@@ -2,27 +2,31 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import 'react-app-polyfill/ie9';
 import 'react-app-polyfill/stable';
-import logo from './logo.svg';
-import './App.css';
+import React, { Children } from 'react';
+import { Route } from 'react-router-dom';
+import MainPage from './pages/MainPage';
+import UsePage from './pages/UsePage';
+import CostPage from './pages/CostPage';
+import ApplyPage from './pages/ApplyPage';
+import SupportPage from './pages/SupportPage';
+import RegisterPage from './pages/RegisterPage';
+import HeaderComponent from './components/common/HeaderComponent';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <>
+        <HeaderComponent>{Children}</HeaderComponent>
+      </>
+      <>
+        <Route component={MainPage} path="/" exact />
+        <Route component={CostPage} path="/cost" />
+        <Route component={UsePage} path="/use" />
+        <Route component={ApplyPage} path="/apply" />
+        <Route component={SupportPage} path="/support" />
+        <Route component={RegisterPage} path="/register" />
+      </>
+    </>
   );
 }
 
