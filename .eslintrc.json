@@ -1,0 +1,16 @@
+{
+    "extends": ["react-app", "prettier", "airbnb"],
+    "plugins": ["prettier"],
+    "rules": {
+      "prettier/prettier": ["error",{
+        "endOfLine":"auto"
+      }],
+      "react/jsx-filename-extension": 0,
+      "react/prop-types": 0,
+      "react/jsx-props-no-spreading":0,
+      "linebreak-style": 0,
+      "global-require": 0,
+      "eslint linebreak-style": [0, "error", "windows"],
+      "object-curly-newline":0
+    }
+  }
