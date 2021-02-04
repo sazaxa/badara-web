@@ -11,6 +11,9 @@
       "linebreak-style": 0,
       "global-require": 0,
       "eslint linebreak-style": [0, "error", "windows"],
-      "object-curly-newline":0
+      "object-curly-newline":0,
+      "no-param-reassign":0,
+      "no-unused-vars":0,
+      "implicit-arrow-linebreak":0
     }
   }

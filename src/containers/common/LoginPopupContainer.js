@@ -1,7 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import LoginPopupComponent from '../../components/common/LoginPopupComponent';
-import { changeLoginPopup } from '../../modules/Popup';
+import { changeField } from '../../modules/auth';
+import { changeLoginPopup } from '../../modules/popup';
 
 const LoginPopupContainer = () => {
   const dispatch = useDispatch();
@@ -9,8 +10,20 @@ const LoginPopupContainer = () => {
   const ClosePopup = () => {
     dispatch(changeLoginPopup(false));
   };
+  const onChange = (e) => {
+    const { value, name } = e.target;
+    // console.log(value);
+    // console.log(name);
+    dispatch(
+      changeField({
+        form: 'login',
+        key: name,
+        value,
+      }),
+    );
+  };
 
-  return <LoginPopupComponent close={ClosePopup} />;
+  return <LoginPopupComponent close={ClosePopup} onChange={onChange} />;
 };
 
 export default LoginPopupContainer;

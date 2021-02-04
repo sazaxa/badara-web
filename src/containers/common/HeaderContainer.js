@@ -1,15 +1,15 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import HeaderComponet from '../../components/common/HeaderComponent';
-import { changeLoginPopup } from '../../modules/Popup';
+import { changeLoginPopup } from '../../modules/popup';
 
 const HeaderContainer = () => {
-  const { open } = useSelector((state) => state.Popup);
+  const { loginPopup } = useSelector((state) => state.popup);
   const dispatch = useDispatch();
   const LoginAction = () => {
     dispatch(changeLoginPopup(true));
   };
-  return <HeaderComponet popup={open} action={LoginAction} />;
+  return <HeaderComponet popup={loginPopup} action={LoginAction} />;
 };
 
 export default HeaderContainer;

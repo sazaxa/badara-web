@@ -4,18 +4,18 @@ const CHANGE_LOGIN_POPUP = 'popup/CHANGE_LOGIN_POPUP';
 
 export const changeLoginPopup = createAction(
   CHANGE_LOGIN_POPUP,
-  (open) => open,
+  (loginPopup) => loginPopup,
 );
 
 const initialState = {
-  open: false,
+  loginPopup: false,
 };
 
 export default handleActions(
   {
-    [CHANGE_LOGIN_POPUP]: (state, { payload: open }) => ({
+    [CHANGE_LOGIN_POPUP]: (state, { payload: loginPopup }) => ({
       ...state,
-      open,
+      loginPopup,
     }),
   },
   initialState,

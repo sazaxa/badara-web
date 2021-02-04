@@ -70,14 +70,25 @@ const StyledInput = styled.input`
     border: 2px solid #1976d2;
   }
 `;
-const LoginPopupComponent = ({ close }) => (
+const LoginPopupComponent = ({ close, onChange }) => (
   <>
     <LoginPopupWrap onClick={close} />
     <LoginPopup>
       <h3>SHIPMENT LOGIN</h3>
       <form>
-        <StyledInput placeholder="E-mail" />
-        <StyledInput placeholder="Password" />
+        <StyledInput
+          placeholder="E-mail"
+          autoFocus
+          type="email"
+          name="email"
+          onChange={onChange}
+        />
+        <StyledInput
+          placeholder="Password"
+          type="password"
+          name="password"
+          onChange={onChange}
+        />
         <Button variant="contained" color="primary">
           로그인
         </Button>

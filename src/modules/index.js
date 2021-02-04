@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import Popup from './Popup';
+import popup from './popup';
+import auth from './auth';
 
 const rootReducer = combineReducers({
-  Popup,
+  popup,
+  auth,
 });
 
 export default rootReducer;
