@@ -10,13 +10,13 @@ import CostPage from './pages/CostPage';
 import ApplyPage from './pages/ApplyPage';
 import SupportPage from './pages/SupportPage';
 import RegisterPage from './pages/RegisterPage';
-import HeaderComponent from './components/common/HeaderComponent';
+import HeaderContainer from './containers/common/HeaderContainer';
 
 function App() {
   return (
     <>
       <>
-        <HeaderComponent>{Children}</HeaderComponent>
+        <HeaderContainer>{Children}</HeaderContainer>
       </>
       <>
         <Route component={MainPage} path="/" exact />
