@@ -17,6 +17,7 @@ const FooterContent = styled.article`
   p {
     margin-bottom: 5px;
     letter-spacing: -1px;
+    font-size: 13px;
   }
   p:last-child {
     margin-top: 20px;
