@@ -22,7 +22,9 @@ const FooterContent = styled.article`
   p:last-child {
     margin-top: 20px;
     margin-bottom: 0;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: -0.5px;
   }
 `;
 
