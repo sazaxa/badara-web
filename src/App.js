@@ -11,13 +11,12 @@ import ApplyPage from './pages/ApplyPage';
 import SupportPage from './pages/SupportPage';
 import RegisterPage from './pages/RegisterPage';
 import HeaderContainer from './containers/common/HeaderContainer';
+import FooterComponent from './components/common/FooterComponent';
 
 function App() {
   return (
     <>
-      <>
-        <HeaderContainer>{Children}</HeaderContainer>
-      </>
+      <HeaderContainer />
       <>
         <Route component={MainPage} path="/" exact />
         <Route component={CostPage} path="/cost" />
@@ -26,6 +25,7 @@ function App() {
         <Route component={SupportPage} path="/support" />
         <Route component={RegisterPage} path="/register" />
       </>
+      <FooterComponent />
     </>
   );
 }
