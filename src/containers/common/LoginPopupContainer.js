@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import LoginPopupComponent from '../../components/common/LoginPopupComponent';
 import { changeField } from '../../modules/auth';
-import { changeLoginPopup } from '../../modules/popup';
+import { changeLoginPopup } from '../../modules/Popup';
 
 const LoginPopupContainer = () => {
   const dispatch = useDispatch();

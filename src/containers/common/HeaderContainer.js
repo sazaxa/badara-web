@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import HeaderComponet from '../../components/common/HeaderComponent';
-import { changeLoginPopup } from '../../modules/popup';
+import { changeLoginPopup } from '../../modules/Popup';
 
 const HeaderContainer = () => {
   const { loginPopup } = useSelector((state) => state.popup);
