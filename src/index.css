@@ -12,6 +12,10 @@ ul {
 a {
   text-decoration: none;
 }
+.adminWrap {
+  display: flex;
+  flex-direction: row;
+}
 
 body {
   margin: 0;

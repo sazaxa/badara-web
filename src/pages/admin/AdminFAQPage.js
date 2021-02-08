@@ -7,6 +7,6 @@ const AdminUserWrap = styled.article`
   background: #f2f2f2;
 `;
 
-const AdminUserPage = () => <AdminUserWrap>유저페이지</AdminUserWrap>;
+const AdminFAQPage = () => <AdminUserWrap>자주하는 질문</AdminUserWrap>;
 
-export default AdminUserPage;
+export default AdminFAQPage;

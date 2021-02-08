@@ -14,6 +14,8 @@
       "object-curly-newline":0,
       "no-param-reassign":0,
       "no-unused-vars":0,
-      "implicit-arrow-linebreak":0
+      "implicit-arrow-linebreak":0,
+      "operator-linebreak":0,
+      "indent":0
     }
   }
