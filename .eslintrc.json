@@ -16,6 +16,7 @@
       "no-unused-vars":0,
       "implicit-arrow-linebreak":0,
       "operator-linebreak":0,
-      "indent":0
+      "indent":0,
+      "prefer-default-export":"off"
     }
   }
