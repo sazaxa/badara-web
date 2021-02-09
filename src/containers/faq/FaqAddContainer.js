@@ -5,7 +5,7 @@ import FaqAddComponent from '../../components/faq/FaqAddComponent';
 import { changeField, readFaq, writeFaq } from '../../modules/Faq';
 import { changeLoginPopup } from '../../modules/Popup';
 
-const FaqAddContainer = ({ close, location }) => {
+const FaqAddContainer = ({ close, update }) => {
   const dispatch = useDispatch();
   const { faqFiend } = useSelector((state) => state.faqs);
 
@@ -35,6 +35,7 @@ const FaqAddContainer = ({ close, location }) => {
       onSubmit={onSubmit}
       onChange={handleChange}
       close={close}
+      update={update}
     />
   );
 };

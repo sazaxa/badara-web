@@ -11,11 +11,15 @@ import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
+import Divider from '@material-ui/core/Divider';
+import AccordionActions from '@material-ui/core/AccordionActions';
 import FaqAddComponent from './FaqAddComponent';
 import FaqAddContainer from '../../containers/faq/FaqAddContainer';
 import FaqDelComponent from './FaqDelComponent';
 import Responsive from '../common/Responsive';
 import { changeDeletePopup, changeLoginPopup } from '../../modules/Popup';
+import FaqDelContainer from '../../containers/faq/FaqDelContainer';
+import { readFaq } from '../../modules/Faq';
 
 const useStyles = makeStyles({
   root: {
@@ -29,7 +33,7 @@ const AdminUserWrap = styled.article`
   height: auto;
   padding: 30px;
   box-sizing: border-box;
-  button {
+  button.btnFirst {
     margin-bottom: 20px;
     margin-right: 20px;
   }
@@ -49,6 +53,7 @@ const FaqComponent = ({ faq, location, close, popup, open, deletePopup }) => {
   const dispatch = useDispatch();
   //  체크한 id값 state 값으로 저장
   const [checked, setChecked] = useState([]);
+  const [update, setUpdate] = useState(false);
   const { pathname } = location;
   //  체크한 faq id 체크
   const checkedId = (e, id) => {
@@ -66,10 +71,21 @@ const FaqComponent = ({ faq, location, close, popup, open, deletePopup }) => {
       dispatch(changeDeletePopup(true));
     }
   };
+
+  // 수정하기 모달창 노출여부
+
+  const updateModalClick = (id) => {
+    console.log(typeof id);
+
+    dispatch(changeLoginPopup(true));
+    dispatch(readFaq(id));
+    setUpdate(true);
+  };
+
   return (
     <Responsive>
       <div className={classes.root}>
-        {popup ? <FaqAddContainer close={close} /> : null}
+        {popup ? <FaqAddContainer close={close} update={update} /> : null}
         <AdminUserWrap>
           {/* 관리자 페이지 버튼 */}
           {pathname === '/admin/FAQ' ? (
@@ -78,13 +94,14 @@ const FaqComponent = ({ faq, location, close, popup, open, deletePopup }) => {
                 variant="contained"
                 color="primary"
                 onClick={open}
-                className="add"
+                className="btnFirst add"
               >
                 추가하기
               </Button>
               <Button
                 variant="contained"
                 color="secondary"
+                className="btnFirst"
                 onClick={delModalClick}
               >
                 삭제하기
@@ -92,7 +109,7 @@ const FaqComponent = ({ faq, location, close, popup, open, deletePopup }) => {
             </>
           ) : null}
           {/* 삭제 모달창 */}
-          <FaqDelComponent
+          <FaqDelContainer
             visible={deletePopup}
             checked={checked}
             close={delModalClick}
@@ -116,6 +133,17 @@ const FaqComponent = ({ faq, location, close, popup, open, deletePopup }) => {
               <AccordionDetails>
                 <Typography color="textSecondary">{faqs.content}</Typography>
               </AccordionDetails>
+              <Divider />
+              <AccordionActions>
+                <Button
+                  size="small"
+                  color="primary"
+                  // eslint-disable-next-line radix
+                  onClick={() => updateModalClick(faqs.id)}
+                >
+                  수정하기
+                </Button>
+              </AccordionActions>
             </Accordion>
           ))}
         </AdminUserWrap>
@@ -124,4 +152,4 @@ const FaqComponent = ({ faq, location, close, popup, open, deletePopup }) => {
   );
 };
 
-export default React.memo(withRouter(FaqComponent));
+export default withRouter(FaqComponent);

@@ -15,6 +15,14 @@ export const changeField = createAction(
     value,
   }),
 );
+// faqs
+const [
+  READ_FAQS,
+  READ_FAQS_SUCCESS,
+  READ_FAQS_FAILURE,
+] = createRequestActionTypes('faq/READ_FAQS');
+
+// faq
 const [READ_FAQ, READ_FAQ_SUCCESS, READ_FAQ_FAILURE] = createRequestActionTypes(
   'faq/READ_FAQ',
 );
@@ -25,8 +33,13 @@ const [
   WRITE_FAQ_FAILURE,
 ] = createRequestActionTypes('faq/WRITE_FAQ');
 
-export const readFaq = createAction(READ_FAQ);
-const readFaqSaga = createRequestSaga(READ_FAQ, FaqAPI.Read);
+export const readFaqs = createAction(READ_FAQS);
+const readFaqsSaga = createRequestSaga(READ_FAQS, FaqAPI.Read);
+
+export const readFaq = createAction(READ_FAQ, ({ id }) => ({
+  id,
+}));
+const readFaqSaga = createRequestSaga(READ_FAQ, FaqAPI.ReadFaq);
 
 export const writeFaq = createAction(WRITE_FAQ, ({ title, content }) => ({
   title,
@@ -35,6 +48,7 @@ export const writeFaq = createAction(WRITE_FAQ, ({ title, content }) => ({
 const writeFaqSaga = createRequestSaga(WRITE_FAQ, FaqAPI.Write);
 
 export function* faqSaga() {
+  yield takeLatest(READ_FAQS, readFaqsSaga);
   yield takeLatest(READ_FAQ, readFaqSaga);
   yield takeLatest(WRITE_FAQ, writeFaqSaga);
 }
@@ -55,11 +69,19 @@ const faqs = handleActions(
       produce(state, (draft) => {
         draft[form][name] = value;
       }),
-    [READ_FAQ_SUCCESS]: (state, { payload: Allfaq }) => ({
+    [READ_FAQ_SUCCESS]: (state, { payload: faq }) => ({
+      ...state,
+      faq,
+    }),
+    [READ_FAQ_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      error,
+    }),
+    [READ_FAQS_SUCCESS]: (state, { payload: Allfaq }) => ({
       ...state,
       Allfaq,
     }),
-    [READ_FAQ_FAILURE]: (state, { payload: error }) => ({
+    [READ_FAQS_FAILURE]: (state, { payload: error }) => ({
       ...state,
       error,
     }),

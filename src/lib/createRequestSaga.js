@@ -10,6 +10,7 @@ export default function createRequestSaga(type, request) {
   const FAILURE = `${type}_FAILURE`;
   return function* (action) {
     try {
+      console.log(request);
       const response = yield call(request, action.payload);
       console.log(response);
       yield put({

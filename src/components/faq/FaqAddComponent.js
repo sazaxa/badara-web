@@ -54,7 +54,7 @@ const FaqAddPopup = styled.article`
   }
 `;
 
-const FaqAddComponent = ({ close, onSubmit, onChange }) => {
+const FaqAddComponent = ({ close, onSubmit, onChange, update }) => {
   const classes = useStyles();
   return (
     <>
@@ -64,7 +64,7 @@ const FaqAddComponent = ({ close, onSubmit, onChange }) => {
           className={classes.root}
           noValidate
           autoComplete="off"
-          onSubmit={onSubmit}
+          onSubmit={update ? null : onSubmit}
         >
           <h2>FAQ</h2>
           <TextField
@@ -84,7 +84,7 @@ const FaqAddComponent = ({ close, onSubmit, onChange }) => {
             name="content"
           />
           <Button variant="contained" color="primary" type="submit">
-            추가하기
+            {update ? '수정하기' : '추가하기'}
           </Button>
         </form>
       </FaqAddPopup>
