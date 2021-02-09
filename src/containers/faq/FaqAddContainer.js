@@ -22,6 +22,10 @@ const FaqAddContainer = ({ close, location }) => {
   const onSubmit = async (event) => {
     event.preventDefault();
     const { title, content } = faqFiend;
+    if (!title || !content) {
+      alert('빈칸이 없어야 합니다.');
+      return;
+    }
     await dispatch(writeFaq({ title, content }));
     dispatch(changeLoginPopup(false));
     await dispatch(readFaq());
