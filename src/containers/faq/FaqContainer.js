@@ -6,7 +6,7 @@ import { changeLoginPopup } from '../../modules/Popup';
 
 const FaqContainer = () => {
   const dispatch = useDispatch();
-  const { faq } = useSelector((state) => state.faqs);
+  const { Allfaq } = useSelector((state) => state.faqs);
   const { loginPopup } = useSelector((state) => state.popup);
 
   const ClosePopup = () => {
@@ -18,12 +18,12 @@ const FaqContainer = () => {
   useEffect(() => {
     dispatch(readFaq());
   }, [dispatch]);
-  if (!faq) {
+  if (!Allfaq) {
     return null;
   }
   return (
     <FaqComponent
-      faq={faq}
+      faq={Allfaq}
       open={OpenPopup}
       close={ClosePopup}
       popup={loginPopup}

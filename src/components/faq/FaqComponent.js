@@ -11,6 +11,7 @@ import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import FaqAddComponent from './FaqAddComponent';
+import FaqAddContainer from '../../containers/faq/FaqAddContainer';
 
 const useStyles = makeStyles({
   root: {
@@ -42,7 +43,7 @@ const FaqComponent = ({ faq, location, close, popup, open }) => {
   const { pathname } = location;
   return (
     <div className={classes.root}>
-      {popup ? <FaqAddComponent close={close} /> : null}
+      {popup ? <FaqAddContainer close={close} /> : null}
       <AdminUserWrap>
         {/* 관리자 페이지 버튼 */}
         {pathname === '/admin/FAQ' ? (
@@ -76,4 +77,4 @@ const FaqComponent = ({ faq, location, close, popup, open }) => {
   );
 };
 
-export default withRouter(FaqComponent);
+export default React.memo(withRouter(FaqComponent));
