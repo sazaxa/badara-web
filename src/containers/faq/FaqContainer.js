@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import FaqComponent from '../../components/faq/FaqComponent';
-import { readFaqs } from '../../modules/Faq';
+import { initialize } from '../../modules/Faq';
+import { readFaqs } from '../../modules/Faqs';
 import { changeLoginPopup } from '../../modules/Popup';
 
 const FaqContainer = () => {
@@ -11,6 +12,7 @@ const FaqContainer = () => {
 
   const ClosePopup = () => {
     dispatch(changeLoginPopup(false));
+    dispatch(initialize());
   };
   const OpenPopup = () => {
     dispatch(changeLoginPopup(true));

@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { useDispatch, useSelector } from 'react-redux';
-import { changeField, writeFaq } from '../../modules/Faq';
-import { changeLoginPopup } from '../../modules/Popup';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,12 +52,10 @@ const FaqAddPopup = styled.article`
   }
 `;
 
-const FaqAddComponent = ({ close, onSubmit, onChange, update }) => {
+const FaqAddComponent = ({ close, onSubmit, onChange }) => {
   const classes = useStyles();
-  const { faq } = useSelector((state) => state.faqs);
-  if (!faq) {
-    return null;
-  }
+  const { faq } = useSelector((state) => state.faq);
+
   return (
     <>
       <FaqAddWrap onClick={close} />
@@ -68,7 +64,7 @@ const FaqAddComponent = ({ close, onSubmit, onChange, update }) => {
           className={classes.root}
           noValidate
           autoComplete="off"
-          onSubmit={update ? null : onSubmit}
+          onSubmit={faq ? null : onSubmit}
         >
           <h2>FAQ</h2>
           <TextField
@@ -77,7 +73,7 @@ const FaqAddComponent = ({ close, onSubmit, onChange, update }) => {
             variant="outlined"
             onChange={onChange}
             name="title"
-            defaultValue={update ? faq.title : null}
+            defaultValue={faq ? faq.title : '1'}
           />
           <TextField
             id="outlined-multiline-flexible"
@@ -87,10 +83,10 @@ const FaqAddComponent = ({ close, onSubmit, onChange, update }) => {
             onChange={onChange}
             variant="outlined"
             name="content"
-            defaultValue={update ? faq.content : null}
+            defaultValue={faq ? faq.content : ''}
           />
           <Button variant="contained" color="primary" type="submit">
-            {update ? '수정하기' : '추가하기'}
+            {faq ? '수정하기' : '추가하기'}
           </Button>
         </form>
       </FaqAddPopup>

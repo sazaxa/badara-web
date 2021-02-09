@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -13,9 +13,7 @@ import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import Divider from '@material-ui/core/Divider';
 import AccordionActions from '@material-ui/core/AccordionActions';
-import FaqAddComponent from './FaqAddComponent';
 import FaqAddContainer from '../../containers/faq/FaqAddContainer';
-import FaqDelComponent from './FaqDelComponent';
 import Responsive from '../common/Responsive';
 import { changeDeletePopup, changeLoginPopup } from '../../modules/Popup';
 import FaqDelContainer from '../../containers/faq/FaqDelContainer';
@@ -53,8 +51,8 @@ const FaqComponent = ({ faq, location, close, popup, open, deletePopup }) => {
   const dispatch = useDispatch();
   //  체크한 id값 state 값으로 저장
   const [checked, setChecked] = useState([]);
-  const [update, setUpdate] = useState(false);
   const { pathname } = location;
+
   //  체크한 faq id 체크
   const checkedId = (e, id) => {
     if (e.target.checked === true) {
@@ -74,18 +72,15 @@ const FaqComponent = ({ faq, location, close, popup, open, deletePopup }) => {
 
   // 수정하기 모달창 노출여부
 
-  const updateModalClick = (id) => {
-    console.log(typeof id);
-
+  const updateModalClick = async (id) => {
     dispatch(changeLoginPopup(true));
-    dispatch(readFaq(id));
-    setUpdate(true);
+    await dispatch(readFaq(id));
   };
 
   return (
     <Responsive>
       <div className={classes.root}>
-        {popup ? <FaqAddContainer close={close} update={update} /> : null}
+        {popup ? <FaqAddContainer close={close} /> : null}
         <AdminUserWrap>
           {/* 관리자 페이지 버튼 */}
           {pathname === '/admin/FAQ' ? (
