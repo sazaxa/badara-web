@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import faqs, { readFaq } from '../../modules/Faq';
 import { deleteFaq } from '../../lib/api/FAQ';
+import { changeDeletePopup, changeLoginPopup } from '../../modules/Popup';
 
 const Fullscreen = styled.div`
   position: fixed;
@@ -52,7 +53,8 @@ const FaqDelComponent = ({ visible, close, checked }) => {
   const onRemove = async () => {
     try {
       await checked.map((checkFaq) => deleteFaq(checkFaq));
-      dispatch(readFaq());
+      dispatch(changeDeletePopup(false));
+      await dispatch(readFaq());
     } catch (e) {
       console.log(e);
     }

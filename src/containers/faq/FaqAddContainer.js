@@ -24,7 +24,7 @@ const FaqAddContainer = ({ close, location }) => {
     const { title, content } = faqFiend;
     await dispatch(writeFaq({ title, content }));
     dispatch(changeLoginPopup(false));
-    dispatch(readFaq());
+    await dispatch(readFaq());
   };
   return (
     <FaqAddComponent

@@ -13,6 +13,9 @@ const AdminHeaderContent = styled.article`
   padding: 20px;
   box-sizing: border-box;
   border-left: 1px solid #ccc;
+  position: fixed;
+  top: 0;
+  left: 0;
 
   .logo {
     background-color: #fff;

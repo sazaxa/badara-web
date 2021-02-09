@@ -10,9 +10,12 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
+import { useDispatch, useSelector } from 'react-redux';
 import FaqAddComponent from './FaqAddComponent';
 import FaqAddContainer from '../../containers/faq/FaqAddContainer';
 import FaqDelComponent from './FaqDelComponent';
+import Responsive from '../common/Responsive';
+import { changeDeletePopup, changeLoginPopup } from '../../modules/Popup';
 
 const useStyles = makeStyles({
   root: {
@@ -22,9 +25,8 @@ const useStyles = makeStyles({
 });
 
 const AdminUserWrap = styled.article`
-  width: 85vw;
+  width: 100%;
   height: auto;
-  background: #f2f2f2;
   padding: 30px;
   box-sizing: border-box;
   button {
@@ -42,12 +44,11 @@ const AdminUserWrap = styled.article`
   }
 `;
 
-const FaqComponent = ({ faq, location, close, popup, open }) => {
+const FaqComponent = ({ faq, location, close, popup, open, deletePopup }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   //  체크한 id값 state 값으로 저장
   const [checked, setChecked] = useState([]);
-  const [visible, setVisible] = useState(false);
-
   const { pathname } = location;
   //  체크한 faq id 체크
   const checkedId = (e, id) => {
@@ -57,68 +58,69 @@ const FaqComponent = ({ faq, location, close, popup, open }) => {
       setChecked(checked.filter((v) => v !== id));
     }
   };
-  console.log(checked);
   // 삭제 모달창 노출여부
   const delModalClick = () => {
     if (checked.length === 0) {
       alert('삭제할 것을 고르시오');
     } else {
-      setVisible(!visible);
+      dispatch(changeDeletePopup(true));
     }
   };
   return (
-    <div className={classes.root}>
-      {popup ? <FaqAddContainer close={close} /> : null}
-      <AdminUserWrap>
-        {/* 관리자 페이지 버튼 */}
-        {pathname === '/admin/FAQ' ? (
-          <>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={open}
-              className="add"
-            >
-              추가하기
-            </Button>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={delModalClick}
-            >
-              삭제하기
-            </Button>
-          </>
-        ) : null}
-        {/* 삭제 모달창 */}
-        <FaqDelComponent
-          visible={visible}
-          checked={checked}
-          close={delModalClick}
-        />
-        {faq.map((faqs) => (
-          <Accordion key={faqs.id}>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-label="Expand"
-              aria-controls="additional-actions1-content"
-              id="additional-actions1-header"
-            >
-              <FormControlLabel
-                aria-label="Acknowledge"
-                onClick={(event) => event.stopPropagation()}
-                onFocus={(event) => event.stopPropagation()}
-                control={<Checkbox onChange={(e) => checkedId(e, faqs.id)} />}
-                label={faqs.title}
-              />
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography color="textSecondary">{faqs.content}</Typography>
-            </AccordionDetails>
-          </Accordion>
-        ))}
-      </AdminUserWrap>
-    </div>
+    <Responsive>
+      <div className={classes.root}>
+        {popup ? <FaqAddContainer close={close} /> : null}
+        <AdminUserWrap>
+          {/* 관리자 페이지 버튼 */}
+          {pathname === '/admin/FAQ' ? (
+            <>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={open}
+                className="add"
+              >
+                추가하기
+              </Button>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={delModalClick}
+              >
+                삭제하기
+              </Button>
+            </>
+          ) : null}
+          {/* 삭제 모달창 */}
+          <FaqDelComponent
+            visible={deletePopup}
+            checked={checked}
+            close={delModalClick}
+          />
+          {faq.map((faqs) => (
+            <Accordion key={faqs.id}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-label="Expand"
+                aria-controls="additional-actions1-content"
+                id="additional-actions1-header"
+              >
+                <FormControlLabel
+                  aria-label="Acknowledge"
+                  onClick={(event) => event.stopPropagation()}
+                  onFocus={(event) => event.stopPropagation()}
+                  control={<Checkbox onChange={(e) => checkedId(e, faqs.id)} />}
+                  label={faqs.title}
+                />
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography color="textSecondary">{faqs.content}</Typography>
+              </AccordionDetails>
+            </Accordion>
+          ))}
+        </AdminUserWrap>
+      </div>
+    </Responsive>
   );
 };
 
