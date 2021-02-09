@@ -19,10 +19,10 @@ const FaqAddContainer = ({ close, location }) => {
       }),
     );
   };
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
     const { title, content } = faqFiend;
-    dispatch(writeFaq({ title, content }));
+    await dispatch(writeFaq({ title, content }));
     dispatch(changeLoginPopup(false));
     dispatch(readFaq());
   };
