@@ -36,9 +36,7 @@ const [
 export const readFaqs = createAction(READ_FAQS);
 const readFaqsSaga = createRequestSaga(READ_FAQS, FaqAPI.Read);
 
-export const readFaq = createAction(READ_FAQ, ({ id }) => ({
-  id,
-}));
+export const readFaq = createAction(READ_FAQ, (id) => id);
 const readFaqSaga = createRequestSaga(READ_FAQ, FaqAPI.ReadFaq);
 
 export const writeFaq = createAction(WRITE_FAQ, ({ title, content }) => ({

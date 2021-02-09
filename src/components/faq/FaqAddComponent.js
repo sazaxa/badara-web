@@ -56,6 +56,10 @@ const FaqAddPopup = styled.article`
 
 const FaqAddComponent = ({ close, onSubmit, onChange, update }) => {
   const classes = useStyles();
+  const { faq } = useSelector((state) => state.faqs);
+  if (!faq) {
+    return null;
+  }
   return (
     <>
       <FaqAddWrap onClick={close} />
@@ -73,15 +77,17 @@ const FaqAddComponent = ({ close, onSubmit, onChange, update }) => {
             variant="outlined"
             onChange={onChange}
             name="title"
+            defaultValue={update ? faq.title : null}
           />
           <TextField
             id="outlined-multiline-flexible"
-            label="Content"
+            label="content"
             multiline
             rows={4}
             onChange={onChange}
             variant="outlined"
             name="content"
+            defaultValue={update ? faq.content : null}
           />
           <Button variant="contained" color="primary" type="submit">
             {update ? '수정하기' : '추가하기'}
