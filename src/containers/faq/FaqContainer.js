@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import FaqComponent from '../../components/faq/FaqComponent';
 import { initialize } from '../../modules/Faq';
 import { readFaqs } from '../../modules/Faqs';
-import { changeLoginPopup } from '../../modules/Popup';
+import { changeLoginPopup, changeUpdatePopup } from '../../modules/Popup';
 
 const FaqContainer = () => {
   const dispatch = useDispatch();
   const { Allfaq } = useSelector((state) => state.faqs);
-  const { loginPopup, deletePopup } = useSelector((state) => state.popup);
+  const { loginPopup, deletePopup, updatePopup } = useSelector(
+    (state) => state.popup,
+  );
 
   const ClosePopup = () => {
     dispatch(changeLoginPopup(false));
@@ -30,6 +32,7 @@ const FaqContainer = () => {
       close={ClosePopup}
       popup={loginPopup}
       deletePopup={deletePopup}
+      updatePopup={updatePopup}
     />
   );
 };

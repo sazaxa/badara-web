@@ -15,9 +15,16 @@ import Divider from '@material-ui/core/Divider';
 import AccordionActions from '@material-ui/core/AccordionActions';
 import FaqAddContainer from '../../containers/faq/FaqAddContainer';
 import Responsive from '../common/Responsive';
-import { changeDeletePopup, changeLoginPopup } from '../../modules/Popup';
+import {
+  changeDeletePopup,
+  changeLoginPopup,
+  changeUpdatePopup,
+} from '../../modules/Popup';
 import FaqDelContainer from '../../containers/faq/FaqDelContainer';
 import { readFaq } from '../../modules/Faq';
+import { readFaqs } from '../../modules/Faqs';
+import { Delete } from '../../lib/api/FAQ';
+import FaqUpdateContainer from '../../containers/faq/FaqUpdateContainer';
 
 const useStyles = makeStyles({
   root: {
@@ -46,7 +53,15 @@ const AdminUserWrap = styled.article`
   }
 `;
 
-const FaqComponent = ({ faq, location, close, popup, open, deletePopup }) => {
+const FaqComponent = ({
+  faq,
+  location,
+  close,
+  popup,
+  open,
+  deletePopup,
+  updatePopup,
+}) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   //  체크한 id값 state 값으로 저장
@@ -73,14 +88,27 @@ const FaqComponent = ({ faq, location, close, popup, open, deletePopup }) => {
   // 수정하기 모달창 노출여부
 
   const updateModalClick = async (id) => {
-    dispatch(changeLoginPopup(true));
     await dispatch(readFaq(id));
+    // TODObug: 2021-02-10 첫 수정하기 로딩시 타이틀 못불러오는 버그 나중에 수정
+    await dispatch(changeUpdatePopup(true));
   };
 
+  const onRemove = async () => {
+    try {
+      await checked.map((checkFaq) => Delete(checkFaq));
+      dispatch(changeDeletePopup(false));
+      // 삭제후 체크한 값 초기화
+      setChecked([]);
+      await dispatch(readFaqs());
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <Responsive>
       <div className={classes.root}>
         {popup ? <FaqAddContainer close={close} /> : null}
+        {updatePopup ? <FaqUpdateContainer close={close} /> : null}
         <AdminUserWrap>
           {/* 관리자 페이지 버튼 */}
           {pathname === '/admin/FAQ' ? (
@@ -106,8 +134,8 @@ const FaqComponent = ({ faq, location, close, popup, open, deletePopup }) => {
           {/* 삭제 모달창 */}
           <FaqDelContainer
             visible={deletePopup}
-            checked={checked}
             close={delModalClick}
+            onRemove={onRemove}
           />
           {faq.map((faqs) => (
             <Accordion key={faqs.id}>

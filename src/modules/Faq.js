@@ -20,15 +20,18 @@ export function* faqSaga() {
 
 const initialState = {
   error: null,
-  faq: null,
+  faq: {
+    title: null,
+    content: null,
+  },
 };
 
-const faq = handleActions(
+const faqReducer = handleActions(
   {
     [INITIALIZE]: (state) => () => ({
       faq: null,
     }),
-    // eslint-disable-next-line no-shadow
+
     [READ_FAQ_SUCCESS]: (state, { payload: faq }) => ({
       ...state,
       faq,
@@ -41,4 +44,4 @@ const faq = handleActions(
   initialState,
 );
 
-export default faq;
+export default faqReducer;

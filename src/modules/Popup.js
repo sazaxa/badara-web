@@ -2,6 +2,7 @@ import { createAction, handleActions } from 'redux-actions';
 
 const CHANGE_LOGIN_POPUP = 'popup/CHANGE_LOGIN_POPUP';
 const CHANGE_DELETE_POPUP = 'popup/CHANGE_DELETE_POPUP';
+const CHANGE_UPDATE_POPUP = 'popup/CHANGE_UPDATE_POPUP';
 
 export const changeLoginPopup = createAction(
   CHANGE_LOGIN_POPUP,
@@ -13,9 +14,15 @@ export const changeDeletePopup = createAction(
   (deletePopup) => deletePopup,
 );
 
+export const changeUpdatePopup = createAction(
+  CHANGE_UPDATE_POPUP,
+  (updatePopup) => updatePopup,
+);
+
 const initialState = {
   loginPopup: false,
   deletePopup: false,
+  updatePopup: false,
 };
 
 export default handleActions(
@@ -27,6 +34,10 @@ export default handleActions(
     [CHANGE_DELETE_POPUP]: (state, { payload: deletePopup }) => ({
       ...state,
       deletePopup,
+    }),
+    [CHANGE_UPDATE_POPUP]: (state, { payload: updatePopup }) => ({
+      ...state,
+      updatePopup,
     }),
   },
   initialState,

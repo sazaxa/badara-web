@@ -52,9 +52,12 @@ const FaqAddPopup = styled.article`
   }
 `;
 
-const FaqAddComponent = ({ close, onSubmit, onChange }) => {
+const FaqUpdateComponent = ({ close, onSubmit, onChange }) => {
   const classes = useStyles();
-
+  const { faq } = useSelector((state) => state.faqReducer);
+  if (!faq) {
+    return null;
+  }
   return (
     <>
       <FaqAddWrap onClick={close} />
@@ -65,13 +68,14 @@ const FaqAddComponent = ({ close, onSubmit, onChange }) => {
           autoComplete="off"
           onSubmit={onSubmit}
         >
-          <h2>FAQ</h2>
+          <h2>FAQ 수정하기</h2>
           <TextField
             id="outlined-basic"
             label="title"
             variant="outlined"
             onChange={onChange}
             name="title"
+            defaultValue={faq.title}
           />
           <TextField
             id="outlined-multiline-flexible"
@@ -81,13 +85,14 @@ const FaqAddComponent = ({ close, onSubmit, onChange }) => {
             onChange={onChange}
             variant="outlined"
             name="content"
+            defaultValue={faq.content}
           />
           <Button variant="contained" color="primary" type="submit">
-            추가하기
+            수정하기
           </Button>
         </form>
       </FaqAddPopup>
     </>
   );
 };
-export default FaqAddComponent;
+export default FaqUpdateComponent;
