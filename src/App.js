@@ -14,14 +14,12 @@ import AdminOrderPage from './pages/admin/AdminOrderPage';
 import AdminFAQPage from './pages/admin/AdminFAQPage';
 
 function App({ location }) {
-  console.log(location);
+  console.log('location : ', location);
   const { pathname } = location;
+  const BASE_ADMIN_URL = '/admin';
   return (
     <>
-      {pathname === '/admin' ||
-      pathname === '/admin/user' ||
-      pathname === '/admin/order' ||
-      pathname === '/admin/FAQ' ? (
+      {pathname.startsWith(BASE_ADMIN_URL) ? (
         <section className="adminWrap">
           <AdminHeaderContent />
           <Route component={AdminUserPage} path="/admin" exact />
@@ -30,21 +28,16 @@ function App({ location }) {
           <Route component={AdminFAQPage} path="/admin/FAQ" />
         </section>
       ) : (
-        <HeaderContainer />
-      )}
-      <>
-        <Route component={MainPage} path="/" exact />
-        <Route component={CostPage} path="/cost" />
-        <Route component={UsePage} path="/use" />
-        <Route component={ApplyPage} path="/apply" />
-        <Route component={SupportPage} path="/support" />
-        <Route component={RegisterPage} path="/register" />
-      </>
-      {pathname === '/admin' ||
-      pathname === '/admin/user' ||
-      pathname === '/admin/order' ||
-      pathname === '/admin/FAQ' ? null : (
-        <FooterComponent />
+        <section>
+          <HeaderContainer />
+          <Route component={MainPage} path="/" exact />
+          <Route component={CostPage} path="/cost" />
+          <Route component={UsePage} path="/use" />
+          <Route component={ApplyPage} path="/apply" />
+          <Route component={SupportPage} path="/support" />
+          <Route component={RegisterPage} path="/register" />
+          <FooterComponent />
+        </section>
       )}
     </>
   );
