@@ -7,7 +7,7 @@ const ResponsiveBlock = styled.div`
   width: 100%;
   height: 980px;
   background: #eee;
-  margin-left: 300px;
+  padding-left: 300px;
   @media (max-width: 780px) {
     width: 100%;
   }

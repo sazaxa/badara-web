@@ -1,4 +1,5 @@
 import { call, put } from 'redux-saga/effects';
+import { Read } from './api/FAQ';
 
 export const createRequestActionTypes = (type) => {
   const SUCCESS = `${type}_SUCCESS`;
@@ -15,6 +16,7 @@ export default function createRequestSaga(type, request) {
       yield put({
         type: SUCCESS,
         payload: response.data,
+        status: response.status,
       });
     } catch (e) {
       console.debug(e);

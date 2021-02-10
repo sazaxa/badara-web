@@ -1,20 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import FaqAddComponent from '../../components/faq/FaqAddComponent';
-import { readFaqs } from '../../modules/Faqs';
 import { changeLoginPopup } from '../../modules/Popup';
-import { writeFaq, changeField } from '../../modules/Write';
+import { writeFaq, changeField, initialize } from '../../modules/Write';
 
 const FaqAddContainer = ({ close }) => {
   const dispatch = useDispatch();
-  const { faqFiend } = useSelector((state) => state.write);
-
+  const { faqField } = useSelector((state) => state.write);
   const handleChange = (e) => {
     const { value, name } = e.target;
     dispatch(
       changeField({
-        form: 'faqFiend',
+        form: 'faqField',
         name,
         value,
       }),
@@ -22,14 +20,13 @@ const FaqAddContainer = ({ close }) => {
   };
   const onSubmit = async (event) => {
     event.preventDefault();
-    const { title, content } = faqFiend;
+    const { title, content } = faqField;
     if (!title || !content) {
       alert('빈칸이 없어야 합니다.');
       return;
     }
-    await dispatch(writeFaq({ title, content }));
-    dispatch(changeLoginPopup(false));
-    await dispatch(readFaqs());
+    dispatch(writeFaq({ title, content }));
+    await dispatch(changeLoginPopup(false));
   };
   return (
     <FaqAddComponent

@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { useSelector } from 'react-redux';
+import EditorContainer from '../../containers/common/EditorContainer';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,6 +83,7 @@ const FaqAddComponent = ({ close, onSubmit, onChange }) => {
             variant="outlined"
             name="content"
           />
+          {/* <EditorContainer /> */}
           <Button variant="contained" color="primary" type="submit">
             추가하기
           </Button>

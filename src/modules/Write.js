@@ -6,6 +6,7 @@ import createRequestSaga, {
 } from '../lib/createRequestSaga';
 import * as FaqAPI from '../lib/api/FAQ';
 
+const INITIALIZE = 'write/INITIALIZE'; // 모든 내용 초기화
 const CHANGE_FIELD = 'faq/CHANGE_FIELD';
 export const changeField = createAction(
   CHANGE_FIELD,
@@ -22,6 +23,8 @@ const [
   WRITE_FAQ_FAILURE,
 ] = createRequestActionTypes('faq/WRITE_FAQ');
 
+export const initialize = createAction(INITIALIZE);
+
 export const writeFaq = createAction(WRITE_FAQ, ({ title, content }) => ({
   title,
   content,
@@ -33,21 +36,22 @@ export function* wirteSaga() {
 }
 
 const initialState = {
-  faqFiend: {
+  faqField: {
     title: '',
     content: '',
   },
+  faq: null,
 };
-
 const write = handleActions(
   {
+    [INITIALIZE]: (state) => initialState, // initialState를 넣으면 초기상태로 바뀜
     [CHANGE_FIELD]: (state, { payload: { form, name, value } }) =>
       produce(state, (draft) => {
         draft[form][name] = value;
       }),
-    [WRITE_FAQ_SUCCESS]: (state, { payload: faq }) => ({
+    [WRITE_FAQ_SUCCESS]: (state, { status }) => ({
       ...state,
-      faq,
+      status,
     }),
     [WRITE_FAQ_FAILURE]: (state, { payload: error }) => ({
       ...state,

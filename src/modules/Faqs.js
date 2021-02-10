@@ -5,7 +5,7 @@ import createRequestSaga, {
 } from '../lib/createRequestSaga';
 import * as FaqAPI from '../lib/api/FAQ';
 // faqs
-const [
+export const [
   READ_FAQS,
   READ_FAQS_SUCCESS,
   READ_FAQS_FAILURE,

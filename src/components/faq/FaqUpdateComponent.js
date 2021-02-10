@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,10 +51,9 @@ const FaqAddPopup = styled.article`
   }
 `;
 
-const FaqUpdateComponent = ({ close, onSubmit, onChange }) => {
+const FaqUpdateComponent = ({ close, onSubmit, onChange, faq }) => {
   const classes = useStyles();
-  const { faq } = useSelector((state) => state.faqReducer);
-  if (!faq) {
+  if (!faq.title) {
     return null;
   }
   return (

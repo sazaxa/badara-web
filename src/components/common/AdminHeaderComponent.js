@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const AdminHeaderContent = styled.article`
   width: 15vw;
-  min-width: 300px;
+  min-width: 230px;
   height: 100vh;
   background: #fff;
   display: flex;

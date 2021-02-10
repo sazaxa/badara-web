@@ -77,18 +77,18 @@ const FaqComponent = ({
     }
   };
   // 삭제 모달창 노출여부
-  const delModalClick = () => {
+  const delModalClick = async () => {
     if (checked.length === 0) {
       alert('삭제할 것을 고르시오');
     } else {
-      dispatch(changeDeletePopup(true));
+      await dispatch(changeDeletePopup(true));
     }
   };
 
   // 수정하기 모달창 노출여부
 
   const updateModalClick = async (id) => {
-    await dispatch(readFaq(id));
+    dispatch(readFaq(id));
     // TODObug: 2021-02-10 첫 수정하기 로딩시 타이틀 못불러오는 버그 나중에 수정
     await dispatch(changeUpdatePopup(true));
   };
