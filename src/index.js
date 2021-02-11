@@ -8,21 +8,18 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import rootReducer, { rootSaga } from './modules';
+import rootReducer, { rootSaga } from './store';
 
 const sagaMiddleWare = createSagaMiddleware();
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(sagaMiddleWare)),
-);
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleWare)));
 sagaMiddleWare.run(rootSaga);
 ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>,
-  document.getElementById('root'),
+    <Provider store={store}>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </Provider>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
