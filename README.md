@@ -1,13 +1,16 @@
-# Getting Started with Create React App SHIPMENT-WEB
+# SAZAXA SHIPMENT-WEB
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## sazaxa shipment Fornt-End Source.
 
 ## Setting dotenv
 
-`cd {Project_Folder}`
-`vi .env`
-`REACT_APP_ENV=local`
-`REACT_APP_API_URL=http://localhost:8080`
+```
+cd {Project Root}
+vi .env
+
+REACT_APP_ENV=local
+REACT_APP_API_URL=http://localhost:8080
+```
 
 ## Available Scripts
 
