@@ -67,19 +67,11 @@ const FaqContainer = () => {
                 faqs: checkList,
                 callBack: () => {
                     dispatch(getFaqListAction());
-<<<<<<< HEAD
                     // 삭제후 checkList state 초기화.
                     setCheckList([]);
                 },
             })
         );
-=======
-                },
-            })
-        );
-        // dispatch(getFaqListAction());
->>>>>>> 85b6b1d477385cca6b45799052d7b52677f8b72d
-
         handleDeletePopup(false);
     };
 
