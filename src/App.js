@@ -17,6 +17,7 @@ import FooterComponent from './components/common/FooterComponent';
 import AdminHeaderContent from './components/common/AdminHeaderComponent';
 
 import HeaderContainer from './containers/common/HeaderContainer';
+import AdminChargePage from 'pages/admin/AdminChargePage';
 
 function App({ location }) {
     //   console.log('location : ', location);
@@ -31,6 +32,7 @@ function App({ location }) {
                     <Route component={AdminUserPage} path="/admin/user" />
                     <Route component={AdminOrderPage} path="/admin/order" />
                     <Route component={AdminFAQPage} path="/admin/faq" />
+                    <Route component={AdminChargePage} path="/admin/delivery" />
                 </section>
             ) : (
                 <section>

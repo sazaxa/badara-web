@@ -9,8 +9,8 @@ export const [GET_FAQ_INFO, GET_FAQ_INFO_SUCCESS, GET_FAQ_INFO_FAILURE] = create
 export const [DELETE_FAQ, DELETE_FAQ_SUCCESS, DELETE_FAQ_FAILURE] = createRequestActionTypes('faq/DELETE_FAQ');
 const CLEAR_FAQ_INFO = 'faq/CLEAR_FAQ_INFO';
 const CHANGE_FAQ_INFO = 'faq/CHANGE_FAQ_INFO';
-const [SAVE_FAQ] = createRequestActionTypes('faq/SAVE_FAQ');
-const [UPDATE_FAQ_INFO] = createRequestActionTypes('faq/UPDATE_FAQ_INFO');
+const SAVE_FAQ = 'faq/SAVE_FAQ';
+const UPDATE_FAQ_INFO = 'faq/UPDATE_FAQ_INFO';
 
 export const getFaqListAction = createAction(GET_FAQ_LIST, state => state);
 export const clearFaqInfoAction = createAction(CLEAR_FAQ_INFO);
@@ -67,10 +67,6 @@ function* updateFaqSaga({ payload: { callBack } }) {
 
 function* deleteFaqsSaga({ payload: { faqs, callBack } }) {
     yield all(faqs.map(e => call(FaqAPI.Delete, { id: e })));
-<<<<<<< HEAD
-=======
-
->>>>>>> 85b6b1d477385cca6b45799052d7b52677f8b72d
     if (callBack instanceof Function) {
         callBack({
             result: true,
