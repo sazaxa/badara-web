@@ -1,8 +1,8 @@
-import ChargeComponent from 'components/delivery/ChargeComponent';
+import { ChargeContainer } from 'containers';
 import React from 'react';
 
 const AdminChargePage = () => {
-    return <ChargeComponent />;
+    return <ChargeContainer />;
 };
 
 export default AdminChargePage;

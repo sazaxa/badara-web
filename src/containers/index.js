@@ -4,3 +4,5 @@ export { default as FaqAddContainer } from './faq/FaqAddContainer';
 export { default as FaqContainer } from './faq/FaqContainer';
 export { default as FaqDelContainer } from './faq/FaqDelContainer';
 export { default as FaqUpdateContainer } from './faq/FaqUpdateContainer';
+
+export { default as ChargeContainer } from './delivery/ChargeContainer';

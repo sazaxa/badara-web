@@ -1,7 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import { createRequestActionTypes } from 'lib/createRequestActionTypes';
 import produce from 'immer';
-import * as delivery from '../lib/api/delivery';
+import * as deliveryAPI from '../lib/api/delivery';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
 const [UPLOAD_CHARGE, UPLOAD_CHARGE_SUCCESS, UPLOAD_CHARGE_FAILURE] = createRequestActionTypes(
@@ -10,8 +10,8 @@ const [UPLOAD_CHARGE, UPLOAD_CHARGE_SUCCESS, UPLOAD_CHARGE_FAILURE] = createRequ
 
 export const uploadDeliveryAction = createAction(UPLOAD_CHARGE, formData => formData);
 
-function* uploadDeliverySaga() {
-    const { status, data } = yield call(delivery.Create);
+function* uploadDeliverySaga({ payload: formData }) {
+    const { status, data } = yield call(deliveryAPI.Create, formData);
     if (status === 200) {
         yield put({ type: UPLOAD_CHARGE_SUCCESS });
     } else {
@@ -41,7 +41,7 @@ export default handleActions(
                 draft.chargeUpload.status = 'success';
             });
         },
-        [UPLOAD_CHARGE_SUCCESS]: (state, { payload }) => {
+        [UPLOAD_CHARGE_FAILURE]: (state, { payload }) => {
             return produce(state, draft => {
                 draft.chargeUpload.status = 'fail';
                 draft.chargeUpload.error = payload;
