@@ -1,22 +1,12 @@
 {
-    "extends": ["react-app", "prettier", "airbnb"],
+    "extends": ["react-app", "prettier"],
     "plugins": ["prettier"],
     "rules": {
-      "prettier/prettier": ["error",{
-        "endOfLine":"auto"
-      }],
-      "react/jsx-filename-extension": 0,
-      "react/prop-types": 0,
-      "react/jsx-props-no-spreading":0,
-      "linebreak-style": 0,
-      "global-require": 0,
-      "eslint linebreak-style": [0, "error", "windows"],
-      "object-curly-newline":0,
-      "no-param-reassign":0,
-      "no-unused-vars":0,
-      "implicit-arrow-linebreak":0,
-      "operator-linebreak":0,
-      "indent":0,
-      "prefer-default-export":"off"
+      "prettier/prettier": [
+        "error",
+        {
+          "endOfLine":"auto"
+        }
+      ]
     }
   }

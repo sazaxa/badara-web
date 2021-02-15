@@ -1,15 +1,15 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import HeaderComponet from '../../components/common/HeaderComponent';
-import { changeLoginPopup } from '../../modules/Popup';
+import React, { useState } from 'react';
+import { HeaderComponent } from 'components';
 
 const HeaderContainer = () => {
-  const { loginPopup } = useSelector((state) => state.popup);
-  const dispatch = useDispatch();
-  const LoginAction = () => {
-    dispatch(changeLoginPopup(true));
-  };
-  return <HeaderComponet popup={loginPopup} action={LoginAction} />;
+    const [loginPopup, setLoginPopup] = useState(false);
+
+    // 로그인 팝업 처리.
+    const handleLoginPopup = e => {
+        setLoginPopup(e);
+        console.log(loginPopup);
+    };
+    return <HeaderComponent HandleLoginPopup={e => handleLoginPopup(e)} LoginPopup={loginPopup} />;
 };
 
 export default HeaderContainer;

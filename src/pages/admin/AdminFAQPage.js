@@ -1,5 +1,5 @@
 import React from 'react';
-import FaqContainer from '../../containers/faq/FaqContainer';
+import { FaqContainer } from 'containers';
 
 const AdminFAQPage = () => <FaqContainer />;
 

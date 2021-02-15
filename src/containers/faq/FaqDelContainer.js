@@ -1,8 +1,6 @@
 import React from 'react';
-import FaqDelComponent from '../../components/faq/FaqDelComponent';
+import { FaqDelComponent } from 'components';
 
-const FaqDelContainer = ({ visible, onRemove, close }) => (
-  <FaqDelComponent visible={visible} close={close} onRemove={onRemove} />
-);
+const FaqDelContainer = ({ onRemove, close }) => <FaqDelComponent close={() => close()} onRemove={() => onRemove()} />;
 
 export default FaqDelContainer;
