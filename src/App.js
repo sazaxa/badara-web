@@ -5,6 +5,7 @@ import {
     AdminUserPage,
     AdminOrderPage,
     AdminFAQPage,
+    AdminChargePage,
     MainPage,
     CostPage,
     UsePage,
@@ -12,11 +13,9 @@ import {
     SupportPage,
     RegisterPage,
 } from 'pages';
-
-import FooterComponent from './components/common/FooterComponent';
-import AdminHeaderContent from './components/common/AdminHeaderComponent';
-
-import HeaderContainer from './containers/common/HeaderContainer';
+import { FooterComponent } from 'components';
+import { HeaderContainer } from 'containers';
+import AdminHeaderContainer from 'containers/common/AdminHeaderContainer';
 
 function App({ location }) {
     //   console.log('location : ', location);
@@ -26,11 +25,12 @@ function App({ location }) {
         <>
             {pathname.startsWith(BASE_ADMIN_URL) ? (
                 <section className="adminWrap">
-                    <AdminHeaderContent />
+                    <AdminHeaderContainer />
                     <Route component={AdminUserPage} path="/admin" exact />
                     <Route component={AdminUserPage} path="/admin/user" />
                     <Route component={AdminOrderPage} path="/admin/order" />
                     <Route component={AdminFAQPage} path="/admin/faq" />
+                    <Route component={AdminChargePage} path="/admin/delivery" />
                 </section>
             ) : (
                 <section>
