@@ -8,14 +8,18 @@ const [UPLOAD_CHARGE, UPLOAD_CHARGE_SUCCESS, UPLOAD_CHARGE_FAILURE] = createRequ
     'delivery/UPLOAD_CHARGE'
 );
 
-export const uploadDeliveryAction = createAction(UPLOAD_CHARGE, formData => formData);
+export const uploadDeliveryAction = createAction(UPLOAD_CHARGE, ({ data }) => ({ data }));
 
-function* uploadDeliverySaga({ payload: formData }) {
-    const { status, data } = yield call(deliveryAPI.Create, formData);
-    if (status === 200) {
-        yield put({ type: UPLOAD_CHARGE_SUCCESS });
-    } else {
-        yield put({ type: UPLOAD_CHARGE_FAILURE, payload: data });
+function* uploadDeliverySaga({ payload: data }) {
+    try {
+        const { status } = yield call(deliveryAPI.Create, data);
+        if (status === 200) {
+            yield put({ type: UPLOAD_CHARGE_SUCCESS });
+        } else {
+            yield put({ type: UPLOAD_CHARGE_FAILURE });
+        }
+    } catch (e) {
+        console.log('통신중 에러가 발생했습니다.', e);
     }
 }
 export function* deliverySaga() {

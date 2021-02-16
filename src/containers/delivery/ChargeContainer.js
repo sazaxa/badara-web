@@ -8,6 +8,8 @@ const ChargeContainer = () => {
     const dispatch = useDispatch();
     const { status } = useSelector(state => state.delivery.chargeUpload);
     const [uploadFile, setUploadFile] = useState(null);
+
+    // status success 될때 마다 렌더링.
     useEffect(() => {
         if (status === 'success') {
             alert('업로드 성공!');
@@ -16,13 +18,16 @@ const ChargeContainer = () => {
             setUploadFile(null);
         }
     }, [status]);
+
+    // 배송비 등록 전송처리.
     const onSubmit = e => {
-        // 브라우저 기본값 초기화
         e.preventDefault();
         const formData = new FormData();
         formData.append('file', uploadFile);
-        dispatch(uploadDeliveryAction(formData));
+        dispatch(uploadDeliveryAction({ data: formData }));
     };
+
+    // 업로드 파일 핸들링.
     const handleUpload = e => {
         setUploadFile(e.target.files[0]);
     };
