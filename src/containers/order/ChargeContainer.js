@@ -1,13 +1,15 @@
 import { ChargeComponent } from 'components';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { uploadDeliveryAction } from 'store/delivery';
+import { uploadDeliveryAction } from 'store/order';
 
 const ChargeContainer = () => {
     const uploadInput = useRef();
     const dispatch = useDispatch();
-    const { status } = useSelector(state => state.delivery.chargeUpload);
+    const { status } = useSelector(state => state.order.chargeInsert);
     const [uploadFile, setUploadFile] = useState(null);
+
+    // status success 될때 마다 렌더링.
     useEffect(() => {
         if (status === 'success') {
             alert('업로드 성공!');
@@ -16,13 +18,16 @@ const ChargeContainer = () => {
             setUploadFile(null);
         }
     }, [status]);
+
+    // 배송비 등록 전송처리.
     const onSubmit = e => {
-        // 브라우저 기본값 초기화
         e.preventDefault();
         const formData = new FormData();
         formData.append('file', uploadFile);
-        dispatch(uploadDeliveryAction(formData));
+        dispatch(uploadDeliveryAction({ data: formData }));
     };
+
+    // 업로드 파일 핸들링.
     const handleUpload = e => {
         setUploadFile(e.target.files[0]);
     };

@@ -14,8 +14,7 @@ import {
     RegisterPage,
 } from 'pages';
 import { FooterComponent } from 'components';
-import { HeaderContainer } from 'containers';
-import AdminHeaderContainer from 'containers/common/AdminHeaderContainer';
+import { HeaderContainer, AdminHeaderContainer } from 'containers';
 
 function App({ location }) {
     //   console.log('location : ', location);
@@ -30,7 +29,7 @@ function App({ location }) {
                     <Route component={AdminUserPage} path="/admin/user" />
                     <Route component={AdminOrderPage} path="/admin/order" />
                     <Route component={AdminFAQPage} path="/admin/faq" />
-                    <Route component={AdminChargePage} path="/admin/delivery" />
+                    <Route component={AdminChargePage} path="/admin/insert" />
                 </section>
             ) : (
                 <section>

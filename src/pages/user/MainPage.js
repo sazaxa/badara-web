@@ -1,7 +1,8 @@
 import React from 'react';
+import { CalculatorContainer } from 'containers';
 
 function MainPage() {
-    return <p>메인페이지</p>;
+    return <CalculatorContainer />;
 }
 
 export default MainPage;
