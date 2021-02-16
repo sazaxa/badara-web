@@ -21,7 +21,7 @@ const AdminHeaderComponent = ({ location }) => {
                         <Link to="/admin/faq">FAQ</Link>
                     </li>
                     <li className={pathname === '/admin/delivery' ? 'active' : null}>
-                        <Link to="/admin/delivery">배송비 등록</Link>
+                        <Link to="/admin/insert">배송비 등록</Link>
                     </li>
                 </ul>
             </article>
