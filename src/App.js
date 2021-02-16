@@ -14,8 +14,7 @@ import {
     RegisterPage,
 } from 'pages';
 import { FooterComponent } from 'components';
-import { HeaderContainer } from 'containers';
-import AdminHeaderContainer from 'containers/common/AdminHeaderContainer';
+import { HeaderContainer, AdminHeaderContainer } from 'containers';
 
 function App({ location }) {
     //   console.log('location : ', location);

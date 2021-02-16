@@ -8,6 +8,6 @@ export { default as FaqComponent } from './faq/FaqComponent';
 export { default as FaqDelComponent } from './faq/FaqDelComponent';
 export { default as FaqUpdateComponent } from './faq/FaqUpdateComponent';
 
-export { default as ChargeComponent } from './delivery/ChargeComponent';
+export { default as ChargeComponent } from './order/ChargeComponent';
 
 export { default as Responsive } from './common/Responsive';
