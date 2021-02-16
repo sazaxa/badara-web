@@ -7,3 +7,4 @@ export { default as FaqDelContainer } from './faq/FaqDelContainer';
 export { default as FaqUpdateContainer } from './faq/FaqUpdateContainer';
 
 export { default as ChargeContainer } from './order/ChargeContainer';
+export { default as CalculatorContainer } from './order/CalculatorContainer';

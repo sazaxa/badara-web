@@ -8,3 +8,8 @@ export const Insert = ({ data }) => {
         },
     });
 };
+
+// 계산기 예상가격 구하기
+export const PredictionPrime = ({ country, weight }) => {
+    return client.post('/api/v1/shipping/dhl', { country, weight });
+};

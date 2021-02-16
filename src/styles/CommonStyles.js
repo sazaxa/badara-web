@@ -63,9 +63,9 @@ export const QuillWrapper = styled.div`
 export const FooterWrap = styled.section`
     width: 100%;
     background-color: #f6f6f6;
-    position: absolute;
-    bottom: 0;
-    left: 0;
+    // position: absolute;
+    // bottom: 0;
+    // left: 0;
 `;
 export const FooterContent = styled.article`
     width: 1140px;
