@@ -12,8 +12,5 @@ export const Write = ({ title, content }) => client.post('/api/v1/faq', { title,
 // faq 수정
 export const Update = ({ title, content, id }) => client.put(`/api/v1/faq/${id}`, { title, content });
 
-// faq 수정
-export const Update = ({ title, content, id }) => client.put(`/api/v1/faq/${id}`, { title, content });
-
 // faq 삭제
 export const Delete = ({ id }) => client.delete(`/api/v1/faq/${id}`);
