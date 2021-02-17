@@ -1,11 +1,11 @@
 import { CalculatorComponent } from 'components';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearPredictionPrimeAction, predictionPrimeAction } from 'store/order';
+import { clearPredictionPrimeAction, getCountryAction, predictionPrimeAction } from 'store/order';
 
 const CalculatorContainer = () => {
     const dispatch = useDispatch();
-    const { predictionPrime } = useSelector(state => state.order);
+    const { predictionPrime, countryLists } = useSelector(state => state.order);
     const [material, setMaterial] = useState({
         width: '',
         vertical: '',
@@ -15,6 +15,10 @@ const CalculatorContainer = () => {
         country: '',
         weight: '',
     });
+    useEffect(() => {
+        dispatch(getCountryAction());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
     console.log(material);
     const handleChange = e => {
         const { name, value } = e.target;
@@ -57,6 +61,7 @@ const CalculatorContainer = () => {
             OnClickVolume={onClickVolume}
             PredictionPrime={predictionPrime}
             Material={material}
+            CountryLists={countryLists}
         />
     );
 };

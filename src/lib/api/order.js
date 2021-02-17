@@ -13,3 +13,7 @@ export const Insert = ({ data }) => {
 export const PredictionPrime = ({ country, weight }) => {
     return client.post('/api/v1/shipping/dhl', { country, weight });
 };
+
+// 배송비 엑셀에 등록된 나라 불러오기
+
+export const getCountry = () => client.get('/api/v1/shipping/dhl/countries');

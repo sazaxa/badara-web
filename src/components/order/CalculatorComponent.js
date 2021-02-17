@@ -1,7 +1,7 @@
 import React from 'react';
 import { CalculatorWrap } from 'styles/CalculatorStyles';
 
-const CalculatorComponent = ({ OnClickWeight, OnChange, OnClickVolume, PredictionPrime, Material }) => {
+const CalculatorComponent = ({ OnClickWeight, OnChange, OnClickVolume, PredictionPrime, Material, CountryLists }) => {
     return (
         <CalculatorWrap>
             <form>
@@ -21,7 +21,13 @@ const CalculatorComponent = ({ OnClickWeight, OnChange, OnClickVolume, Predictio
                     <div className="content">
                         <select name="country" onChange={OnChange}>
                             <option value="">나라선택</option>
-                            <option value="Singapore">Singapore</option>
+                            {CountryLists.map(v => {
+                                return (
+                                    <option value={v} key={v}>
+                                        {v}
+                                    </option>
+                                );
+                            })}
                         </select>
                     </div>
                 </div>
@@ -44,7 +50,7 @@ const CalculatorComponent = ({ OnClickWeight, OnChange, OnClickVolume, Predictio
                 <div className="wrap">
                     <div className="title">
                         <h4>부피 무게</h4>
-                        <p>(단위:kg)</p>
+                        <p>(단위:g)</p>
                     </div>
                     <div className="content">
                         <input
@@ -52,14 +58,14 @@ const CalculatorComponent = ({ OnClickWeight, OnChange, OnClickVolume, Predictio
                             name="volume"
                             disabled
                             onChange={OnChange}
-                            placeholder={Material.volume ? Material.volume + 'kg' : '부피무게'}
+                            placeholder={Material.volume ? Material.volume + 'g' : '부피무게'}
                         />
                     </div>
                 </div>
                 <div className="wrap">
                     <div className="title">
                         <h4>실 무게</h4>
-                        <p>(단위:kg)</p>
+                        <p>(단위:g)</p>
                     </div>
                     <div className="content">
                         <input type="text" name="actual" onChange={OnChange} placeholder="실 무게" />
