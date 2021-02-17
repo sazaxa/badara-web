@@ -1,7 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 import { createRequestActionTypes } from 'lib/createRequestActionTypes';
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest, select } from 'redux-saga/effects';
 import * as orderAPI from '../lib/api/order';
 
 //  주문 목록 Action Types
@@ -15,11 +15,16 @@ const [UPLOAD_CHARGE, UPLOAD_CHARGE_SUCCESS, UPLOAD_CHARGE_FAILURE] = createRequ
 const [PREDICTION_PRIME, PREDICTION_PRIME_SUCCESS, PREDICTION_PRIME_FAILURE] = createRequestActionTypes(
     'order/PREDICTION_PRIME'
 );
-const CLEAR_PREDICTION_PRIME = 'faq/CLEAR_PREDICTION_PRIME';
+// 예상 가격 초기화 Action Types.
+const CLEAR_PREDICTION_PRIME = 'order/CLEAR_PREDICTION_PRIME';
+
+// 나라 가져오기 Action Types.
+const GET_COUNTRY = 'order/GET_COUNTRY';
 
 export const uploadDeliveryAction = createAction(UPLOAD_CHARGE, ({ data }) => ({ data }));
 export const predictionPrimeAction = createAction(PREDICTION_PRIME, ({ country, weight }) => ({ country, weight }));
 export const clearPredictionPrimeAction = createAction(CLEAR_PREDICTION_PRIME);
+export const getCountryAction = createAction(GET_COUNTRY);
 
 // 배송비 엑셀 등록 Saga.
 function* insertDeliverySaga({ payload: data }) {
@@ -46,10 +51,24 @@ function* predictionPrimeSaga({ payload: { country, weight } }) {
         console.log('통신중 에러가 발생했습니다.', e);
     }
 }
+//  계산기 나라 목록 가져오기.
+function* getCountrySaga() {
+    const response = yield call(orderAPI.getCountry);
+    const countryLists = yield select(store => store.order.countryLists);
+    const { data } = response;
+    data.map(e => {
+        if (countryLists.indexOf(e.country) < 0) {
+            countryLists.push(e.country);
+        }
+        // eslint-disable-next-line array-callback-return
+        return;
+    });
+}
 
 export function* orderSaga() {
     yield takeLatest(UPLOAD_CHARGE, insertDeliverySaga);
     yield takeLatest(PREDICTION_PRIME, predictionPrimeSaga);
+    yield takeLatest(GET_COUNTRY, getCountrySaga);
 }
 
 const initialState = {
@@ -62,6 +81,7 @@ const initialState = {
         error: '',
     },
     predictionPrime: null,
+    countryLists: [],
 };
 
 export default handleActions(
