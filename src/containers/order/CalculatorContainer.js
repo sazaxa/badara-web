@@ -6,6 +6,7 @@ import { clearPredictionPrimeAction, getCountryAction, predictionPrimeAction } f
 const CalculatorContainer = () => {
     const dispatch = useDispatch();
     const { predictionPrime, countryLists } = useSelector(state => state.order);
+    const [getCountry, setGetCountry] = useState([]);
     const [material, setMaterial] = useState({
         width: '',
         vertical: '',
@@ -15,6 +16,15 @@ const CalculatorContainer = () => {
         country: '',
         weight: '',
     });
+    const { list, status } = countryLists;
+
+    //  store 에 나라 목록 받아오면 state값에 넘김
+    useEffect(() => {
+        if (status === 'success') {
+            setGetCountry(list);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [countryLists]);
 
     // 최초 로딩시 계산기 나라목록 가져오기.
     useEffect(() => {
@@ -62,7 +72,7 @@ const CalculatorContainer = () => {
             OnClickVolume={onClickVolume}
             PredictionPrime={predictionPrime}
             Material={material}
-            CountryLists={countryLists}
+            CountryLists={getCountry}
         />
     );
 };
