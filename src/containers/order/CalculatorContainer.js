@@ -15,11 +15,12 @@ const CalculatorContainer = () => {
         country: '',
         weight: '',
     });
+
+    // 최초 로딩시 계산기 나라목록 가져오기.
     useEffect(() => {
         dispatch(getCountryAction());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    console.log(material);
     const handleChange = e => {
         const { name, value } = e.target;
         setMaterial({

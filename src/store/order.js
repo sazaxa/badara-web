@@ -51,7 +51,7 @@ function* predictionPrimeSaga({ payload: { country, weight } }) {
         console.log('통신중 에러가 발생했습니다.', e);
     }
 }
-
+//  계산기 나라 목록 가져오기.
 function* getCountrySaga() {
     const response = yield call(orderAPI.getCountry);
     const countryLists = yield select(store => store.order.countryLists);
