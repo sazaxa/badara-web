@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, withRouter } from 'react-router-dom';
 
 import {
@@ -15,8 +15,16 @@ import {
 } from 'pages';
 import { FooterComponent } from 'components';
 import { HeaderContainer, AdminHeaderContainer } from 'containers';
+import { getCountryAction } from 'store/order';
+import { useDispatch } from 'react-redux';
 
 function App({ location }) {
+    const dispatch = useDispatch();
+    // 최초 로딩시 계산기 나라목록 가져오기.
+    useEffect(() => {
+        dispatch(getCountryAction());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
     //   console.log('location : ', location);
     const { pathname } = location;
     const BASE_ADMIN_URL = '/admin';

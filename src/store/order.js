@@ -19,13 +19,16 @@ const [PREDICTION_PRIME, PREDICTION_PRIME_SUCCESS, PREDICTION_PRIME_FAILURE] = c
 const CLEAR_PREDICTION_PRIME = 'order/CLEAR_PREDICTION_PRIME';
 
 // 나라 가져오기 Action Types.
-// const GET_COUNTRY = 'order/GET_COUNTRY';
 const [GET_COUNTRY, GET_COUNTRY_SUCCESS, GET_COUNTRY_FAILURE] = createRequestActionTypes('order/GET_COUNTRY');
+
+// 신청 목록 Action Types.
+const APPLY_LIST = 'order/APPLY_LIST';
 
 export const uploadDeliveryAction = createAction(UPLOAD_CHARGE, ({ data }) => ({ data }));
 export const predictionPrimeAction = createAction(PREDICTION_PRIME, ({ country, weight }) => ({ country, weight }));
 export const clearPredictionPrimeAction = createAction(CLEAR_PREDICTION_PRIME);
 export const getCountryAction = createAction(GET_COUNTRY);
+export const applyListAction = createAction(APPLY_LIST, applyData => applyData);
 
 // 배송비 엑셀 등록 Saga.
 function* insertDeliverySaga({ payload: data }) {
@@ -91,6 +94,9 @@ const initialState = {
         status: 'idle',
         list: [],
     },
+    apply: {
+        list: [],
+    },
 };
 
 export default handleActions(
@@ -129,6 +135,11 @@ export default handleActions(
         [GET_COUNTRY_FAILURE]: state => {
             return produce(state, draft => {
                 draft.countryLists.status = 'fail';
+            });
+        },
+        [APPLY_LIST]: (state, { payload }) => {
+            return produce(state, draft => {
+                draft.apply.list.push(payload);
             });
         },
     },

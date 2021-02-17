@@ -1,7 +1,7 @@
 import { CalculatorComponent } from 'components';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearPredictionPrimeAction, getCountryAction, predictionPrimeAction } from 'store/order';
+import { clearPredictionPrimeAction, predictionPrimeAction } from 'store/order';
 
 const CalculatorContainer = () => {
     const dispatch = useDispatch();
@@ -26,11 +26,6 @@ const CalculatorContainer = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [countryLists]);
 
-    // 최초 로딩시 계산기 나라목록 가져오기.
-    useEffect(() => {
-        dispatch(getCountryAction());
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
     const handleChange = e => {
         const { name, value } = e.target;
         setMaterial({
