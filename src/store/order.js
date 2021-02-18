@@ -28,6 +28,7 @@ const DELETE_APPLY_INFO = 'order/DELETE_APPLY_INFO';
 // 신청하기 Action Types.
 const APPLY_LIST_INSERT = 'order/APPLY_LIST_INSERT';
 
+export const getOrderListAction = createAction(GET_ORDER_LIST_REQUEST);
 export const uploadDeliveryAction = createAction(UPLOAD_CHARGE, ({ data }) => ({ data }));
 export const predictionPrimeAction = createAction(PREDICTION_PRIME, ({ country, weight }) => ({ country, weight }));
 export const clearPredictionPrimeAction = createAction(CLEAR_PREDICTION_PRIME);
@@ -35,6 +36,15 @@ export const getCountryAction = createAction(GET_COUNTRY);
 export const applyListAction = createAction(APPLY_LIST, applyData => applyData);
 export const applyListInsertAction = createAction(APPLY_LIST_INSERT, list => list);
 export const deleteApplyInfoAction = createAction(DELETE_APPLY_INFO, index => index);
+
+function* getOrderListSaga() {
+    try {
+        const response = yield call(orderAPI.getOrder);
+        yield put({ type: GET_ORDER_LIST_SUCCESS, payload: response.data });
+    } catch (e) {
+        yield put({ type: GET_ORDER_LIST_FAILURE });
+    }
+}
 
 // 배송비 엑셀 등록 Saga.
 function* insertDeliverySaga({ payload: data }) {
@@ -89,6 +99,7 @@ export function* orderSaga() {
     yield takeLatest(PREDICTION_PRIME, predictionPrimeSaga);
     yield takeLatest(GET_COUNTRY, getCountrySaga);
     yield takeLatest(APPLY_LIST_INSERT, applyListInsertSaga);
+    yield takeLatest(GET_ORDER_LIST_REQUEST, getOrderListSaga);
 }
 
 const initialState = {
@@ -112,6 +123,22 @@ const initialState = {
 
 export default handleActions(
     {
+        [GET_ORDER_LIST_REQUEST]: state => {
+            return produce(state, draft => {
+                draft.orders.status = 'loading';
+            });
+        },
+        [GET_ORDER_LIST_SUCCESS]: (state, { payload }) => {
+            return produce(state, draft => {
+                draft.orders.status = 'loading';
+                draft.orders.list = payload;
+            });
+        },
+        [GET_ORDER_LIST_REQUEST]: state => {
+            return produce(state, draft => {
+                draft.orders.status = 'fail';
+            });
+        },
         [UPLOAD_CHARGE]: state => {
             return produce(state, draft => {
                 draft.chargeInsert.status = 'loading';
