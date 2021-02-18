@@ -130,7 +130,7 @@ export default handleActions(
         },
         [GET_ORDER_LIST_SUCCESS]: (state, { payload }) => {
             return produce(state, draft => {
-                draft.orders.status = 'loading';
+                draft.orders.status = 'success';
                 draft.orders.list = payload;
             });
         },
