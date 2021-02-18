@@ -2,7 +2,7 @@ import { Responsive } from 'components';
 import styled from 'styled-components';
 
 export const ApplyWrap = styled(Responsive)`
-    padding: 80px 0;
+    padding: 120px 0;
     background: #fff;
     height: 100%;
 `;
@@ -28,6 +28,51 @@ export const ApplyContent = styled.article`
         border-radius: 5px;
         display: block;
         margin: 0 auto;
+    }
+    .ApplyListHeader {
+        width: 100%;
+        height: 50px;
+        border-top:2px solid #000;
+        border-bottom:1px solid #ccc;
+        background: #eee;
+        display:flex;
+            align-items:center;
+        ul {
+            width:100%;
+            display:flex;
+            align-items:center;
+            li {
+                width:20%;
+                text-align:center;
+                font-weight:600;
+            }
+        }
+    }
+    .ApplyListContent {
+        width: 100%;
+        height: 150px;
+        border-bottom:1px solid #ccc;
+        position:relative;
+        display:flex;
+        align-items:center;
+        .delete {
+            position:absolute;
+            top:50%;
+            right:10px;
+            transform:translateY(-50%);
+        }
+        ul {
+            width:100%;
+            display:flex;
+            align-items:center;
+            li {
+                width:20%;
+                text-align:center;
+                p {
+                    line-height:1.5;
+                }
+            }
+        }
     }
     .waring {
         background: #f2f2f2;
@@ -110,7 +155,6 @@ export const ApplyContent = styled.article`
                     color: #fff;
                     border-radius: 5px;
                 }
-            }
         }
     }
 `;
