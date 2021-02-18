@@ -12,6 +12,7 @@ import {
     ApplyPage,
     SupportPage,
     RegisterPage,
+    ApplyListPage,
 } from 'pages';
 import { FooterComponent } from 'components';
 import { HeaderContainer, AdminHeaderContainer } from 'containers';
@@ -45,7 +46,8 @@ function App({ location }) {
                     <Route component={MainPage} path="/" exact />
                     <Route component={CostPage} path="/cost" />
                     <Route component={UsePage} path="/use" />
-                    <Route component={ApplyPage} path="/apply" />
+                    <Route component={ApplyPage} path="/apply" exact />
+                    <Route component={ApplyListPage} path="/apply/list" />
                     <Route component={SupportPage} path="/support" />
                     <Route component={RegisterPage} path="/register" />
                     <FooterComponent />

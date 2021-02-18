@@ -1,6 +1,7 @@
 export { default as UsePage } from './user/UsePage';
 export { default as CostPage } from './user/CostPage';
 export { default as ApplyPage } from './user/ApplyPage';
+export { default as ApplyListPage } from './user/ApplyListPage';
 export { default as SupportPage } from './user/SupportPage';
 export { default as RegisterPage } from './user/RegisterPage';
 export { default as AdminUserPage } from './admin/AdminUserPage';
