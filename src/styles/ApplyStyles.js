@@ -1,4 +1,4 @@
-import { Responsive } from 'components';
+import Responsive from '../components/common/Responsive';
 import styled from 'styled-components';
 
 export const ApplyWrap = styled(Responsive)`
@@ -19,15 +19,30 @@ export const ApplyContent = styled.article`
         text-align: center;
         font-size: 2rem;
     }
+    button {
+        background: #343a40;
+        cursor:pointer;
+        transition:background .3s;
+        color:#fff;
+        padding:10px;
+        border-radius:5px;
+    }
+    button:hover {
+        background:#000;
+    }
     button.applyBtn {
         width: 20%;
         height: 50px;
         font-size: 1rem;
-        background: #000;
         color: #fff;
         border-radius: 5px;
         display: block;
         margin: 0 auto;
+        margin-top:50px;
+    }
+    .ApplyList {
+        width:100%;
+        height:100%;
     }
     .ApplyListHeader {
         width: 100%;
@@ -73,6 +88,9 @@ export const ApplyContent = styled.article`
                 }
             }
         }
+    }
+    .ApplyListContent:last-child {
+        margin-bottom:50px;
     }
     .waring {
         background: #f2f2f2;
@@ -148,13 +166,71 @@ export const ApplyContent = styled.article`
                 button {
                     width: 20%;
                     height: 35px;
-                    background: #000;
                     cursor: pointer;
                     outline: none;
                     border: none;
                     color: #fff;
                     border-radius: 5px;
                 }
+        }
+    }
+`;
+
+export const Fullscreen = styled.section`
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+export const AskModalBlock = styled.article`
+    width: 320px;
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 4px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.125);
+    text-align: center;
+    h2 {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+    }
+    h3 {
+        margin-bottom: 1rem;
+        line-height: 1.5;
+    }
+    p {
+        margin-bottom: 1.5rem;
+        line-height: 1.5;
+        text-align: center;
+    }
+    .buttons {
+        display: flex;
+        justify-content: flex-end;
+        button {
+            padding: 10px;
+            outline: none;
+            border: none;
+            color: #fff;
+            border-radius: 3px;
+            letter-spacing: -1px;
+        }
+        button:first-child {
+            background: #fff;
+            border: 1px solid #343a40;
+            color: #343a40;
+            &:hover {
+                background: #343a40;
+                color: #fff;
+            }
+        }
+        button:nth-child(2) {
+            margin: 0 0.5rem;
         }
     }
 `;

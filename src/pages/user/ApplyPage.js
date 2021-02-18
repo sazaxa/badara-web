@@ -1,4 +1,4 @@
-import ApplyContainer from 'containers/apply/ApplyContainer';
+import { ApplyContainer } from 'containers';
 import React from 'react';
 
 const ApplyPage = () => <ApplyContainer />;

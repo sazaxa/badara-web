@@ -1,6 +1,6 @@
-import ApplyListComponent from 'components/apply/ApplyListComponent';
+import { ApplyListContainer } from 'containers';
 import React from 'react';
 
-const ApplyListPage = () => <ApplyListComponent />;
+const ApplyListPage = () => <ApplyListContainer />;
 
 export default ApplyListPage;

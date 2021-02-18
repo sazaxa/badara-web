@@ -1,7 +1,7 @@
 import React from 'react';
 import { ApplyContent, ApplyWrap } from 'styles/ApplyStyles';
 
-const ApplyListComponent = () => {
+const ApplyListComponent = ({ ApplyList, HandleDeleteClick, HandleInsertClick }) => {
     return (
         <ApplyWrap>
             <ApplyContent>
@@ -10,6 +10,7 @@ const ApplyListComponent = () => {
                     <h3>신청 전 주의사항!</h3>
                     <p>
                         *실 무게, 부피무게중 높은 쪽으로 예상가격이 측정 됩니다. <br />
+                        *새로고침시 신청한 내용이 사라지니 유의하시기 바랍니다.
                     </p>
                     <h4>
                         * 배송 대행 신청후 물품을 센터로 보내주셔야 합니다. <br /> * 센터 주소 :
@@ -24,25 +25,36 @@ const ApplyListComponent = () => {
                         <li>예상가격</li>
                     </ul>
                 </article>
-                <article className="ApplyListContent">
-                    <ul>
-                        <li>과자 묶음</li>
-                        <li>미국</li>
-                        <li>
-                            <p>이름 : 강경원</p>
-                            <p>휴대폰 : 010321321313</p>
-                            <p>주소 : ㅇㅁㄴㅇㅇㄴㅁㅇㅁ</p>
-                        </li>
-                        <li>
-                            <p>부피무게 : 123g</p>
-                            <p>실 무게 : 1234g</p>
-                        </li>
-                        <li>123$</li>
-                    </ul>
-                    <button type="button" className="delete">
-                        삭제
-                    </button>
-                </article>
+                {ApplyList.map((e, index) => {
+                    return (
+                        <article className="ApplyListContent" key={index}>
+                            <ul>
+                                <li>{e.productName}</li>
+                                <li>{e.country}</li>
+                                <li>
+                                    <p>이름 : {e.recipientName}</p>
+                                    <p>휴대폰 : {e.recipientPhoneNumber}</p>
+                                    <p>주소 : {e.recipientAddress}</p>
+                                </li>
+                                <li>
+                                    <p>
+                                        부피무게 :<b>{e.volumeWeight ? e.volumeWeight + 'g' : '미입력'}</b>
+                                    </p>
+                                    <p>
+                                        실 무게 : <b>{e.netWeight ? e.netWeight + 'g' : '미입력'}</b>
+                                    </p>
+                                </li>
+                                <li>{e.expectedPrice}$</li>
+                            </ul>
+                            <button type="button" className="delete" onClick={() => HandleDeleteClick(index)}>
+                                삭제
+                            </button>
+                        </article>
+                    );
+                })}
+                <button type="button" className="applyBtn" onClick={HandleInsertClick}>
+                    신청하기
+                </button>
             </ApplyContent>
         </ApplyWrap>
     );
