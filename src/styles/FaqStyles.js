@@ -1,10 +1,15 @@
 import styled from 'styled-components';
+import Responsive from '../components/common/Responsive';
 import Button from '@material-ui/core/Button';
+
+export const FaqWrap = styled(Responsive)`
+    padding: 50px 0;
+    margin-left: 300px;
+`;
 
 export const FaqAddWrap = styled.section`
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.1);
     position: fixed;
     z-index: 1;
 `;

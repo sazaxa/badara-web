@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Responsive } from 'components/index';
-import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,36 +8,19 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import { useDispatch, useSelector } from 'react-redux';
-import { getOrderListAction } from 'store/order';
+import { OrderWrap } from 'styles/OrderStyles';
+import { Link } from 'react-router-dom';
+import { columns } from 'containers/order/OrderListContainer';
 
-const columns = [
-    { id: 'id', label: '번호', minWidth: 50, align: 'center' },
-    { id: 'days', label: '날짜', minWidth: 200, align: 'center' },
-    {
-        id: 'member',
-        label: '회원',
-        minWidth: 170,
-        align: 'center',
+const StyledTableCell = withStyles(theme => ({
+    head: {
+        backgroundColor: '#2191f3',
+        color: theme.palette.common.white,
     },
-    {
-        id: 'status',
-        label: '상태',
-        minWidth: 170,
-        align: 'center',
+    body: {
+        fontSize: 14,
     },
-    {
-        id: 'country',
-        label: '국가',
-        minWidth: 170,
-        align: 'center',
-    },
-];
-
-function createData(id, days, member, status, country) {
-    return { id, days, member, status, country };
-}
-
+}))(TableCell);
 const useStyles = makeStyles({
     root: {
         width: '100%',
@@ -47,60 +29,41 @@ const useStyles = makeStyles({
         maxHeight: 440,
     },
 });
-const OrderListComponent = () => {
-    const dispatch = useDispatch();
-    const { list } = useSelector(state => state.order.orders);
-    useEffect(() => {
-        dispatch(getOrderListAction());
-    }, []);
+const OrderListComponent = ({ Rows, RowsPerPage, Page, HandleChangePage, HandleChangeRowsPerPage }) => {
     const classes = useStyles();
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(10);
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
-
-    const handleChangeRowsPerPage = event => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
-    };
-    const rows = [
-        // createData('India', 'IN', 1324171354, 3287263),
-        list.map(v => createData(v.id, v.product.createdDate, '회원', v.status, v.country)),
-    ];
-    console.log(rows);
-    if (list.length === 0) {
-        return null;
-    }
     return (
-        <Responsive>
+        <OrderWrap>
             <Paper className={classes.root}>
                 <TableContainer className={classes.container}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                             <TableRow>
                                 {columns.map(column => (
-                                    <TableCell
+                                    <StyledTableCell
                                         key={column.id}
                                         align={column.align}
                                         style={{ minWidth: column.minWidth }}
                                     >
                                         {column.label}
-                                    </TableCell>
+                                    </StyledTableCell>
                                 ))}
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows[0].map(row => {
+                            {Rows[0].map(row => {
                                 return (
                                     <TableRow key={row.id}>
                                         <TableCell component="th" scope="row" align="center">
                                             {row.id}
                                         </TableCell>
-                                        <TableCell align="center">{row.days}</TableCell>
+                                        <TableCell align="center">
+                                            <Link to={`/admin/order/${row.orderId}`} key={row.id}>
+                                                {row.orderId}
+                                            </Link>
+                                        </TableCell>
                                         <TableCell align="center">{row.member}</TableCell>
                                         <TableCell align="center">{row.status}</TableCell>
-                                        <TableCell align="center">{row.country}</TableCell>
+                                        <TableCell align="center">{row.days}</TableCell>
                                     </TableRow>
                                 );
                             })}
@@ -110,14 +73,14 @@ const OrderListComponent = () => {
                 <TablePagination
                     rowsPerPageOptions={[10, 25, 100]}
                     component="div"
-                    count={rows.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onChangePage={handleChangePage}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                    count={Rows.length}
+                    rowsPerPage={RowsPerPage}
+                    page={Page}
+                    onChangePage={HandleChangePage}
+                    onChangeRowsPerPage={HandleChangeRowsPerPage}
                 />
             </Paper>
-        </Responsive>
+        </OrderWrap>
     );
 };
 

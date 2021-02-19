@@ -207,12 +207,11 @@ export const StyledInput = styled.input`
 `;
 
 export const ResponsiveBlock = styled.div`
-    padding: 0 0.8rem;
+    // padding: 0 0.8rem;
     box-sizing: border-box;
     width: 100%;
     height: 980px;
-    background: #eee;
-    padding-left: 300px;
+    // padding-left: 300px;
     @media (max-width: 780px) {
         width: 100%;
     }

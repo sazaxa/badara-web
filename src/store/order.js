@@ -134,7 +134,7 @@ export default handleActions(
                 draft.orders.list = payload;
             });
         },
-        [GET_ORDER_LIST_REQUEST]: state => {
+        [GET_ORDER_LIST_FAILURE]: state => {
             return produce(state, draft => {
                 draft.orders.status = 'fail';
             });

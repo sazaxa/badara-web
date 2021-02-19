@@ -5,6 +5,9 @@
   padding:0;
   font-family: 'Nanum Gothic', sans-serif;
 }
+#root {
+  background:#f2f2f2;
+}
 
 ul {
   list-style: none;

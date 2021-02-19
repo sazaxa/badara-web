@@ -13,6 +13,7 @@ import {
     SupportPage,
     RegisterPage,
     ApplyListPage,
+    AdminOrderDetailPage,
 } from 'pages';
 import { FooterComponent } from 'components';
 import { HeaderContainer, AdminHeaderContainer } from 'containers';
@@ -36,7 +37,8 @@ function App({ location }) {
                     <AdminHeaderContainer />
                     <Route component={AdminUserPage} path="/admin" exact />
                     <Route component={AdminUserPage} path="/admin/user" />
-                    <Route component={AdminOrderPage} path="/admin/order" />
+                    <Route component={AdminOrderPage} path="/admin/order" exact />
+                    <Route component={AdminOrderDetailPage} path="/admin/order/:id" />
                     <Route component={AdminFAQPage} path="/admin/faq" />
                     <Route component={AdminChargePage} path="/admin/insert" />
                 </section>

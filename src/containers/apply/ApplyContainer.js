@@ -2,7 +2,7 @@ import ApplyComponent from 'components/apply/ApplyComponent';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { applyListAction, predictionPrimeAction } from 'store/order';
+import { applyListAction, clearPredictionPrimeAction, predictionPrimeAction } from 'store/order';
 import { Courier } from './courier';
 
 const ApplyContainer = ({ history }) => {
@@ -18,18 +18,18 @@ const ApplyContainer = ({ history }) => {
         recipientAddress: '',
         koreanInvoice: '',
         koreanShippingCompany: '',
+        country: '',
+        userMemo: '',
+        addProduct: false,
         productName: '',
         width: '',
         depth: '',
         height: '',
         volumeWeight: '',
         netWeight: '',
-        country: '',
-        userMemo: '',
         expectedPrice: '',
-        addProduct: false,
     });
-    console.log(material);
+    // console.log(material);
 
     useEffect(() => {
         if (predictionPrime !== null) {
@@ -37,7 +37,7 @@ const ApplyContainer = ({ history }) => {
                 ...material,
                 expectedPrice: predictionPrime,
             });
-            console.log(material);
+            setVisible(true);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [predictionPrime]);
@@ -57,12 +57,13 @@ const ApplyContainer = ({ history }) => {
     };
     const handleChange = e => {
         const { name, value } = e.target;
+        console.log(name, value);
         setMaterial({
             ...material,
             [name]: value,
         });
     };
-    console.log(material);
+    // console.log(material);
     // 모달 관련
     const handleConfirmModal = () => {
         if (material.recipientName === '') {
@@ -84,7 +85,6 @@ const ApplyContainer = ({ history }) => {
             alert('부피무게, 실무게 중 하나를 입력하세요.');
             return;
         }
-        setVisible(true);
         if (material.volumeWeight > material.netWeight) {
             dispatch(predictionPrimeAction({ country: material.country, weight: material.volumeWeight }));
         } else if (material.volumeWeight < material.netWeight) {
@@ -93,9 +93,11 @@ const ApplyContainer = ({ history }) => {
     };
     const handleCancel = () => {
         setVisible(false);
+        dispatch(clearPredictionPrimeAction());
     };
     const handleAddConfirm = () => {
         setVisible(false);
+        console.log(material);
         dispatch(applyListAction(material));
         setMaterial({
             recipientName: material.recipientName,
@@ -103,17 +105,18 @@ const ApplyContainer = ({ history }) => {
             recipientAddress: material.recipientAddress,
             koreanInvoice: '',
             koreanShippingCompany: '',
+            country: material.country,
+            userMemo: '',
+            addProduct: true,
             productName: '',
             width: '',
             depth: '',
             height: '',
             volumeWeight: '',
             netWeight: '',
-            country: material.country,
-            userMemo: '',
             expectedPrice: '',
-            addProduct: true,
         });
+        dispatch(clearPredictionPrimeAction());
     };
     const handleConfirm = () => {
         dispatch(applyListAction(material));

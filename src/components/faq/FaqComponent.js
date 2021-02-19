@@ -15,8 +15,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import AccordionActions from '@material-ui/core/AccordionActions';
 
 import { FaqAddContainer, FaqUpdateContainer, FaqDelContainer } from 'containers';
-import { Responsive } from 'components';
-import { AdminUserWrap } from 'styles/FaqStyles';
+import { AdminUserWrap, FaqWrap } from 'styles/FaqStyles';
 
 const useStyles = makeStyles({
     root: {
@@ -40,7 +39,7 @@ const FaqComponent = ({
     const classes = useStyles();
 
     return (
-        <Responsive>
+        <FaqWrap>
             <div className={classes.root}>
                 {AddPopup === true && <FaqAddContainer close={() => HandleAddPopup(false)} />}
                 {UpdatePopup === true && <FaqUpdateContainer close={() => HandleUpdatePopup({ state: false })} />}
@@ -106,7 +105,7 @@ const FaqComponent = ({
                         })}
                 </AdminUserWrap>
             </div>
-        </Responsive>
+        </FaqWrap>
     );
 };
 

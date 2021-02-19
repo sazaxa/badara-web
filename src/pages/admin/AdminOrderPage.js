@@ -1,6 +1,6 @@
-import OrderListComponent from 'components/order/OrderListComponent';
+import OrderListContainer from 'containers/order/OrderListContainer';
 import React from 'react';
 
-const AdminOrderPage = () => <OrderListComponent />;
+const AdminOrderPage = () => <OrderListContainer />;
 
 export default AdminOrderPage;
