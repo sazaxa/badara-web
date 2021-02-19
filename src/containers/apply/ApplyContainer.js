@@ -27,6 +27,7 @@ const ApplyContainer = ({ history }) => {
         country: '',
         userMemo: '',
         expectedPrice: '',
+        addProduct: false,
     });
     console.log(material);
 
@@ -61,6 +62,7 @@ const ApplyContainer = ({ history }) => {
             [name]: value,
         });
     };
+    console.log(material);
     // 모달 관련
     const handleConfirmModal = () => {
         if (material.recipientName === '') {
@@ -96,9 +98,9 @@ const ApplyContainer = ({ history }) => {
         setVisible(false);
         dispatch(applyListAction(material));
         setMaterial({
-            recipientName: '',
-            recipientPhoneNumber: '',
-            recipientAddress: '',
+            recipientName: material.recipientName,
+            recipientPhoneNumber: material.recipientPhoneNumber,
+            recipientAddress: material.recipientAddress,
             koreanInvoice: '',
             koreanShippingCompany: '',
             productName: '',
@@ -107,9 +109,10 @@ const ApplyContainer = ({ history }) => {
             height: '',
             volumeWeight: '',
             netWeight: '',
-            country: '',
+            country: material.country,
             userMemo: '',
             expectedPrice: '',
+            addProduct: true,
         });
     };
     const handleConfirm = () => {

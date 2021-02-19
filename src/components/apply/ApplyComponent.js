@@ -37,12 +37,22 @@ const ApplyComponent = ({
                                 <p>받는 분</p>
                             </article>
                             <article className="body">
-                                <input
-                                    type="text"
-                                    name="recipientName"
-                                    onChange={HandleChange}
-                                    value={Material.recipientName}
-                                />
+                                {Material.addProduct ? (
+                                    <input
+                                        type="text"
+                                        name="recipientName"
+                                        onChange={HandleChange}
+                                        value={Material.recipientName}
+                                        disabled
+                                    />
+                                ) : (
+                                    <input
+                                        type="text"
+                                        name="recipientName"
+                                        onChange={HandleChange}
+                                        value={Material.recipientName}
+                                    />
+                                )}
                             </article>
                         </article>
                         <article className="content">
@@ -50,12 +60,22 @@ const ApplyComponent = ({
                                 <p>받는 분 휴대폰 번호</p>
                             </article>
                             <article className="body">
-                                <input
-                                    type="number"
-                                    name="recipientPhoneNumber"
-                                    onChange={HandleChange}
-                                    value={Material.recipientPhoneNumber}
-                                />
+                                {Material.addProduct ? (
+                                    <input
+                                        type="number"
+                                        name="recipientPhoneNumber"
+                                        onChange={HandleChange}
+                                        value={Material.recipientPhoneNumber}
+                                        disabled
+                                    />
+                                ) : (
+                                    <input
+                                        type="number"
+                                        name="recipientPhoneNumber"
+                                        onChange={HandleChange}
+                                        value={Material.recipientPhoneNumber}
+                                    />
+                                )}
                             </article>
                         </article>
                         <article className="content">
@@ -63,16 +83,29 @@ const ApplyComponent = ({
                                 <p>보내는 국가</p>
                             </article>
                             <article className="body">
-                                <select name="country" onChange={HandleChange} value={Material.country}>
-                                    <option value="">국가 선택</option>
-                                    {CountryLists.map(e => {
-                                        return (
-                                            <option value={e} key={e}>
-                                                {e}
-                                            </option>
-                                        );
-                                    })}
-                                </select>
+                                {Material.addProduct ? (
+                                    <select name="country" onChange={HandleChange} value={Material.country} disabled>
+                                        <option value="">국가 선택</option>
+                                        {CountryLists.map(e => {
+                                            return (
+                                                <option value={e} key={e}>
+                                                    {e}
+                                                </option>
+                                            );
+                                        })}
+                                    </select>
+                                ) : (
+                                    <select name="country" onChange={HandleChange} value={Material.country}>
+                                        <option value="">국가 선택</option>
+                                        {CountryLists.map(e => {
+                                            return (
+                                                <option value={e} key={e}>
+                                                    {e}
+                                                </option>
+                                            );
+                                        })}
+                                    </select>
+                                )}
                             </article>
                         </article>
                         <article className="content">
@@ -80,12 +113,22 @@ const ApplyComponent = ({
                                 <p>보내는 주소</p>
                             </article>
                             <article className="body">
-                                <input
-                                    type="text"
-                                    name="recipientAddress"
-                                    onChange={HandleChange}
-                                    value={Material.recipientAddress}
-                                />
+                                {Material.addProduct ? (
+                                    <input
+                                        type="text"
+                                        name="recipientAddress"
+                                        onChange={HandleChange}
+                                        value={Material.recipientAddress}
+                                        disabled
+                                    />
+                                ) : (
+                                    <input
+                                        type="text"
+                                        name="recipientAddress"
+                                        onChange={HandleChange}
+                                        value={Material.recipientAddress}
+                                    />
+                                )}
                             </article>
                         </article>
                         <article className="content">
