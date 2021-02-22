@@ -2,14 +2,15 @@ import ApplyComponent from 'components/apply/ApplyComponent';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { applyListAction, clearPredictionPrimeAction, predictionPrimeAction } from 'store/order';
+import { applyListAction } from 'store/apply';
+import { clearPredictionPrimeAction, predictionPrimeAction } from 'store/part';
 import { Courier } from './courier';
 
 const ApplyContainer = ({ history }) => {
     const dispatch = useDispatch();
-    const { list, predictionPrime } = useSelector(state => ({
-        list: state.order.countryLists.list,
-        predictionPrime: state.order.predictionPrime,
+    const { list, prime } = useSelector(state => ({
+        list: state.part.country.list,
+        prime: state.part.prime,
     }));
     const [visible, setVisible] = useState(false);
     const [material, setMaterial] = useState({
@@ -32,15 +33,15 @@ const ApplyContainer = ({ history }) => {
     // console.log(material);
 
     useEffect(() => {
-        if (predictionPrime !== null) {
+        if (prime !== null) {
             setMaterial({
                 ...material,
-                expectedPrice: predictionPrime,
+                expectedPrice: prime,
             });
             setVisible(true);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [predictionPrime]);
+    }, [prime]);
 
     // 부피계산.
     const onClickVolume = () => {

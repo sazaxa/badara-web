@@ -5,16 +5,20 @@ import auth, { authSaga } from './auth';
 import member, { memberSaga } from './member';
 import order, { orderSaga } from './order';
 import faq, { faqSaga } from './faq';
+import apply, { applySaga } from './apply';
+import part, { partSaga } from './part';
 
 const rootReducer = combineReducers({
     auth,
     member,
     order,
     faq,
+    apply,
+    part,
 });
 
 export function* rootSaga() {
-    yield all([authSaga(), memberSaga(), orderSaga(), faqSaga()]);
+    yield all([authSaga(), memberSaga(), orderSaga(), faqSaga(), partSaga(), applySaga()]);
 }
 
 export default rootReducer;

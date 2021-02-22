@@ -17,7 +17,7 @@ import {
 } from 'pages';
 import { FooterComponent } from 'components';
 import { HeaderContainer, AdminHeaderContainer } from 'containers';
-import { getCountryAction } from 'store/order';
+import { getCountryAction } from 'store/part';
 import { useDispatch } from 'react-redux';
 
 function App({ location }) {

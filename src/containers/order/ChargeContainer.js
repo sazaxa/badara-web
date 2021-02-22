@@ -1,12 +1,12 @@
 import { ChargeComponent } from 'components';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { uploadDeliveryAction } from 'store/order';
+import { uploadDeliveryAction } from 'store/part';
 
 const ChargeContainer = () => {
     const uploadInput = useRef();
     const dispatch = useDispatch();
-    const { status } = useSelector(state => state.order.chargeInsert);
+    const { status } = useSelector(state => state.part.insert);
     const [uploadFile, setUploadFile] = useState(null);
 
     // status success 될때 마다 렌더링.

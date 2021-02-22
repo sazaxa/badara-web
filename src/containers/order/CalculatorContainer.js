@@ -1,11 +1,11 @@
 import { CalculatorComponent } from 'components';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearPredictionPrimeAction, predictionPrimeAction } from 'store/order';
+import { clearPredictionPrimeAction, predictionPrimeAction } from 'store/part';
 
 const CalculatorContainer = () => {
     const dispatch = useDispatch();
-    const { predictionPrime, countryLists } = useSelector(state => state.order);
+    const { prime, country } = useSelector(state => state.part);
     const [getCountry, setGetCountry] = useState([]);
     const [material, setMaterial] = useState({
         width: '',
@@ -16,7 +16,7 @@ const CalculatorContainer = () => {
         country: '',
         weight: '',
     });
-    const { list, status } = countryLists;
+    const { list, status } = country;
 
     //  store 에 나라 목록 받아오면 state값에 넘김
     useEffect(() => {
@@ -24,7 +24,7 @@ const CalculatorContainer = () => {
             setGetCountry(list);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [countryLists]);
+    }, [country]);
 
     const handleChange = e => {
         const { name, value } = e.target;
@@ -65,7 +65,7 @@ const CalculatorContainer = () => {
             OnClickWeight={onClickWeight}
             OnChange={e => handleChange(e)}
             OnClickVolume={onClickVolume}
-            PredictionPrime={predictionPrime}
+            PredictionPrime={prime}
             Material={material}
             CountryLists={getCountry}
         />

@@ -2,7 +2,7 @@ import { ApplyListComponent } from 'components';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { applyListInsertAction, deleteApplyInfoAction } from 'store/order';
+import { applyListInsertAction, deleteApplyInfoAction } from 'store/apply';
 
 const ApplyListContainer = ({ history }) => {
     const dispatch = useDispatch();
