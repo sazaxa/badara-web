@@ -1,10 +1,18 @@
 import styled from 'styled-components';
 
+export const Responsive = styled.section`
+    width: 100%;
+    padding: 150px 0;
+    box-sizing: border-box;
+    background: #fff;
+`;
+
 export const CalculatorWrap = styled.article`
     width: 1140px;
     margin: 0 auto;
     padding: 50px 0;
     box-sizing: border-box;
+    background: #fff;
     form {
         width: 50%;
         margin: 0 auto;

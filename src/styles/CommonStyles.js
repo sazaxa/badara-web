@@ -91,6 +91,7 @@ export const HeaderWrap = styled.section`
     width: 100%;
     height: 80px;
     border-bottom: 1px solid #eee;
+    background: #fff;
 `;
 
 export const HeaderContent = styled.header`

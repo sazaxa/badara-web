@@ -15,7 +15,7 @@ const HeaderComponent = ({ HandleLoginPopup, LoginPopup }) => (
                 <nav>
                     <ul>
                         <li>
-                            <Link to="/use">이용안내</Link>
+                            <Link to="/guide">이용안내</Link>
                         </li>
                         <li>
                             <Link to="/cost">비용안내</Link>
