@@ -17,4 +17,6 @@ export { default as ApplyModal } from './apply/ApplyModal';
 
 export { default as GuideComponent } from './guide/GuideComponent';
 
+export { default as SupportConponent } from './support/SupportConponent';
+
 export { default as Responsive } from './common/Responsive';

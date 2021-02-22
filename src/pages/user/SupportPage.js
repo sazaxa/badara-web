@@ -1,5 +1,6 @@
+import { SupportContainer } from 'containers';
 import React from 'react';
 
-const SupportPage = () => <p>고객센터 신청 페이지</p>;
+const SupportPage = () => <SupportContainer />;
 
 export default SupportPage;
