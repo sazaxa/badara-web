@@ -1,5 +1,6 @@
+import { GuideContainer } from 'containers';
 import React from 'react';
 
-const GuidePage = () => <p>이용안내</p>;
+const GuidePage = () => <GuideContainer />;
 
 export default GuidePage;

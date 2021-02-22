@@ -15,4 +15,6 @@ export { default as ApplyContent } from './apply/ApplyComponent';
 export { default as ApplyListComponent } from './apply/ApplyListComponent';
 export { default as ApplyModal } from './apply/ApplyModal';
 
+export { default as GuideComponent } from './guide/GuideComponent';
+
 export { default as Responsive } from './common/Responsive';
