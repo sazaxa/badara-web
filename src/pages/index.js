@@ -1,4 +1,4 @@
-export { default as UsePage } from './user/UsePage';
+export { default as GuidePage } from './user/GuidePage';
 export { default as CostPage } from './user/CostPage';
 export { default as ApplyPage } from './user/ApplyPage';
 export { default as ApplyListPage } from './user/ApplyListPage';

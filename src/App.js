@@ -8,7 +8,7 @@ import {
     AdminChargePage,
     MainPage,
     CostPage,
-    UsePage,
+    GuidePage,
     ApplyPage,
     SupportPage,
     RegisterPage,
@@ -47,7 +47,7 @@ function App({ location }) {
                     <HeaderContainer />
                     <Route component={MainPage} path="/" exact />
                     <Route component={CostPage} path="/cost" />
-                    <Route component={UsePage} path="/use" />
+                    <Route component={GuidePage} path="/guide" />
                     <Route component={ApplyPage} path="/apply" exact />
                     <Route component={ApplyListPage} path="/apply/list" />
                     <Route component={SupportPage} path="/support" />
