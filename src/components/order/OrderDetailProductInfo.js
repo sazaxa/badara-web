@@ -18,14 +18,14 @@ const OrderDetailProductInfo = ({ UpdateState, HandleChange, Products, List }) =
                                         <select
                                             name="status"
                                             onChange={e => HandleChange(e, index)}
-                                            defaultValue={product.status}
+                                            defaultValue={product.status || ''}
                                         >
                                             <option value="송장입력">송장입력</option>
                                             <option value="센터입고중">센터입고중</option>
                                             <option value="결제요청">결제요청</option>
                                             <option value="결제완료">결제완료</option>
                                             <option value="해외배송중">해외배송중</option>
-                                            <option value="해외배송중">해외배송완료</option>
+                                            <option value="해외배송완료">해외배송완료</option>
                                         </select>
                                     ) : (
                                         <select
@@ -35,11 +35,11 @@ const OrderDetailProductInfo = ({ UpdateState, HandleChange, Products, List }) =
                                             disabled
                                         >
                                             <option value="송장입력">송장입력</option>
-                                            <option value="송장입력">센터입고중</option>
+                                            <option value="센터입고중">센터입고중</option>
                                             <option value="결제요청">결제요청</option>
                                             <option value="결제완료">결제완료</option>
                                             <option value="해외배송중">해외배송중</option>
-                                            <option value="해외배송중">해외배송완료</option>
+                                            <option value="해외배송완료">해외배송완료</option>
                                         </select>
                                     )}
                                 </td>
@@ -66,7 +66,7 @@ const OrderDetailProductInfo = ({ UpdateState, HandleChange, Products, List }) =
                                         <select
                                             name="country"
                                             onChange={e => HandleChange(e, index)}
-                                            value={product.country}
+                                            value={product.country || ''}
                                             disabled
                                         >
                                             <option value="">나라선택</option>
