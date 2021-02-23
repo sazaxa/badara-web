@@ -108,7 +108,7 @@ export default handleActions(
         },
         [CLEAR_PREDICTION_PRIME]: state => {
             return produce(state, draft => {
-                draft.prime = initialState.predictionPrime;
+                draft.prime = initialState.prime;
             });
         },
         [GET_COUNTRY_SUCCESS]: (state, { payload }) => {

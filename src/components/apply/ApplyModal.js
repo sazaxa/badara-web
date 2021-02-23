@@ -1,4 +1,7 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { clearPredictionPrimeAction } from 'store/part';
 import { AskModalBlock, Fullscreen } from 'styles/ApplyStyles';
 
 const ApplyModal = ({
@@ -11,6 +14,13 @@ const ApplyModal = ({
     onAddConfirm,
     Material,
 }) => {
+    const dispatch = useDispatch();
+    // 예상 가격 초기화
+    useEffect(() => {
+        return () => {
+            dispatch(clearPredictionPrimeAction());
+        };
+    }, []);
     if (!visible) return null;
     return (
         <Fullscreen>

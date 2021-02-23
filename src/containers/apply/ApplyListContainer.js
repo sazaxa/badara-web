@@ -6,7 +6,7 @@ import { applyListInsertAction, deleteApplyInfoAction } from 'store/apply';
 
 const ApplyListContainer = ({ history }) => {
     const dispatch = useDispatch();
-    const { list } = useSelector(state => state.order.apply);
+    const { list } = useSelector(state => state.apply.apply);
     useEffect(() => {
         if (list.length === 0) {
             history.push('/');
