@@ -1,5 +1,6 @@
+import RegisterContainer from 'containers/register/RegisterContainer';
 import React from 'react';
 
-const RegisterPage = () => <p>회원가입</p>;
+const RegisterPage = () => <RegisterContainer />;
 
 export default RegisterPage;
