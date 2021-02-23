@@ -3,6 +3,7 @@ import Responsive from '../components/common/Responsive';
 
 export const OrderWrap = styled(Responsive)`
     width: 100%;
+    height: 100%;
     padding: 50px;
     box-sizing: border-box;
     margin-left: 300px;

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { applyListAction } from 'store/apply';
-import { clearPredictionPrimeAction, predictionPrimeAction } from 'store/part';
+import { predictionPrimeAction } from 'store/part';
 import { Courier } from './courier';
 
 const ApplyContainer = ({ history }) => {
@@ -94,7 +94,7 @@ const ApplyContainer = ({ history }) => {
     };
     const handleCancel = () => {
         setVisible(false);
-        dispatch(clearPredictionPrimeAction());
+        // dispatch(clearPredictionPrimeAction());
     };
     const handleAddConfirm = () => {
         setVisible(false);
@@ -117,7 +117,7 @@ const ApplyContainer = ({ history }) => {
             netWeight: '',
             expectedPrice: '',
         });
-        dispatch(clearPredictionPrimeAction());
+        // dispatch(clearPredictionPrimeAction());
     };
     const handleConfirm = () => {
         dispatch(applyListAction(material));

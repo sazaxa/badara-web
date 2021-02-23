@@ -32,7 +32,7 @@ const useStyles = makeStyles({
 const OrderListComponent = ({ Rows, RowsPerPage, Page, HandleChangePage, HandleChangeRowsPerPage }) => {
     const classes = useStyles();
     return (
-        <OrderWrap>
+        <OrderWrap style={{ height: '930px' }}>
             <Paper className={classes.root}>
                 <TableContainer className={classes.container}>
                     <Table stickyHeader aria-label="sticky table">
@@ -57,7 +57,7 @@ const OrderListComponent = ({ Rows, RowsPerPage, Page, HandleChangePage, HandleC
                                             {row.id}
                                         </TableCell>
                                         <TableCell align="center">
-                                            <Link to={`/admin/order/${row.orderId}`} key={row.id}>
+                                            <Link to={`/admin/order/${row.id}`} key={row.id}>
                                                 {row.orderId}
                                             </Link>
                                         </TableCell>

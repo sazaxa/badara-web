@@ -1,4 +1,4 @@
-import OrderListContainer from 'containers/order/OrderListContainer';
+import { OrderListContainer } from 'containers';
 import React from 'react';
 
 const AdminOrderPage = () => <OrderListContainer />;

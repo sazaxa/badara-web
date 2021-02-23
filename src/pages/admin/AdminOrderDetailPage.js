@@ -1,6 +1,6 @@
-import OrderDetailComponent from 'components/order/OrderDetailComponent';
+import { OrderDetailContainer } from 'containers';
 import React from 'react';
 
-const AdminOrderDetailPage = () => <OrderDetailComponent />;
+const AdminOrderDetailPage = () => <OrderDetailContainer />;
 
 export default AdminOrderDetailPage;

@@ -10,5 +10,7 @@ export { default as SupportContainer } from './support/SupportContainer';
 
 export { default as ChargeContainer } from './order/ChargeContainer';
 export { default as CalculatorContainer } from './order/CalculatorContainer';
+export { default as OrderListContainer } from './order/OrderListContainer';
+export { default as OrderDetailContainer } from './order/OrderDetailContainer';
 export { default as ApplyContainer } from './apply/ApplyContainer';
 export { default as ApplyListContainer } from './apply/ApplyListContainer';
