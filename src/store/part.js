@@ -18,7 +18,11 @@ const CLEAR_PREDICTION_PRIME = 'order/CLEAR_PREDICTION_PRIME';
 const [GET_COUNTRY, GET_COUNTRY_SUCCESS, GET_COUNTRY_FAILURE] = createRequestActionTypes('order/GET_COUNTRY');
 
 export const uploadDeliveryAction = createAction(UPLOAD_CHARGE, ({ data }) => ({ data }));
-export const predictionPrimeAction = createAction(PREDICTION_PRIME, ({ country, weight }) => ({ country, weight }));
+export const predictionPrimeAction = createAction(PREDICTION_PRIME, ({ country, weight, callBack }) => ({
+    country,
+    weight,
+    callBack,
+}));
 export const clearPredictionPrimeAction = createAction(CLEAR_PREDICTION_PRIME);
 export const getCountryAction = createAction(GET_COUNTRY);
 
@@ -37,14 +41,16 @@ function* insertDeliverySaga({ payload: data }) {
 }
 
 // 예상 가격 가져오기 Saga.
-function* predictionPrimeSaga({ payload: { country, weight } }) {
-    try {
-        const response = yield call(partAPI.PredictionPrime, { country, weight });
-        yield put({ type: PREDICTION_PRIME_SUCCESS, payload: response.data });
-        console.log(response.data);
-    } catch (e) {
+function* predictionPrimeSaga({ payload: { country, weight, callBack } }) {
+    const response = yield call(partAPI.PredictionPrime, { country, weight });
+    yield put({ type: PREDICTION_PRIME_SUCCESS, payload: response.data });
+    if (callBack instanceof Function) {
+        callBack({
+            result: true,
+        });
+    } else {
         yield put({ type: PREDICTION_PRIME_FAILURE });
-        console.log('통신중 에러가 발생했습니다.', e);
+        console.log('통신중 에러가 발생했습니다.');
     }
 }
 //  계산기 나라 목록 가져오기.

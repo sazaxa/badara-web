@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { CalculatorComponent } from 'components';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -55,9 +56,25 @@ const CalculatorContainer = () => {
             alert('나라를 선택해주세요.');
             dispatch(clearPredictionPrimeAction());
         } else if (volume > actual) {
-            dispatch(predictionPrimeAction({ country: country, weight: volume }));
+            dispatch(
+                predictionPrimeAction({
+                    country: country,
+                    weight: volume,
+                    callBack: () => {
+                        dispatch(clearPredictionPrimeAction());
+                    },
+                })
+            );
         } else if (volume < actual) {
-            dispatch(predictionPrimeAction({ country: country, weight: actual }));
+            dispatch(
+                predictionPrimeAction({
+                    country: country,
+                    weight: actual,
+                    callBack: () => {
+                        dispatch(clearPredictionPrimeAction());
+                    },
+                })
+            );
         }
     };
     return (
