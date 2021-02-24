@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { HeaderComponent } from 'components';
-import { useDispatch } from 'react-redux';
-import { clearStoreAction, logoutAction } from 'store/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearStoreAction } from 'store/auth';
+import { logoutAction } from 'store/user';
 
 const HeaderContainer = () => {
+    const { user } = useSelector(state => state.user);
     const [loginPopup, setLoginPopup] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
-    const auth = localStorage.getItem('accessToken');
     const dispatch = useDispatch();
 
     // 로그인 팝업 처리.
@@ -34,7 +35,7 @@ const HeaderContainer = () => {
         <HeaderComponent
             HandleLoginPopup={e => handleLoginPopup(e)}
             LoginPopup={loginPopup}
-            Auth={auth}
+            Auth={user}
             AnchorEl={anchorEl}
             HandleMenuClick={handleMenuClick}
             HandleMenuClose={handleMenuClose}

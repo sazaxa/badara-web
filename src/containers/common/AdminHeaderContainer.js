@@ -1,7 +1,7 @@
 import { AdminHeaderComponent } from 'components/index';
 import React from 'react';
 
-const AdminHeaderContainer = () => {
+const AdminHeaderContainer = ({ history }) => {
     return <AdminHeaderComponent />;
 };
 

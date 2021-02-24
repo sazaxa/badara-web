@@ -4,19 +4,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginAction } from 'store/auth';
 import { withRouter } from 'react-router-dom';
 import { loadUser } from 'index';
+import { check } from '../../store/user';
 
-const LoginPopupContainer = ({ close, history }) => {
+const LoginPopupContainer = ({ close, location }) => {
     const dispatch = useDispatch();
     const { auth, status } = useSelector(state => state.auth.login);
     const [loginData, setLoginData] = useState({
         email: '',
         password: '',
     });
+
     useEffect(() => {
         if (status === 'success') {
-            history.push('/');
             close();
             loadUser();
+            check();
         }
         if (status === 'fail') {
             alert('이메일과 비밀번호를 확인하세요.');
