@@ -1,5 +1,6 @@
+import CostContainer from 'containers/cost/CostContainer';
 import React from 'react';
 
-const CostPage = () => <p>비용안내</p>;
+const CostPage = () => <CostContainer />;
 
 export default CostPage;
