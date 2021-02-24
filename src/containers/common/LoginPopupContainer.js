@@ -3,6 +3,7 @@ import { LoginPopupComponent } from 'components';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAction } from 'store/auth';
 import { withRouter } from 'react-router-dom';
+import { loadUser } from 'index';
 
 const LoginPopupContainer = ({ close, history }) => {
     const dispatch = useDispatch();
@@ -15,11 +16,7 @@ const LoginPopupContainer = ({ close, history }) => {
         if (status === 'success') {
             history.push('/');
             close();
-            try {
-                localStorage.setItem('accessToken', JSON.stringify(auth.accessToken));
-            } catch (e) {
-                console.log('e');
-            }
+            loadUser();
         }
         if (status === 'fail') {
             alert('이메일과 비밀번호를 확인하세요.');

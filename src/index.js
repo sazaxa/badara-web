@@ -9,10 +9,23 @@ import createSagaMiddleware from 'redux-saga';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import rootReducer, { rootSaga } from './store';
+import { check } from 'store/user';
 
 const sagaMiddleWare = createSagaMiddleware();
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleWare)));
+export function loadUser() {
+    try {
+        const user = localStorage.getItem('accessToken');
+        console.log(user);
+        if (!user) return;
+        store.dispatch(check());
+    } catch (e) {
+        console.log(e);
+    }
+}
+
 sagaMiddleWare.run(rootSaga);
+loadUser();
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>

@@ -21,6 +21,7 @@ function* loginSaga({ payload: { email, password } }) {
     try {
         const response = yield call(authAPI.login, { email, password });
         yield put({ type: LOGIN_SUCCESS, payload: response.data });
+        localStorage.setItem('accessToken', response.data.accessToken);
     } catch (e) {
         yield put({ type: LOGIN_FAILURE, payload: e });
     }
