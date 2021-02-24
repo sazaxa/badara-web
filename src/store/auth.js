@@ -15,10 +15,14 @@ export const loginAction = createAction(LOGIN_REQUEST, ({ email, password }) => 
 export const registerAction = createAction(REGISTER_REQUEST, data => data);
 export const clearRegisterAction = createAction(CLEAR_REGISTER);
 
-// function* loginSaga({ email, password }) {
-//     // 로그인 로직.
-//     console.debug(email, password);
-// }
+function* loginSaga({ payload: { email, password } }) {
+    try {
+        const response = yield call(authAPI.login, { email, password });
+        yield put({ type: LOGIN_SUCCESS, payload: response.data });
+    } catch (e) {
+        yield put({ type: LOGIN_FAILURE, payload: e });
+    }
+}
 function* registerSaga({ payload: data }) {
     try {
         const response = yield call(authAPI.register, data);
@@ -29,7 +33,7 @@ function* registerSaga({ payload: data }) {
     }
 }
 export function* authSaga() {
-    // yield takeLatest(LOGIN_REQUEST, loginSaga);
+    yield takeLatest(LOGIN_REQUEST, loginSaga);
     yield takeLatest(REGISTER_REQUEST, registerSaga);
 }
 
@@ -38,6 +42,10 @@ const initialState = {
     register: {
         status: 'idle',
         error: null,
+    },
+    login: {
+        status: 'idle',
+        auth: null,
     },
 };
 
@@ -57,6 +65,23 @@ export default handleActions(
         [CLEAR_REGISTER]: state => {
             return produce(state, draft => {
                 draft.register = initialState.register;
+            });
+        },
+        [LOGIN_REQUEST]: state => {
+            return produce(state, draft => {
+                draft.login.status = 'loading';
+            });
+        },
+        [LOGIN_SUCCESS]: (state, { payload }) => {
+            return produce(state, draft => {
+                draft.login.status = 'success';
+                draft.login.auth = payload;
+            });
+        },
+        [LOGIN_FAILURE]: (state, { payload }) => {
+            return produce(state, draft => {
+                draft.login.status = 'fail';
+                draft.login.auth = payload;
             });
         },
     },

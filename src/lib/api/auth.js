@@ -4,3 +4,9 @@ import client from './client';
 export const register = data => {
     return client.post('/api/v1/auth/signup', data);
 };
+
+//로그인
+
+export const login = (email, password) => {
+    return client.post('/api/v1/auth/signin', email, password);
+};
