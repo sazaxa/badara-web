@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+export const Responsive = styled.section`
+    width: 100%;
+    padding: 100px 0 200px 0;
+    box-sizing: border-box;
+    background: #fff;
+`;
+
 export const AdminHeaderContent = styled.article`
     width: 15vw;
     min-width: 230px;
