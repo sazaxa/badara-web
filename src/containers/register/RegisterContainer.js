@@ -1,10 +1,31 @@
 import ReigisterComponent from 'components/register/RegisterComponent';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { clearRegisterAction, registerAction } from 'store/auth';
 
 const RegisterContainer = ({ history }) => {
-    const [registerInfo, setRegisterInfo] = useState({});
-    console.log(registerInfo);
+    const { error, status } = useSelector(state => state.auth.register);
+    const dispatch = useDispatch();
+    const [registerInfo, setRegisterInfo] = useState({
+        email: '',
+        password: '',
+        passwordConfirm: '',
+        name: '',
+        phoneNumber: '',
+    });
+
+    useEffect(() => {
+        if (status === 'success') {
+            alert('가입이 완료되었습니다.');
+            dispatch(clearRegisterAction());
+            history.push('/');
+        } else if (status === 'fail') {
+            alert('이미 존재하는 이메일입니다.');
+            dispatch(clearRegisterAction());
+        }
+    });
+
     const handleChange = e => {
         const { name, value } = e.target;
         setRegisterInfo({
@@ -22,6 +43,7 @@ const RegisterContainer = ({ history }) => {
             return;
         } else if (!emailCheck(registerInfo.email)) {
             alert('이메일 형식으로 입력하세요.');
+            return;
         } else if (!registerInfo.password) {
             alert('패스워드를 입력하세요.');
         } else if (registerInfo.password !== registerInfo.passwordConfirm) {
@@ -30,18 +52,19 @@ const RegisterContainer = ({ history }) => {
         } else if (registerInfo.password.length < 8) {
             alert('패스워드는 8자이상 입력하세요.');
             return;
-        } else if (!registerInfo.phone) {
+        } else if (!registerInfo.phoneNumber) {
             alert('휴대폰번호를 입력하세요.');
             return;
         } else if (!registerInfo.name) {
             alert('이름을 입력하세요.');
             return;
-        } else {
-            alert('회원가입 완료.');
-            history.push('/');
+        } else if (error !== null) {
+            alert('가입되어 있는 이메일 입니다.');
+            return;
         }
+        dispatch(registerAction(registerInfo));
     };
-    return <ReigisterComponent HandleChange={handleChange} HandleFinish={handleFinish} />;
+    return <ReigisterComponent HandleChange={handleChange} HandleFinish={handleFinish} RegisterInfo={registerInfo} />;
 };
 
 export default withRouter(RegisterContainer);
