@@ -1,16 +1,16 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import ApplyComponent from 'components/apply/ApplyComponent';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { applyListAction } from 'store/apply';
-import { predictionPrimeAction } from 'store/part';
+import { applyListAction, applyPriseAction, clearPredictionPriseAction, initialState } from 'store/apply';
 import { Courier } from './courier';
 
 const ApplyContainer = ({ history }) => {
     const dispatch = useDispatch();
-    const { list, prime } = useSelector(state => ({
+    const { list, prise } = useSelector(state => ({
         list: state.part.country.list,
-        prime: state.part.prime,
+        prise: state.apply.prise,
     }));
     const [visible, setVisible] = useState(false);
     const [material, setMaterial] = useState({
@@ -28,20 +28,31 @@ const ApplyContainer = ({ history }) => {
         height: '',
         volumeWeight: '',
         netWeight: '',
-        expectedPrice: '',
+        expectedPrice: null,
     });
-    // console.log(material);
+    useEffect(() => {
+        setVisible(false);
+        if (prise !== null) {
+            dispatch(clearPredictionPriseAction());
+        }
+    }, []);
 
     useEffect(() => {
-        if (prime !== null) {
+        if (prise !== null) {
             setMaterial({
                 ...material,
-                expectedPrice: prime,
+                expectedPrice: prise,
             });
-            setVisible(true);
         }
+        const checkPrisePopup = checkData => {
+            if (initialState.prise !== checkData) {
+                setVisible(true);
+                console.log(checkData);
+            }
+        };
+        checkPrisePopup(prise);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [prime]);
+    }, [prise]);
 
     // 부피계산.
     const onClickVolume = () => {
@@ -64,6 +75,7 @@ const ApplyContainer = ({ history }) => {
             [name]: value,
         });
     };
+
     // console.log(material);
     // 모달 관련
     const handleConfirmModal = () => {
@@ -87,14 +99,24 @@ const ApplyContainer = ({ history }) => {
             return;
         }
         if (material.volumeWeight > material.netWeight) {
-            dispatch(predictionPrimeAction({ country: material.country, weight: material.volumeWeight }));
+            dispatch(
+                applyPriseAction({
+                    country: material.country,
+                    weight: material.volumeWeight,
+                })
+            );
         } else if (material.volumeWeight < material.netWeight) {
-            dispatch(predictionPrimeAction({ country: material.country, weight: material.netWeight }));
+            dispatch(
+                applyPriseAction({
+                    country: material.country,
+                    weight: material.netWeight,
+                })
+            );
         }
     };
     const handleCancel = () => {
         setVisible(false);
-        // dispatch(clearPredictionPrimeAction());
+        dispatch(clearPredictionPriseAction());
     };
     const handleAddConfirm = () => {
         setVisible(false);
@@ -117,7 +139,7 @@ const ApplyContainer = ({ history }) => {
             netWeight: '',
             expectedPrice: '',
         });
-        // dispatch(clearPredictionPrimeAction());
+        dispatch(clearPredictionPriseAction());
     };
     const handleConfirm = () => {
         dispatch(applyListAction(material));

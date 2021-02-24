@@ -51,18 +51,15 @@ const CalculatorContainer = () => {
         const { volume, actual, country } = material;
         if (volume === '' && actual === '') {
             alert('부피무게, 실무게 중 1개가 입력되어야 합니다.');
-            dispatch(clearPredictionPrimeAction());
+            // dispatch(clearPredictionPrimeAction());
         } else if (country === '') {
             alert('나라를 선택해주세요.');
-            dispatch(clearPredictionPrimeAction());
+            // dispatch(clearPredictionPrimeAction());
         } else if (volume > actual) {
             dispatch(
                 predictionPrimeAction({
                     country: country,
                     weight: volume,
-                    callBack: () => {
-                        dispatch(clearPredictionPrimeAction());
-                    },
                 })
             );
         } else if (volume < actual) {
@@ -70,9 +67,6 @@ const CalculatorContainer = () => {
                 predictionPrimeAction({
                     country: country,
                     weight: actual,
-                    callBack: () => {
-                        dispatch(clearPredictionPrimeAction());
-                    },
                 })
             );
         }

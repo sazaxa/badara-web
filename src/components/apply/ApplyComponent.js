@@ -14,6 +14,7 @@ const ApplyComponent = ({
     HandleCancel,
     HandleAddConfirm,
     Material,
+    Prise,
 }) => {
     return (
         <ApplyWrap>
