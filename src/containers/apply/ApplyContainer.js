@@ -143,12 +143,10 @@ const ApplyContainer = ({ history }) => {
     };
     const handleConfirm = () => {
         dispatch(applyListAction(material));
+        dispatch(clearPredictionPriseAction());
         history.push('/apply/list');
     };
 
-    const handleClickApply = () => {
-        dispatch(applyListAction(material));
-    };
     return (
         <ApplyComponent
             HandleChange={e => handleChange(e)}
@@ -157,7 +155,6 @@ const ApplyContainer = ({ history }) => {
             OnClickVolume={onClickVolume}
             Material={material}
             VolumeWeight={material.volumeWeight}
-            HandleClickApply={handleClickApply}
             Visible={visible}
             HandleConfirmModal={handleConfirmModal}
             HandleConfirm={handleConfirm}
