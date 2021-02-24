@@ -1,15 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { LoginPopupComponent } from 'components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginAction } from 'store/auth';
+import { withRouter } from 'react-router-dom';
 
-const LoginPopupContainer = ({ close }) => {
+const LoginPopupContainer = ({ close, history }) => {
     const dispatch = useDispatch();
+    const { auth, status } = useSelector(state => state.auth.login);
     const [loginData, setLoginData] = useState({
         email: '',
         password: '',
     });
-
+    useEffect(() => {
+        if (status === 'success') {
+            history.push('/');
+            close();
+            try {
+                localStorage.setItem('accessToken', JSON.stringify(auth.accessToken));
+            } catch (e) {
+                console.log('e');
+            }
+        }
+    }, [status]);
     const handleChange = e => {
         const { value, name } = e.target;
         setLoginData({
@@ -38,4 +50,4 @@ const LoginPopupContainer = ({ close }) => {
     );
 };
 
-export default LoginPopupContainer;
+export default withRouter(LoginPopupContainer);
