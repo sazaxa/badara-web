@@ -21,6 +21,10 @@ const LoginPopupContainer = ({ close, history }) => {
                 console.log('e');
             }
         }
+        if (status === 'fail') {
+            alert('이메일과 비밀번호를 확인하세요.');
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [status]);
     const handleChange = e => {
         const { value, name } = e.target;

@@ -108,7 +108,7 @@ export const HeaderContent = styled.header`
     display: flex;
     justify-content: start;
     align-items: center;
-
+    position: relative;
     h2 > a {
         letter-spacing: -2.5px;
         font-size: 32px;
@@ -142,6 +142,12 @@ export const HeaderContent = styled.header`
     button:hover {
         background-color: #1976d2;
         opacity: 0.5;
+    }
+    .MuiSvgIcon-root {
+        position: absolute;
+        right: 20px;
+        font-size: 35px;
+        cursor: pointer;
     }
 `;
 

@@ -1,10 +1,21 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Link } from 'react-router-dom';
 import { LoginPopupContainer } from 'containers';
 import { HeaderWrap, HeaderContent } from 'styles/CommonStyles';
 
-const HeaderComponent = ({ HandleLoginPopup, LoginPopup }) => (
+const HeaderComponent = ({
+    HandleLoginPopup,
+    LoginPopup,
+    Auth,
+    AnchorEl,
+    HandleMenuClick,
+    HandleMenuClose,
+    HandleLogout,
+}) => (
     <>
         {LoginPopup === true && <LoginPopupContainer close={() => HandleLoginPopup(false)} />}
         <HeaderWrap>
@@ -28,9 +39,25 @@ const HeaderComponent = ({ HandleLoginPopup, LoginPopup }) => (
                         </li>
                     </ul>
                 </nav>
-                <Button variant="contained" color="primary" onClick={() => HandleLoginPopup(true)}>
-                    로그인
-                </Button>
+                {Auth ? (
+                    <>
+                        <AccountCircleIcon onClick={HandleMenuClick} />
+                        <Menu
+                            id="simple-menu"
+                            anchorEl={AnchorEl}
+                            keepMounted
+                            open={Boolean(AnchorEl)}
+                            onClose={HandleMenuClose}
+                        >
+                            <MenuItem onClick={HandleMenuClose}>마이페이지</MenuItem>
+                            <MenuItem onClick={HandleLogout}>로그아웃</MenuItem>
+                        </Menu>
+                    </>
+                ) : (
+                    <Button variant="contained" color="primary" onClick={() => HandleLoginPopup(true)}>
+                        로그인
+                    </Button>
+                )}
             </HeaderContent>
         </HeaderWrap>
     </>

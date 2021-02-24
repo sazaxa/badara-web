@@ -2,7 +2,7 @@ import ReigisterComponent from 'components/register/RegisterComponent';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { clearRegisterAction, registerAction } from 'store/auth';
+import { clearStoreAction, registerAction } from 'store/auth';
 
 const RegisterContainer = ({ history }) => {
     const { error, status } = useSelector(state => state.auth.register);
@@ -18,11 +18,11 @@ const RegisterContainer = ({ history }) => {
     useEffect(() => {
         if (status === 'success') {
             alert('가입이 완료되었습니다.');
-            dispatch(clearRegisterAction());
+            dispatch(clearStoreAction());
             history.push('/');
         } else if (status === 'fail') {
             alert('이미 존재하는 이메일입니다.');
-            dispatch(clearRegisterAction());
+            dispatch(clearStoreAction());
         }
     });
 
