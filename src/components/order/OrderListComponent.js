@@ -31,6 +31,7 @@ const useStyles = makeStyles({
 });
 const OrderListComponent = ({ Rows, RowsPerPage, Page, HandleChangePage, HandleChangeRowsPerPage }) => {
     const classes = useStyles();
+    console.log(Rows);
     return (
         <OrderWrap style={{ height: '930px' }}>
             <Paper className={classes.root}>
@@ -50,23 +51,31 @@ const OrderListComponent = ({ Rows, RowsPerPage, Page, HandleChangePage, HandleC
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {Rows[0].map(row => {
-                                return (
-                                    <TableRow key={row.id}>
-                                        <TableCell component="th" scope="row" align="center">
-                                            {row.id}
-                                        </TableCell>
-                                        <TableCell align="center">
-                                            <Link to={`/admin/order/${row.id}`} key={row.id}>
-                                                {row.orderId}
-                                            </Link>
-                                        </TableCell>
-                                        <TableCell align="center">{row.member}</TableCell>
-                                        <TableCell align="center">{row.status}</TableCell>
-                                        <TableCell align="center">{row.days}</TableCell>
-                                    </TableRow>
-                                );
-                            })}
+                            {Rows[0].length > 0 ? (
+                                Rows[0].map(row => {
+                                    return (
+                                        <TableRow key={row.id}>
+                                            <TableCell component="th" scope="row" align="center">
+                                                {row.id}
+                                            </TableCell>
+                                            <TableCell align="center">
+                                                <Link to={`/admin/order/${row.id}`} key={row.id}>
+                                                    {row.orderId}
+                                                </Link>
+                                            </TableCell>
+                                            <TableCell align="center">{row.member}</TableCell>
+                                            <TableCell align="center">{row.status}</TableCell>
+                                            <TableCell align="center">{row.days}</TableCell>
+                                        </TableRow>
+                                    );
+                                })
+                            ) : (
+                                <TableRow>
+                                    <TableCell colSpan="6" align="center">
+                                        접수된 내용이 없습니다.
+                                    </TableCell>
+                                </TableRow>
+                            )}
                         </TableBody>
                     </Table>
                 </TableContainer>

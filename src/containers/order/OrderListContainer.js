@@ -50,10 +50,10 @@ const OrderListContainer = () => {
         // createData('India', 'IN', 1324171354, 3287263),
         list.map(v => createData(v.id, v.orderNumber, '회원', v.products[0].status, v.products[0].createdDate)),
     ];
-    console.log(rows);
-    if (list.length === 0) {
-        return null;
-    }
+    // console.log(rows);
+    // if (list.length === 0) {
+    //     return null;
+    // }
     return (
         <OrderListComponent
             Rows={rows}
