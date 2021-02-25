@@ -9,7 +9,7 @@ import createSagaMiddleware from 'redux-saga';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import rootReducer, { rootSaga } from './store';
-import { check } from 'store/user';
+import { getMemberInfoAction } from 'store/member';
 
 const sagaMiddleWare = createSagaMiddleware();
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleWare)));
@@ -18,7 +18,7 @@ export function loadUser() {
         const user = localStorage.getItem('accessToken');
         console.log(user);
         if (!user) return;
-        store.dispatch(check());
+        store.dispatch(getMemberInfoAction());
     } catch (e) {
         console.log(e);
     }

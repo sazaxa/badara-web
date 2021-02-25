@@ -42,7 +42,6 @@ export function* authSaga() {
 }
 
 const initialState = {
-    loginState: true,
     register: {
         status: 'idle',
         error: null,

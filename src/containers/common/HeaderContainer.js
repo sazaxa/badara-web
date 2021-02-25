@@ -1,11 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { HeaderComponent } from 'components';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearStoreAction } from 'store/auth';
-import { logoutAction } from 'store/user';
+import { logoutAction } from 'store/member';
 
 const HeaderContainer = () => {
-    const { user } = useSelector(state => state.user);
+    const { member } = useSelector(state => state.member.memberInfo);
     const [loginPopup, setLoginPopup] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const dispatch = useDispatch();
@@ -35,7 +36,7 @@ const HeaderContainer = () => {
         <HeaderComponent
             HandleLoginPopup={e => handleLoginPopup(e)}
             LoginPopup={loginPopup}
-            Auth={user}
+            Auth={member}
             AnchorEl={anchorEl}
             HandleMenuClick={handleMenuClick}
             HandleMenuClose={handleMenuClose}
