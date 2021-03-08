@@ -147,7 +147,8 @@ const ApplyContainer = ({ history }) => {
         dispatch(clearPredictionPriseAction());
         history.push('/apply/list');
     };
-    if (!member) {
+    const Auth = localStorage.getItem('accessToken');
+    if (!Auth) {
         alert('로그인이 필요한 페이지 입니다.');
         history.push('/');
     }
