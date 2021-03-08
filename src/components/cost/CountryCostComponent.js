@@ -5,8 +5,12 @@ const CountryCostComponent = () => {
     const { list } = useSelector(state => state.part.country);
     const [selectedValue, setSelectedValue] = useState();
 
+    const onHandleSelectCountry = e => {
+        setSelectedValue(e.target.value);
+    };
+    console.log(selectedValue);
     return (
-        <select>
+        <select onChange={e => onHandleSelectCountry(e)}>
             <option value="">나라선택</option>
             {list.map((country, index) => {
                 return (

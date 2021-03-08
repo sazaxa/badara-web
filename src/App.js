@@ -14,6 +14,7 @@ import {
     RegisterPage,
     ApplyListPage,
     AdminOrderDetailPage,
+    Mypage,
 } from 'pages';
 import { FooterComponent } from 'components';
 import { HeaderContainer, AdminHeaderContainer } from 'containers';
@@ -54,6 +55,7 @@ function App({ location }) {
                     <Route component={ApplyListPage} path="/apply/list" />
                     <Route component={RegisterPage} path="/register" />
                     <Route component={SupportPage} path="/support" />
+                    <Route component={Mypage} path="/mypage" />
                     <FooterComponent />
                 </section>
             )}

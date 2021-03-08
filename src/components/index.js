@@ -25,3 +25,5 @@ export { default as GuideComponent } from './guide/GuideComponent';
 export { default as SupportConponent } from './support/SupportConponent';
 
 export { default as Responsive } from './common/Responsive';
+
+export { default as MypageComponent } from './mypage/MypageComponent';

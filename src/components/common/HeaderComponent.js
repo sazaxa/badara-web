@@ -49,7 +49,9 @@ const HeaderComponent = ({
                             open={Boolean(AnchorEl)}
                             onClose={HandleMenuClose}
                         >
-                            <MenuItem onClick={HandleMenuClose}>마이페이지</MenuItem>
+                            <MenuItem onClick={HandleMenuClose}>
+                                <Link to="/mypage">마이페이지</Link>
+                            </MenuItem>
                             <MenuItem onClick={HandleLogout}>로그아웃</MenuItem>
                         </Menu>
                     </>

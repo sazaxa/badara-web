@@ -109,6 +109,9 @@ export const HeaderContent = styled.header`
     justify-content: start;
     align-items: center;
     position: relative;
+    .MuiButtonBase-root > a {
+        clolor: #000;
+    }
     h2 > a {
         letter-spacing: -2.5px;
         font-size: 32px;

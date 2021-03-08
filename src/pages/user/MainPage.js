@@ -1,8 +1,8 @@
 import React from 'react';
-import { CalculatorContainer } from 'containers';
+import MainContentComponent from 'components/common/MainContentComponet';
 
 function MainPage() {
-    return <CalculatorContainer />;
+    return <MainContentComponent />;
 }
 
 export default MainPage;

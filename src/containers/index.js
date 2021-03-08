@@ -1,3 +1,5 @@
+import MypageContainer from './mypage/MypageContainer';
+
 export { default as HeaderContainer } from './common/HeaderContainer';
 export { default as AdminHeaderContainer } from './common/AdminHeaderContainer';
 export { default as LoginPopupContainer } from './common/LoginPopupContainer';
@@ -14,3 +16,4 @@ export { default as OrderListContainer } from './order/OrderListContainer';
 export { default as OrderDetailContainer } from './order/OrderDetailContainer';
 export { default as ApplyContainer } from './apply/ApplyContainer';
 export { default as ApplyListContainer } from './apply/ApplyListContainer';
+export { default as MypageContainer } from './mypage/MypageContainer';
