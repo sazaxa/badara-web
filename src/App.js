@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import { Route, withRouter } from 'react-router-dom';
 
 import {
@@ -19,12 +19,14 @@ import { FooterComponent } from 'components';
 import { HeaderContainer, AdminHeaderContainer } from 'containers';
 import { getCountryAction } from 'store/part';
 import { useDispatch } from 'react-redux';
+import { loadUser } from 'index';
 
 function App({ location }) {
     const dispatch = useDispatch();
     // 최초 로딩시 계산기 나라목록 가져오기.
-    useEffect(() => {
+    useLayoutEffect(() => {
         dispatch(getCountryAction());
+        loadUser();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     //   console.log('location : ', location);

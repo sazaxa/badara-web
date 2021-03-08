@@ -34,8 +34,9 @@ function* checkSaga() {
 // 로그아웃 토큰값 삭제, user store 초기화.
 function* logoutSaga() {
     try {
-        yield delay(1000);
+        yield delay(100);
         localStorage.removeItem('accessToken');
+        window.location.href = '/';
     } catch (e) {
         console.debug(e);
     }

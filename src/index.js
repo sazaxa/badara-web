@@ -16,7 +16,6 @@ const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaM
 export function loadUser() {
     try {
         const user = localStorage.getItem('accessToken');
-        console.log(user);
         if (!user) return;
         store.dispatch(getMemberInfoAction());
     } catch (e) {
@@ -25,7 +24,7 @@ export function loadUser() {
 }
 
 sagaMiddleWare.run(rootSaga);
-loadUser();
+// loadUser();
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>

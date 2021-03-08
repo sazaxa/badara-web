@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { HeaderComponent } from 'components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { clearStoreAction } from 'store/auth';
 import { logoutAction } from 'store/member';
 
-const HeaderContainer = () => {
-    const { member } = useSelector(state => state.member.memberInfo);
+const HeaderContainer = ({}) => {
     const [loginPopup, setLoginPopup] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const dispatch = useDispatch();
 
+    const member = localStorage.getItem('accessToken');
     // 로그인 팝업 처리.
     const handleLoginPopup = e => {
         setLoginPopup(e);
