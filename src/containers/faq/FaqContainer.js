@@ -7,9 +7,9 @@ import { initialState, getFaqListAction, getFaqInfoAction, deleteFaqAction } fro
 
 const FaqContainer = () => {
     const dispatch = useDispatch();
-    const { status: faqStatus, list: faqList, loginState, faqinfo } = useSelector(
+    const { status: faqStatus, list: faqList, member, faqinfo } = useSelector(
         state => ({
-            loginState: state.auth.loginState,
+            member: state.member.memberInfo.member,
             status: state.faq.faqs.status,
             list: state.faq.faqs.list,
             faqinfo: state.faq.faqinfo,
@@ -115,7 +115,7 @@ const FaqContainer = () => {
         <>
             <FaqComponent
                 FaqList={faqLists}
-                LoginState={loginState}
+                LoginState={member}
                 HandleAddPopup={e => handleAddPopup(e)}
                 HandleUpdatePopup={e => handleUpdatePopup(e)}
                 HandleDeletePopup={e => handleDeletePopup(e)}

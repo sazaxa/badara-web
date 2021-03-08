@@ -48,7 +48,7 @@ const FaqComponent = ({
                 )}
                 <AdminUserWrap>
                     {/* 관리자 페이지 버튼 */}
-                    {LoginState === true && (
+                    {LoginState && (
                         <>
                             <Button
                                 variant="contained"
