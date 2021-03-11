@@ -18,3 +18,7 @@ export const PredictionPrime = ({ country, weight }) => {
 export const getCountry = () => {
     return client.get('/api/v1/shipping/dhl/countries');
 };
+
+/*
+let country_array = data.country.map()
+*/

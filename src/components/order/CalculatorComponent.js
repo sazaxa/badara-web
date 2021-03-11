@@ -1,20 +1,24 @@
 import React from 'react';
 import { CalculatorWrap } from 'styles/CalculatorStyles';
+import AttachMoneyRoundedIcon from '@material-ui/icons/AttachMoneyRounded';
 
 const CalculatorComponent = ({ OnClickWeight, OnChange, OnClickVolume, PredictionPrime, Material, CountryLists }) => {
     return (
         <CalculatorWrap>
             <form>
-                <h2>배송비 계산기</h2>
-                <div className="wrap top">
+                <div className="title_wrap">
+                    <AttachMoneyRoundedIcon />
+                    <h2>배송비 계산기</h2>
+                </div>
+                {/* <div className="wrap top">
                     <div className="title">
                         <h4>품목</h4>
                     </div>
                     <div className="content">
                         <input type="text" name="tltle" placeholder="품목" />
                     </div>
-                </div>
-                <div className="wrap">
+                </div> */}
+                <div className="wrap top">
                     <div className="title">
                         <h4>나라 선택</h4>
                     </div>
@@ -31,7 +35,7 @@ const CalculatorComponent = ({ OnClickWeight, OnChange, OnClickVolume, Predictio
                         </select>
                     </div>
                 </div>
-                <div className="wrap">
+                <div className="wrap material">
                     <div className="title">
                         <h4>부피 무게 계산</h4>
                         <p>(단위:cm)</p>
@@ -71,8 +75,9 @@ const CalculatorComponent = ({ OnClickWeight, OnChange, OnClickVolume, Predictio
                         <input type="text" name="actual" onChange={OnChange} placeholder="실 무게" />
                     </div>
                 </div>
-                <div className="wrap">
-                    <div className="primeBtn">
+                <div className="wrap prisebtn">
+                    <div className="title"></div>
+                    <div className="content">
                         <button type="button" onClick={OnClickWeight}>
                             예상가격 구하기
                         </button>
