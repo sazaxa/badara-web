@@ -181,6 +181,11 @@ export const CalculatorWrap = styled.article`
         align-items: center;
         justify-content: center;
         cursor: pointer;
+        a {
+            color: #fff;
+            display: flex;
+            align-items: center;
+        }
     }
 
     .btnWrap > button.applybtn {

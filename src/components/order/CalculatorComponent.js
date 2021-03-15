@@ -2,6 +2,7 @@ import React from 'react';
 import { CalculatorWrap } from 'styles/CalculatorStyles';
 import CreateIcon from '@material-ui/icons/Create';
 import SearchIcon from '@material-ui/icons/Search';
+import { Link } from 'react-router-dom';
 
 const CalculatorComponent = ({
     OnClickWeight,
@@ -109,12 +110,16 @@ const CalculatorComponent = ({
                     </div>
                     <article className="btnWrap">
                         <button type="button" className="applybtn">
-                            <CreateIcon />
-                            배송대행신청
+                            <Link to="/apply">
+                                <CreateIcon />
+                                배송대행신청
+                            </Link>
                         </button>
                         <button type="button" className="mypagebtn">
-                            <SearchIcon />
-                            접수내역보기
+                            <Link to="/mypage">
+                                <SearchIcon />
+                                접수내역보기
+                            </Link>
                         </button>
                     </article>
                 </article>

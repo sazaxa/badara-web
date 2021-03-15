@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Responsive = styled.section`
     width: 100%;
-    padding: 100px 0 200px 0;
+    padding: 100px 0 100px 0;
     box-sizing: border-box;
     background: #fff;
 `;

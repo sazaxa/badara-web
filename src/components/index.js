@@ -20,6 +20,8 @@ export { default as ApplyContent } from './apply/ApplyComponent';
 export { default as ApplyListComponent } from './apply/ApplyListComponent';
 export { default as ApplyModal } from './apply/ApplyModal';
 
+export { default as MainContentComponent } from './main/MainContentComponet';
+
 export { default as GuideComponent } from './guide/GuideComponent';
 
 export { default as SupportConponent } from './support/SupportConponent';

@@ -16,4 +16,5 @@ export { default as OrderListContainer } from './order/OrderListContainer';
 export { default as OrderDetailContainer } from './order/OrderDetailContainer';
 export { default as ApplyContainer } from './apply/ApplyContainer';
 export { default as ApplyListContainer } from './apply/ApplyListContainer';
+export { default as MainContentContainer } from './main/MainContentContainer';
 export { default as MypageContainer } from './mypage/MypageContainer';

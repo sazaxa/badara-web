@@ -1,8 +1,8 @@
 import React from 'react';
-import MainContentComponent from 'components/common/MainContentComponet';
+import { MainContentContainer } from 'containers';
 
 function MainPage() {
-    return <MainContentComponent />;
+    return <MainContentContainer />;
 }
 
 export default MainPage;
