@@ -8,10 +8,9 @@ import { Courier } from './courier';
 
 const ApplyContainer = ({ history }) => {
     const dispatch = useDispatch();
-    const { list, prise, member } = useSelector(state => ({
+    const { list, prise } = useSelector(state => ({
         list: state.part.country.list,
         prise: state.apply.prise,
-        member: state.member.memberInfo.member,
     }));
     const [visible, setVisible] = useState(false);
     const [material, setMaterial] = useState({
@@ -147,8 +146,8 @@ const ApplyContainer = ({ history }) => {
         dispatch(clearPredictionPriseAction());
         history.push('/apply/list');
     };
-    const Auth = localStorage.getItem('accessToken');
-    if (!Auth) {
+    const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) {
         alert('로그인이 필요한 페이지 입니다.');
         history.push('/');
     }

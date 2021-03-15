@@ -15,8 +15,9 @@ const sagaMiddleWare = createSagaMiddleware();
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleWare)));
 export function loadUser() {
     try {
-        const user = localStorage.getItem('accessToken');
-        if (!user) return;
+        const token = localStorage.getItem('accessToken');
+        const currentUser = localStorage.getItem('currentUser');
+        if (!token || currentUser) return;
         store.dispatch(getMemberInfoAction());
     } catch (e) {
         console.log(e);

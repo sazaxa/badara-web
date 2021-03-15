@@ -25,7 +25,10 @@ export const logoutAction = createAction(LOGOUT);
 function* checkSaga() {
     try {
         const response = yield call(authAPI.check);
-        yield put({ type: GET_MEMBER_INFO_SUCCESS, payload: response.data });
+        yield put({ type: GET_MEMBER_INFO_SUCCESS });
+        localStorage.setItem('currentUser', JSON.stringify(response.data));
+        window.location.href = '/';
+        console.log(response.data);
     } catch (e) {
         yield put({ type: GET_MEMBER_INFO_FAILURE, payload: e });
     }
@@ -36,6 +39,7 @@ function* logoutSaga() {
     try {
         yield delay(100);
         localStorage.removeItem('accessToken');
+        localStorage.removeItem('currentUser');
         window.location.href = '/';
     } catch (e) {
         console.debug(e);
@@ -61,16 +65,6 @@ const initialState = {
 
 export default handleActions(
     {
-        [GET_MEMBER_INFO_SUCCESS]: (state, { payload }) => {
-            return produce(state, draft => {
-                draft.memberInfo.member = payload;
-            });
-        },
-        [GET_MEMBER_INFO_FAILURE]: (state, { payload }) => {
-            return produce(state, draft => {
-                draft.memberInfo.error = payload;
-            });
-        },
         [LOGOUT]: state => {
             return produce(state, draft => {
                 draft.memberInfo = initialState.memberInfo;
