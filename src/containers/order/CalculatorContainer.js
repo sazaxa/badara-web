@@ -8,6 +8,7 @@ const CalculatorContainer = () => {
     const dispatch = useDispatch();
     const { prime, country } = useSelector(state => state.part);
     const [getCountry, setGetCountry] = useState([]);
+    const [priseOpen, setPriseOpen] = useState(false);
     const [material, setMaterial] = useState({
         width: '',
         vertical: '',
@@ -67,6 +68,7 @@ const CalculatorContainer = () => {
                     weight: volume,
                 })
             );
+            setPriseOpen(true);
         } else if (volume < actual) {
             dispatch(
                 predictionPrimeAction({
@@ -74,7 +76,13 @@ const CalculatorContainer = () => {
                     weight: actual,
                 })
             );
+            setPriseOpen(true);
         }
+    };
+
+    const onReset = () => {
+        setPriseOpen(false);
+        console.log(priseOpen);
     };
     return (
         <CalculatorComponent
@@ -84,6 +92,8 @@ const CalculatorContainer = () => {
             PredictionPrime={prime}
             Material={material}
             CountryLists={getCountry}
+            OnReset={onReset}
+            PriseOpen={priseOpen}
         />
     );
 };

@@ -52,18 +52,7 @@ const MainContentComponent = () => {
         <Responsive>
             <MainWrap>
                 <MainCalculator />
-                <article className="btnWrap">
-                    <button type="button" className="applybtn">
-                        <CreateIcon />
-                        배송대행신청
-                    </button>
-                    <button type="button" className="mypagebtn">
-                        <SearchIcon />
-                        접수내역보기
-                    </button>
-                </article>
             </MainWrap>
-            <article className="centerAdress">1</article>
         </Responsive>
     );
 };

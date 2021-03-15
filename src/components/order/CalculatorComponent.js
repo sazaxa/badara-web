@@ -1,14 +1,24 @@
 import React from 'react';
 import { CalculatorWrap } from 'styles/CalculatorStyles';
-import AttachMoneyRoundedIcon from '@material-ui/icons/AttachMoneyRounded';
+import CreateIcon from '@material-ui/icons/Create';
+import SearchIcon from '@material-ui/icons/Search';
 
-const CalculatorComponent = ({ OnClickWeight, OnChange, OnClickVolume, PredictionPrime, Material, CountryLists }) => {
+const CalculatorComponent = ({
+    OnClickWeight,
+    OnChange,
+    OnClickVolume,
+    PredictionPrime,
+    Material,
+    CountryLists,
+    OnReset,
+    PriseOpen,
+}) => {
     return (
         <CalculatorWrap>
             <form>
                 <div className="title_wrap">
-                    <AttachMoneyRoundedIcon />
                     <h2>배송비 계산기</h2>
+                    <span>쉽고 빠르게 배송비를 계산해 보세요</span>
                 </div>
                 {/* <div className="wrap top">
                     <div className="title">
@@ -75,27 +85,39 @@ const CalculatorComponent = ({ OnClickWeight, OnChange, OnClickVolume, Predictio
                         <input type="text" name="actual" onChange={OnChange} placeholder="실 무게" />
                     </div>
                 </div>
-                <div className="wrap prisebtn">
-                    <div className="title"></div>
-                    <div className="content">
-                        <button type="button" onClick={OnClickWeight}>
-                            예상가격 구하기
+                <div className={PriseOpen ? 'wrap prisebtn' : 'wrap prisebtn show'}>
+                    <button type="button" onClick={OnClickWeight}>
+                        예상가격 구하기
+                    </button>
+                </div>
+                <article className={PriseOpen ? 'priseWrap show' : 'priseWrap'}>
+                    <div className="wrap">
+                        <div className="title">
+                            <h4>예상가격</h4>
+                            <p>(단위:달러($))</p>
+                        </div>
+                        <div className="content">
+                            <input
+                                type="text"
+                                disabled
+                                placeholder={PredictionPrime ? PredictionPrime + '$' : '예상가격'}
+                            />
+                            <button type="button" className="resetBtn" onClick={OnReset}>
+                                리셋
+                            </button>
+                        </div>
+                    </div>
+                    <article className="btnWrap">
+                        <button type="button" className="applybtn">
+                            <CreateIcon />
+                            배송대행신청
                         </button>
-                    </div>
-                </div>
-                <div className="wrap bottom">
-                    <div className="title">
-                        <h4>예상가격</h4>
-                        <p>(단위:달러($))</p>
-                    </div>
-                    <div className="content">
-                        <input
-                            type="text"
-                            disabled
-                            placeholder={PredictionPrime ? PredictionPrime + '$' : '예상가격'}
-                        />
-                    </div>
-                </div>
+                        <button type="button" className="mypagebtn">
+                            <SearchIcon />
+                            접수내역보기
+                        </button>
+                    </article>
+                </article>
             </form>
         </CalculatorWrap>
     );

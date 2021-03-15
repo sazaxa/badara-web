@@ -4,7 +4,7 @@ export const Responsive = styled.section`
     width: 100%;
     padding: 100px 0 200px 0;
     box-sizing: border-box;
-    background: #fafafa;
+    background: #fff;
 `;
 
 export const AdminHeaderContent = styled.article`

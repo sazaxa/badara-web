@@ -5,9 +5,11 @@ export const CalculatorWrap = styled.article`
     margin: 0 auto;
     box-sizing: border-box;
     background: #fff;
-    border: 1px solid #d7d7d7;
-    // border-radius: 10px 10px 0 0;
+    // border: 1px solid #d7d7d7;
+    border-radius: 10px;
+    box-shadow: 0 0 8px #ccc;
     margin-bottom: 50px;
+    padding: 50px 100px;
     form {
         width: 100%;
         margin: 0 auto;
@@ -15,30 +17,30 @@ export const CalculatorWrap = styled.article`
     form > .title_wrap {
         margin-bottom: 20px;
         display: flex;
+
         justify-content: left;
-        align-items: center;
+        align-items: flex-end;
         color: #000;
-        border-bottom: 1px solid #ddd;
-        padding: 20px;
-        background-color: #f5f5f5;
-    }
-    form > .title_wrap > .MuiSvgIcon-root {
-        font-size: 24px;
     }
     form > .title_wrap > h2 {
         letter-spacing: -2.5px;
         text-align: center;
-        font-size: 20px;
+        font-size: 32px;
+    }
+    form > .title_wrap > span {
+        font-size: 14px;
+        color: #ccc;
+        margin-left: 5px;
     }
     .wrap {
         display: flex;
         align-items: center;
         width: 100%;
-        height: 50px;
-        border-bottom: 1px solid #ccc;
+        height: 70px;
+        border-bottom: 1px solid #0080ff;
     }
     .wrap.top {
-        border-top: 2px solid #000;
+        border-top: 4px solid #0080ff;
     }
     .wrap.bottom {
         border-top: 2px solid #000;
@@ -47,19 +49,22 @@ export const CalculatorWrap = styled.article`
         width: 30%;
         min-width: 171px;
         height: 50px;
-        background: #eee;
         padding: 15px 0 15px 20px;
         box-sizing: border-box;
         letter-spacing: -2px;
         border-right: 1px #eee;
         display: flex;
-        align-items: center;
+        align-items: flex-end;
         color: #000;
+    }
+    .wrap > .title > h4 {
+        font-size: 18px;
     }
     .wrap > .title > p {
         font-size: 12px;
         letter-spacing: -0.5px;
         margin-left: 5px;
+        color: #666;
     }
     .wrap > .content {
         width: 70%;
@@ -69,6 +74,9 @@ export const CalculatorWrap = styled.article`
         box-sizing: border-box;
         background-color: #fff;
     }
+    .wrap > .content > select {
+        width: 60%;
+    }
     .wrap > .content > button {
         width: 50%;
         height: 50px;
@@ -76,43 +84,49 @@ export const CalculatorWrap = styled.article`
         cursor: pointer;
         outline: none;
         border: none;
-        background-color: #1976d2;
+        background-color: #0049ff;
         color: #fff;
         font-size: 16px;
-        margin-top: 10px;
-    }
-    .wrap.material {
-        height: 150px;
-    }
-    .wrap.material > .title {
-        height: 150px;
     }
     .wrap > .content.material {
         display: flex;
-        height: 100px;
         align-items: center;
-        justify-content: center;
+        justify-content: space-btween;
         flex-wrap: wrap;
     }
     .wrap > .content.material > input {
-        width: 30%;
+        width: 20%;
         height: 40px;
     }
-
+    .wrap > .content.material > span {
+        margin: 0 3%;
+    }
+    .wrap > .content.material > button {
+        width: 20%;
+        height: 40px;
+        margin-top: 0;
+        margin-left: 3%;
+        border-radius: 15px;
+    }
     .wrap > .content > input,
     select {
-        width: 100%;
+        width: 50%;
         height: 40px;
         outline: 0;
-        border: none;
-        border-bottom: 1px solid #ccc;
+        border: 1px solid #ccc;
+        border-radius: 5px;
         font-size: 16px;
         padding: 10px;
         box-sizing: border-box;
-        text-align-last: center;
     }
     .wrap > .content > input:focus {
         border-bottom: 2px solid #333;
+    }
+    .wrap.prisebtn {
+        display: none;
+    }
+    .wrap.prisebtn.show {
+        display: block;
     }
     .wrap.prisebtn > .title {
         background: #fff;
@@ -126,10 +140,59 @@ export const CalculatorWrap = styled.article`
     .wrap.prisebtn {
         width: 100%;
         height: 80px;
+        align-items: flex-start;
+        border-bottom: none;
     }
     .wrap.prisebtn button {
-        width: 50%;
+        width: 100%;
+        height: 52px;
+        background-color: #0049ff;
         box-sizing: border-box;
         margin-top: 0;
+        outline: none;
+        border: none;
+        color: #fff;
+        font-size: 20px;
+        letter-spacing: -1.5px;
+        border-radius: 0 0 10px 10px;
+        cursor: pointer;
+    }
+    .priseWrap {
+        display: none;
+    }
+    .priseWrap.show {
+        display: block;
+        border-top: 1px solid #0080ff;
+    }
+    .btnWrap {
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+    .btnWrap > button {
+        width: 50%;
+        height: 52px;
+        border: none;
+        color: #fff;
+        font-size: 20px;
+        letter-spacing: -1.5px;
+        border-radius: 0 0 10px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .btnWrap > button.applybtn {
+        background-color: #0049ff;
+    }
+    .btnWrap > button.mypagebtn {
+        background-color: #009aff;
+    }
+    .resetBtn {
+        width: 20% !important;
+        height: 40px !important;
+        margin-left: 3%;
+        border-radius: 15px;
     }
 `;
