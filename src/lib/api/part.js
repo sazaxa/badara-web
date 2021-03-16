@@ -19,6 +19,8 @@ export const getCountry = () => {
     return client.get('/api/v1/shipping/dhl/countries');
 };
 
-/*
-let country_array = data.country.map()
-*/
+// 나라별 가격 가져오기
+
+export const CountryPrise = country => {
+    return client.post('/api/v1/shipping/dhl/country/price', country);
+};
