@@ -9,7 +9,7 @@ const FaqContainer = () => {
     const dispatch = useDispatch();
     const { status: faqStatus, list: faqList, member, faqinfo } = useSelector(
         state => ({
-            member: state.member.memberInfo.member,
+            member: state.member.members,
             status: state.faq.faqs.status,
             list: state.faq.faqs.list,
             faqinfo: state.faq.faqinfo,
