@@ -28,7 +28,7 @@ function* getMemberListSaga() {
         const { data } = yield call(authAPI.users);
         yield put({ type: GET_MEMBER_LIST_SUCCESS, payload: data });
     } catch (e) {
-        yield put({ type: GET_MEMBER_INFO_FAILURE, payload: e });
+        yield put({ type: GET_MEMBER_LIST_FAILURE, payload: e });
     }
 }
 
@@ -39,6 +39,9 @@ function* getMemberInfoSaga({ payload: id }) {
         yield put({ type: GET_MEMBER_INFO_SUCCESS, payload: data });
     } catch (e) {
         yield put({ type: GET_MEMBER_INFO_FAILURE, payload: e });
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('currentUser');
+        window.location.href = '/';
     }
 }
 
@@ -52,8 +55,6 @@ function* checkSaga() {
         console.log(response.data);
     } catch (e) {
         yield put({ type: GET_MEMBER_CHECK_FAILURE, payload: e });
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('currentUser');
     }
 }
 
