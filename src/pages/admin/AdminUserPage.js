@@ -1,5 +1,5 @@
+import { AdminUserContainer } from 'containers';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { AdminUserWrap } from 'styles/AdminPagesStyle';
 
 const AdminUserPage = ({ history }) => {
@@ -10,7 +10,11 @@ const AdminUserPage = ({ history }) => {
     //     alert('관리자에게 문의하세요.');
     //     history.push('/');
     // }
-    return <AdminUserWrap>유저페이지</AdminUserWrap>;
+    return (
+        <AdminUserWrap>
+            <AdminUserContainer />
+        </AdminUserWrap>
+    );
 };
 
 export default AdminUserPage;

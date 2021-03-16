@@ -21,6 +21,7 @@ import { HeaderContainer, AdminHeaderContainer } from 'containers';
 import { getCountryAction } from 'store/part';
 import { useDispatch } from 'react-redux';
 import { loadUser } from 'index';
+import AdminUserDetailPage from 'pages/admin/AdminUserDetailPage';
 
 function App({ location }) {
     const dispatch = useDispatch();
@@ -39,7 +40,8 @@ function App({ location }) {
                 <section className="adminWrap">
                     <AdminHeaderContainer />
                     <Route component={AdminUserPage} path="/admin" exact />
-                    <Route component={AdminUserPage} path="/admin/user" />
+                    <Route component={AdminUserPage} path="/admin/user" exact />
+                    <Route component={AdminUserDetailPage} path="/admin/user/:id" />
                     <Route component={AdminOrderPage} path="/admin/order" exact />
                     <Route component={AdminOrderDetailPage} path="/admin/order/:id" />
                     <Route component={AdminFAQPage} path="/admin/faq" />
