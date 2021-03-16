@@ -1,10 +1,51 @@
 import { MypageComponent } from 'components';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMemberInfoAction } from 'store/member';
+import { getOrderInfoAction } from 'store/order';
+import { getProductInfoAction } from 'store/product';
 
 const MypageContainer = () => {
+    const dispatch = useDispatch();
+    const [updatePopup, setUpdatePopup] = useState(false);
+    const [paymentPopup, setPaymentPopup] = useState(false);
+
+    const handlePopup = () => {
+        setUpdatePopup(!updatePopup);
+        setPaymentPopup(!paymentPopup);
+    };
+
+    const handlePaymentInfo = id => {
+        setPaymentPopup(!paymentPopup);
+        dispatch(getOrderInfoAction(id));
+    };
+
+    const handleProductInfo = id => {
+        setUpdatePopup(!updatePopup);
+        dispatch(getProductInfoAction(id));
+    };
+
+    useEffect(() => {
+        const currentUser = localStorage.getItem('currentUser');
+        if (currentUser) {
+            console.log(JSON.parse(currentUser).id);
+            dispatch(getMemberInfoAction(JSON.parse(currentUser).id));
+        } else {
+            window.location.href = '/';
+        }
+    }, []);
     const { member } = useSelector(state => state.member.memberInfo);
-    return <MypageComponent member={member} />;
+    if (!member) return null;
+    return (
+        <MypageComponent
+            member={member}
+            handlePopup={handlePopup}
+            updatePopup={updatePopup}
+            handleProductInfo={handleProductInfo}
+            handlePaymentInfo={handlePaymentInfo}
+            paymentPopup={paymentPopup}
+        />
+    );
 };
 
 export default MypageContainer;

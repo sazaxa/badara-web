@@ -77,4 +77,64 @@ export const MypageContent = styled.article`
             }
         }
     }
+    .MuiTableCell-root ul {
+        display: flex;
+        justify-content: space-between;
+        li {
+            // margin-right: 8px;
+        }
+    }
+    .MuiTableCell-body {
+        // width: 100%;
+    }
+    button {
+        width: 80px;
+        height: 35px;
+        border: none;
+        background: #0049ff;
+        border-radius: 10px;
+        color: #fff;
+        outline: none;
+        cursor: pointer;
+        padding: 10px;
+        margin-top: 10px;
+    }
+`;
+
+export const UpdateInvoiceWrap = styled.article`
+    width: 500px;
+    height: 300px;
+    background: #fff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    padding: 50px;
+    box-sizing: border-box;
+    h2 {
+        margin-bottom: 20px;
+    }
+    input,
+    select {
+        width: 100%;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+    button {
+        width: 80px;
+        height: 40px;
+        border: none;
+        background: #0049ff;
+        border-radius: 15px;
+        color: #fff;
+        margin: 20px 10px;
+        outline: none;
+        cursor: pointer;
+    }
 `;

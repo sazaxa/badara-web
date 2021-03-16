@@ -11,6 +11,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { MypageContent } from 'styles/MypageStyles';
+import UpdateInvoice from './UpdateInvoice';
+import PaymentPopup from './PaymentPopup';
 
 const StyledTableCell = withStyles(theme => ({
     head: {
@@ -35,25 +37,15 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function createData(name, calories, fat, carbs, protein, status) {
-    return { name, calories, fat, carbs, protein, status };
-}
-
-const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 2),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 2),
-    createData('Eclair', 262, 16.0, 24, 6.0, 3),
-    createData('Cupcake', 305, 3.7, 67, 4.3, 30),
-    createData('Gingerbread', 356, 16.0, 49, 3.9, 300),
-];
-
-const MypageComponent = ({ member }) => {
+const MypageComponent = ({ member, handlePopup, updatePopup, handleProductInfo, paymentPopup, handlePaymentInfo }) => {
     const classes = useStyles();
     if (!member) {
         return null;
     }
     return (
         <Responsive>
+            {updatePopup === true ? <UpdateInvoice handlePopup={handlePopup} updatePopup={updatePopup} /> : null}
+            {paymentPopup === true ? <PaymentPopup handlePopup={handlePopup} /> : null}
             <MypageContent>
                 {/* <Button variant="contained" color="primary">
                     내정보 수정
@@ -93,32 +85,136 @@ const MypageComponent = ({ member }) => {
                     </article>
                 </article>
                 <TableContainer component={Paper}>
-                    <Table className={classes.table} aria-label="simple table">
-                        <TableHead>
-                            <TableRow>
-                                <StyledTableCell>신청일자</StyledTableCell>
-                                <StyledTableCell align="right">품목명</StyledTableCell>
-                                <StyledTableCell align="right">주소</StyledTableCell>
-                                <StyledTableCell align="right">금액</StyledTableCell>
-                                <StyledTableCell align="right">무게(회원/측정)</StyledTableCell>
-                                <StyledTableCell align="right">상태</StyledTableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {rows.map(row => (
-                                <TableRow key={row.name}>
-                                    <TableCell component="th" scope="row">
-                                        {row.name}
-                                    </TableCell>
-                                    <TableCell align="right">{row.calories}</TableCell>
-                                    <TableCell align="right">{row.fat}</TableCell>
-                                    <TableCell align="right">{row.carbs}</TableCell>
-                                    <TableCell align="right">{row.protein}</TableCell>
-                                    <TableCell align="right">{row.status}</TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
+                    {member.orders.length !== 0 ? (
+                        member.orders.map(order => (
+                            <Table className={classes.table} aria-label="simple table">
+                                <TableHead>
+                                    <TableRow>
+                                        <StyledTableCell width="38%">
+                                            <ul>
+                                                <li>
+                                                    <span>
+                                                        <strong>신청날짜</strong> : {order.products[0].createdDate}
+                                                        {/* {moment(member.orders[0].products[0].createdDate, 'MMM Do YY')} */}
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <strong>주문 번호</strong> : {order.orderNumber}
+                                                </li>
+                                            </ul>
+                                        </StyledTableCell>
+                                        <StyledTableCell align="center">받는 분 정보</StyledTableCell>
+                                        <StyledTableCell align="center">금액(예상/실제)</StyledTableCell>
+                                        <StyledTableCell align="center">상태</StyledTableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {/* <TableRow key={order.id}> */}
+                                    {order.products.map(product => (
+                                        <>
+                                            <TableRow align="center">
+                                                <TableCell key={product.id} width="20%" align="center">
+                                                    <p>
+                                                        <strong>상품 명 :</strong> {product.productName}
+                                                    </p>
+                                                    <p>
+                                                        <strong>회원 입력 부피 무게 :</strong>
+                                                        {product.volumeWeight === 0
+                                                            ? '입력하지 않음'
+                                                            : product.volumeWeight}
+                                                    </p>
+                                                    <p>
+                                                        <strong>회원 입력 실 무게 :</strong>
+                                                        {product.netWeight === 0 ? '입력하지 않음' : product.netWeight}
+                                                    </p>
+                                                    <p>
+                                                        <strong>고래타고 입력 부피 무게 :</strong>
+                                                        {product.adminVolumeWeight === 0
+                                                            ? '입력하지 않음'
+                                                            : product.adminVolumeWeight}
+                                                    </p>
+                                                    <p>
+                                                        <strong>고래타고 입력 실 무게 :</strong>
+                                                        {product.adminNetWeight === 0
+                                                            ? '입력하지 않음'
+                                                            : product.adminNetWeight}
+                                                    </p>
+                                                </TableCell>
+                                                <TableCell align="center">
+                                                    <p>
+                                                        <strong>이름 :</strong> {product.recipientName}
+                                                    </p>
+                                                    <p>
+                                                        <strong>주소 :</strong> {product.recipientAddress}
+                                                    </p>
+                                                    <p>
+                                                        <strong>휴대폰 번호 :</strong> {product.recipientPhoneNumber}
+                                                    </p>
+                                                    <p>
+                                                        <strong>국가 :</strong> {product.country}
+                                                    </p>
+                                                </TableCell>
+                                                <TableCell align="center">
+                                                    {product.expectedPrice} $ /
+                                                    {product.shippingPrice === 0
+                                                        ? '책정중'
+                                                        : product.shippingPrice + '$'}
+                                                </TableCell>
+                                                <TableCell align="center">
+                                                    <p>{product.status}</p>
+                                                    {product.status === '송장입력' ? (
+                                                        <button
+                                                            type="onClick"
+                                                            onClick={() => handleProductInfo(product.id)}
+                                                        >
+                                                            송장 입력
+                                                        </button>
+                                                    ) : null}
+                                                    {product.status === '해외배송중' ? (
+                                                        <>
+                                                            <p style={{ marginTop: '10px' }}>
+                                                                <strong>택배사 :</strong>{' '}
+                                                                {product.abroadShippingCompany}
+                                                            </p>
+                                                            <p>
+                                                                <strong>운송장 번호 : </strong>
+                                                                {product.abroadInvoice}
+                                                            </p>
+                                                        </>
+                                                    ) : null}
+                                                </TableCell>
+                                            </TableRow>
+                                        </>
+                                    ))}
+                                    {order.products[0].status === '송장입력' ||
+                                    order.products[0].status === '센터입고중' ? null : (
+                                        <TableRow>
+                                            <TableCell align="right" colSpan={5}>
+                                                총 금액 : {order.orderPrice}$
+                                                {order.products[0].status === '결제요청' ? (
+                                                    <button type="onClick" onClick={() => handlePaymentInfo(order.id)}>
+                                                        결제하기
+                                                    </button>
+                                                ) : null}
+                                            </TableCell>
+                                        </TableRow>
+                                    )}
+                                </TableBody>
+                            </Table>
+                        ))
+                    ) : (
+                        <div
+                            style={{
+                                padding: '100px 0',
+                                textAlign: 'center',
+                                fontSize: '40px',
+                                border: 'none',
+                                letterSpacing: '-1.5px',
+                            }}
+                        >
+                            접수된 주문건이 없습니다.
+                        </div>
+                    )}
                 </TableContainer>
             </MypageContent>
         </Responsive>
