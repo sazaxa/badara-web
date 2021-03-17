@@ -1,7 +1,7 @@
 import { MypageComponent } from 'components';
 import React, { useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { getMemberInfoAction } from 'store/member';
+import { getMemberCheckAction, getMemberInfoAction } from 'store/member';
 import { getOrderInfoAction } from 'store/order';
 import { getProductInfoAction } from 'store/product';
 
@@ -39,9 +39,10 @@ const MypageContainer = () => {
         if (logged) {
             dispatch(getMemberInfoAction(logged.id));
         } else {
-            window.location.href = '/';
+            // window.location.href = '/';
+            dispatch(getMemberCheckAction());
         }
-    }, []);
+    }, [logged]);
     if (!logged) return null;
     return (
         <MypageComponent

@@ -26,16 +26,21 @@ import { getAdminCheckAction, getMemberCheckAction } from 'store/member';
 
 function App({ location, history }) {
     const dispatch = useDispatch();
+    const { logged } = useSelector(state => state.member.adminInfo);
     const token = localStorage.getItem('accessToken');
+    const tokenAdmin = localStorage.getItem('accessTokenAdmin');
     // localStronge에 토큰값이 있으면 token check
     useEffect(() => {
         if (token) {
             dispatch(getMemberCheckAction());
         }
-        if (pathname.startsWith(BASE_ADMIN_URL)) {
+    }, [token]);
+
+    useEffect(() => {
+        if (logged === false && pathname.startsWith(BASE_ADMIN_URL)) {
             dispatch(getAdminCheckAction());
         }
-    }, [token]);
+    }, []);
 
     // 최초 로딩시 계산기 나라목록 가져오기.
     useEffect(() => {

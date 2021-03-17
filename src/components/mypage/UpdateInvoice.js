@@ -8,6 +8,7 @@ import { Courier } from '../../containers/apply/courier';
 const UpdateInvoice = ({ handlePopup }) => {
     const dispatch = useDispatch();
     const { product } = useSelector(state => state.product);
+    const { logged } = useSelector(state => state.member.loggedInfo);
     const [updateInvoice, setUpdateInvoice] = useState('');
 
     const handleChange = e => {
@@ -26,7 +27,7 @@ const UpdateInvoice = ({ handlePopup }) => {
                 id: product.id,
                 data: updateInvoice,
                 callBack: () => {
-                    dispatch(getMemberInfoAction(JSON.parse(currentUser).id));
+                    dispatch(getMemberInfoAction(logged.id));
                 },
             })
         );

@@ -26,9 +26,13 @@ function* loginSaga({ payload: { email, password } }) {
     try {
         const response = yield call(authAPI.login, { email, password });
         yield put({ type: LOGIN_SUCCESS, payload: response.data });
+        if (localStorage.getItem('accessTokenAdmin')) {
+            localStorage.removeItem('accessTokenAdmin');
+        }
         localStorage.setItem('accessToken', response.data.accessToken);
         window.location.href = '/';
     } catch (e) {
+        console.log(e.status);
         yield put({ type: LOGIN_FAILURE, payload: e });
     }
 }
@@ -37,9 +41,13 @@ function* adminLoginSaga({ payload: { email, password } }) {
     try {
         const response = yield call(authAPI.adminLogin, { email, password });
         yield put({ type: LOGIN_SUCCESS, payload: response.data });
-        localStorage.setItem('accessToken', response.data.accessToken);
+        if (localStorage.getItem('accessToken')) {
+            localStorage.removeItem('accessToken');
+        }
+        localStorage.setItem('accessTokenAdmin', response.data.accessToken);
         window.location.href = '/admin/user';
     } catch (e) {
+        console.log(e);
         yield put({ type: LOGIN_FAILURE, payload: e });
     }
 }

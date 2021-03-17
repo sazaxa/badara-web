@@ -4,7 +4,11 @@ const client = axios.create({
     // withCredentials: true,
 });
 const auth = localStorage.getItem('accessToken');
+const authAdmin = localStorage.getItem('accessTokenAdmin');
 if (auth) {
     client.defaults.headers.common['Authorization'] = `Bearer ${auth}`;
+}
+if (authAdmin) {
+    client.defaults.headers.common['Authorization'] = `Bearer ${authAdmin}`;
 }
 export default client;

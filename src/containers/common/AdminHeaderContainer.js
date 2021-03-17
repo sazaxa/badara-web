@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { AdminHeaderComponent } from 'components/index';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,12 +12,10 @@ const AdminHeaderContainer = ({ history }) => {
     const handleLogout = () => {
         dispatch(adminLogoutAction());
     };
-    useEffect(() => {
-        if (logged === false) {
-            alert('관리자만 접근 가능합니다.');
-            history.push('/admin');
-        }
-    }, [logged]);
+    if (logged === false) {
+        // alert('관리자만 이용가능합니다.');
+        history.push('/admin');
+    }
     return <AdminHeaderComponent handleLogout={handleLogout} />;
 };
 

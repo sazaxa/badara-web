@@ -47,7 +47,6 @@ function* getMemberInfoSaga({ payload: id }) {
     } catch (e) {
         yield put({ type: GET_MEMBER_INFO_FAILURE, payload: e });
         localStorage.removeItem('accessToken');
-        localStorage.removeItem('currentUser');
         window.location.href = '/';
     }
 }
@@ -55,12 +54,13 @@ function* getMemberInfoSaga({ payload: id }) {
 // 토큰값으로 해당 유저 정보 가져오기.
 function* checkSaga() {
     try {
+        localStorage.removeItem('accessTokenAdmin');
         const response = yield call(authAPI.check);
         yield put({ type: GET_MEMBER_CHECK_SUCCESS, payload: response.data });
     } catch (e) {
         yield put({ type: GET_MEMBER_CHECK_FAILURE, payload: e });
         localStorage.removeItem('accessToken');
-        // window.location.href = '/';
+        window.location.href = '/';
     }
 }
 
@@ -69,10 +69,10 @@ function* adminCheckSaga() {
     try {
         const response = yield call(authAPI.adminCheck);
         yield put({ type: GET_ADMIN_CHECK_SUCCESS, payload: response.data });
-        window.location.href = '/admin/user';
+        // window.location.href = '/admin/user';
     } catch (e) {
         yield put({ type: GET_ADMIN_CHECK_FAILURE, payload: e });
-        localStorage.removeItem('accessToken');
+        localStorage.removeItem('accessTokenAdmin');
         // window.location.href = '/admin';
     }
 }
@@ -92,7 +92,7 @@ function* logoutSaga() {
 function* adminLogoutSaga() {
     try {
         yield delay(100);
-        localStorage.removeItem('accessToken');
+        localStorage.removeItem('accessTokenAdmin');
         yield put({ type: ADMIN_LOGOUT_SUCCESS });
         // window.location.href = '/';
     } catch (e) {
@@ -180,7 +180,7 @@ export default handleActions(
         [GET_ADMIN_CHECK_FAILURE]: (state, { payload }) => {
             return produce(state, draft => {
                 draft.adminInfo.error = payload;
-                draft.adminInfo.logged = initialState;
+                draft.adminInfo.logged = initialState.adminInfo.looged;
             });
         },
         [ADMIN_LOGOUT_SUCCESS]: state => {

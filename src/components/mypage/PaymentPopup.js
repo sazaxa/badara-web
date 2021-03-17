@@ -7,6 +7,7 @@ import { UpdateInvoiceWrap } from 'styles/MypageStyles';
 const PaymentPopup = ({ handlePopup, updatePopup }) => {
     const dispatch = useDispatch();
     const { orderInfo } = useSelector(state => state.order);
+    const { logged } = useSelector(state => state.member.loggedInfo);
 
     const handlePayment = () => {
         // localStorage에 있는 회원 정보를 가져온다.
@@ -17,7 +18,7 @@ const PaymentPopup = ({ handlePopup, updatePopup }) => {
                 id: orderInfo.id,
                 status: { status: '결제완료' },
                 callBack: () => {
-                    dispatch(getMemberInfoAction(JSON.parse(currentUser).id));
+                    dispatch(getMemberInfoAction(logged.id));
                 },
             })
         );
