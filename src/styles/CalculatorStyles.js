@@ -14,7 +14,7 @@ export const CalculatorWrap = styled.article`
         width: 100%;
         margin: 0 auto;
     }
-    form > .title_wrap {
+    .title_wrap {
         margin-bottom: 20px;
         display: flex;
 
@@ -22,15 +22,18 @@ export const CalculatorWrap = styled.article`
         align-items: flex-end;
         color: #000;
     }
-    form > .title_wrap > h2 {
+    .title_wrap > h2 {
         letter-spacing: -2.5px;
         text-align: center;
         font-size: 32px;
     }
-    form > .title_wrap > span {
+    .title_wrap > span {
         font-size: 14px;
         color: #ccc;
         margin-left: 5px;
+    }
+    .countryTitle {
+        margin-right: 20px;
     }
     .wrap {
         display: flex;

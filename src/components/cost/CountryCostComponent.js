@@ -1,27 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { countryPriseAction } from 'store/part';
-
-const CountryCostComponent = () => {
-    const dispatch = useDispatch();
-    const { list, countryPrise } = useSelector(state => ({
-        list: state.part.country.list,
-        countryPrise: state.part.countryPrise,
-    }));
-    const [selectedValue, setSelectedValue] = useState();
-
-    const onHandleSelectCountry = e => {
-        setSelectedValue(e.target.value);
-    };
-    useEffect(() => {
-        if (selectedValue) {
-            dispatch(countryPriseAction({ country: selectedValue }));
-        }
-    }, [selectedValue]);
+import React from 'react';
+import { CalculatorWrap as CountryWrap } from 'styles/CalculatorStyles';
+import { CostTable } from 'styles/CostStyles';
+const CountryCostComponent = ({ list, onHandleSelectCountry, countryPrise }) => {
     return (
-        <>
+        <CountryWrap>
+            <article className="title_wrap">
+                <h2>비용 안내</h2>
+                <span>나라별 배송 비용을 알수 있습니다.</span>
+            </article>
+            <span className="countryTitle">나라선택</span>
             <select onChange={e => onHandleSelectCountry(e)}>
-                <option value="">나라선택</option>
+                <option value="">나라 선택</option>
                 {list.map((country, index) => {
                     return (
                         <option key={index} value={country}>
@@ -30,7 +19,7 @@ const CountryCostComponent = () => {
                     );
                 })}
             </select>
-            <table>
+            <CostTable>
                 <thead>
                     {countryPrise ? (
                         <tr>
@@ -42,13 +31,13 @@ const CountryCostComponent = () => {
                 <tbody>
                     {countryPrise?.map(prise => (
                         <tr key={prise.id}>
-                            <td>{prise.weight}</td>
-                            <td>{prise.price}</td>
+                            <td>{prise.weight + 'g'}</td>
+                            <td>{prise.price + '$'}</td>
                         </tr>
                     ))}
                 </tbody>
-            </table>
-        </>
+            </CostTable>
+        </CountryWrap>
     );
 };
 
