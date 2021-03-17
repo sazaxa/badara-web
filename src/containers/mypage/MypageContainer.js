@@ -1,6 +1,6 @@
 import { MypageComponent } from 'components';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { getMemberInfoAction } from 'store/member';
 import { getOrderInfoAction } from 'store/order';
 import { getProductInfoAction } from 'store/product';
@@ -9,6 +9,13 @@ const MypageContainer = () => {
     const dispatch = useDispatch();
     const [updatePopup, setUpdatePopup] = useState(false);
     const [paymentPopup, setPaymentPopup] = useState(false);
+    const { logged, member } = useSelector(
+        state => ({
+            logged: state.member.loggedInfo.logged,
+            member: state.member.memberInfo.member,
+        }),
+        shallowEqual
+    );
 
     const handleUpdatePopup = () => {
         setUpdatePopup(!updatePopup);
@@ -29,15 +36,13 @@ const MypageContainer = () => {
     };
 
     useEffect(() => {
-        const currentUser = localStorage.getItem('currentUser');
-        if (currentUser) {
-            dispatch(getMemberInfoAction(JSON.parse(currentUser).id));
+        if (logged) {
+            dispatch(getMemberInfoAction(logged.id));
         } else {
             window.location.href = '/';
         }
     }, []);
-    const { member } = useSelector(state => state.member.memberInfo);
-    if (!member) return null;
+    if (!logged) return null;
     return (
         <MypageComponent
             member={member}

@@ -20,7 +20,7 @@ export const users = () => {
     return client.get('/api/v1/members');
 };
 
-// 단일 회원 불러오기
-export const user = id => {
+// 회원 주문 목록 불러오기
+export const userOrders = id => {
     return client.get(`/api/v1/members/${id}/order`);
 };

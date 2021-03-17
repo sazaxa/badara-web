@@ -17,8 +17,6 @@ const LoginPopupContainer = ({ close, location }) => {
     useEffect(() => {
         if (status === 'success') {
             close();
-            loadUser();
-            getMemberInfoAction();
         }
         if (status === 'fail') {
             alert('이메일과 비밀번호를 확인하세요.');

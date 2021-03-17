@@ -35,7 +35,7 @@ function* getMemberListSaga() {
 function* getMemberInfoSaga({ payload: id }) {
     // 단일 회원 로직.
     try {
-        const { data } = yield call(authAPI.user, id);
+        const { data } = yield call(authAPI.userOrders, id);
         yield put({ type: GET_MEMBER_INFO_SUCCESS, payload: data });
     } catch (e) {
         yield put({ type: GET_MEMBER_INFO_FAILURE, payload: e });
@@ -49,12 +49,10 @@ function* getMemberInfoSaga({ payload: id }) {
 function* checkSaga() {
     try {
         const response = yield call(authAPI.check);
-        yield put({ type: GET_MEMBER_CHECK_SUCCESS });
-        localStorage.setItem('currentUser', JSON.stringify(response.data));
-        window.location.href = '/';
-        console.log(response.data);
+        yield put({ type: GET_MEMBER_CHECK_SUCCESS, payload: response.data });
     } catch (e) {
         yield put({ type: GET_MEMBER_CHECK_FAILURE, payload: e });
+        localStorage.removeItem('accessToken');
     }
 }
 
@@ -63,7 +61,7 @@ function* logoutSaga() {
     try {
         yield delay(100);
         localStorage.removeItem('accessToken');
-        localStorage.removeItem('currentUser');
+        // localStorage.removeItem('currentUser');
         window.location.href = '/';
     } catch (e) {
         console.debug(e);
@@ -84,6 +82,10 @@ const initialState = {
     },
     memberInfo: {
         member: null,
+        error: null,
+    },
+    loggedInfo: {
+        logged: null,
         error: null,
     },
 };
@@ -119,6 +121,16 @@ export default handleActions(
         [GET_MEMBER_INFO_FAILURE]: (state, { payload }) => {
             return produce(state, draft => {
                 draft.memberInfo.error = payload;
+            });
+        },
+        [GET_MEMBER_CHECK_SUCCESS]: (state, { payload }) => {
+            return produce(state, draft => {
+                draft.loggedInfo.logged = payload;
+            });
+        },
+        [GET_MEMBER_CHECK_FAILURE]: (state, { payload }) => {
+            return produce(state, draft => {
+                draft.loggedInfo.error = payload;
             });
         },
     },

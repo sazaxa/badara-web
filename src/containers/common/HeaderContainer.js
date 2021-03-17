@@ -10,7 +10,7 @@ const HeaderContainer = ({}) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const dispatch = useDispatch();
 
-    const member = localStorage.getItem('currentUser');
+    const member = localStorage.getItem('accessToken');
     // 로그인 팝업 처리.
     const handleLoginPopup = e => {
         setLoginPopup(e);

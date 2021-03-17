@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Route, withRouter } from 'react-router-dom';
 
 import {
@@ -22,13 +22,21 @@ import { getCountryAction } from 'store/part';
 import { useDispatch } from 'react-redux';
 import { loadUser } from 'index';
 import AdminUserDetailPage from 'pages/admin/AdminUserDetailPage';
+import { getMemberCheckAction } from 'store/member';
 
 function App({ location }) {
     const dispatch = useDispatch();
+    const token = localStorage.getItem('accessToken');
+    // localStronge에 토큰값이 있으면 token check
+    useEffect(() => {
+        if (token) {
+            dispatch(getMemberCheckAction());
+        }
+    }, [token]);
+
     // 최초 로딩시 계산기 나라목록 가져오기.
-    useLayoutEffect(() => {
+    useEffect(() => {
         dispatch(getCountryAction());
-        loadUser();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     //   console.log('location : ', location);

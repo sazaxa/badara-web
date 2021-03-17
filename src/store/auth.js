@@ -20,7 +20,6 @@ function* loginSaga({ payload: { email, password } }) {
         const response = yield call(authAPI.login, { email, password });
         yield put({ type: LOGIN_SUCCESS, payload: response.data });
         localStorage.setItem('accessToken', response.data.accessToken);
-
         window.location.href = '/';
     } catch (e) {
         yield put({ type: LOGIN_FAILURE, payload: e });
