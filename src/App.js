@@ -14,18 +14,19 @@ import {
     RegisterPage,
     ApplyListPage,
     AdminOrderDetailPage,
+    AdminLoginPage,
     Mypage,
 } from 'pages';
 import { FooterComponent } from 'components';
 import { HeaderContainer, AdminHeaderContainer } from 'containers';
 import { getCountryAction } from 'store/part';
 import { useDispatch } from 'react-redux';
-import { loadUser } from 'index';
 import AdminUserDetailPage from 'pages/admin/AdminUserDetailPage';
 import { getMemberCheckAction } from 'store/member';
 
 function App({ location }) {
     const dispatch = useDispatch();
+
     const token = localStorage.getItem('accessToken');
     // localStronge에 토큰값이 있으면 token check
     useEffect(() => {
@@ -46,8 +47,8 @@ function App({ location }) {
         <>
             {pathname.startsWith(BASE_ADMIN_URL) ? (
                 <section className="adminWrap">
-                    <AdminHeaderContainer />
-                    <Route component={AdminUserPage} path="/admin" exact />
+                    <Route component={AdminLoginPage} path="/admin" exact />
+                    {pathname === '/admin' ? null : <AdminHeaderContainer />}
                     <Route component={AdminUserPage} path="/admin/user" exact />
                     <Route component={AdminUserDetailPage} path="/admin/user/:id" />
                     <Route component={AdminOrderPage} path="/admin/order" exact />
