@@ -31,7 +31,6 @@ const MypageContainer = () => {
     useEffect(() => {
         const currentUser = localStorage.getItem('currentUser');
         if (currentUser) {
-            console.log(JSON.parse(currentUser).id);
             dispatch(getMemberInfoAction(JSON.parse(currentUser).id));
         } else {
             window.location.href = '/';

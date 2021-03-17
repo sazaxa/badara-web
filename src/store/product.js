@@ -15,8 +15,16 @@ const [PRODUCT_PAYMENT_REQUEST, PRODUCT_PAYMENT_SUCCESS, PRODUCT_PAYMENT_FAILURE
     'product/PRODUCT_PAYMENT'
 );
 export const getProductInfoAction = createAction(GET_PRODUCT_REQUEST, id => id);
-export const porductInvoiceAction = createAction(PRODUCT_INVOICE_REQUEST, ({ id, data }) => ({ id, data }));
-export const productPaymentAction = createAction(PRODUCT_PAYMENT_REQUEST, ({ id, status }) => ({ id, status }));
+export const porductInvoiceAction = createAction(PRODUCT_INVOICE_REQUEST, ({ id, data, callBack }) => ({
+    id,
+    data,
+    callBack,
+}));
+export const productPaymentAction = createAction(PRODUCT_PAYMENT_REQUEST, ({ id, status, callBack }) => ({
+    id,
+    status,
+    callBack,
+}));
 
 // 상품 단일 saga
 function* getProductInfoSaga({ payload: id }) {
@@ -29,20 +37,30 @@ function* getProductInfoSaga({ payload: id }) {
 }
 
 // 상품 단일 saga
-function* productInvoiceSaga({ payload: { id, data } }) {
+function* productInvoiceSaga({ payload: { id, data, callBack } }) {
     try {
         const response = yield call(productAPI.invoice, { id, data });
         yield put({ type: PRODUCT_INVOICE_SUCCESS, payload: response.data });
+        if (callBack instanceof Function) {
+            callBack({
+                result: true,
+            });
+        }
     } catch (e) {
         yield put({ type: PRODUCT_INVOICE_FAILURE, payload: e });
     }
 }
 
 //상품 결제 saga
-function* productPeymentSaga({ payload: { id, status } }) {
+function* productPeymentSaga({ payload: { id, status, callBack } }) {
     try {
         const response = yield call(productAPI.payment, { id, status });
         yield put({ type: PRODUCT_PAYMENT_SUCCESS, payload: response.data });
+        if (callBack instanceof Function) {
+            callBack({
+                result: true,
+            });
+        }
     } catch (e) {
         yield put({ type: PRODUCT_PAYMENT_FAILURE, payload: e });
     }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { getMemberInfoAction } from 'store/member';
 import { porductInvoiceAction } from 'store/product';
 import { UpdateInvoiceWrap } from 'styles/MypageStyles';
 import { Courier } from '../../containers/apply/courier';
@@ -17,9 +18,19 @@ const UpdateInvoice = ({ handlePopup }) => {
         });
     };
     const handleUpdateInvoise = () => {
-        dispatch(porductInvoiceAction({ id: product.id, data: updateInvoice }));
+        // localStorage에 있는 회원 정보를 가져온다.
+        const currentUser = localStorage.getItem('currentUser');
+        // 운송장번호를 Insert 하고, callBack으로 order를 다시 불러온다.
+        dispatch(
+            porductInvoiceAction({
+                id: product.id,
+                data: updateInvoice,
+                callBack: () => {
+                    dispatch(getMemberInfoAction(JSON.parse(currentUser).id));
+                },
+            })
+        );
         handlePopup();
-        // window.location.href = '/mypage';
     };
     if (!product) return null;
     return (
