@@ -37,15 +37,23 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const MypageComponent = ({ member, handlePopup, updatePopup, handleProductInfo, paymentPopup, handlePaymentInfo }) => {
+const MypageComponent = ({
+    member,
+    handleUpdatePopup,
+    handlePaymentPopup,
+    updatePopup,
+    handleProductInfo,
+    paymentPopup,
+    handlePaymentInfo,
+}) => {
     const classes = useStyles();
     if (!member) {
         return null;
     }
     return (
         <Responsive>
-            {updatePopup === true ? <UpdateInvoice handlePopup={handlePopup} updatePopup={updatePopup} /> : null}
-            {paymentPopup === true ? <PaymentPopup handlePopup={handlePopup} /> : null}
+            {updatePopup === true ? <UpdateInvoice handlePopup={handleUpdatePopup} updatePopup={updatePopup} /> : null}
+            {paymentPopup === true ? <PaymentPopup handlePopup={handlePaymentPopup} /> : null}
             <MypageContent>
                 {/* <Button variant="contained" color="primary">
                     내정보 수정

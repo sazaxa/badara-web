@@ -10,8 +10,11 @@ const MypageContainer = () => {
     const [updatePopup, setUpdatePopup] = useState(false);
     const [paymentPopup, setPaymentPopup] = useState(false);
 
-    const handlePopup = () => {
+    const handleUpdatePopup = () => {
         setUpdatePopup(!updatePopup);
+    };
+
+    const handlePaymentPopup = () => {
         setPaymentPopup(!paymentPopup);
     };
 
@@ -39,11 +42,12 @@ const MypageContainer = () => {
     return (
         <MypageComponent
             member={member}
-            handlePopup={handlePopup}
+            handleUpdatePopup={handleUpdatePopup}
             updatePopup={updatePopup}
             handleProductInfo={handleProductInfo}
             handlePaymentInfo={handlePaymentInfo}
             paymentPopup={paymentPopup}
+            handlePaymentPopup={handlePaymentPopup}
         />
     );
 };

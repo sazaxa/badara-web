@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { porductInvoiceAction } from 'store/product';
-import styled from 'styled-components';
 import { UpdateInvoiceWrap } from 'styles/MypageStyles';
 import { Courier } from '../../containers/apply/courier';
 
-const UpdateInvoice = ({ handlePopup, updatePopup }) => {
+const UpdateInvoice = ({ handlePopup }) => {
     const dispatch = useDispatch();
     const { product } = useSelector(state => state.product);
     const [updateInvoice, setUpdateInvoice] = useState('');
@@ -17,11 +16,10 @@ const UpdateInvoice = ({ handlePopup, updatePopup }) => {
             [name]: value,
         });
     };
-    console.log(updateInvoice);
     const handleUpdateInvoise = () => {
         dispatch(porductInvoiceAction({ id: product.id, data: updateInvoice }));
         handlePopup();
-        window.location.href = '/mypage';
+        // window.location.href = '/mypage';
     };
     if (!product) return null;
     return (

@@ -12,7 +12,7 @@ const [PRODUCT_INVOICE_REQUEST, PRODUCT_INVOICE_SUCCESS, PRODUCT_INVOICE_FAILURE
 );
 //상품 결제완료 Action Types
 const [PRODUCT_PAYMENT_REQUEST, PRODUCT_PAYMENT_SUCCESS, PRODUCT_PAYMENT_FAILURE] = createRequestActionTypes(
-    'product/PRODUCT_INVOICE'
+    'product/PRODUCT_PAYMENT'
 );
 export const getProductInfoAction = createAction(GET_PRODUCT_REQUEST, id => id);
 export const porductInvoiceAction = createAction(PRODUCT_INVOICE_REQUEST, ({ id, data }) => ({ id, data }));
@@ -32,13 +32,13 @@ function* getProductInfoSaga({ payload: id }) {
 function* productInvoiceSaga({ payload: { id, data } }) {
     try {
         const response = yield call(productAPI.invoice, { id, data });
-        yield put({ type: GET_PRODUCT_SUCCESS, payload: response.data });
+        yield put({ type: PRODUCT_INVOICE_SUCCESS, payload: response.data });
     } catch (e) {
-        yield put({ type: GET_PRODUCT_FAILURE, payload: e });
+        yield put({ type: PRODUCT_INVOICE_FAILURE, payload: e });
     }
 }
 
-// 상품 단일 saga
+//상품 결제 saga
 function* productPeymentSaga({ payload: { id, status } }) {
     try {
         const response = yield call(productAPI.payment, { id, status });
