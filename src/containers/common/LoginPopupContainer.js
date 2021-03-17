@@ -3,8 +3,6 @@ import { LoginPopupComponent } from 'components';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAction } from 'store/auth';
 import { withRouter } from 'react-router-dom';
-import { loadUser } from 'index';
-import { getMemberInfoAction } from 'store/member';
 
 const LoginPopupContainer = ({ close, location }) => {
     const dispatch = useDispatch();

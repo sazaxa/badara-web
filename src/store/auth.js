@@ -38,7 +38,7 @@ function* adminLoginSaga({ payload: { email, password } }) {
         const response = yield call(authAPI.adminLogin, { email, password });
         yield put({ type: LOGIN_SUCCESS, payload: response.data });
         localStorage.setItem('accessToken', response.data.accessToken);
-        window.location.href = '/admin';
+        window.location.href = '/admin/user';
     } catch (e) {
         yield put({ type: LOGIN_FAILURE, payload: e });
     }

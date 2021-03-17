@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { AdminHeaderContent } from 'styles/CommonStyles';
 
-const AdminHeaderComponent = ({ location }) => {
+const AdminHeaderComponent = ({ location, handleLogout }) => {
     const { pathname } = location;
     return (
         <AdminHeaderContent>
@@ -24,6 +24,9 @@ const AdminHeaderComponent = ({ location }) => {
                         <Link to="/admin/insert">배송비 등록</Link>
                     </li>
                 </ul>
+                <button type="button" onClick={handleLogout}>
+                    로그아웃
+                </button>
             </article>
         </AdminHeaderContent>
     );

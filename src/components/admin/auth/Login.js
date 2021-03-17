@@ -25,9 +25,9 @@ const Login = ({ history }) => {
         // console.log(loginData.email);
         dispatch(adminLoginAction({ email: loginData.email, password: loginData.password }));
     };
-    if (logged) {
-        history.push('/admin/user');
-    }
+    // if (logged === true) {
+    //     history.push('/admin/user');
+    // }
     return (
         <LoginWrap>
             <h2>관리자 로그인</h2>

@@ -20,12 +20,14 @@ export const [GET_ADMIN_CHECK_REQUEST, GET_ADMIN_CHECK_SUCCESS, GET_ADMIN_CHECK_
     'admin/CHECK'
 );
 export const LOGOUT = 'auth/LOGOUT';
+export const [ADMIN_LOGOUT, ADMIN_LOGOUT_SUCCESS, ADMIN_LOGOUT_FAILURE] = createRequestActionTypes('auth/ADMIN_LOGOUT');
 
 export const getMemberListAction = createAction(GET_MEMBER_LIST_REQUEST);
 export const getMemberInfoAction = createAction(GET_MEMBER_INFO_REQUEST, id => id);
 export const getMemberCheckAction = createAction(GET_MEMBER_CHECK_REQUEST);
 export const getAdminCheckAction = createAction(GET_ADMIN_CHECK_REQUEST);
 export const logoutAction = createAction(LOGOUT);
+export const adminLogoutAction = createAction(ADMIN_LOGOUT);
 
 function* getMemberListSaga() {
     // 회원 목록 로직.
@@ -67,10 +69,11 @@ function* adminCheckSaga() {
     try {
         const response = yield call(authAPI.adminCheck);
         yield put({ type: GET_ADMIN_CHECK_SUCCESS, payload: response.data });
+        window.location.href = '/admin/user';
     } catch (e) {
         yield put({ type: GET_ADMIN_CHECK_FAILURE, payload: e });
         localStorage.removeItem('accessToken');
-        window.location.href = '/admin';
+        // window.location.href = '/admin';
     }
 }
 
@@ -86,12 +89,25 @@ function* logoutSaga() {
     }
 }
 
+function* adminLogoutSaga() {
+    try {
+        yield delay(100);
+        localStorage.removeItem('accessToken');
+        yield put({ type: ADMIN_LOGOUT_SUCCESS });
+        // window.location.href = '/';
+    } catch (e) {
+        yield put({ type: ADMIN_LOGOUT_SUCCESS, payload: e });
+        console.debug(e);
+    }
+}
+
 export function* memberSaga() {
     yield takeLatest(GET_MEMBER_LIST_REQUEST, getMemberListSaga);
     yield takeLatest(GET_MEMBER_INFO_REQUEST, getMemberInfoSaga);
     yield takeLatest(GET_MEMBER_CHECK_REQUEST, checkSaga);
     yield takeLatest(GET_ADMIN_CHECK_REQUEST, adminCheckSaga);
     yield takeLatest(LOGOUT, logoutSaga);
+    yield takeLatest(ADMIN_LOGOUT, adminLogoutSaga);
 }
 
 const initialState = {
@@ -165,6 +181,16 @@ export default handleActions(
             return produce(state, draft => {
                 draft.adminInfo.error = payload;
                 draft.adminInfo.logged = initialState;
+            });
+        },
+        [ADMIN_LOGOUT_SUCCESS]: state => {
+            return produce(state, draft => {
+                draft.adminInfo.logged = false;
+            });
+        },
+        [ADMIN_LOGOUT_FAILURE]: (state, { payload }) => {
+            return produce(state, draft => {
+                draft.adminInfo.error = payload;
             });
         },
     },
