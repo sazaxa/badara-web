@@ -15,11 +15,16 @@ export const [GET_MEMBER_INFO_REQUEST, GET_MEMBER_INFO_SUCCESS, GET_MEMBER_INFO_
 export const [GET_MEMBER_CHECK_REQUEST, GET_MEMBER_CHECK_SUCCESS, GET_MEMBER_CHECK_FAILURE] = createRequestActionTypes(
     'user/CHECK'
 );
+
+export const [GET_ADMIN_CHECK_REQUEST, GET_ADMIN_CHECK_SUCCESS, GET_ADMIN_CHECK_FAILURE] = createRequestActionTypes(
+    'admin/CHECK'
+);
 export const LOGOUT = 'auth/LOGOUT';
 
 export const getMemberListAction = createAction(GET_MEMBER_LIST_REQUEST);
 export const getMemberInfoAction = createAction(GET_MEMBER_INFO_REQUEST, id => id);
 export const getMemberCheckAction = createAction(GET_MEMBER_CHECK_REQUEST);
+export const getAdminCheckAction = createAction(GET_ADMIN_CHECK_REQUEST);
 export const logoutAction = createAction(LOGOUT);
 
 function* getMemberListSaga() {
@@ -53,6 +58,19 @@ function* checkSaga() {
     } catch (e) {
         yield put({ type: GET_MEMBER_CHECK_FAILURE, payload: e });
         localStorage.removeItem('accessToken');
+        // window.location.href = '/';
+    }
+}
+
+// 토큰값으로 관리자 확인하기.
+function* adminCheckSaga() {
+    try {
+        const response = yield call(authAPI.adminCheck);
+        yield put({ type: GET_ADMIN_CHECK_SUCCESS, payload: response.data });
+    } catch (e) {
+        yield put({ type: GET_ADMIN_CHECK_FAILURE, payload: e });
+        localStorage.removeItem('accessToken');
+        window.location.href = '/admin';
     }
 }
 
@@ -72,6 +90,7 @@ export function* memberSaga() {
     yield takeLatest(GET_MEMBER_LIST_REQUEST, getMemberListSaga);
     yield takeLatest(GET_MEMBER_INFO_REQUEST, getMemberInfoSaga);
     yield takeLatest(GET_MEMBER_CHECK_REQUEST, checkSaga);
+    yield takeLatest(GET_ADMIN_CHECK_REQUEST, adminCheckSaga);
     yield takeLatest(LOGOUT, logoutSaga);
 }
 
@@ -129,6 +148,16 @@ export default handleActions(
             });
         },
         [GET_MEMBER_CHECK_FAILURE]: (state, { payload }) => {
+            return produce(state, draft => {
+                draft.loggedInfo.error = payload;
+            });
+        },
+        [GET_ADMIN_CHECK_SUCCESS]: (state, { payload }) => {
+            return produce(state, draft => {
+                draft.loggedInfo.logged = payload;
+            });
+        },
+        [GET_ADMIN_CHECK_FAILURE]: (state, { payload }) => {
             return produce(state, draft => {
                 draft.loggedInfo.error = payload;
             });

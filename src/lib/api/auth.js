@@ -24,3 +24,13 @@ export const users = () => {
 export const userOrders = id => {
     return client.get(`/api/v1/members/${id}/order`);
 };
+
+//관리자 로그인 체크
+export const adminCheck = () => {
+    return client.get('/api/v1/auth/current/admin');
+};
+
+// 관리자 로그인
+export const adminLogin = (email, password) => {
+    return client.post('/api/v1/auth/signin/admin', email, password);
+};

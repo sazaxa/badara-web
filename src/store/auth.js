@@ -5,9 +5,16 @@ import * as authAPI from '../lib/api/auth';
 import produce from 'immer';
 
 export const [LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE] = createRequestActionTypes('auth/LOGIN');
+export const [ADMIN_LOGIN, ADMIN_LOGIN_SUCCESS, ADMIN_LOGIN_FAILURE] = createRequestActionTypes('auth/ADMIN_LOGIN');
 export const [REGISTER_REQUEST, REGISTER_SUCCESS, REIGSTER_FAILURE] = createRequestActionTypes('auth/REGISER');
 export const CLEAR_STORE = 'auth/CLEAR_STORE';
+
 export const loginAction = createAction(LOGIN_REQUEST, ({ email, password }) => ({
+    email,
+    password,
+}));
+
+export const adminLoginAction = createAction(ADMIN_LOGIN, ({ email, password }) => ({
     email,
     password,
 }));
@@ -26,6 +33,17 @@ function* loginSaga({ payload: { email, password } }) {
     }
 }
 
+function* adminLoginSaga({ payload: { email, password } }) {
+    try {
+        const response = yield call(authAPI.adminLogin, { email, password });
+        yield put({ type: LOGIN_SUCCESS, payload: response.data });
+        localStorage.setItem('accessToken', response.data.accessToken);
+        window.location.href = '/admin';
+    } catch (e) {
+        yield put({ type: LOGIN_FAILURE, payload: e });
+    }
+}
+
 function* registerSaga({ payload: data }) {
     try {
         const response = yield call(authAPI.register, data);
@@ -38,6 +56,7 @@ function* registerSaga({ payload: data }) {
 export function* authSaga() {
     yield takeLatest(LOGIN_REQUEST, loginSaga);
     yield takeLatest(REGISTER_REQUEST, registerSaga);
+    yield takeLatest(ADMIN_LOGIN, adminLoginSaga);
 }
 
 const initialState = {
@@ -47,6 +66,7 @@ const initialState = {
     },
     login: {
         status: 'idle',
+        role: null,
         auth: null,
     },
 };
@@ -78,10 +98,29 @@ export default handleActions(
         [LOGIN_SUCCESS]: (state, { payload }) => {
             return produce(state, draft => {
                 draft.login.status = 'success';
+                draft.login.role = 'user';
                 draft.login.auth = payload;
             });
         },
         [LOGIN_FAILURE]: (state, { payload }) => {
+            return produce(state, draft => {
+                draft.login.status = 'fail';
+                draft.login.auth = payload;
+            });
+        },
+        [ADMIN_LOGIN]: state => {
+            return produce(state, draft => {
+                draft.login.status = 'loading';
+            });
+        },
+        [ADMIN_LOGIN_SUCCESS]: (state, { payload }) => {
+            return produce(state, draft => {
+                draft.login.status = 'success';
+                draft.login.role = 'admin';
+                draft.login.auth = payload;
+            });
+        },
+        [ADMIN_LOGIN_FAILURE]: (state, { payload }) => {
             return produce(state, draft => {
                 draft.login.status = 'fail';
                 draft.login.auth = payload;

@@ -20,18 +20,20 @@ import {
 import { FooterComponent } from 'components';
 import { HeaderContainer, AdminHeaderContainer } from 'containers';
 import { getCountryAction } from 'store/part';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AdminUserDetailPage from 'pages/admin/AdminUserDetailPage';
-import { getMemberCheckAction } from 'store/member';
+import { getAdminCheckAction, getMemberCheckAction } from 'store/member';
 
-function App({ location }) {
+function App({ location, history }) {
     const dispatch = useDispatch();
-
     const token = localStorage.getItem('accessToken');
     // localStronge에 토큰값이 있으면 token check
     useEffect(() => {
         if (token) {
             dispatch(getMemberCheckAction());
+        }
+        if (pathname.startsWith(BASE_ADMIN_URL)) {
+            dispatch(getAdminCheckAction());
         }
     }, [token]);
 
