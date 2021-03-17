@@ -107,6 +107,10 @@ const initialState = {
         logged: null,
         error: null,
     },
+    adminInfo: {
+        logged: false,
+        error: null,
+    },
 };
 
 export default handleActions(
@@ -154,12 +158,13 @@ export default handleActions(
         },
         [GET_ADMIN_CHECK_SUCCESS]: (state, { payload }) => {
             return produce(state, draft => {
-                draft.loggedInfo.logged = payload;
+                draft.adminInfo.logged = payload;
             });
         },
         [GET_ADMIN_CHECK_FAILURE]: (state, { payload }) => {
             return produce(state, draft => {
-                draft.loggedInfo.error = payload;
+                draft.adminInfo.error = payload;
+                draft.adminInfo.logged = initialState;
             });
         },
     },

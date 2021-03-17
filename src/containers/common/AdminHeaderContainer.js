@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router';
 
 const AdminHeaderContainer = ({ history }) => {
-    const { logged } = useSelector(state => state.member.loggedInfo);
+    const { logged } = useSelector(state => state.member.adminInfo);
     useEffect(() => {
         if (logged === false) {
             alert('관리자만 접근 가능합니다.');

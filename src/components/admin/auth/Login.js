@@ -11,7 +11,7 @@ const Login = ({ history }) => {
         email: '',
         password: '',
     });
-    const { logged } = useSelector(state => state.member.loggedInfo);
+    const { logged } = useSelector(state => state.member.adminInfo);
     const dispatch = useDispatch();
     const handleChange = e => {
         const { name, value } = e.target;
@@ -25,7 +25,9 @@ const Login = ({ history }) => {
         // console.log(loginData.email);
         dispatch(adminLoginAction({ email: loginData.email, password: loginData.password }));
     };
-
+    if (logged) {
+        history.push('/admin/user');
+    }
     return (
         <LoginWrap>
             <h2>관리자 로그인</h2>
