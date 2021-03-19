@@ -1,8 +1,8 @@
-import Login from 'components/admin/auth/Login';
+import { AdminLoginContainer } from 'containers/index';
 import React from 'react';
 
 const AdminLoginPage = () => {
-    return <Login />;
+    return <AdminLoginContainer />;
 };
 
 export default AdminLoginPage;

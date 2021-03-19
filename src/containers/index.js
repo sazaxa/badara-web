@@ -20,3 +20,4 @@ export { default as ApplyListContainer } from './apply/ApplyListContainer';
 export { default as MainContentContainer } from './main/MainContentContainer';
 export { default as MypageContainer } from './mypage/MypageContainer';
 export { default as AdminUserContainer } from './admin/user/AdminUserContainer';
+export { default as AdminLoginContainer } from './admin/auth/Login';
