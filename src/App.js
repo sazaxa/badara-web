@@ -20,27 +20,19 @@ import {
 import { FooterComponent } from 'components';
 import { HeaderContainer, AdminHeaderContainer } from 'containers';
 import { getCountryAction } from 'store/part';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import AdminUserDetailPage from 'pages/admin/AdminUserDetailPage';
-import { getAdminCheckAction, getMemberCheckAction } from 'store/member';
+import { getMemberCheckAction } from 'store/member';
 
-function App({ location, history }) {
+function App({ location }) {
     const dispatch = useDispatch();
-    const { logged } = useSelector(state => state.member.adminInfo);
     const token = localStorage.getItem('accessToken');
-    const tokenAdmin = localStorage.getItem('accessTokenAdmin');
     // localStronge에 토큰값이 있으면 token check
     useEffect(() => {
         if (token) {
             dispatch(getMemberCheckAction());
         }
     }, [token]);
-
-    useEffect(() => {
-        if (logged === false && pathname.startsWith(BASE_ADMIN_URL)) {
-            dispatch(getAdminCheckAction());
-        }
-    }, []);
 
     // 최초 로딩시 계산기 나라목록 가져오기.
     useEffect(() => {

@@ -45,6 +45,7 @@ function* adminLoginSaga({ payload: { email, password } }) {
             localStorage.removeItem('accessToken');
         }
         localStorage.setItem('accessTokenAdmin', response.data.accessToken);
+        window.location.href = '/admin/user';
     } catch (e) {
         console.log(e);
         yield put({ type: ADMIN_LOGIN_FAILURE, payload: e });
