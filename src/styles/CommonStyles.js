@@ -96,14 +96,14 @@ export const FooterContent = styled.article`
 
 export const HeaderWrap = styled.section`
     width: 100%;
-    height: 80px;
+    height: 110px;
     border-bottom: 1px solid #eee;
     background: #fff;
 `;
 
 export const HeaderContent = styled.header`
     width: 1140px;
-    height: 80px;
+    height: 110px;
     margin: 0 auto;
     display: flex;
     justify-content: start;
@@ -151,6 +151,12 @@ export const HeaderContent = styled.header`
         right: 20px;
         font-size: 35px;
         cursor: pointer;
+    }
+    p.username {
+        position: absolute;
+        right: 0;
+        bottom: 10px;
+        letter-spacing: -1px;
     }
 `;
 
