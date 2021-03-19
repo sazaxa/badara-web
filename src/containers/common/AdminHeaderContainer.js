@@ -26,7 +26,6 @@ const AdminHeaderContainer = ({ history }) => {
         }
         if (error) {
             alert('관리자만 이용 할수 있습니다.');
-            window.location.href = '/admin';
         }
     }, [isAdmin]);
 

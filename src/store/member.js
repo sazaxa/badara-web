@@ -73,6 +73,7 @@ function* adminCheckSaga() {
     } catch (e) {
         yield put({ type: GET_ADMIN_CHECK_FAILURE, payload: e });
         localStorage.removeItem('accessTokenAdmin');
+        window.location.href = '/admin';
     }
 }
 
