@@ -25,6 +25,12 @@ const Login = () => {
         });
     };
 
+    const onKeyPress = e => {
+        if (e.key === 'Enter') {
+            handleSubmit();
+        }
+    };
+
     const handleSubmit = () => {
         // console.log(loginData.email);
         if ((loginData.email, loginData.password === '')) {
@@ -45,7 +51,14 @@ const Login = () => {
             });
         }
     }, [isAdmin, status]);
-    return <AdminLogin loginData={loginData} handleChange={handleChange} handleSubmit={handleSubmit} />;
+    return (
+        <AdminLogin
+            loginData={loginData}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+            onKeyPress={onKeyPress}
+        />
+    );
 };
 
 export default Login;

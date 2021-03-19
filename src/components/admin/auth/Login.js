@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import { LoginWrap } from 'styles/AdminPagesStyle';
 import { withRouter } from 'react-router';
 
-const Login = ({ loginData, handleChange, handleSubmit }) => {
+const Login = ({ loginData, handleChange, handleSubmit, onKeyPress }) => {
     return (
         <LoginWrap>
             <h2>관리자 로그인</h2>
@@ -15,6 +15,7 @@ const Login = ({ loginData, handleChange, handleSubmit }) => {
                     variant="outlined"
                     onChange={e => handleChange(e)}
                     value={loginData.email}
+                    onKeyPress={onKeyPress}
                 />
                 <TextField
                     label="비밀번호"
@@ -23,6 +24,7 @@ const Login = ({ loginData, handleChange, handleSubmit }) => {
                     type="password"
                     onChange={e => handleChange(e)}
                     value={loginData.password}
+                    onKeyPress={onKeyPress}
                 />
                 <Button variant="contained" color="primary" type="button" onClick={handleSubmit}>
                     로그인
