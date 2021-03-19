@@ -19,8 +19,6 @@ const UpdateInvoice = ({ handlePopup }) => {
         });
     };
     const handleUpdateInvoise = () => {
-        // localStorage에 있는 회원 정보를 가져온다.
-        const currentUser = localStorage.getItem('currentUser');
         // 운송장번호를 Insert 하고, callBack으로 order를 다시 불러온다.
         dispatch(
             porductInvoiceAction({
