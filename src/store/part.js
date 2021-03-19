@@ -134,7 +134,7 @@ export default handleActions(
         [GET_COUNTRY_SUCCESS]: (state, { payload }) => {
             return produce(state, draft => {
                 draft.country.status = 'success';
-                draft.country.list = payload;
+                draft.country.list = payload.sort();
             });
         },
         [GET_COUNTRY_FAILURE]: state => {
