@@ -17,7 +17,6 @@ const HeaderComponent = ({
     HandleLogout,
     loggedUser,
 }) => {
-    if (!loggedUser) return null;
     return (
         <>
             {LoginPopup === true && <LoginPopupContainer close={() => HandleLoginPopup(false)} />}
@@ -46,7 +45,7 @@ const HeaderComponent = ({
                         <>
                             <AccountCircleIcon onClick={HandleMenuClick} />
                             <p className="username">
-                                <strong>{loggedUser.name}</strong> 님
+                                <strong>{loggedUser ? loggedUser.name : null}</strong> 님
                             </p>
                             <Menu
                                 id="simple-menu"
