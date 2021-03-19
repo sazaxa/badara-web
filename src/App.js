@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { Route, withRouter } from 'react-router-dom';
 
@@ -37,7 +38,6 @@ function App({ location }) {
     // 최초 로딩시 계산기 나라목록 가져오기.
     useEffect(() => {
         dispatch(getCountryAction());
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     //   console.log('location : ', location);
     const { pathname } = location;
