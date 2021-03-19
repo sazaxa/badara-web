@@ -34,7 +34,7 @@ const CalculatorComponent = ({
                         <h4>나라 선택</h4>
                     </div>
                     <div className="content">
-                        <select name="country" onChange={OnChange}>
+                        <select name="country" onChange={OnChange} value={Material.country}>
                             <option value="">나라선택</option>
                             {CountryLists.map(v => {
                                 return (
@@ -52,11 +52,23 @@ const CalculatorComponent = ({
                         <p>(단위:cm)</p>
                     </div>
                     <div className="content material">
-                        <input type="text" name="width" onChange={OnChange} placeholder="가로" />
+                        <input type="text" name="width" onChange={OnChange} placeholder="가로" value={Material.width} />
                         <span>X</span>
-                        <input type="text" name="vertical" onChange={OnChange} placeholder="세로" />
+                        <input
+                            type="text"
+                            name="vertical"
+                            onChange={OnChange}
+                            placeholder="세로"
+                            value={Material.vertical}
+                        />
                         <span>X</span>
-                        <input type="text" name="height" onChange={OnChange} placeholder="높이" />
+                        <input
+                            type="text"
+                            name="height"
+                            onChange={OnChange}
+                            placeholder="높이"
+                            value={Material.height}
+                        />
                         <button type="button" onClick={OnClickVolume}>
                             계산하기
                         </button>
@@ -65,7 +77,7 @@ const CalculatorComponent = ({
                 <div className="wrap">
                     <div className="title">
                         <h4>부피 무게</h4>
-                        <p>(단위:g)</p>
+                        <p>(단위:kg)</p>
                     </div>
                     <div className="content">
                         <input
@@ -73,36 +85,44 @@ const CalculatorComponent = ({
                             name="volume"
                             disabled
                             onChange={OnChange}
-                            placeholder={Material.volume ? Material.volume + 'g' : '부피무게'}
+                            placeholder={Material.volume ? Material.volume + 'kg' : '부피무게'}
                         />
                     </div>
                 </div>
                 <div className="wrap">
                     <div className="title">
                         <h4>실 무게</h4>
-                        <p>(단위:g)</p>
+                        <p>(단위:kg)</p>
                     </div>
                     <div className="content">
-                        <input type="text" name="actual" onChange={OnChange} placeholder="실 무게" />
+                        <input
+                            type="text"
+                            name="actual"
+                            onChange={OnChange}
+                            placeholder="실 무게"
+                            value={Material.actual}
+                        />
                     </div>
                 </div>
                 <div className={PriseOpen ? 'wrap prisebtn' : 'wrap prisebtn show'}>
                     <button type="button" onClick={OnClickWeight}>
                         예상가격 구하기
                     </button>
+                    <p>(예상가격은 부피무게와 실무게 중 무거운 것으로 측정되어 표기됩니다.)</p>
                 </div>
                 <article className={PriseOpen ? 'priseWrap show' : 'priseWrap'}>
                     <div className="wrap">
                         <div className="title">
                             <h4>예상가격</h4>
-                            <p>(단위:달러($))</p>
+                            <p>(단위:원(₩))</p>
                         </div>
                         <div className="content">
                             <input
                                 type="text"
                                 disabled
-                                placeholder={PredictionPrime ? PredictionPrime + '$' : '예상가격'}
+                                placeholder={PredictionPrime ? PredictionPrime + '원' : '예상가격'}
                             />
+                            <span>({Material.selected === 'volume' ? '부피 무게' : '실 무게'})</span>
                             <button type="button" className="resetBtn" onClick={OnReset}>
                                 리셋
                             </button>

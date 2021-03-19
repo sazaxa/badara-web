@@ -134,6 +134,12 @@ export const CalculatorWrap = styled.article`
     .wrap.prisebtn > .title {
         background: #fff;
     }
+    .wrap.prisebtn p {
+        text-align: center;
+        margin-top: 20px;
+        font-weight: 600;
+        color: red;
+    }
     .prisebtn > .content {
         display: flex;
         height: 60px;

@@ -17,6 +17,7 @@ const CalculatorContainer = () => {
         actual: '',
         country: '',
         weight: '',
+        selected: '',
     });
     const { list, status } = country;
 
@@ -68,6 +69,10 @@ const CalculatorContainer = () => {
                     weight: volume,
                 })
             );
+            setMaterial({
+                ...material,
+                selected: 'volume',
+            });
             setPriseOpen(true);
         } else if (volume < actual) {
             dispatch(
@@ -76,13 +81,26 @@ const CalculatorContainer = () => {
                     weight: actual,
                 })
             );
+            setMaterial({
+                ...material,
+                selected: 'actual',
+            });
             setPriseOpen(true);
         }
     };
 
     const onReset = () => {
         setPriseOpen(false);
-        console.log(priseOpen);
+        setMaterial({
+            width: '',
+            vertical: '',
+            height: '',
+            volume: '',
+            actual: '',
+            country: '',
+            weight: '',
+            selected: '',
+        });
     };
     return (
         <CalculatorComponent
