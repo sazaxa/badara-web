@@ -16,16 +16,16 @@ export const [GET_MEMBER_CHECK_REQUEST, GET_MEMBER_CHECK_SUCCESS, GET_MEMBER_CHE
     'user/CHECK'
 );
 
-// export const [GET_ADMIN_CHECK_REQUEST, GET_ADMIN_CHECK_SUCCESS, GET_ADMIN_CHECK_FAILURE] = createRequestActionTypes(
-//     'admin/CHECK'
-// );
+export const [GET_ADMIN_CHECK_REQUEST, GET_ADMIN_CHECK_SUCCESS, GET_ADMIN_CHECK_FAILURE] = createRequestActionTypes(
+    'admin/CHECK'
+);
 export const LOGOUT = 'auth/LOGOUT';
 export const [ADMIN_LOGOUT, ADMIN_LOGOUT_SUCCESS, ADMIN_LOGOUT_FAILURE] = createRequestActionTypes('auth/ADMIN_LOGOUT');
 
 export const getMemberListAction = createAction(GET_MEMBER_LIST_REQUEST);
 export const getMemberInfoAction = createAction(GET_MEMBER_INFO_REQUEST, id => id);
 export const getMemberCheckAction = createAction(GET_MEMBER_CHECK_REQUEST);
-// export const getAdminCheckAction = createAction(GET_ADMIN_CHECK_REQUEST);
+export const getAdminCheckAction = createAction(GET_ADMIN_CHECK_REQUEST);
 export const logoutAction = createAction(LOGOUT);
 export const adminLogoutAction = createAction(ADMIN_LOGOUT);
 
@@ -65,18 +65,16 @@ function* checkSaga() {
 }
 
 // 토큰값으로 관리자 확인하기.
-// function* adminCheckSaga() {
-//     try {
-//         const response = yield call(authAPI.adminCheck);
-//         yield put({ type: GET_ADMIN_CHECK_SUCCESS, payload: response.data });
-//         localStorage.setItem('Admin', response.data);
-//         // window.location.href = '/admin/user';
-//     } catch (e) {
-//         yield put({ type: GET_ADMIN_CHECK_FAILURE, payload: e });
-//         localStorage.removeItem('accessTokenAdmin');
-//         // window.location.href = '/admin';
-//     }
-// }
+function* adminCheckSaga() {
+    try {
+        const response = yield call(authAPI.adminCheck);
+        yield put({ type: GET_ADMIN_CHECK_SUCCESS, payload: response.data });
+        // window.location.href = '/admin/user';
+    } catch (e) {
+        yield put({ type: GET_ADMIN_CHECK_FAILURE, payload: e });
+        localStorage.removeItem('accessTokenAdmin');
+    }
+}
 
 // 로그아웃 토큰값 삭제, user store 초기화.
 function* logoutSaga() {
@@ -106,7 +104,7 @@ export function* memberSaga() {
     yield takeLatest(GET_MEMBER_LIST_REQUEST, getMemberListSaga);
     yield takeLatest(GET_MEMBER_INFO_REQUEST, getMemberInfoSaga);
     yield takeLatest(GET_MEMBER_CHECK_REQUEST, checkSaga);
-    // yield takeLatest(GET_ADMIN_CHECK_REQUEST, adminCheckSaga);
+    yield takeLatest(GET_ADMIN_CHECK_REQUEST, adminCheckSaga);
     yield takeLatest(LOGOUT, logoutSaga);
     yield takeLatest(ADMIN_LOGOUT, adminLogoutSaga);
 }
@@ -178,12 +176,12 @@ export default handleActions(
         //         draft.adminInfo.logged = payload;
         //     });
         // },
-        // [GET_ADMIN_CHECK_FAILURE]: (state, { payload }) => {
-        //     return produce(state, draft => {
-        //         draft.adminInfo.error = payload;
-        //         draft.adminInfo.logged = initialState.adminInfo.looged;
-        //     });
-        // },
+        [GET_ADMIN_CHECK_FAILURE]: (state, { payload }) => {
+            return produce(state, draft => {
+                draft.adminInfo.error = payload;
+                draft.adminInfo.logged = initialState.adminInfo.looged;
+            });
+        },
         [ADMIN_LOGOUT_SUCCESS]: state => {
             return produce(state, draft => {
                 draft.adminInfo.logged = false;

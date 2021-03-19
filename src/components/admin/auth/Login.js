@@ -19,7 +19,7 @@ const Login = ({ history }) => {
         shallowEqual
     );
 
-    const isAdmin = localStorage.getItem('acessTokenAdmin');
+    const isAdmin = localStorage.getItem('accessTokenAdmin');
     const dispatch = useDispatch();
     const handleChange = e => {
         const { name, value } = e.target;
@@ -40,8 +40,7 @@ const Login = ({ history }) => {
 
     useEffect(() => {
         if (isAdmin) {
-            alert('로그인이 성공하였습니다.');
-            // window.location.href = '/admin/user';
+            window.location.href = '/admin/user';
         } else if (status === 'fail') {
             alert('개발자에게 문의하세요.');
             setLoginData({
@@ -51,9 +50,6 @@ const Login = ({ history }) => {
         }
     }, [isAdmin, status]);
 
-    if (isAdmin) {
-        history.push('/admin/user');
-    }
     return (
         <LoginWrap>
             <h2>관리자 로그인</h2>
