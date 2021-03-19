@@ -9,14 +9,20 @@ import createSagaMiddleware from 'redux-saga';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import rootReducer, { rootSaga } from './store';
+import { createBrowserHistory } from 'history';
 
-const sagaMiddleWare = createSagaMiddleware();
+const customHistory = createBrowserHistory();
+const sagaMiddleWare = createSagaMiddleware({
+    context: {
+        history: customHistory,
+    },
+});
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleWare)));
 
 sagaMiddleWare.run(rootSaga);
 ReactDOM.render(
     <Provider store={store}>
-        <BrowserRouter>
+        <BrowserRouter history={customHistory}>
             <App />
         </BrowserRouter>
     </Provider>,

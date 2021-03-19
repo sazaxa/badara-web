@@ -82,7 +82,6 @@ function* logoutSaga() {
     try {
         yield delay(100);
         localStorage.removeItem('accessToken');
-        // localStorage.removeItem('currentUser');
         window.location.href = '/';
     } catch (e) {
         console.debug(e);
@@ -94,7 +93,7 @@ function* adminLogoutSaga() {
         yield delay(100);
         localStorage.removeItem('accessTokenAdmin');
         yield put({ type: ADMIN_LOGOUT_SUCCESS });
-        // window.location.href = '/';
+        window.location.href = '/admin';
     } catch (e) {
         yield put({ type: ADMIN_LOGOUT_SUCCESS, payload: e });
         console.debug(e);

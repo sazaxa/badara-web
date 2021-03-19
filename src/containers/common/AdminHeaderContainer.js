@@ -3,6 +3,7 @@ import { AdminHeaderComponent } from 'components/index';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router';
+import { clearStoreAction } from 'store/auth';
 import { adminLogoutAction } from 'store/member';
 
 const AdminHeaderContainer = ({ history }) => {
@@ -12,6 +13,11 @@ const AdminHeaderContainer = ({ history }) => {
     const handleLogout = () => {
         dispatch(adminLogoutAction());
     };
+
+    useEffect(() => {
+        // store 초기화
+        dispatch(clearStoreAction());
+    }, []);
     if (logged === false) {
         // alert('관리자만 이용가능합니다.');
         history.push('/admin');

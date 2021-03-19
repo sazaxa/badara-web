@@ -1,5 +1,5 @@
 import { createAction, handleActions } from 'redux-actions';
-import { takeLatest, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put, getContext } from 'redux-saga/effects';
 import { createRequestActionTypes } from 'lib/createRequestActionTypes';
 import * as authAPI from '../lib/api/auth';
 import produce from 'immer';
@@ -40,15 +40,14 @@ function* loginSaga({ payload: { email, password } }) {
 function* adminLoginSaga({ payload: { email, password } }) {
     try {
         const response = yield call(authAPI.adminLogin, { email, password });
-        yield put({ type: LOGIN_SUCCESS, payload: response.data });
+        yield put({ type: ADMIN_LOGIN_SUCCESS, payload: response.data });
         if (localStorage.getItem('accessToken')) {
             localStorage.removeItem('accessToken');
         }
         localStorage.setItem('accessTokenAdmin', response.data.accessToken);
-        window.location.href = '/admin/user';
     } catch (e) {
         console.log(e);
-        yield put({ type: LOGIN_FAILURE, payload: e });
+        yield put({ type: ADMIN_LOGIN_FAILURE, payload: e });
     }
 }
 
