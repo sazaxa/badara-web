@@ -16,6 +16,7 @@ export const CostTable = styled.table`
         border: 1px solid #ccc;
         height: 60px;
         text-align: center;
+        width: 50%;
     }
     & > thead {
         width: 100%;

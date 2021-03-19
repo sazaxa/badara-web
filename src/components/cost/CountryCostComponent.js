@@ -29,12 +29,17 @@ const CountryCostComponent = ({ list, onHandleSelectCountry, countryPrise }) => 
                     ) : null}
                 </thead>
                 <tbody>
-                    {countryPrise?.map(prise => (
-                        <tr key={prise.id}>
-                            <td>{prise.weight + 'g'}</td>
-                            <td>{prise.price + '$'}</td>
-                        </tr>
-                    ))}
+                    {countryPrise?.map(prise => {
+                        const Calculated = prise.price;
+                        return (
+                            <tr key={prise.id}>
+                                <td>{prise.weight + 'kg'}</td>
+                                <td>
+                                    <strong>{Math.floor(parseInt(Calculated)).toLocaleString()}</strong> 원
+                                </td>
+                            </tr>
+                        );
+                    })}
                 </tbody>
             </CostTable>
         </CountryWrap>
