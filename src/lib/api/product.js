@@ -11,5 +11,5 @@ export const invoice = ({ data, id }) => {
 };
 
 export const payment = ({ id, status }) => {
-    return client.put(`/api/v1/orders/payment/${id}`, status);
+    return client.put(`/api/v1/haporders/payment/${id}`, status);
 };
