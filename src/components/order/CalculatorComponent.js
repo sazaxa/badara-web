@@ -120,7 +120,11 @@ const CalculatorComponent = ({
                             <input
                                 type="text"
                                 disabled
-                                placeholder={PredictionPrime ? PredictionPrime + '원' : '예상가격'}
+                                placeholder={
+                                    PredictionPrime
+                                        ? Math.floor(parseInt(PredictionPrime)).toLocaleString() + '원'
+                                        : '예상가격'
+                                }
                             />
                             <span>({Material.selected === 'volume' ? '부피 무게' : '실 무게'})</span>
                             <button type="button" className="resetBtn" onClick={OnReset}>
