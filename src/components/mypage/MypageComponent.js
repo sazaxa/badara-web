@@ -121,7 +121,7 @@ const MypageComponent = ({
                                             <TableRow align="center">
                                                 <TableCell key={order.id} width="20%" align="center">
                                                     <p>
-                                                        <strong>상품 명 :</strong> {order.productName}
+                                                        <strong>상품 명 :</strong> {order.orderName}
                                                     </p>
                                                     <p>
                                                         <strong>회원 입력 부피 무게 :</strong>

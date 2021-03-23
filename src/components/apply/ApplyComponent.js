@@ -138,9 +138,9 @@ const ApplyComponent = ({
                             <article className="body">
                                 <input
                                     type="text"
-                                    name="productName"
+                                    name="orderName"
                                     onChange={HandleChange}
-                                    value={Material.productName}
+                                    value={Material.orderName}
                                     placeholder="한가지 상품만 입력하세요"
                                 />
                             </article>
