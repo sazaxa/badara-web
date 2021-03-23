@@ -168,8 +168,8 @@ export const LoginPopupWrap = styled.section`
     z-index: 1;
 `;
 export const LoginPopup = styled.article`
-    width: 500px;
-    height: 350px;
+    width: 600px;
+    height: 425px;
     background: #fff;
     position: absolute;
     top: 50%;
@@ -199,6 +199,7 @@ export const LoginPopup = styled.article`
         font-weight: 600;
         opacity: 0.8;
         margin-bottom: 10px;
+        box-shadow: none;
     }
     button:hover {
         background-color: #1976d2;
@@ -212,20 +213,47 @@ export const LoginPopup = styled.article`
     p.registerFont > a {
         color: #666;
     }
+    #loginBtn {
+        background: #0049ff;
+    }
+    #registerBtn {
+        background: #fff;
+        color: #0049ff;
+        border: 1px solid #0049ff;
+    }
+    .inputBox {
+        position: relative;
+        width: 100%;
+        border: 1px solid #0049ff;
+        margin-bottom: 30px;
+        border-radius: 5px;
+        overflow: hidden;
+        & > label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 12%;
+            height: 100%;
+            background: #0049ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+        }
+    }
 `;
 
 export const StyledInput = styled.input`
     width: 100%;
-    height: 48px;
+    height: 52px;
     box-sizing: border-box;
     border-radius: 5px;
-    padding: 10px;
+    padding-left: 14%;
     font-size: 16px;
-    border: 1px solid #ccc;
-    margin-bottom: 20px;
+    border: none;
     &:focus {
         outline: none;
-        border: 2px solid #1976d2;
+        border: 1px solid #0049ff;
     }
 `;
 
