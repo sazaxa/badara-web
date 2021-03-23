@@ -23,7 +23,7 @@ const ApplyContainer = ({ history }) => {
         country: '',
         userMemo: '',
         addProduct: false,
-        productName: '',
+        orderName: '',
         width: '',
         depth: '',
         height: '',
@@ -89,7 +89,7 @@ const ApplyContainer = ({ history }) => {
         } else if (material.recipientAddress === '') {
             alert('보내는 주소를 입력하세요.');
             return;
-        } else if (material.productName === '') {
+        } else if (material.orderName === '') {
             alert('상품명을 입력하세요.');
             return;
         } else if (material.country === '') {
@@ -132,7 +132,7 @@ const ApplyContainer = ({ history }) => {
             country: material.country,
             userMemo: '',
             addProduct: true,
-            productName: '',
+            orderName: '',
             width: '',
             depth: '',
             height: '',
