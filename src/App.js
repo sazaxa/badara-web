@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
-import { Route, withRouter } from 'react-router-dom';
+import { Redirect, Route, withRouter } from 'react-router-dom';
 
 import {
     AdminUserPage,
@@ -66,6 +66,7 @@ function App({ location }) {
                     <Route component={RegisterPage} path="/register" />
                     <Route component={SupportPage} path="/support" />
                     <Route component={Mypage} path="/mypage" />
+                    <Redirect path="*" to="/" />
                     <FooterComponent />
                 </section>
             )}
