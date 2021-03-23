@@ -1,4 +1,4 @@
-import CostContainer from 'containers/cost/CostContainer';
+import { CostContainer } from 'containers';
 import React from 'react';
 
 const CostPage = () => <CostContainer />;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChargeWrap } from '../../styles/DeliveryStyle';
+import { ChargeWrap } from '../../../styles/DeliveryStyle';
 const ChargeComponent = ({ OnSubmit, OnChange, InputRef }) => {
     return (
         <ChargeWrap>

@@ -10,7 +10,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import { OrderWrap } from 'styles/OrderStyles';
 import { Link } from 'react-router-dom';
-import { columns } from 'containers/order/OrderListContainer';
+import { columns } from 'containers/admin/order/OrderListContainer';
 
 const StyledTableCell = withStyles(theme => ({
     head: {

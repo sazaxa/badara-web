@@ -1,5 +1,5 @@
 import React from 'react';
-import { RegisterWrap, RegisterContent } from '../../styles/RegisterStyles';
+import { RegisterWrap, RegisterContent } from '../../../styles/RegisterStyles';
 
 const ReigisterComponent = ({ HandleChange, HandleFinish, RegisterInfo }) => {
     return (

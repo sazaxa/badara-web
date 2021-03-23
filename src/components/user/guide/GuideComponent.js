@@ -1,6 +1,6 @@
 import React from 'react';
-import { GuideContents, GuideWrap } from '../../styles/GuidePageStyles';
-import logo from '../../styles/img/logo.png';
+import { GuideContents, GuideWrap } from '../../../styles/GuidePageStyles';
+import logo from '../../../styles/img/logo.png';
 
 const GuideComponent = () => {
     return (

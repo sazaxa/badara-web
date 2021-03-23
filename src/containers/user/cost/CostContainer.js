@@ -1,4 +1,4 @@
-import CostComponent from 'components/cost/CostComponent';
+import { CostComponent } from 'components';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { countryPriseAction } from 'store/part';

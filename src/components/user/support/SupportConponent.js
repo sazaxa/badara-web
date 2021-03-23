@@ -5,7 +5,7 @@ import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
 import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import { SupportContents, SupportWrap } from 'styles/SupportStyles';
-import logo from '../../styles/img/logo.png';
+import logo from '../../../styles/img/logo.png';
 
 const AccordionSummary = withStyles({
     root: {

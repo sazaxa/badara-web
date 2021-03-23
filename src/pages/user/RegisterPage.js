@@ -1,4 +1,4 @@
-import RegisterContainer from 'containers/register/RegisterContainer';
+import { RegisterContainer } from 'containers';
 import React from 'react';
 
 const RegisterPage = () => <RegisterContainer />;

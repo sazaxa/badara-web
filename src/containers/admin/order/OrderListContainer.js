@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import OrderListComponent from 'components/order/OrderListComponent';
+import { OrderListComponent } from 'components';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOrderListAction } from 'store/order';

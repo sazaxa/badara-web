@@ -169,7 +169,7 @@ export const LoginPopupWrap = styled.section`
 `;
 export const LoginPopup = styled.article`
     width: 600px;
-    height: 425px;
+    height: 415px;
     background: #fff;
     position: absolute;
     top: 50%;
@@ -235,6 +235,7 @@ export const LoginPopup = styled.article`
             width: 12%;
             height: 100%;
             background: #0049ff;
+            border-radius: 5px 0 0 5px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -251,9 +252,9 @@ export const StyledInput = styled.input`
     padding-left: 14%;
     font-size: 16px;
     border: none;
-    &:focus {
-        outline: none;
-        border: 1px solid #0049ff;
+    outline: none;
+    & > focus {
+        outline: 1px solid #ccc;
     }
 `;
 

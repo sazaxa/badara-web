@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getMemberInfoAction } from 'store/member';
 import { porductInvoiceAction } from 'store/product';
 import { UpdateInvoiceWrap } from 'styles/MypageStyles';
-import { Courier } from '../../containers/apply/courier';
+import { Courier } from '../../../containers/user/apply/courier';
 
 const UpdateInvoice = ({ handlePopup }) => {
     const dispatch = useDispatch();

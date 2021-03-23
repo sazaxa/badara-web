@@ -1,4 +1,4 @@
-import ReigisterComponent from 'components/register/RegisterComponent';
+import ReigisterComponent from 'components/user/register/RegisterComponent';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
