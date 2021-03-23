@@ -5,11 +5,16 @@ import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
 import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import { SupportContents, SupportWrap } from 'styles/SupportStyles';
+import logo from '../../styles/img/logo.png';
 
 const AccordionSummary = withStyles({
     root: {
-        backgroundColor: 'rgba(0, 0, 0, .03)',
-        borderBottom: '1px solid rgba(0, 0, 0, .125)',
+        backgroundColor: '#0049ff',
+        borderBottom: '1px solid #fff',
+        borderRadius: '10px 10px 0 0',
+        color: '#fff',
+        fontWeight: '600',
+        fontSize: '24px',
         marginBottom: -1,
         minHeight: 56,
         '&$expanded': {
@@ -33,7 +38,10 @@ const SupportComponent = ({ FaqLists, Expanded, HandleChange }) => {
     return (
         <SupportWrap>
             <SupportContents>
-                <h2>자주하는 질문</h2>
+                <h2>
+                    <img src={logo} alt="logo" />
+                    <span>자주하는 질문</span>
+                </h2>
                 {FaqLists.length > 0 ? (
                     FaqLists.map(faq => {
                         return (
@@ -44,10 +52,10 @@ const SupportComponent = ({ FaqLists, Expanded, HandleChange }) => {
                                 onChange={HandleChange('panel' + faq.id)}
                             >
                                 <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-                                    <Typography>{faq.title}</Typography>
+                                    <Typography id="faqTitle">{faq.title}</Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
-                                    <Typography>{faq.content}</Typography>
+                                    <Typography id="faqContent">{faq.content}</Typography>
                                 </AccordionDetails>
                             </Accordion>
                         );
