@@ -1,12 +1,16 @@
 import React from 'react';
 import { GuideContents, GuideWrap } from '../../styles/GuidePageStyles';
+import logo from '../../styles/img/logo.png';
 
 const GuideComponent = () => {
     return (
         <GuideWrap>
             <GuideContents>
                 <article className="GuideContent">
-                    <h2>서비스 소개</h2>
+                    <h2>
+                        <img src={logo} alt="logo" />
+                        <span>서비스 소개</span>
+                    </h2>
                     <p>
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
                         the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
@@ -18,7 +22,10 @@ const GuideComponent = () => {
                     </p>
                 </article>
                 <article className="GuideContent">
-                    <h2>서비스 이용안내</h2>
+                    <h2>
+                        <img src={logo} alt="logo" />
+                        <span>서비스 이용안내</span>
+                    </h2>
                     <ul>
                         <li>
                             <span className="num">01</span>
@@ -52,12 +59,12 @@ const GuideComponent = () => {
                         </li>
                         <li>
                             <span className="num">07</span>
-                            해외출발
+                            해외송장
                             <span className="next">></span>
                         </li>
                         <li>
                             <span className="num">08</span>
-                            해외송장
+                            해외출발
                             <span className="next">></span>
                         </li>
                         <li>

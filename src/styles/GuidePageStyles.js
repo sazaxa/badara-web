@@ -11,18 +11,23 @@ export const GuideContents = styled.article`
     width: 1140px;
     margin: 0 auto;
     .GuideContent {
-        border-bottom: 1px solid #bebebe;
         padding-bottom: 50px;
         box-sizing: border-box;
         margin-bottom: 100px;
         &:last-child {
             margin-bottom: 0;
         }
-        h2 {
+       h2  {
             margin-bottom: 50px;
             letter-spacing: -1px;
-            border-left: 5px solid #000;
+            border-left: 5px solid #0049ff;
             padding-left: 20px;
+            display:flex;
+            align-items:center;
+            & > span {
+                margin-left:15px;
+                font-size:22px;
+            }
         }
         ul {
             width:90%;
@@ -37,11 +42,17 @@ export const GuideContents = styled.article`
                 width: 142px;
                 height: 142px;
                 margin:0 0 49px 49px;
-                border: 1px solid #3c3c3c;
+                font-weight:600;
                 border-radius: 50%;
+                background:#0049ff;
                 font-size: 16px;
-                color: #3c3c3c;
+                color: #fff;
                 text-align: center;
+                &:nth-child(2n) {
+                    border:1px solid #0049ff;
+                    color:#0049ff;
+                    background:#fff;
+                }
                 &:nth-child(1),
                 &:nth-child(6) {
                     margin: 0 0 49px 0;
@@ -49,7 +60,7 @@ export const GuideContents = styled.article`
                 .num {
                     display: block;
                     padding: 44px 0 17px;
-                    font-size: 20px;
+                    font-size: 22px;
                     font-weight: 600;
                 }
                 .next {
@@ -59,6 +70,7 @@ export const GuideContents = styled.article`
                     width: 9px;
                     height: 15px;
                     font-weight:600;
+                    color:#0049ff !important;
                 }
                 }
             }
