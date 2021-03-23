@@ -59,8 +59,8 @@ function* checkSaga() {
         yield put({ type: GET_MEMBER_CHECK_SUCCESS, payload: response.data });
     } catch (e) {
         yield put({ type: GET_MEMBER_CHECK_FAILURE, payload: e });
-        // localStorage.removeItem('accessToken');
-        // window.location.href = '/';
+        localStorage.removeItem('accessToken');
+        window.location.href = '/';
     }
 }
 

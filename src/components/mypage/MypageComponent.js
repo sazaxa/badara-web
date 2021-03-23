@@ -91,8 +91,8 @@ const MypageComponent = ({
                     </article>
                 </article>
                 <TableContainer component={Paper}>
-                    {member.orders.length !== 0 ? (
-                        member.orders.map(order => (
+                    {member.hapOrders.length !== 0 ? (
+                        member.hapOrders.map(hapOrder => (
                             <Table className={classes.table} aria-label="simple table">
                                 <TableHead>
                                     <TableRow>
@@ -100,12 +100,12 @@ const MypageComponent = ({
                                             <ul>
                                                 <li>
                                                     <span>
-                                                        <strong>신청날짜</strong> : {order.products[0].createdDate}
+                                                        <strong>신청날짜</strong> : {hapOrder.orders[0].createdDate}
                                                         {/* {moment(member.orders[0].products[0].createdDate, 'MMM Do YY')} */}
                                                     </span>
                                                 </li>
                                                 <li>
-                                                    <strong>주문 번호</strong> : {order.orderNumber}
+                                                    <strong>주문 번호</strong> : {hapOrder.orderNumber}
                                                 </li>
                                             </ul>
                                         </StyledTableCell>
@@ -116,75 +116,72 @@ const MypageComponent = ({
                                 </TableHead>
                                 <TableBody>
                                     {/* <TableRow key={order.id}> */}
-                                    {order.products.map(product => (
+                                    {hapOrder.orders.map(order => (
                                         <>
                                             <TableRow align="center">
-                                                <TableCell key={product.id} width="20%" align="center">
+                                                <TableCell key={order.id} width="20%" align="center">
                                                     <p>
-                                                        <strong>상품 명 :</strong> {product.productName}
+                                                        <strong>상품 명 :</strong> {order.productName}
                                                     </p>
                                                     <p>
                                                         <strong>회원 입력 부피 무게 :</strong>
-                                                        {product.volumeWeight === 0
+                                                        {order.volumeWeight === 0
                                                             ? '입력하지 않음'
-                                                            : product.volumeWeight}
+                                                            : order.volumeWeight}
                                                     </p>
                                                     <p>
                                                         <strong>회원 입력 실 무게 :</strong>
-                                                        {product.netWeight === 0 ? '입력하지 않음' : product.netWeight}
+                                                        {order.netWeight === 0 ? '입력하지 않음' : order.netWeight}
                                                     </p>
                                                     <p>
                                                         <strong>고래타고 입력 부피 무게 :</strong>
-                                                        {product.adminVolumeWeight === 0
+                                                        {order.adminVolumeWeight === 0
                                                             ? '입력하지 않음'
-                                                            : product.adminVolumeWeight}
+                                                            : order.adminVolumeWeight}
                                                     </p>
                                                     <p>
                                                         <strong>고래타고 입력 실 무게 :</strong>
-                                                        {product.adminNetWeight === 0
+                                                        {order.adminNetWeight === 0
                                                             ? '입력하지 않음'
-                                                            : product.adminNetWeight}
+                                                            : order.adminNetWeight}
                                                     </p>
                                                 </TableCell>
                                                 <TableCell align="center">
                                                     <p>
-                                                        <strong>이름 :</strong> {product.recipientName}
+                                                        <strong>이름 :</strong> {order.recipientName}
                                                     </p>
                                                     <p>
-                                                        <strong>주소 :</strong> {product.recipientAddress}
+                                                        <strong>주소 :</strong> {order.recipientAddress}
                                                     </p>
                                                     <p>
-                                                        <strong>휴대폰 번호 :</strong> {product.recipientPhoneNumber}
+                                                        <strong>휴대폰 번호 :</strong> {order.recipientPhoneNumber}
                                                     </p>
                                                     <p>
-                                                        <strong>국가 :</strong> {product.country}
+                                                        <strong>국가 :</strong> {order.country}
                                                     </p>
                                                 </TableCell>
                                                 <TableCell align="center">
-                                                    {product.expectedPrice} $ /
-                                                    {product.shippingPrice === 0
-                                                        ? '책정중'
-                                                        : product.shippingPrice + '$'}
+                                                    {order.expectedPrice} $ /
+                                                    {order.shippingPrice === 0 ? '책정중' : order.shippingPrice + '$'}
                                                 </TableCell>
                                                 <TableCell align="center">
-                                                    <p>{product.status}</p>
-                                                    {product.status === '송장입력' ? (
+                                                    <p>{order.status}</p>
+                                                    {order.status === '송장입력' ? (
                                                         <button
                                                             type="onClick"
-                                                            onClick={() => handleProductInfo(product.id)}
+                                                            onClick={() => handleProductInfo(order.id)}
                                                         >
                                                             송장 입력
                                                         </button>
                                                     ) : null}
-                                                    {product.status === '해외배송중' ? (
+                                                    {order.status === '해외배송중' ? (
                                                         <>
                                                             <p style={{ marginTop: '10px' }}>
-                                                                <strong>택배사 :</strong>{' '}
-                                                                {product.abroadShippingCompany}
+                                                                <strong>택배사 :</strong> {order.abroadShippingCompany}
                                                             </p>
                                                             <p>
                                                                 <strong>운송장 번호 : </strong>
-                                                                {product.abroadInvoice}
+                                                                {order.abroadInvoice}
                                                             </p>
                                                         </>
                                                     ) : null}
@@ -192,13 +189,16 @@ const MypageComponent = ({
                                             </TableRow>
                                         </>
                                     ))}
-                                    {order.products[0].status === '송장입력' ||
-                                    order.products[0].status === '센터입고중' ? null : (
+                                    {hapOrder.orders[0].status === '송장입력' ||
+                                    hapOrder.orders[0].status === '센터입고중' ? null : (
                                         <TableRow>
                                             <TableCell align="right" colSpan={5}>
-                                                총 금액 : {order.orderPrice}$
-                                                {order.products[0].status === '결제요청' ? (
-                                                    <button type="onClick" onClick={() => handlePaymentInfo(order.id)}>
+                                                총 금액 : {hapOrder.orderPrice}원
+                                                {hapOrder.orders[0].status === '결제요청' ? (
+                                                    <button
+                                                        type="onClick"
+                                                        onClick={() => handlePaymentInfo(hapOrder.id)}
+                                                    >
                                                         결제하기
                                                     </button>
                                                 ) : null}

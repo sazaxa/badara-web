@@ -1,12 +1,14 @@
 import { MypageComponent } from 'components';
 import React, { useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { withRouter } from 'react-router';
 import { getMemberCheckAction, getMemberInfoAction } from 'store/member';
 import { getOrderInfoAction } from 'store/order';
 import { getProductInfoAction } from 'store/product';
 
 const MypageContainer = () => {
     const dispatch = useDispatch();
+    const accessToken = localStorage.getItem('accessToken');
     const [updatePopup, setUpdatePopup] = useState(false);
     const [paymentPopup, setPaymentPopup] = useState(false);
     const { logged, member } = useSelector(
@@ -36,14 +38,17 @@ const MypageContainer = () => {
     };
 
     useEffect(() => {
-        if (logged) {
-            dispatch(getMemberInfoAction(logged.id));
+        if (accessToken) {
+            if (logged) {
+                dispatch(getMemberInfoAction(logged.id));
+                console.log('호출됨');
+            }
         } else {
-            // window.location.href = '/';
-            dispatch(getMemberCheckAction());
+            alert('로그인이 필요합니다.');
+            window.location.href = '/';
         }
-    }, [logged]);
-    if (!logged) return null;
+    }, [accessToken, logged]);
+    if (!logged && !accessToken) return null;
     return (
         <MypageComponent
             member={member}
