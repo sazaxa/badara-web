@@ -6,6 +6,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Link } from 'react-router-dom';
 import { LoginPopupContainer } from 'containers';
 import { HeaderWrap, HeaderContent } from 'styles/CommonStyles';
+import logo from '../../styles/img/logo.png';
 
 const HeaderComponent = ({
     HandleLoginPopup,
@@ -23,7 +24,9 @@ const HeaderComponent = ({
             <HeaderWrap>
                 <HeaderContent>
                     <h2>
-                        <Link to="/">SHIPMENT</Link>
+                        <Link to="/">
+                            <img src={logo} alt="logo" />
+                        </Link>
                     </h2>
                     <nav>
                         <ul>

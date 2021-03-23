@@ -116,7 +116,7 @@ export const HeaderContent = styled.header`
         letter-spacing: -2.5px;
         font-size: 32px;
         color: #1976d2;
-        margin-right: 220px;
+        margin-right: 180px;
         font-weight: 900;
     }
     nav ul {
@@ -138,12 +138,12 @@ export const HeaderContent = styled.header`
     }
     button {
         margin-left: 80px;
-        background-color: #1976d2;
+        background-color: #0049ff;
         font-weight: 600;
         font-size: 16px;
     }
     button:hover {
-        background-color: #1976d2;
+        background-color: #0049ff;
         opacity: 0.5;
     }
     .MuiSvgIcon-root {
