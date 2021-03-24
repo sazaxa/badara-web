@@ -14,6 +14,11 @@ const [PREDICTION_PRIME, PREDICTION_PRIME_SUCCESS, PREDICTION_PRIME_FAILURE] = c
 // 예상 가격 초기화 Action Types.
 const CLEAR_PREDICTION_PRIME = 'order/CLEAR_PREDICTION_PRIME';
 
+// 배송신청 step Action Types;
+
+const ACTIVE_STEP_CHANGE = 'part/ACTIVE_STEP_CHANGE';
+const RESET_STEP = 'part/RESET_STEP';
+
 // 나라 가져오기 Action Types.
 const [GET_COUNTRY, GET_COUNTRY_SUCCESS, GET_COUNTRY_FAILURE] = createRequestActionTypes('order/GET_COUNTRY');
 
@@ -29,6 +34,9 @@ export const clearPredictionPrimeAction = createAction(CLEAR_PREDICTION_PRIME);
 export const getCountryAction = createAction(GET_COUNTRY);
 
 export const countryPriseAction = createAction(COUNTRY_PRISE, country => country);
+
+export const acitiveStepChange = createAction(ACTIVE_STEP_CHANGE, step => step);
+export const resetStep = createAction(RESET_STEP);
 
 // 배송비 엑셀 등록 Saga.
 function* insertDeliverySaga({ payload: data }) {
@@ -102,6 +110,7 @@ export const initialState = {
         list: [],
     },
     countryPrise: null,
+    activeStep: 0,
 };
 
 export default handleActions(
@@ -145,6 +154,16 @@ export default handleActions(
         [COUNTRY_PRISE_SUCCESS]: (state, { payload }) => {
             return produce(state, draft => {
                 draft.countryPrise = payload;
+            });
+        },
+        [ACTIVE_STEP_CHANGE]: (state, action) => {
+            return produce(state, draft => {
+                draft.activeStep = action.payload;
+            });
+        },
+        [RESET_STEP]: state => {
+            return produce(state, draft => {
+                draft.activeStep = initialState.activeStep;
             });
         },
     },
