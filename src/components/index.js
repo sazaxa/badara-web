@@ -8,19 +8,19 @@ export { default as FaqComponent } from './admin/faq/FaqComponent';
 export { default as FaqDelComponent } from './admin/faq/FaqDelComponent';
 export { default as FaqUpdateComponent } from './admin/faq/FaqUpdateComponent';
 
-export { default as ChargeComponent } from './user/order/ChargeComponent';
+export { default as ChargeComponent } from './admin/order/ChargeComponent';
 export { default as CalculatorComponent } from './common/CalculatorComponent';
-export { default as OrderListComponent } from './user/order/OrderListComponent';
-export { default as OrderDetailComponent } from './user/order/OrderDetailComponent';
-export { default as OrderDetailProductInfo } from './user/order/OrderDetailProductInfo';
-export { default as OrderDetailUserInfo } from './user/order/OrderDetailUserInfo';
-export { default as OrderDetailButtonComponent } from './user/order/OrderDetailButtonComponent';
+export { default as OrderListComponent } from './admin/order/OrderListComponent';
+export { default as OrderDetailComponent } from './admin/order/OrderDetailComponent';
+export { default as OrderDetailProductInfo } from './admin/order/OrderDetailProductInfo';
+export { default as OrderDetailUserInfo } from './admin/order/OrderDetailUserInfo';
+export { default as OrderDetailButtonComponent } from './admin/order/OrderDetailButtonComponent';
 
 export { default as CostComponent } from './user/cost/CostComponent';
 
-export { default as ApplyComponent } from './user/apply/ApplyComponent';
-export { default as ApplyListComponent } from './user/apply/ApplyListComponent';
-export { default as ApplyModal } from './user/apply/ApplyModal';
+export { default as ApplyComponent } from './user/apply/old/ApplyComponent';
+export { default as ApplyListComponent } from './user/apply/old/ApplyListComponent';
+export { default as ApplyModal } from './user/apply/old/ApplyModal';
 
 export { default as MainContentComponent } from './user/main/MainContentComponet';
 
