@@ -5,8 +5,13 @@ import * as applyAPI from '../lib/api/apply';
 import * as partAPI from '../lib/api/part';
 import { createRequestActionTypes } from 'lib/createRequestActionTypes';
 
-// 신청 목록 Action Types.
-const APPLY_LIST = 'order/APPLY_LIST';
+// 수취인 정보 Action Types.
+const RECIPIENT_DATA_SAVE = 'apply/RECIPIENT_DATA_SAVE';
+
+// 상품 추가 Action Types.
+const PRODUCT_DATA_ADD = 'apply/PRODUCT_DATA_ADD';
+const PRODUCT_DATA_REMOVE = 'apply/PRODUCT_DATA_REMOVE';
+const PRODUCT_DATA_UPDATE = 'apply/PRODUCT_DATA_UPDATE';
 // 신청 목록 삭제 Action Types.
 const DELETE_APPLY_INFO = 'order/DELETE_APPLY_INFO';
 // 신청하기 Action Types.
@@ -18,7 +23,13 @@ const [PREDICTION_PRISE, PREDICTION_PRISE_SUCCESS, PREDICTION_PRISE_FAILURE] = c
 // 예상 가격 초기화 Action Types.
 const CLEAR_PREDICTION_PRISE = 'apply/CLEAR_PREDICTION_PRISE';
 
-export const applyListAction = createAction(APPLY_LIST, applyData => applyData);
+export const recipientInsertAction = createAction(RECIPIENT_DATA_SAVE, data => data);
+export const productDataAddAction = createAction(PRODUCT_DATA_ADD, data => data);
+export const productDataRemoveAction = createAction(PRODUCT_DATA_REMOVE, index => index);
+export const productDataUpdateAction = createAction(PRODUCT_DATA_UPDATE, ({ index, updateData }) => ({
+    index,
+    updateData,
+}));
 export const applyListInsertAction = createAction(APPLY_LIST_INSERT, list => list);
 export const deleteApplyInfoAction = createAction(DELETE_APPLY_INFO, index => index);
 export const applyPriseAction = createAction(PREDICTION_PRISE, ({ country, weight }) => ({ country, weight }));
@@ -45,16 +56,41 @@ export function* applySaga() {
 
 export const initialState = {
     apply: {
-        list: [],
+        // list: [],
+        recipient: null,
+        product: [
+            {
+                productDetail: null,
+                quntity: null,
+                price: null,
+                weight: null,
+            },
+        ],
+        box: null,
     },
     prise: null,
 };
 
 export default handleActions(
     {
-        [APPLY_LIST]: (state, { payload }) => {
+        [RECIPIENT_DATA_SAVE]: (state, { payload }) => {
             return produce(state, draft => {
-                draft.apply.list.push(payload);
+                draft.apply.recipient = payload.recipient;
+            });
+        },
+        [PRODUCT_DATA_ADD]: (state, { payload }) => {
+            return produce(state, draft => {
+                draft.apply.product.push(payload.product);
+            });
+        },
+        [PRODUCT_DATA_UPDATE]: (state, { payload }) => {
+            return produce(state, draft => {
+                draft.apply.product.splice(payload.index, 1, payload.updateData);
+            });
+        },
+        [PRODUCT_DATA_REMOVE]: (state, { payload }) => {
+            return produce(state, draft => {
+                draft.apply.product.splice(payload.index, 1);
             });
         },
         [DELETE_APPLY_INFO]: (state, { payload }) => {

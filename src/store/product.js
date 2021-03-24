@@ -73,7 +73,12 @@ export function* productSaga() {
 }
 
 const initialState = {
-    product: null,
+    defaultProduct: {
+        productDetail: null,
+        quntity: null,
+        price: null,
+        weight: null,
+    },
     error: null,
 };
 
