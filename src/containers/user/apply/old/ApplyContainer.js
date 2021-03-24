@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { applyListAction, applyPriseAction, clearPredictionPriseAction, initialState } from 'store/apply';
-import { Courier } from './courier';
+import { Courier } from '../courier';
 
 const ApplyContainer = ({ history }) => {
     const dispatch = useDispatch();
@@ -122,7 +122,7 @@ const ApplyContainer = ({ history }) => {
     const handleAddConfirm = () => {
         setVisible(false);
         console.log(material);
-        dispatch(applyListAction(material));
+        // dispatch(applyListAction(material));
         setMaterial({
             recipientName: material.recipientName,
             recipientPhoneNumber: material.recipientPhoneNumber,
@@ -143,7 +143,7 @@ const ApplyContainer = ({ history }) => {
         dispatch(clearPredictionPriseAction());
     };
     const handleConfirm = () => {
-        dispatch(applyListAction(material));
+        // dispatch(applyListAction(material));
         dispatch(clearPredictionPriseAction());
         history.push('/apply/list');
     };
