@@ -18,10 +18,6 @@ export { default as OrderDetailButtonComponent } from './admin/order/OrderDetail
 
 export { default as CostComponent } from './user/cost/CostComponent';
 
-export { default as ApplyComponent } from './user/apply/old/ApplyComponent';
-export { default as ApplyListComponent } from './user/apply/old/ApplyListComponent';
-export { default as ApplyModal } from './user/apply/old/ApplyModal';
-
 export { default as MainContentComponent } from './user/main/MainContentComponet';
 
 export { default as GuideComponent } from './user/guide/GuideComponent';

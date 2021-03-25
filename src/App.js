@@ -13,7 +13,6 @@ import {
     ApplyPage,
     SupportPage,
     RegisterPage,
-    ApplyListPage,
     AdminOrderDetailPage,
     AdminLoginPage,
     Mypage,
@@ -62,7 +61,6 @@ function App({ location }) {
                     <Route component={CostPage} path="/cost" />
                     <Route component={GuidePage} path="/guide" />
                     <Route component={ApplyPage} path="/apply" exact />
-                    <Route component={ApplyListPage} path="/apply/list" />
                     <Route component={RegisterPage} path="/register" />
                     <Route component={SupportPage} path="/support" />
                     <Route component={Mypage} path="/mypage" />

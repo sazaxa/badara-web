@@ -18,16 +18,10 @@ const BOX_DATA_ADD = 'apply/BOX_DATA_ADD';
 const BOX_DATA_REMOVE = 'apply/BOX_DATA_REMOVE';
 const BOX_DATA_UPDATE = 'apply/BOX_DATA_UPDATE';
 
-// 신청 목록 삭제 Action Types.
-const DELETE_APPLY_INFO = 'order/DELETE_APPLY_INFO';
-// 신청하기 Action Types.
-const APPLY_LIST_INSERT = 'order/APPLY_LIST_INSERT';
 // apply 예상가격 가져오기 Action Types
 const [PREDICTION_PRISE, PREDICTION_PRISE_SUCCESS, PREDICTION_PRISE_FAILURE] = createRequestActionTypes(
     'apply/PREDICTION_PRISE'
 );
-// 예상 가격 초기화 Action Types.
-const CLEAR_PREDICTION_PRISE = 'apply/CLEAR_PREDICTION_PRISE';
 
 export const recipientInsertAction = createAction(RECIPIENT_DATA_SAVE, data => data);
 
@@ -44,18 +38,12 @@ export const boxDataUpdateAction = createAction(BOX_DATA_UPDATE, ({ index, updat
     index,
     updateData,
 }));
-export const applyListInsertAction = createAction(APPLY_LIST_INSERT, list => list);
-export const deleteApplyInfoAction = createAction(DELETE_APPLY_INFO, index => index);
-export const applyPriseAction = createAction(PREDICTION_PRISE, ({ country, weight }) => ({ country, weight }));
-export const clearPredictionPriseAction = createAction(CLEAR_PREDICTION_PRISE);
 
-function* applyListInsertSaga({ payload: list }) {
-    console.log(list.list);
-    yield call(applyAPI.post, list.list);
-}
+export const applyPriseAction = createAction(PREDICTION_PRISE, ({ country, weight }) => ({ country, weight }));
+
 // 예상 가격 가져오기 Saga.
 function* predictionPrimeSaga({ payload: { country, weight } }) {
-    const response = yield call(partAPI.PredictionPrime, { country, weight });
+    const response = yield call(partAPI.PredictionPrice, { country, weight });
     try {
         yield put({ type: PREDICTION_PRISE_SUCCESS, payload: response.data });
     } catch (e) {
@@ -64,13 +52,11 @@ function* predictionPrimeSaga({ payload: { country, weight } }) {
     }
 }
 export function* applySaga() {
-    yield takeLatest(APPLY_LIST_INSERT, applyListInsertSaga);
     yield takeLatest(PREDICTION_PRISE, predictionPrimeSaga);
 }
 
 export const initialState = {
     apply: {
-        // list: [],
         recipient: null,
         products: [
             {
@@ -93,7 +79,6 @@ export const initialState = {
             },
         ],
     },
-    prise: null,
 };
 
 export default handleActions(
@@ -131,26 +116,6 @@ export default handleActions(
         [BOX_DATA_REMOVE]: (state, { payload }) => {
             return produce(state, draft => {
                 draft.apply.boxes.splice(payload.index, 1);
-            });
-        },
-        [DELETE_APPLY_INFO]: (state, { payload }) => {
-            return produce(state, draft => {
-                draft.apply.list.splice(payload, 1);
-            });
-        },
-        [APPLY_LIST_INSERT]: state => {
-            return produce(state, draft => {
-                draft.apply.list = initialState.apply.list;
-            });
-        },
-        [PREDICTION_PRISE_SUCCESS]: (state, { payload }) => {
-            return produce(state, draft => {
-                draft.prise = payload;
-            });
-        },
-        [CLEAR_PREDICTION_PRISE]: state => {
-            return produce(state, draft => {
-                draft.prise = initialState.prise;
             });
         },
     },

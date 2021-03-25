@@ -15,8 +15,6 @@ export { default as ChargeContainer } from './admin/order/ChargeContainer';
 export { default as CalculatorContainer } from './user/cost/CalculatorContainer';
 export { default as OrderListContainer } from './admin/order/OrderListContainer';
 export { default as OrderDetailContainer } from './admin/order/OrderDetailContainer';
-export { default as ApplyContainer } from './user/apply/old/ApplyContainer';
-export { default as ApplyListContainer } from './user/apply/old/ApplyListContainer';
 export { default as MainContentContainer } from './user/main/MainContentContainer';
 export { default as MypageContainer } from './user/mypage/MypageContainer';
 export { default as AdminUserContainer } from './admin/user/AdminUserContainer';
