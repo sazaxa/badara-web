@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { acitiveStepChange } from 'store/part';
-import { productDataAddAction, productDataRemoveAction, productInsertAction } from 'store/apply';
+import { productDataAddAction, productDataRemoveAction } from 'store/apply';
 import Button from '@material-ui/core/Button';
 import Product from './Product';
 
 const Products = ({ stepIndex, steps }) => {
     const dispatch = useDispatch();
-    const { activeStep, defaultProduct, product: applyProduct } = useSelector(
+    const { activeStep, defaultProduct, products: applyProduct } = useSelector(
         state => ({
             activeStep: state.part.activeStep,
             defaultProduct: state.product.defaultProduct,
-            product: state.apply.apply.product,
+            products: state.apply.apply.products,
         }),
         shallowEqual
     );
@@ -21,12 +21,14 @@ const Products = ({ stepIndex, steps }) => {
     const handlePrev = () => {
         dispatch(acitiveStepChange(activeStep - 1));
     };
-    const handleClick = () => {
+    const handleClick = e => {
+        e.preventDefault();
         //TODO: 클릭이벤트 생성해야함.
+        //FIXME:2021-03-25 Submit 함수로 필수값을 체크하고 필수값이 입력이 안되면 넘어가지 않도록 조치
+        dispatch(acitiveStepChange(activeStep + 1));
     };
 
     const ProductAdd = () => {
-        console.log('bamm');
         dispatch(productDataAddAction({ product: defaultProduct }));
         console.log(defaultProduct);
     };
@@ -48,7 +50,9 @@ const Products = ({ stepIndex, steps }) => {
                         ProductRemove={ProductRemove}
                     />
                 ))}
-                <button onClick={ProductAdd}>추가</button>
+                <button type="button" onClick={ProductAdd}>
+                    추가
+                </button>
                 <Button disabled={stepIndex === 0} onClick={handlePrev}>
                     Back
                 </Button>
