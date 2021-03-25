@@ -36,24 +36,26 @@ const Products = ({ stepIndex, steps }) => {
     };
     return (
         <>
-            {applyProduct?.map((v, index) => (
-                <Product
-                    stepIndex={stepIndex}
-                    steps={steps}
-                    product={v}
-                    // handlePrev={handlePrev}
-                    // handleClick={handleClick}
-                    index={index}
-                    ProductRemove={ProductRemove}
-                />
-            ))}
-            <button onClick={ProductAdd}>추가</button>
-            <Button disabled={stepIndex === 0} onClick={handlePrev}>
-                Back
-            </Button>
-            <Button variant="contained" color="primary" onClick={handleClick}>
-                {stepIndex === steps.length - 1 ? 'Finish' : 'Next'}
-            </Button>
+            <form onSubmit={handleClick}>
+                {applyProduct?.map((v, index) => (
+                    <Product
+                        stepIndex={stepIndex}
+                        steps={steps}
+                        product={v}
+                        // handlePrev={handlePrev}
+                        // handleClick={handleClick}
+                        index={index}
+                        ProductRemove={ProductRemove}
+                    />
+                ))}
+                <button onClick={ProductAdd}>추가</button>
+                <Button disabled={stepIndex === 0} onClick={handlePrev}>
+                    Back
+                </Button>
+                <Button variant="contained" color="primary" type="submit">
+                    {stepIndex === steps.length - 1 ? 'Finish' : 'Next'}
+                </Button>
+            </form>
         </>
     );
 };

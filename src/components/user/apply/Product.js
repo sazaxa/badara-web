@@ -34,6 +34,7 @@ const Product = ({ stepIndex, steps, product, handlePrev, handleClick, index, Pr
                                 name="productDetail"
                                 value={updateProductData.productDetail ?? undefined}
                                 onChange={e => handleChange(e)}
+                                required
                             />
                         </td>
                     </tr>
@@ -45,6 +46,7 @@ const Product = ({ stepIndex, steps, product, handlePrev, handleClick, index, Pr
                                 name="quntity"
                                 value={updateProductData.quntity ?? undefined}
                                 onChange={e => handleChange(e)}
+                                required
                             />
                         </td>
                     </tr>
@@ -56,6 +58,7 @@ const Product = ({ stepIndex, steps, product, handlePrev, handleClick, index, Pr
                                 name="price"
                                 value={updateProductData.price ?? undefined}
                                 onChange={e => handleChange(e)}
+                                required
                             />
                         </td>
                     </tr>
@@ -67,6 +70,7 @@ const Product = ({ stepIndex, steps, product, handlePrev, handleClick, index, Pr
                                 name="weight"
                                 value={updateProductData.weight ?? undefined}
                                 onChange={e => handleChange(e)}
+                                required
                             />
                         </td>
                     </tr>
