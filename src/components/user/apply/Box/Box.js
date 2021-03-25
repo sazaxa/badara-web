@@ -6,7 +6,7 @@ const Box = ({ box, index, Remove }) => {
     // 받은 data를 수정하기 위해 state에 담는다.
     const [updateBoxData, setUpdateBoxData] = useState(box);
     const dispatch = useDispatch();
-
+    console.log(box);
     const handleChange = e => {
         const { name, value } = e.target;
         setUpdateBoxData({
@@ -22,9 +22,9 @@ const Box = ({ box, index, Remove }) => {
 
     // 가로 세로 높이 구해서 부피무게를 구하고 state에 저장한다.
     const onClickVolume = () => {
-        const { expectedWitdh, expectedDepth, expectedHeight } = updateBoxData;
-        if ((expectedWitdh, expectedDepth, expectedHeight !== null)) {
-            const sum = (expectedWitdh * expectedDepth * expectedHeight) / 5000;
+        const { expectedWidth, expectedDepth, expectedHeight } = updateBoxData;
+        if ((expectedWidth, expectedDepth, expectedHeight !== null)) {
+            const sum = (expectedWidth * expectedDepth * expectedHeight) / 5000;
             setUpdateBoxData({
                 ...updateBoxData,
                 expectedVolumeWeight: sum,
@@ -44,8 +44,8 @@ const Box = ({ box, index, Remove }) => {
                         <td>
                             <input
                                 type="number"
-                                name="expectedWitdh"
-                                value={updateBoxData.expectedWitdh ?? undefined}
+                                name="expectedWidth"
+                                value={updateBoxData.expectedWidth ?? undefined}
                                 onChange={e => handleChange(e)}
                                 required
                             />

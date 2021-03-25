@@ -99,7 +99,7 @@ export const initialState = {
                 expectedVolumeWeight: null,
                 expectedNetWeight: null,
                 expectedPrice: null,
-                koreanInvoitce: null,
+                koreanInvoice: null,
                 koreanShippingCompany: null,
             },
         ],
@@ -112,7 +112,7 @@ export default handleActions(
     {
         [APPLY_CLEAR]: state => {
             return produce(state, draft => {
-                draft.apply = initialState.apply;
+                draft = initialState;
             });
         },
         [RECIPIENT_DATA_SAVE]: (state, { payload }) => {
