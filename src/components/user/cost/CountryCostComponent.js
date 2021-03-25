@@ -29,11 +29,11 @@ const CountryCostComponent = ({ list, onHandleSelectCountry, countryPrise }) => 
                     ) : null}
                 </thead>
                 <tbody>
-                    {countryPrise?.map(prise => {
-                        const Calculated = prise.price;
+                    {countryPrise?.map(price => {
+                        const Calculated = price.price;
                         return (
-                            <tr key={prise.id}>
-                                <td>{prise.weight + 'kg'}</td>
+                            <tr key={price.id}>
+                                <td>{price.weight + 'kg'}</td>
                                 <td>
                                     <strong>{Math.floor(parseInt(Calculated)).toLocaleString()}</strong> 원
                                 </td>

@@ -8,7 +8,7 @@ const CalculatorComponent = ({
     OnClickWeight,
     OnChange,
     OnClickVolume,
-    PredictionPrime,
+    PredictionPrise,
     Material,
     CountryLists,
     OnReset,
@@ -104,13 +104,13 @@ const CalculatorComponent = ({
                         />
                     </div>
                 </div>
-                <div className={PriseOpen ? 'wrap prisebtn' : 'wrap prisebtn show'}>
+                <div className={PriseOpen ? 'wrap pricebtn' : 'wrap pricebtn show'}>
                     <button type="button" onClick={OnClickWeight}>
                         예상가격 구하기
                     </button>
                     <p>(예상가격은 부피무게와 실무게 중 무거운 것으로 측정되어 표기됩니다.)</p>
                 </div>
-                <article className={PriseOpen ? 'priseWrap show' : 'priseWrap'}>
+                <article className={PriseOpen ? 'priceWrap show' : 'priceWrap'}>
                     <div className="wrap">
                         <div className="title">
                             <h4>예상가격</h4>
@@ -121,8 +121,8 @@ const CalculatorComponent = ({
                                 type="text"
                                 disabled
                                 placeholder={
-                                    PredictionPrime
-                                        ? Math.floor(parseInt(PredictionPrime)).toLocaleString() + '원'
+                                    PredictionPrise
+                                        ? Math.floor(parseInt(PredictionPrise)).toLocaleString() + '원'
                                         : '예상가격'
                                 }
                             />

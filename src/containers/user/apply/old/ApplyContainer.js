@@ -8,9 +8,9 @@ import { Courier } from '../courier';
 
 const ApplyContainer = ({ history }) => {
     const dispatch = useDispatch();
-    const { list, prise, logged } = useSelector(state => ({
+    const { list, price, logged } = useSelector(state => ({
         list: state.part.country.list,
-        prise: state.apply.prise,
+        price: state.apply.price,
         logged: state.member.loggedInfo.logged,
     }));
     const [visible, setVisible] = useState(false);
@@ -33,27 +33,27 @@ const ApplyContainer = ({ history }) => {
     });
     useEffect(() => {
         setVisible(false);
-        if (prise !== null) {
+        if (price !== null) {
             dispatch(clearPredictionPriseAction());
         }
     }, []);
 
     useEffect(() => {
-        if (prise !== null) {
+        if (price !== null) {
             setMaterial({
                 ...material,
-                expectedPrice: prise,
+                expectedPrice: price,
             });
         }
         const checkPrisePopup = checkData => {
-            if (initialState.prise !== checkData) {
+            if (initialState.price !== checkData) {
                 setVisible(true);
                 console.log(checkData);
             }
         };
-        checkPrisePopup(prise);
+        checkPrisePopup(price);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [prise]);
+    }, [price]);
 
     // 부피계산.
     const onClickVolume = () => {

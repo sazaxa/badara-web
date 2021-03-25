@@ -2,13 +2,13 @@
 import { CalculatorComponent } from 'components';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearPredictionPrimeAction, predictionPrimeAction } from 'store/part';
+import { clearPredictionpriceAction, predictionpriceAction } from 'store/part';
 
 const CalculatorContainer = () => {
     const dispatch = useDispatch();
-    const { prime, country } = useSelector(state => state.part);
+    const { price, country } = useSelector(state => state.part);
     const [getCountry, setGetCountry] = useState([]);
-    const [priseOpen, setPriseOpen] = useState(false);
+    const [priceOpen, setPriseOpen] = useState(false);
     const [material, setMaterial] = useState({
         width: '',
         vertical: '',
@@ -32,7 +32,7 @@ const CalculatorContainer = () => {
     // 페이지 이동시 예상가격 삭제.
     useEffect(() => {
         return () => {
-            dispatch(clearPredictionPrimeAction());
+            dispatch(clearPredictionpriceAction());
         };
     }, []);
 
@@ -64,7 +64,7 @@ const CalculatorContainer = () => {
             alert('나라를 선택해주세요.');
         } else if (volume > actual) {
             dispatch(
-                predictionPrimeAction({
+                predictionpriceAction({
                     country: country,
                     weight: volume,
                 })
@@ -76,7 +76,7 @@ const CalculatorContainer = () => {
             setPriseOpen(true);
         } else if (volume < actual) {
             dispatch(
-                predictionPrimeAction({
+                predictionpriceAction({
                     country: country,
                     weight: actual,
                 })
@@ -107,11 +107,11 @@ const CalculatorContainer = () => {
             OnClickWeight={onClickWeight}
             OnChange={e => handleChange(e)}
             OnClickVolume={onClickVolume}
-            PredictionPrime={prime}
+            PredictionPrise={price}
             Material={material}
             CountryLists={getCountry}
             OnReset={onReset}
-            PriseOpen={priseOpen}
+            PriseOpen={priceOpen}
         />
     );
 };

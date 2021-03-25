@@ -125,34 +125,34 @@ export const CalculatorWrap = styled.article`
     .wrap > .content > input:focus {
         border-bottom: 2px solid #333;
     }
-    .wrap.prisebtn {
+    .wrap.pricebtn {
         display: none;
     }
-    .wrap.prisebtn.show {
+    .wrap.pricebtn.show {
         display: block;
     }
-    .wrap.prisebtn > .title {
+    .wrap.pricebtn > .title {
         background: #fff;
     }
-    .wrap.prisebtn p {
+    .wrap.pricebtn p {
         text-align: center;
         margin-top: 20px;
         font-weight: 600;
         color: red;
     }
-    .prisebtn > .content {
+    .pricebtn > .content {
         display: flex;
         height: 60px;
         justify-content: center;
         align-items: center;
     }
-    .wrap.prisebtn {
+    .wrap.pricebtn {
         width: 100%;
         height: 80px;
         align-items: flex-start;
         border-bottom: none;
     }
-    .wrap.prisebtn button {
+    .wrap.pricebtn button {
         width: 100%;
         height: 52px;
         background-color: #0049ff;
@@ -166,10 +166,10 @@ export const CalculatorWrap = styled.article`
         border-radius: 0 0 10px 10px;
         cursor: pointer;
     }
-    .priseWrap {
+    .priceWrap {
         display: none;
     }
-    .priseWrap.show {
+    .priceWrap.show {
         display: block;
         border-top: 1px solid #0080ff;
     }
