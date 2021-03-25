@@ -8,10 +8,16 @@ import { createRequestActionTypes } from 'lib/createRequestActionTypes';
 // 수취인 정보 Action Types.
 const RECIPIENT_DATA_SAVE = 'apply/RECIPIENT_DATA_SAVE';
 
-// 상품 추가 Action Types.
+// 상품 Action Types.
 const PRODUCT_DATA_ADD = 'apply/PRODUCT_DATA_ADD';
 const PRODUCT_DATA_REMOVE = 'apply/PRODUCT_DATA_REMOVE';
 const PRODUCT_DATA_UPDATE = 'apply/PRODUCT_DATA_UPDATE';
+
+// 박스 Action Types.
+const BOX_DATA_ADD = 'apply/BOX_DATA_ADD';
+const BOX_DATA_REMOVE = 'apply/BOX_DATA_REMOVE';
+const BOX_DATA_UPDATE = 'apply/BOX_DATA_UPDATE';
+
 // 신청 목록 삭제 Action Types.
 const DELETE_APPLY_INFO = 'order/DELETE_APPLY_INFO';
 // 신청하기 Action Types.
@@ -24,9 +30,17 @@ const [PREDICTION_PRISE, PREDICTION_PRISE_SUCCESS, PREDICTION_PRISE_FAILURE] = c
 const CLEAR_PREDICTION_PRISE = 'apply/CLEAR_PREDICTION_PRISE';
 
 export const recipientInsertAction = createAction(RECIPIENT_DATA_SAVE, data => data);
+
 export const productDataAddAction = createAction(PRODUCT_DATA_ADD, data => data);
 export const productDataRemoveAction = createAction(PRODUCT_DATA_REMOVE, index => index);
 export const productDataUpdateAction = createAction(PRODUCT_DATA_UPDATE, ({ index, updateData }) => ({
+    index,
+    updateData,
+}));
+
+export const boxDataAddAction = createAction(BOX_DATA_ADD, data => data);
+export const boxDataRemoveAction = createAction(BOX_DATA_REMOVE, index => index);
+export const boxDataUpdateAction = createAction(BOX_DATA_UPDATE, ({ index, updateData }) => ({
     index,
     updateData,
 }));
@@ -58,7 +72,7 @@ export const initialState = {
     apply: {
         // list: [],
         recipient: null,
-        product: [
+        products: [
             {
                 productDetail: null,
                 quntity: null,
@@ -66,7 +80,18 @@ export const initialState = {
                 weight: null,
             },
         ],
-        box: null,
+        boxes: [
+            {
+                expectedWitdh: null,
+                expectedDepth: null,
+                expectedHeight: null,
+                expectedVolumeWeight: null,
+                expectedNetWeight: null,
+                expectedPrice: null,
+                koreanInvoitce: null,
+                koreanShippingCompany: null,
+            },
+        ],
     },
     prise: null,
 };
@@ -80,17 +105,32 @@ export default handleActions(
         },
         [PRODUCT_DATA_ADD]: (state, { payload }) => {
             return produce(state, draft => {
-                draft.apply.product.push(payload.product);
+                draft.apply.products.push(payload.product);
             });
         },
         [PRODUCT_DATA_UPDATE]: (state, { payload }) => {
             return produce(state, draft => {
-                draft.apply.product.splice(payload.index, 1, payload.updateData);
+                draft.apply.products.splice(payload.index, 1, payload.updateData);
             });
         },
         [PRODUCT_DATA_REMOVE]: (state, { payload }) => {
             return produce(state, draft => {
-                draft.apply.product.splice(payload.index, 1);
+                draft.apply.products.splice(payload.index, 1);
+            });
+        },
+        [BOX_DATA_ADD]: (state, { payload }) => {
+            return produce(state, draft => {
+                draft.apply.boxes.push(payload.box);
+            });
+        },
+        [BOX_DATA_UPDATE]: (state, { payload }) => {
+            return produce(state, draft => {
+                draft.apply.boxes.splice(payload.index, 1, payload.updateData);
+            });
+        },
+        [BOX_DATA_REMOVE]: (state, { payload }) => {
+            return produce(state, draft => {
+                draft.apply.boxes.splice(payload.index, 1);
             });
         },
         [DELETE_APPLY_INFO]: (state, { payload }) => {

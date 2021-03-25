@@ -6,9 +6,10 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Tos from './Tos';
-import Recipient from './Recipient';
-import Products from './Products';
+import Tos from './tos/Tos';
+import Recipient from './recipient/Recipient';
+import Products from './product/Products';
+import Boxes from './Box/Boxes';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -40,7 +41,7 @@ const getStepContent = (stepIndex, steps) => {
         case 2:
             return <Products stepIndex={stepIndex} steps={steps} />;
         case 3:
-            return '박스등록';
+            return <Boxes stepIndex={stepIndex} steps={steps} />;
         case 4:
             return '마지막 확인';
         default:
