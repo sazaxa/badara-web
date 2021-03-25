@@ -22,7 +22,7 @@ const BOX_DATA_UPDATE = 'apply/BOX_DATA_UPDATE';
 const APPLY_CLEAR = 'apply/APPLY_CLEAR';
 
 // apply 예상가격 가져오기 Action Types
-const [PREDICTION_PRISE, PREDICTION_PRISE_SUCCESS, PREDICTION_PRISE_FAILURE] = createRequestActionTypes(
+const [PREDICTION_PRICE, PREDICTION_PRICE_SUCCESS, PREDICTION_PRICE_FAILURE] = createRequestActionTypes(
     'apply/PREDICTION_PRISE'
 );
 
@@ -44,20 +44,21 @@ export const boxDataUpdateAction = createAction(BOX_DATA_UPDATE, ({ index, updat
     updateData,
 }));
 
-export const applyPriseAction = createAction(PREDICTION_PRISE, ({ country, weight }) => ({ country, weight }));
+export const applyPriseAction = createAction(PREDICTION_PRICE, ({ country, weight }) => ({ country, weight }));
 
 // 예상 가격 가져오기 Saga.
 function* predictionPrimeSaga({ payload: { country, weight } }) {
+    console.log('사가는 타니?');
     const response = yield call(partAPI.PredictionPrice, { country, weight });
     try {
-        yield put({ type: PREDICTION_PRISE_SUCCESS, payload: response.data });
+        yield put({ type: PREDICTION_PRICE_SUCCESS, payload: response.data });
     } catch (e) {
-        yield put({ type: PREDICTION_PRISE_FAILURE, e });
+        yield put({ type: PREDICTION_PRICE_FAILURE, e });
         console.log('통신중 에러가 발생했습니다.');
     }
 }
 export function* applySaga() {
-    yield takeLatest(PREDICTION_PRISE, predictionPrimeSaga);
+    yield takeLatest(PREDICTION_PRICE, predictionPrimeSaga);
 }
 
 export const initialState = {
@@ -84,6 +85,7 @@ export const initialState = {
             },
         ],
     },
+    prise: null,
 };
 
 export default handleActions(
@@ -126,6 +128,11 @@ export default handleActions(
         [BOX_DATA_REMOVE]: (state, { payload }) => {
             return produce(state, draft => {
                 draft.apply.boxes.splice(payload.index, 1);
+            });
+        },
+        [PREDICTION_PRICE_SUCCESS]: (state, { payload }) => {
+            return produce(state, draft => {
+                draft.price = payload;
             });
         },
     },

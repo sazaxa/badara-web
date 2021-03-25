@@ -29,7 +29,6 @@ const Box = ({ box, index, Remove }) => {
                 ...updateBoxData,
                 expectedVolumeWeight: sum,
             });
-            console.log(sum);
         } else {
             alert('가로,세로,높이 값을 모두 입력하세요.');
         }

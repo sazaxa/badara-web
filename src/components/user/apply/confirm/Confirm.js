@@ -1,61 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { applyPriseAction } from 'store/apply';
 import { clearPredictionpriceAction } from 'store/part';
 
 const Confirm = () => {
-    const [totalData, setTotalData] = useState({
+    const [totalWeightData, setTotalWeightData] = useState({
         weight: null,
-        price: null,
     });
     const dispatch = useDispatch();
-    const { country, apply } = useSelector(
+    const { country, apply, price } = useSelector(
         state => ({
             country: state.apply.apply.recipient.country,
             apply: state.apply.apply,
+            price: state.apply.price,
         }),
         shallowEqual
     );
-    console.log(apply);
+    console.log(totalWeightData);
     const { recipient, boxes, products } = apply;
 
-    const totalWeight = () => {
+    const totalCalculation = async () => {
         let sum = 0;
-        boxes.map(box => {
+        await boxes.map(box => {
             if (box.expectedNetWeight > box.expectedVolumeWeight) {
-                sum += box.expectedNetWeight;
-                setTotalData({
-                    ...totalData,
-                    weight: sum,
-                });
+                sum += Number(box.expectedNetWeight);
             } else {
-                sum += box.expectedVolumeWeight;
-                setTotalData({
-                    ...totalData,
-                    weight: sum,
-                });
+                sum += Number(box.expectedVolumeWeight);
             }
+            return sum;
         });
+        console.log(sum);
+        setTotalWeightData({
+            ...totalWeightData,
+            weight: sum,
+        });
+        dispatch(applyPriseAction({ country: country, weight: sum }));
     };
     useEffect(() => {
-        totalWeight();
+        totalCalculation();
     }, []);
-
-    useEffect(() => {
-        if (totalData.weight !== null) {
-            onClickWPrice();
-        }
-    }, [totalData.weight]);
-
-    const onClickWPrice = () => {
-        console.log('country', country);
-        console.log('totalWeightData', totalData.weight);
-        dispatch(
-            clearPredictionpriceAction({
-                country: country,
-                weight: totalData.weight,
-            })
-        );
-    };
     return (
         <>
             <table>
@@ -133,25 +116,34 @@ const Confirm = () => {
                                 <td>{box.expectedWitdh}cm</td>
                                 <td>{box.expectedDepth}cm</td>
                                 <td>{box.expectedHeight}cm</td>
-                                <td>{box.expectedVolumeWeight}</td>
-                                <td>{box.expectedNetWeight}</td>
+                                <td>{box.expectedVolumeWeight}kg</td>
+                                <td>{box.expectedNetWeight}kg</td>
                             </tr>
                             <tr>
-                                <th colSpan="5">
-                                    총 측정된 무게 <br />
-                                    (부피무게와 실무게중 무거운 쪽이 측정됩니다.)
-                                </th>
-                            </tr>
-                            <tr>
+                                <th>측정된 무게</th>
                                 <td>{box.expectedVolumeWeight > box.expectedNetWeight ? '부피무게' : '실 무게'}</td>
+                                <td>
+                                    {box.expectedVolumeWeight > box.expectedNetWeight
+                                        ? box.expectedVolumeWeight + 'kg'
+                                        : box.expectedNetWeight + 'kg'}
+                                </td>
                             </tr>
-                            <tr>
-                                <td>{totalData.weight}</td>
-                            </tr>
+                            <tr></tr>
                         </tbody>
                     </table>
                 );
             })}
+            <div className="total">
+                <h4>Total</h4>
+                <div className="weight">
+                    <h3>총 무게</h3>
+                    <p>{totalWeightData.weight}</p>
+                </div>
+                <div className="price">
+                    <h3>총 예상가격</h3>
+                    <p>{price}</p>
+                </div>
+            </div>
         </>
     );
 };
