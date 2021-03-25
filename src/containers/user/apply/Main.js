@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { applyClearAction } from 'store/apply';
 import { resetStep } from 'store/part';
 import { Responsive } from 'styles/CommonStyles';
 import ApplyMain from '../../../components/user/apply/Main';
@@ -11,17 +12,13 @@ const Main = () => {
     useEffect(() => {
         return () => {
             dispatch(resetStep());
+            dispatch(applyClearAction());
         };
     }, []);
 
     return (
         <Responsive>
-            <ApplyMain
-                activeStep={activeStep}
-                // handleNext={handleNext}
-                // handleBack={handleBack}
-                // handleReset={handleReset}
-            />
+            <ApplyMain activeStep={activeStep} />
         </Responsive>
     );
 };

@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { boxDataUpdateAction } from 'store/apply';
 
-const Product = ({ box, index, Remove }) => {
+const Box = ({ box, index, Remove }) => {
+    // 받은 data를 수정하기 위해 state에 담는다.
     const [updateBoxData, setUpdateBoxData] = useState(box);
     const dispatch = useDispatch();
-    console.log(updateBoxData);
+
     const handleChange = e => {
         const { name, value } = e.target;
         setUpdateBoxData({
@@ -14,10 +15,25 @@ const Product = ({ box, index, Remove }) => {
         });
     };
 
+    // state가 변경 될때마다 redux state에 저장한다.
     useEffect(() => {
         dispatch(boxDataUpdateAction({ index: index, updateData: updateBoxData }));
-        console.log(updateBoxData);
-    }, [boxDataUpdateAction]);
+    }, [updateBoxData]);
+
+    // 가로 세로 높이 구해서 부피무게를 구하고 state에 저장한다.
+    const onClickVolume = () => {
+        const { expectedWitdh, expectedDepth, expectedHeight } = updateBoxData;
+        if ((expectedWitdh, expectedDepth, expectedHeight !== null)) {
+            const sum = (expectedWitdh * expectedDepth * expectedHeight) / 5000;
+            setUpdateBoxData({
+                ...updateBoxData,
+                expectedVolumeWeight: sum,
+            });
+            console.log(sum);
+        } else {
+            alert('가로,세로,높이 값을 모두 입력하세요.');
+        }
+    };
 
     return (
         <>
@@ -61,12 +77,21 @@ const Product = ({ box, index, Remove }) => {
                         </td>
                     </tr>
                     <tr>
+                        <td>
+                            <button type="button" onClick={onClickVolume}>
+                                부피무게 계산하기
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
                         <th>부피무게</th>
                         <td>
                             <input
                                 type="number"
                                 name="expectedVolumeWeight"
                                 value={updateBoxData.expectedVolumeWeight ?? undefined}
+                                disabled
+                                placeholder="계산하기 후 확인가능합니다."
                                 onChange={e => handleChange(e)}
                                 required
                             />
@@ -84,18 +109,6 @@ const Product = ({ box, index, Remove }) => {
                             />
                         </td>
                     </tr>
-                    <tr>
-                        <th>예상가격</th>
-                        <td>
-                            <input
-                                type="number"
-                                name="expectedPrice"
-                                value={updateBoxData.expectedPrice ?? undefined}
-                                onChange={e => handleChange(e)}
-                                required
-                            />
-                        </td>
-                    </tr>
                 </tbody>
             </table>
             {index !== 0 ? <button onClick={() => Remove()}>삭제</button> : null}
@@ -103,4 +116,4 @@ const Product = ({ box, index, Remove }) => {
     );
 };
 
-export default Product;
+export default Box;

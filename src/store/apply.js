@@ -18,10 +18,15 @@ const BOX_DATA_ADD = 'apply/BOX_DATA_ADD';
 const BOX_DATA_REMOVE = 'apply/BOX_DATA_REMOVE';
 const BOX_DATA_UPDATE = 'apply/BOX_DATA_UPDATE';
 
+// Apply clear Types.
+const APPLY_CLEAR = 'apply/APPLY_CLEAR';
+
 // apply 예상가격 가져오기 Action Types
 const [PREDICTION_PRISE, PREDICTION_PRISE_SUCCESS, PREDICTION_PRISE_FAILURE] = createRequestActionTypes(
     'apply/PREDICTION_PRISE'
 );
+
+export const applyClearAction = createAction(APPLY_CLEAR);
 
 export const recipientInsertAction = createAction(RECIPIENT_DATA_SAVE, data => data);
 
@@ -83,6 +88,11 @@ export const initialState = {
 
 export default handleActions(
     {
+        [APPLY_CLEAR]: state => {
+            return produce(state, draft => {
+                draft.apply = initialState.apply;
+            });
+        },
         [RECIPIENT_DATA_SAVE]: (state, { payload }) => {
             return produce(state, draft => {
                 draft.apply.recipient = payload.recipient;

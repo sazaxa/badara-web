@@ -10,6 +10,7 @@ import Tos from './tos/Tos';
 import Recipient from './recipient/Recipient';
 import Products from './product/Products';
 import Boxes from './Box/Boxes';
+import Confirm from './confirm/Confirm';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -43,7 +44,7 @@ const getStepContent = (stepIndex, steps) => {
         case 3:
             return <Boxes stepIndex={stepIndex} steps={steps} />;
         case 4:
-            return '마지막 확인';
+            return <Confirm />;
         default:
             return 'Unknown stepIndex';
     }
