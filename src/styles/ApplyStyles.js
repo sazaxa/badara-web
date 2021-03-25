@@ -212,6 +212,7 @@ export const AskModalBlock = styled.article`
     .buttons {
         display: flex;
         justify-content: flex-end;
+        clear: both;
         button {
             padding: 10px;
             outline: none;
@@ -231,6 +232,19 @@ export const AskModalBlock = styled.article`
         }
         button:nth-child(2) {
             margin: 0 0.5rem;
+        }
+    }
+    .shippingWrap {
+        padding: 15px;
+        box-sizing: border-box;
+        height: 100px;
+        & > input {
+            float: left;
+            width: 50%;
+            height: 30px;
+            border: none;
+            outline: none;
+            border-bottom: 1px solid #ccc;
         }
     }
 `;

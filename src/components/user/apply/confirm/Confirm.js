@@ -136,7 +136,7 @@ const Confirm = ({ stepIndex, steps, history }) => {
                                 <th>실 무게</th>
                             </tr>
                             <tr>
-                                <td>{box.expectedWitdh}cm</td>
+                                <td>{box.expectedWidth}cm</td>
                                 <td>{box.expectedDepth}cm</td>
                                 <td>{box.expectedHeight}cm</td>
                                 <td>{box.expectedVolumeWeight}kg</td>
