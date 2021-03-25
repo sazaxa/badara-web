@@ -75,7 +75,7 @@ export function* productSaga() {
 const initialState = {
     defaultProduct: {
         productDetail: null,
-        quntity: null,
+        quantity: null,
         price: null,
         weight: null,
     },
