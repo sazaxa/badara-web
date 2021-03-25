@@ -21,15 +21,22 @@ const BOX_DATA_UPDATE = 'apply/BOX_DATA_UPDATE';
 // Apply clear Types.
 const APPLY_CLEAR = 'apply/APPLY_CLEAR';
 
-// apply 예상가격 가져오기 Action Types
+// Apply 예상가격 가져오기 Action Types
 const [PREDICTION_PRICE, PREDICTION_PRICE_SUCCESS, PREDICTION_PRICE_FAILURE] = createRequestActionTypes(
     'apply/PREDICTION_PRISE'
 );
 
-export const applyClearAction = createAction(APPLY_CLEAR);
+// Apply Save Types;
+const [APPLY_SAVE_REQUEST, APPLY_SAVE_SUCCESS, APPLY_SAVE_FAILURE] = createRequestActionTypes('apply/APPLY_SAVE');
 
+// Apply All
+export const applyClearAction = createAction(APPLY_CLEAR);
+export const applySaveAction = createAction(APPLY_SAVE_REQUEST, ({ data }) => ({ data }));
+
+// Apply.recipinet
 export const recipientInsertAction = createAction(RECIPIENT_DATA_SAVE, data => data);
 
+// Apply.product
 export const productDataAddAction = createAction(PRODUCT_DATA_ADD, data => data);
 export const productDataRemoveAction = createAction(PRODUCT_DATA_REMOVE, index => index);
 export const productDataUpdateAction = createAction(PRODUCT_DATA_UPDATE, ({ index, updateData }) => ({
@@ -37,6 +44,7 @@ export const productDataUpdateAction = createAction(PRODUCT_DATA_UPDATE, ({ inde
     updateData,
 }));
 
+// Apply.box
 export const boxDataAddAction = createAction(BOX_DATA_ADD, data => data);
 export const boxDataRemoveAction = createAction(BOX_DATA_REMOVE, index => index);
 export const boxDataUpdateAction = createAction(BOX_DATA_UPDATE, ({ index, updateData }) => ({
@@ -48,7 +56,6 @@ export const applyPriseAction = createAction(PREDICTION_PRICE, ({ country, weigh
 
 // 예상 가격 가져오기 Saga.
 function* predictionPrimeSaga({ payload: { country, weight } }) {
-    console.log('사가는 타니?');
     const response = yield call(partAPI.PredictionPrice, { country, weight });
     try {
         yield put({ type: PREDICTION_PRICE_SUCCESS, payload: response.data });
@@ -57,8 +64,20 @@ function* predictionPrimeSaga({ payload: { country, weight } }) {
         console.log('통신중 에러가 발생했습니다.');
     }
 }
+
+// order Save Saga.
+function* applySaveSaga({ payload: { data } }) {
+    console.log(data);
+    const response = yield call(applyAPI.save, data);
+    try {
+        yield put({ type: APPLY_SAVE_SUCCESS, payload: response.data });
+    } catch (e) {
+        yield put({ type: APPLY_SAVE_FAILURE, e });
+    }
+}
 export function* applySaga() {
     yield takeLatest(PREDICTION_PRICE, predictionPrimeSaga);
+    yield takeLatest(APPLY_SAVE_REQUEST, applySaveSaga);
 }
 
 export const initialState = {
@@ -67,14 +86,14 @@ export const initialState = {
         products: [
             {
                 productDetail: null,
-                quntity: null,
+                quantity: null,
                 price: null,
                 weight: null,
             },
         ],
         boxes: [
             {
-                expectedWitdh: null,
+                expectedWidth: null,
                 expectedDepth: null,
                 expectedHeight: null,
                 expectedVolumeWeight: null,
@@ -85,7 +104,8 @@ export const initialState = {
             },
         ],
     },
-    prise: null,
+    price: null,
+    status: 'idle',
 };
 
 export default handleActions(
@@ -133,6 +153,21 @@ export default handleActions(
         [PREDICTION_PRICE_SUCCESS]: (state, { payload }) => {
             return produce(state, draft => {
                 draft.price = payload;
+            });
+        },
+        [APPLY_SAVE_REQUEST]: state => {
+            return produce(state, draft => {
+                draft.status = 'loading';
+            });
+        },
+        [APPLY_SAVE_SUCCESS]: state => {
+            return produce(state, draft => {
+                draft.status = 'success';
+            });
+        },
+        [APPLY_SAVE_FAILURE]: state => {
+            return produce(state, draft => {
+                draft.status = 'fail';
             });
         },
     },

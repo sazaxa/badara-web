@@ -44,7 +44,7 @@ const getStepContent = (stepIndex, steps) => {
         case 3:
             return <Boxes stepIndex={stepIndex} steps={steps} />;
         case 4:
-            return <Confirm />;
+            return <Confirm stepIndex={stepIndex} steps={steps} />;
         default:
             return 'Unknown stepIndex';
     }
@@ -63,24 +63,9 @@ const ApplyMain = ({ activeStep, handleNext, handleBack, handleReset }) => {
                 ))}
             </Stepper>
             <div>
-                {activeStep === steps.length ? (
-                    <div>
-                        <Typography className={classes.instructions}>All steps completed</Typography>
-                        <Button onClick={handleReset}>Reset</Button>
-                    </div>
-                ) : (
-                    <div>
-                        <Typography className={classes.instructions}>{getStepContent(activeStep, steps)}</Typography>
-                        <div>
-                            {/* <Button disabled={activeStep === 0} onClick={handleBack} className={classes.backButton}>
-                                Back
-                            </Button>
-                            <Button variant="contained" color="primary" onClick={handleNext}>
-                                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                            </Button> */}
-                        </div>
-                    </div>
-                )}
+                <div>
+                    <Typography className={classes.instructions}>{getStepContent(activeStep, steps)}</Typography>
+                </div>
             </div>
         </div>
     );

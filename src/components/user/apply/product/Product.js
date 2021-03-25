@@ -18,7 +18,6 @@ const Product = ({ stepIndex, steps, product, handlePrev, handleClick, index, Pr
 
     useEffect(() => {
         dispatch(productDataUpdateAction({ index: index, updateData: updateProductData }));
-        console.log(updateProductData);
     }, [updateProductData]);
 
     return (

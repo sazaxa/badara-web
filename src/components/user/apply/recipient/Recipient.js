@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { acitiveStepChange } from 'store/part';
 import Button from '@material-ui/core/Button';
@@ -6,10 +6,11 @@ import { recipientInsertAction } from 'store/apply';
 
 const Recipient = ({ stepIndex, steps }) => {
     const dispatch = useDispatch();
-    const { activeStep, country } = useSelector(
+    const { activeStep, country, recipient: updateRecipient } = useSelector(
         state => ({
             activeStep: state.part.activeStep,
             country: state.part.country,
+            recipient: state.apply.apply.recipient,
         }),
         shallowEqual
     );
@@ -26,7 +27,11 @@ const Recipient = ({ stepIndex, steps }) => {
         phoneNumber: null,
     });
 
-    console.log(recipient);
+    useEffect(() => {
+        if (updateRecipient) {
+            setRecipinet(updateRecipient);
+        }
+    }, []);
 
     const handleChange = e => {
         const { name, value } = e.target;

@@ -17,7 +17,7 @@ const Boxes = ({ stepIndex, steps }) => {
     );
 
     const defaultBoxData = {
-        expectedWitdh: null,
+        expectedWidth: null,
         expectedDepth: null,
         expectedHeight: null,
         expectedVolumeWeight: null,
@@ -39,7 +39,6 @@ const Boxes = ({ stepIndex, steps }) => {
 
     const BoxAdd = () => {
         dispatch(boxDataAddAction({ box: defaultBoxData }));
-        console.log(defaultBoxData);
     };
 
     const boxRemove = index => {

@@ -1,26 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { applyPriseAction } from 'store/apply';
-import { clearPredictionpriceAction } from 'store/part';
+import { applyPriseAction, applySaveAction } from 'store/apply';
+import Button from '@material-ui/core/Button';
+import { acitiveStepChange } from 'store/part';
+import { withRouter } from 'react-router';
 
-const Confirm = () => {
+const Confirm = ({ stepIndex, steps, history }) => {
     const [totalWeightData, setTotalWeightData] = useState({
         weight: null,
     });
     const dispatch = useDispatch();
-    const { country, apply, price } = useSelector(
+    const { country, apply, price, activeStep, status } = useSelector(
         state => ({
             country: state.apply.apply.recipient.country,
             apply: state.apply.apply,
             price: state.apply.price,
+            activeStep: state.part.activeStep,
+            status: state.apply.status,
         }),
         shallowEqual
     );
-    console.log(totalWeightData);
+
+    useEffect(() => {
+        totalCalculation();
+    }, []);
+
+    useEffect(() => {
+        if (status === 'success') {
+            alert('접수가 완료 되었습니다.');
+            history.push('/');
+        }
+    }, [status]);
+
     const { recipient, boxes, products } = apply;
 
     const totalCalculation = async () => {
         let sum = 0;
+        // map 함수를 동기로 진행한다.
         await boxes.map(box => {
             if (box.expectedNetWeight > box.expectedVolumeWeight) {
                 sum += Number(box.expectedNetWeight);
@@ -34,13 +50,20 @@ const Confirm = () => {
             ...totalWeightData,
             weight: sum,
         });
+        // dispatch는 원래 동기다.
         dispatch(applyPriseAction({ country: country, weight: sum }));
     };
-    useEffect(() => {
-        totalCalculation();
-    }, []);
+
+    const handlePrev = () => {
+        dispatch(acitiveStepChange(activeStep - 1));
+    };
+
+    const hadleApplySaveSumbit = e => {
+        e.preventDefault();
+        dispatch(applySaveAction({ data: apply }));
+    };
     return (
-        <>
+        <form onSubmit={e => hadleApplySaveSumbit(e)}>
             <table>
                 <tbody>
                     <tr>
@@ -144,8 +167,14 @@ const Confirm = () => {
                     <p>{price}</p>
                 </div>
             </div>
-        </>
+            <Button type="button" disabled={stepIndex === 0} onClick={handlePrev}>
+                Back
+            </Button>
+            <Button variant="contained" color="primary" type="submit">
+                {stepIndex === steps.length - 1 ? 'Finish' : 'Next'}
+            </Button>
+        </form>
     );
 };
 
-export default Confirm;
+export default withRouter(Confirm);
