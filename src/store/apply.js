@@ -112,7 +112,9 @@ export default handleActions(
     {
         [APPLY_CLEAR]: state => {
             return produce(state, draft => {
-                draft = initialState;
+                draft.apply = initialState.apply;
+                draft.price = initialState.price;
+                draft.status = initialState.status;
             });
         },
         [RECIPIENT_DATA_SAVE]: (state, { payload }) => {
