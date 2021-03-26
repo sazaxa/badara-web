@@ -215,20 +215,21 @@ export const AskModalBlock = styled.article`
         clear: both;
         button {
             padding: 10px;
-            outline: none;
-            border: none;
-            color: #fff;
+            // outline: none;
+            // border: none;
+            // color: #000;
             border-radius: 3px;
             letter-spacing: -1px;
+            cursor: pointer;
         }
-        button:first-child {
-            background: #fff;
-            border: 1px solid #343a40;
-            color: #343a40;
-            &:hover {
-                background: #343a40;
-                color: #fff;
-            }
+        // button:first-child {
+        //     background: #fff;
+        //     border: 1px solid #343a40;
+        //     color: #343a40;
+        //     &:hover {
+        //         background: #343a40;
+        //         color: #fff;
+        //     }
         }
         button:nth-child(2) {
             margin: 0 0.5rem;

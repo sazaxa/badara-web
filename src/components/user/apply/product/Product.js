@@ -55,13 +55,6 @@ const ProductWrap = styled.article`
             width: 100%;
         }
     }
-    .agreeBox {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        margin: 20px 0;
-    }
 `;
 
 const Product = ({ stepIndex, steps, product, handlePrev, handleClick, index, ProductRemove }) => {

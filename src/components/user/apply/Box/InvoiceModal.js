@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AskModalBlock, Fullscreen } from 'styles/ApplyStyles';
 import Invoise from './Invoice';
+import Button from '@material-ui/core/Button';
 
 const InvoiceModal = ({ visible, close, open }) => {
     const { boxes } = useSelector(state => state.apply.apply);
@@ -15,10 +16,12 @@ const InvoiceModal = ({ visible, close, open }) => {
                         <Invoise box={box} index={index} />
                     ))}
                     <div className="buttons">
-                        <button type="submit">입력하기</button>
-                        <button type="button" onClick={e => close(e)}>
-                            다음에 입력
-                        </button>
+                        <Button variant="contained" color="primary" type="submit">
+                            입력하기
+                        </Button>
+                        <Button variant="outlined" color="primary" type="button" onClick={e => close(e)}>
+                            취소
+                        </Button>
                     </div>
                 </form>
             </AskModalBlock>

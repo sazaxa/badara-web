@@ -44,6 +44,10 @@ const Boxes = ({ stepIndex, steps }) => {
         setAskPopup(false);
         dispatch(acitiveStepChange(activeStep + 1));
     };
+    const handleAskCancel = e => {
+        e.preventDefault();
+        setAskPopup(false);
+    };
     const handleInvoiceOpen = e => {
         e.preventDefault();
         setInvoicePopup(true);
@@ -83,15 +87,27 @@ const Boxes = ({ stepIndex, steps }) => {
                         key={index}
                     />
                 ))}
-                <button onClick={BoxAdd}>추가</button>
-                <Button disabled={stepIndex === 0} onClick={handlePrev}>
-                    Back
+                <Button variant="outlined" color="primary" onClick={BoxAdd}>
+                    추가
                 </Button>
-                <Button variant="contained" color="primary" type="submit">
-                    {stepIndex === steps.length - 1 ? 'Finish' : 'Next'}
-                </Button>
+                <article
+                    style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        margin: '20px 0',
+                    }}
+                >
+                    <Button disabled={stepIndex === 0} onClick={handlePrev}>
+                        Back
+                    </Button>
+                    <Button variant="contained" color="primary" type="submit">
+                        {stepIndex === steps.length - 1 ? 'Finish' : 'Next'}
+                    </Button>
+                </article>
             </form>
-            <AskModal visible={AskPopop} close={handleAskClose} open={handleInvoiceOpen} />
+            <AskModal visible={AskPopop} close={handleAskClose} open={handleInvoiceOpen} cancel={handleAskCancel} />
             <InvoiceModal visible={InvoicePopup} close={handleInvoiceClose} open={handleClick} />
         </>
     );

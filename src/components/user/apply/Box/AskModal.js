@@ -1,7 +1,8 @@
 import React from 'react';
 import { AskModalBlock, Fullscreen } from 'styles/ApplyStyles';
+import Button from '@material-ui/core/Button';
 
-const AskModal = ({ visible, close, open }) => {
+const AskModal = ({ visible, close, open, cancel }) => {
     if (!visible) return null;
     return (
         <Fullscreen>
@@ -14,12 +15,15 @@ const AskModal = ({ visible, close, open }) => {
                     (보내시기 전이라면 보내신 뒤 <br /> 마이페이지에서 입력 가능합니다.)
                 </p>
                 <div className="buttons">
-                    <button type="button" onClick={e => open(e)}>
+                    <Button variant="contained" color="primary" type="button" onClick={e => open(e)}>
                         입력하기
-                    </button>
-                    <button type="button" onClick={e => close(e)}>
-                        다음에 입력
-                    </button>
+                    </Button>
+                    <Button variant="outlined" color="primary" type="button" onClick={e => close(e)}>
+                        나중에 하기
+                    </Button>
+                    <Button variant="outlined" color="primary" type="button" onClick={e => cancel(e)}>
+                        취소
+                    </Button>
                 </div>
             </AskModalBlock>
         </Fullscreen>
