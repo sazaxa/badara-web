@@ -238,13 +238,15 @@ export const AskModalBlock = styled.article`
         padding: 15px;
         box-sizing: border-box;
         height: 100px;
-        & > input {
+        & > input,
+        & > select {
             float: left;
             width: 50%;
             height: 30px;
             border: none;
             outline: none;
             border-bottom: 1px solid #ccc;
+            box-sizing: border-box;
         }
     }
 `;
