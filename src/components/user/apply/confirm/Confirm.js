@@ -254,7 +254,6 @@ const Confirm = ({ stepIndex, steps, history }) => {
                                             : Number(box.expectedNetWeight).toFixed(2) + 'kg'}
                                     </td>
                                 </tr>
-                                <tr></tr>
                             </tbody>
                         </table>
                     );
