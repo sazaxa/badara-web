@@ -50,15 +50,25 @@ const Products = ({ stepIndex, steps }) => {
                         ProductRemove={ProductRemove}
                     />
                 ))}
-                <button type="button" onClick={ProductAdd}>
+                <Button variant="outlined" color="primary" type="button" onClick={ProductAdd}>
                     추가
-                </button>
-                <Button disabled={stepIndex === 0} onClick={handlePrev}>
-                    Back
                 </Button>
-                <Button variant="contained" color="primary" type="submit">
-                    {stepIndex === steps.length - 1 ? 'Finish' : 'Next'}
-                </Button>
+                <article
+                    style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        margin: '20px 0',
+                    }}
+                >
+                    <Button disabled={stepIndex === 0} onClick={handlePrev}>
+                        Back
+                    </Button>
+                    <Button variant="contained" color="primary" type="submit">
+                        {stepIndex === steps.length - 1 ? 'Finish' : 'Next'}
+                    </Button>
+                </article>
             </form>
         </>
     );
