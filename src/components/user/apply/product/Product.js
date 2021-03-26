@@ -42,7 +42,7 @@ const Product = ({ stepIndex, steps, product, handlePrev, handleClick, index, Pr
                         <td>
                             <input
                                 type="text"
-                                name="quntity"
+                                name="quantity"
                                 value={updateProductData.quntity ?? undefined}
                                 onChange={e => handleChange(e)}
                                 required
