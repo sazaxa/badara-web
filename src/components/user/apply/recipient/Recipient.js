@@ -3,6 +3,56 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { acitiveStepChange } from 'store/part';
 import Button from '@material-ui/core/Button';
 import { recipientInsertAction } from 'store/apply';
+import styled from 'styled-components';
+
+const RecipientWrap = styled.article`
+    width: 100%;
+    h2 {
+        letter-spacing: -2.5px;
+        padding-bottom: 15px;
+        font-size: 32px;
+        border-bottom: 4px solid #0080ff;
+    }
+    input,
+    select {
+        width: 100%;
+        border: none;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        height: 40px;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+    table {
+        width: 100%;
+        & > tbody > tr {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            border-bottom: 1px solid #ccc;
+            padding: 15px 0;
+        }
+        & > tbody > tr > th {
+            width: 30%;
+        }
+        & > tbody > tr > td {
+            width: 70%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        & > tbody > tr > td > input {
+            width: 100%;
+        }
+    }
+    .agreeBox {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 0;
+    }
+`;
 
 const Recipient = ({ stepIndex, steps }) => {
     const dispatch = useDispatch();
@@ -66,7 +116,7 @@ const Recipient = ({ stepIndex, steps }) => {
         }
     };
     return (
-        <>
+        <RecipientWrap>
             <h2>수취인 정보</h2>
             <table>
                 <tbody>
@@ -115,53 +165,50 @@ const Recipient = ({ stepIndex, steps }) => {
                             <input
                                 type="text"
                                 name="address1"
+                                placeholder="address1"
                                 value={recipient.address1 ?? undefined}
                                 onChange={e => handleChange(e)}
+                                style={{ width: '33%' }}
                             />
-                        </td>
-                        <td>
                             <input
                                 type="text"
                                 name="address2"
+                                placeholder="address2"
                                 value={recipient.address2 ?? undefined}
                                 onChange={e => handleChange(e)}
+                                style={{ width: '33%', marginBottom: '5px' }}
                             />
-                        </td>
-                        <td>
                             <input
                                 type="text"
                                 name="address3"
+                                placeholder="address3"
                                 value={recipient.address3 ?? undefined}
                                 onChange={e => handleChange(e)}
+                                style={{ width: '33%' }}
                             />
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>우편번호</th>
-                        <td>
                             <input
                                 type="text"
                                 name="zipcode"
                                 value={recipient.zipcode ?? undefined}
                                 onChange={e => handleChange(e)}
+                                placeholder="우편번호"
+                                style={{ width: '33%' }}
                             />
-                        </td>
-                        <th>도시</th>
-                        <td>
                             <input
                                 type="text"
                                 name="city"
                                 value={recipient.city ?? undefined}
+                                placeholder="도시"
                                 onChange={e => handleChange(e)}
+                                style={{ width: '33%' }}
                             />
-                        </td>
-                        <th>주/도</th>
-                        <td>
                             <input
                                 type="text"
                                 name="state"
+                                placeholder="주/도"
                                 value={recipient.state ?? undefined}
                                 onChange={e => handleChange(e)}
+                                style={{ width: '33%' }}
                             />
                         </td>
                     </tr>
@@ -174,6 +221,7 @@ const Recipient = ({ stepIndex, steps }) => {
                                 name="countryCode"
                                 value={recipient.countryCode ?? undefined}
                                 onChange={e => handleChange(e)}
+                                style={{ width: '29.5%' }}
                             />
                             <input
                                 type="text"
@@ -181,18 +229,21 @@ const Recipient = ({ stepIndex, steps }) => {
                                 name="phoneNumber"
                                 value={recipient.phoneNumber ?? undefined}
                                 onChange={e => handleChange(e)}
+                                style={{ width: '70%' }}
                             />
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <Button disabled={stepIndex === 0} onClick={handlePrev}>
-                Back
-            </Button>
-            <Button variant="contained" color="primary" onClick={handleClick}>
-                {stepIndex === steps.length - 1 ? 'Finish' : 'Next'}
-            </Button>
-        </>
+            <article className="agreeBox">
+                <Button disabled={stepIndex === 0} onClick={handlePrev}>
+                    Back
+                </Button>
+                <Button variant="contained" color="primary" onClick={handleClick}>
+                    {stepIndex === steps.length - 1 ? 'Finish' : 'Next'}
+                </Button>
+            </article>
+        </RecipientWrap>
     );
 };
 
