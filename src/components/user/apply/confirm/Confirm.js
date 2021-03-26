@@ -4,6 +4,91 @@ import { applyPriseAction, applySaveAction } from 'store/apply';
 import Button from '@material-ui/core/Button';
 import { acitiveStepChange } from 'store/part';
 import { withRouter } from 'react-router';
+import styled from 'styled-components';
+
+const ConfirmWrap = styled.article`
+    width: 100%;
+    margin-bottom: 30px;
+    .titleBox {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding-bottom: 15px;
+        box-sizing: border-box;
+        & > h2 {
+            letter-spacing: -2.5px;
+            font-size: 32px;
+            margin-right: 10px;
+        }
+        & > button {
+            height: 40px;
+        }
+    }
+    input,
+    select {
+        width: 100%;
+        border: none;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        height: 40px;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+    table {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 50px;
+        & > tbody > tr {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            border-bottom: 1px solid #ccc;
+            padding: 15px 0;
+        }
+        & > tbody > tr:first-child {
+            border-top: 4px solid #0080ff;
+        }
+        & > tbody > tr > th {
+            width: 50%;
+        }
+        & > tbody > tr > td {
+            width: 50%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        & > tbody > tr > td > input {
+            width: 100%;
+        }
+    }
+    .total {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        & > h2 {
+            width: 100%;
+            text-align: center;
+            background: #0080ff;
+            padding: 20px 0;
+            color: #fff;
+        }
+        & > div {
+            width: 50%;
+            & > h3 {
+                text-align: center;
+                padding: 20px 0;
+                box-sizing: border-box;
+                border-bottom: 1px solid #ccc;
+            }
+            & > p {
+                text-align: center;
+                padding: 20px 0;
+                box-sizing: border-box;
+                border-bottom: 1px solid #ccc;
+            }
+        }
+    }
+`;
 
 const Confirm = ({ stepIndex, steps, history }) => {
     const [totalWeightData, setTotalWeightData] = useState({
@@ -23,7 +108,7 @@ const Confirm = ({ stepIndex, steps, history }) => {
 
     useEffect(() => {
         totalCalculation();
-    }, []);
+    }, [apply]);
 
     useEffect(() => {
         if (status === 'success') {
@@ -63,117 +148,146 @@ const Confirm = ({ stepIndex, steps, history }) => {
         dispatch(applySaveAction({ data: apply }));
     };
     return (
-        <form onSubmit={e => hadleApplySaveSumbit(e)}>
-            <table>
-                <tbody>
-                    <tr>
-                        <th>수취인 정보</th>
-                    </tr>
-                    <tr>
-                        <th>이름</th>
-                        <td>{recipient.name}</td>
-                    </tr>
-                    <tr>
-                        <th>이메일</th>
-                        <td>{recipient.email}</td>
-                    </tr>
-                    <tr>
-                        <th>휴대폰 번호</th>
-                        <td>
-                            [{recipient.countryCode}]{recipient.phoneNumber}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>주소</th>
-                        <td>
-                            [{recipient.zipcode}]{' '}
-                            {recipient.address1 ??
-                                undefined + recipient.address2 ??
-                                undefined + recipient.address3 ??
-                                undefined + recipient.city ??
-                                undefined + recipient.state ??
-                                undefined}{' '}
-                            ({recipient.country})
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            {products.map((product, index) => {
-                return (
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th colSpan="5">상품 {index + 1}</th>
-                            </tr>
-                            <tr>
-                                <th>상품정보</th>
-                                <th>개수</th>
-                                <th>가격</th>
-                                <th>실 무게</th>
-                            </tr>
-                            <tr>
-                                <td>{product.productDetail}</td>
-                                <td>{product.quntity}</td>
-                                <td>{product.price}</td>
-                                <td>{product.weight}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                );
-            })}
-            {boxes.map((box, index) => {
-                return (
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th colSpan="5">박스 {index + 1}</th>
-                            </tr>
-                            <tr>
-                                <th>가로</th>
-                                <th>세로</th>
-                                <th>높이</th>
-                                <th>부피 무게</th>
-                                <th>실 무게</th>
-                            </tr>
-                            <tr>
-                                <td>{box.expectedWidth}cm</td>
-                                <td>{box.expectedDepth}cm</td>
-                                <td>{box.expectedHeight}cm</td>
-                                <td>{box.expectedVolumeWeight}kg</td>
-                                <td>{box.expectedNetWeight}kg</td>
-                            </tr>
-                            <tr>
-                                <th>측정된 무게</th>
-                                <td>{box.expectedVolumeWeight > box.expectedNetWeight ? '부피무게' : '실 무게'}</td>
-                                <td>
-                                    {box.expectedVolumeWeight > box.expectedNetWeight
-                                        ? box.expectedVolumeWeight + 'kg'
-                                        : box.expectedNetWeight + 'kg'}
-                                </td>
-                            </tr>
-                            <tr></tr>
-                        </tbody>
-                    </table>
-                );
-            })}
-            <div className="total">
-                <h4>Total</h4>
-                <div className="weight">
-                    <h3>총 무게</h3>
-                    <p>{totalWeightData.weight}</p>
+        <ConfirmWrap>
+            <article className="titleBox">
+                <h2>수취인</h2>
+            </article>
+            <form onSubmit={e => hadleApplySaveSumbit(e)}>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th colSpan="4" style={{ width: '100%' }}>
+                                수취인 정보
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>이름</th>
+                            <td>{recipient.name}</td>
+                        </tr>
+                        <tr>
+                            <th>이메일</th>
+                            <td>{recipient.email}</td>
+                        </tr>
+                        <tr>
+                            <th>휴대폰 번호</th>
+                            <td>
+                                [{recipient.countryCode}]{recipient.phoneNumber}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>주소</th>
+                            <td>
+                                [{recipient.zipcode}]{' '}
+                                {recipient.address1 ??
+                                    undefined + recipient.address2 ??
+                                    undefined + recipient.address3 ??
+                                    undefined + recipient.city ??
+                                    undefined + recipient.state ??
+                                    undefined}{' '}
+                                ({recipient.country})
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <article className="titleBox">
+                    <h2>상품</h2>
+                </article>
+                {products.map((product, index) => {
+                    return (
+                        <>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <th colSpan="4" style={{ width: '100%' }}>
+                                            상품 {index + 1}
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th>상품정보</th>
+                                        <th>개수</th>
+                                        <th>가격</th>
+                                        <th>실 무게</th>
+                                    </tr>
+                                    <tr>
+                                        <td>{product.productDetail}</td>
+                                        <td>{product.quantity}개</td>
+                                        <td>{Number(product.price).toLocaleString()}원</td>
+                                        <td>{product.weight ? product.weight + 'kg' : null}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </>
+                    );
+                })}
+                <article className="titleBox">
+                    <h2>박스</h2>
+                </article>
+                {boxes.map((box, index) => {
+                    return (
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th colSpan="4" style={{ width: '100%' }}>
+                                        박스 {index + 1}
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>가로</th>
+                                    <th>세로</th>
+                                    <th>높이</th>
+                                    <th>부피 무게</th>
+                                    <th>실 무게</th>
+                                </tr>
+                                <tr>
+                                    <td>{box.expectedWidth}cm</td>
+                                    <td>{box.expectedDepth}cm</td>
+                                    <td>{box.expectedHeight}cm</td>
+                                    <td>{Number(box.expectedVolumeWeight).toFixed(2)}kg</td>
+                                    <td>{Number(box.expectedNetWeight).toFixed(2)}kg</td>
+                                </tr>
+                                <tr>
+                                    <th>측정된 무게</th>
+                                    <td>{box.expectedVolumeWeight > box.expectedNetWeight ? '부피무게' : '실 무게'}</td>
+                                    <td>
+                                        {box.expectedVolumeWeight > box.expectedNetWeight
+                                            ? Number(box.expectedVolumeWeight).toFixed(2) + 'kg'
+                                            : Number(box.expectedNetWeight).toFixed(2) + 'kg'}
+                                    </td>
+                                </tr>
+                                <tr></tr>
+                            </tbody>
+                        </table>
+                    );
+                })}
+                <div className="total">
+                    <h2>Total</h2>
+                    <div className="weight">
+                        <h3>총 무게</h3>
+                        <p>{Number(totalWeightData.weight).toFixed(2) + 'kg'}</p>
+                    </div>
+                    <div className="price">
+                        <h3>총 예상가격</h3>
+                        <p>{Math.ceil(price).toLocaleString() + '원'}</p>
+                    </div>
                 </div>
-                <div className="price">
-                    <h3>총 예상가격</h3>
-                    <p>{price}</p>
-                </div>
-            </div>
-            <Button type="button" disabled={stepIndex === 0} onClick={handlePrev}>
-                Back
-            </Button>
-            <Button variant="contained" color="primary" type="submit">
-                {stepIndex === steps.length - 1 ? 'Finish' : 'Next'}
-            </Button>
-        </form>
+                <article
+                    style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        margin: '20px 0',
+                    }}
+                >
+                    <Button type="button" disabled={stepIndex === 0} onClick={handlePrev}>
+                        이전
+                    </Button>
+                    <Button variant="contained" color="primary" type="submit">
+                        {stepIndex === steps.length - 1 ? '접수하기' : '다음'}
+                    </Button>
+                </article>
+            </form>
+        </ConfirmWrap>
     );
 };
 

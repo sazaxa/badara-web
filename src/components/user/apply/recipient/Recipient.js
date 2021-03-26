@@ -237,10 +237,10 @@ const Recipient = ({ stepIndex, steps }) => {
             </table>
             <article className="agreeBox">
                 <Button disabled={stepIndex === 0} onClick={handlePrev}>
-                    Back
+                    이전
                 </Button>
                 <Button variant="contained" color="primary" onClick={handleClick}>
-                    {stepIndex === steps.length - 1 ? 'Finish' : 'Next'}
+                    {stepIndex === steps.length - 1 ? '접수하기' : '다음'}
                 </Button>
             </article>
         </RecipientWrap>
