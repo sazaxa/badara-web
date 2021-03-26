@@ -4,10 +4,40 @@ import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { acitiveStepChange } from 'store/part';
 
+const TosWrap = styled.article`
+    width: 100%;
+
+    h2 {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    .agreeBox {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 0;
+    }
+    .agreeBox > .inputBox {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 0;
+    }
+    .agreeBox > .inputBox > label {
+        margin: 0 10px;
+        display: inline-block;
+    }
+`;
+
 const TosBox = styled.article`
     width: 100%;
     height: 500px;
     overflow-y: auto;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
 `;
 
 const Tos = ({ stepIndex, steps }) => {
@@ -21,7 +51,7 @@ const Tos = ({ stepIndex, steps }) => {
         dispatch(acitiveStepChange(activeStep + 1));
     };
     return (
-        <>
+        <TosWrap>
             <h2>이용약관</h2>
             <TosBox>
                 웹사이트 이용 약관 알로하! 하와이에서 가장 크고 가장 오래된 항공사이며 미국 대륙의 주요 방문자 시장에서
@@ -170,13 +200,17 @@ const Tos = ({ stepIndex, steps }) => {
                 이벤트 또는 상황을 반영하기 위해 사이트에 포함되거나 사이트에서 참조된 예상 보고서를 업데이트, 수정,
                 추가 또는 다른 방법으로 개정할 의무를 명시적으로 부인합니다.
             </TosBox>
-            <input type="checkbox" id="agree" onChange={e => handleChange(e)} />
-            <label htmlFor="agree">동의하시겠습니까?</label>
-            {/* <Button disabled={stepIndex === 0}>Back</Button> */}
-            <Button variant="contained" color="primary" disabled={inputChecked ? false : true} onClick={handleNext}>
-                {stepIndex === steps.length - 1 ? 'Finish' : 'Next'}
-            </Button>
-        </>
+            <article className="agreeBox">
+                <article className="inputBox">
+                    <input type="checkbox" id="agree" onChange={e => handleChange(e)} />
+                    <label htmlFor="agree">동의하시겠습니까?</label>
+                </article>
+                {/* <Button disabled={stepIndex === 0}>Back</Button> */}
+                <Button variant="contained" color="primary" disabled={inputChecked ? false : true} onClick={handleNext}>
+                    {stepIndex === steps.length - 1 ? 'Finish' : 'Next'}
+                </Button>
+            </article>
+        </TosWrap>
     );
 };
 
