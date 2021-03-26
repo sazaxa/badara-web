@@ -77,27 +77,24 @@ export const MypageContent = styled.article`
             }
         }
     }
-    .MuiTableCell-root ul {
+    .memberOrders .data {
         display: flex;
-        justify-content: space-between;
-        li {
-            // margin-right: 8px;
+        flex-wrap: wrap;
+    }
+    strong {
+        margin-right: 10px;
+    }
+    .order {
+        width: 100%;
+        margin-bottom: 30px;
+        & > .orderHead {
+            width: 100%;
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-around;
+            background: #1976d2;
+            color: #fff;
         }
-    }
-    .MuiTableCell-body {
-        // width: 100%;
-    }
-    button {
-        width: 80px;
-        height: 35px;
-        border: none;
-        background: #0049ff;
-        border-radius: 10px;
-        color: #fff;
-        outline: none;
-        cursor: pointer;
-        padding: 10px;
-        margin-top: 10px;
     }
 `;
 

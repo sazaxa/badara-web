@@ -11,10 +11,10 @@ const MypageContainer = () => {
     const accessToken = localStorage.getItem('accessToken');
     const [updatePopup, setUpdatePopup] = useState(false);
     const [paymentPopup, setPaymentPopup] = useState(false);
-    const { logged, member } = useSelector(
+    const { logged, orders } = useSelector(
         state => ({
             logged: state.member.loggedInfo.logged,
-            member: state.member.memberInfo.member,
+            orders: state.member.memberInfo.orders,
         }),
         shallowEqual
     );
@@ -51,7 +51,7 @@ const MypageContainer = () => {
     if (!logged && !accessToken) return null;
     return (
         <MypageComponent
-            member={member}
+            memberOrder={orders}
             handleUpdatePopup={handleUpdatePopup}
             updatePopup={updatePopup}
             handleProductInfo={handleProductInfo}

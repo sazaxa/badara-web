@@ -46,8 +46,8 @@ function* getMemberInfoSaga({ payload: id }) {
         yield put({ type: GET_MEMBER_INFO_SUCCESS, payload: data });
     } catch (e) {
         yield put({ type: GET_MEMBER_INFO_FAILURE, payload: e });
-        localStorage.removeItem('accessToken');
-        window.location.href = '/';
+        // localStorage.removeItem('accessToken');
+        // window.location.href = '/';
     }
 }
 
@@ -116,7 +116,7 @@ const initialState = {
         list: [],
     },
     memberInfo: {
-        member: null,
+        orders: null,
         error: null,
     },
     loggedInfo: {
@@ -154,7 +154,7 @@ export default handleActions(
         },
         [GET_MEMBER_INFO_SUCCESS]: (state, { payload }) => {
             return produce(state, draft => {
-                draft.memberInfo.member = payload;
+                draft.memberInfo.orders = payload;
             });
         },
         [GET_MEMBER_INFO_FAILURE]: (state, { payload }) => {

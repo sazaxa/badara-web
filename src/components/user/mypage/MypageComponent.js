@@ -1,42 +1,12 @@
 import React from 'react';
 import { Responsive } from 'styles/CommonStyles';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { MypageContent } from 'styles/MypageStyles';
 import UpdateInvoice from './UpdateInvoice';
 import PaymentPopup from './PaymentPopup';
 
-const StyledTableCell = withStyles(theme => ({
-    head: {
-        backgroundColor: '#1976d2',
-        color: theme.palette.common.white,
-    },
-    body: {
-        fontSize: 14,
-    },
-}))(TableCell);
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        width: '80px',
-        height: '80px',
-        fontSize: '24px',
-        margin: '0 auto',
-        marginBottom: '50px',
-    },
-    table: {
-        minWidth: 650,
-    },
-}));
-
 const MypageComponent = ({
-    member,
+    memberOrder,
     handleUpdatePopup,
     handlePaymentPopup,
     updatePopup,
@@ -44,8 +14,7 @@ const MypageComponent = ({
     paymentPopup,
     handlePaymentInfo,
 }) => {
-    const classes = useStyles();
-    if (!member) {
+    if (!memberOrder) {
         return null;
     }
     return (
@@ -90,138 +59,101 @@ const MypageComponent = ({
                         </ul>
                     </article>
                 </article>
-                <TableContainer component={Paper}>
-                    {member.hapOrders.length !== 0 ? (
-                        member.hapOrders.map(hapOrder => (
-                            <Table className={classes.table} aria-label="simple table">
-                                <TableHead>
-                                    <TableRow>
-                                        <StyledTableCell width="38%">
-                                            <ul>
-                                                <li>
-                                                    <span>
-                                                        <strong>신청날짜</strong> : {hapOrder.orders[0].createdDate}
-                                                        {/* {moment(member.orders[0].products[0].createdDate, 'MMM Do YY')} */}
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <strong>주문 번호</strong> : {hapOrder.orderNumber}
-                                                </li>
-                                            </ul>
-                                        </StyledTableCell>
-                                        <StyledTableCell align="center">받는 분 정보</StyledTableCell>
-                                        <StyledTableCell align="center">금액(예상/실제)</StyledTableCell>
-                                        <StyledTableCell align="center">상태</StyledTableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {/* <TableRow key={order.id}> */}
-                                    {hapOrder.orders.map(order => (
+                <article className="memberOrders">
+                    {memberOrder.map(order => (
+                        <article className="order">
+                            <article className="orderHead">
+                                <div className="headData">
+                                    <strong>주문번호 </strong>
+                                    <span>{order.orderNumber}</span>
+                                </div>
+                                <div className="headData">
+                                    <strong>신청일자 </strong>
+                                    <span>{order.recipient.createdDate}</span>
+                                </div>
+                                <div className="headData">
+                                    <strong>도착국가 </strong>
+                                    <span>{order.recipient.country}</span>
+                                </div>
+                            </article>
+                            <article className="data">
+                                <article className="recipient">
+                                    <h2>수취인 정보</h2>
+                                    <div className="recipientItem">
+                                        <strong>이름 </strong>
+                                        <span>{order.recipient.name}</span>
+                                    </div>
+                                    <div className="recipientItem">
+                                        <strong>이메일 </strong>
+                                        <span>{order.recipient.email}</span>
+                                    </div>
+                                    <div className="recipientItem">
+                                        <strong>주소 </strong>
+                                        <span>
+                                            {order.recipient.address1}
+                                            {order.recipient.address2 ?? order.recipient.address2}
+                                            {order.recipient.address3 ?? order.recipient.address3}
+                                            {order.recipient.city +
+                                                order.recipient.state +
+                                                order.recipient.country +
+                                                order.recipient.zipcode}
+                                        </span>
+                                    </div>
+                                    <div className="recipientItem">
+                                        <strong>휴대폰 번호 </strong>
+                                        <span>
+                                            ({order.recipient.countryCode}){order.recipient.phoneNumber}
+                                        </span>
+                                    </div>
+                                </article>
+                                <article className="product">
+                                    <h2>상품 정보</h2>
+                                    {order.productResponses.map((product, index) => (
                                         <>
-                                            <TableRow align="center">
-                                                <TableCell key={order.id} width="20%" align="center">
-                                                    <p>
-                                                        <strong>상품 명 :</strong> {order.orderName}
-                                                    </p>
-                                                    <p>
-                                                        <strong>회원 입력 부피 무게 :</strong>
-                                                        {order.volumeWeight === 0
-                                                            ? '입력하지 않음'
-                                                            : order.volumeWeight}
-                                                    </p>
-                                                    <p>
-                                                        <strong>회원 입력 실 무게 :</strong>
-                                                        {order.netWeight === 0 ? '입력하지 않음' : order.netWeight}
-                                                    </p>
-                                                    <p>
-                                                        <strong>고래타고 입력 부피 무게 :</strong>
-                                                        {order.adminVolumeWeight === 0
-                                                            ? '입력하지 않음'
-                                                            : order.adminVolumeWeight}
-                                                    </p>
-                                                    <p>
-                                                        <strong>고래타고 입력 실 무게 :</strong>
-                                                        {order.adminNetWeight === 0
-                                                            ? '입력하지 않음'
-                                                            : order.adminNetWeight}
-                                                    </p>
-                                                </TableCell>
-                                                <TableCell align="center">
-                                                    <p>
-                                                        <strong>이름 :</strong> {order.recipientName}
-                                                    </p>
-                                                    <p>
-                                                        <strong>주소 :</strong> {order.recipientAddress}
-                                                    </p>
-                                                    <p>
-                                                        <strong>휴대폰 번호 :</strong> {order.recipientPhoneNumber}
-                                                    </p>
-                                                    <p>
-                                                        <strong>국가 :</strong> {order.country}
-                                                    </p>
-                                                </TableCell>
-                                                <TableCell align="center">
-                                                    {order.expectedPrice} $ /
-                                                    {order.shippingPrice === 0 ? '책정중' : order.shippingPrice + '$'}
-                                                </TableCell>
-                                                <TableCell align="center">
-                                                    <p>{order.status}</p>
-                                                    {order.status === '송장입력' ? (
-                                                        <button
-                                                            type="onClick"
-                                                            onClick={() => handleProductInfo(order.id)}
-                                                        >
-                                                            송장 입력
-                                                        </button>
-                                                    ) : null}
-                                                    {order.status === '해외배송중' ? (
-                                                        <>
-                                                            <p style={{ marginTop: '10px' }}>
-                                                                <strong>택배사 :</strong> {order.abroadShippingCompany}
-                                                            </p>
-                                                            <p>
-                                                                <strong>운송장 번호 : </strong>
-                                                                {order.abroadInvoice}
-                                                            </p>
-                                                        </>
-                                                    ) : null}
-                                                </TableCell>
-                                            </TableRow>
+                                            <h3>상품정보 {index + 1}</h3>
+                                            <div className="productItem">
+                                                <strong>상품 </strong>
+                                                <span>{product.productDetail}</span>
+                                            </div>
+                                            <div className="productItem">
+                                                <strong>상품 가격</strong>
+                                                <span>{product.price.toLocaleString()}원</span>
+                                            </div>
+                                            <div className="productItem">
+                                                <strong>상품 개수</strong>
+                                                <span>{product.quantity}개</span>
+                                            </div>
+                                            <div className="productItem">
+                                                <strong>상품 무게</strong>
+                                                <span>{product.weight}kg</span>
+                                            </div>
                                         </>
                                     ))}
-                                    {hapOrder.orders[0].status === '송장입력' ||
-                                    hapOrder.orders[0].status === '센터입고중' ? null : (
-                                        <TableRow>
-                                            <TableCell align="right" colSpan={5}>
-                                                총 금액 : {hapOrder.orderPrice}원
-                                                {hapOrder.orders[0].status === '결제요청' ? (
-                                                    <button
-                                                        type="onClick"
-                                                        onClick={() => handlePaymentInfo(hapOrder.id)}
-                                                    >
-                                                        결제하기
-                                                    </button>
-                                                ) : null}
-                                            </TableCell>
-                                        </TableRow>
-                                    )}
-                                </TableBody>
-                            </Table>
-                        ))
-                    ) : (
-                        <div
-                            style={{
-                                padding: '100px 0',
-                                textAlign: 'center',
-                                fontSize: '40px',
-                                border: 'none',
-                                letterSpacing: '-1.5px',
-                            }}
-                        >
-                            접수된 주문건이 없습니다.
-                        </div>
-                    )}
-                </TableContainer>
+                                </article>
+                                <article className="box">
+                                    <h2>박스 정보</h2>
+                                    {order.boxResponses.map((box, index) => (
+                                        <>
+                                            <h3>박스정보 {index + 1}</h3>
+                                            <div className="boxItem">
+                                                <strong>회원님이 직접 입력한 부피 무게</strong>
+                                                <span>{box.expectedVolumeWeight}kg</span>
+                                            </div>
+                                            <div className="boxItem">
+                                                <strong>회원님이 직접 입력한 실 무게</strong>
+                                                <span>{box.expectedNetWeight}kg</span>
+                                            </div>
+                                            <div className="boxItem">
+                                                <strong>상태</strong>
+                                                <span>{box.koreanShippingStatus}</span>
+                                            </div>
+                                        </>
+                                    ))}
+                                </article>
+                            </article>
+                        </article>
+                    ))}
+                </article>
             </MypageContent>
         </Responsive>
     );
