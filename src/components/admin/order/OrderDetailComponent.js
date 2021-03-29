@@ -25,12 +25,12 @@ const OrderDetailComponent = ({
                     UpdateState={UpdateState}
                     OrderInfo={OrderInfo}
                     HandleChange={(e, index) => HandleChange(e, index)}
+                    List={List}
                 />
                 <OrderDetailProductInfo
                     HandleChange={(e, index) => HandleChange(e, index)}
                     UpdateState={UpdateState}
-                    Products={OrderInfo.products}
-                    List={List}
+                    Products={OrderInfo.productResponses}
                 />
             </article>
         </OrderWrap>

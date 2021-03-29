@@ -1,6 +1,6 @@
 import React from 'react';
 
-const OrderDetailUserInfo = ({ UpdateState, OrderInfo, HandleChange }) => {
+const OrderDetailUserInfo = ({ UpdateState, OrderInfo, HandleChange, List }) => {
     return (
         <table>
             <tbody>
@@ -42,17 +42,65 @@ const OrderDetailUserInfo = ({ UpdateState, OrderInfo, HandleChange }) => {
                 <tr>
                     <th>이름</th>
                     <td>
-                        <input type="text" value={OrderInfo.products[0].recipientName || ''} disabled />
+                        <input type="text" value={OrderInfo.recipient.name || ''} disabled />
                     </td>
                     <th>휴대폰 번호</th>
                     <td>
-                        <input type="text" value={OrderInfo.products[0].recipientPhoneNumber || ''} disabled />
+                        <input type="text" value={OrderInfo.recipient.phoneNumber || ''} disabled />
                     </td>
                 </tr>
                 <tr>
                     <th>주소</th>
                     <td colSpan="3">
-                        <input type="text" value={OrderInfo.products[0].recipientAddress || ''} disabled />
+                        <input
+                            type="text"
+                            value={
+                                OrderInfo.recipient.address1 +
+                                    OrderInfo.recipient.address2 +
+                                    OrderInfo.recipient.address3 +
+                                    OrderInfo.recipient.state +
+                                    OrderInfo.recipient.zipcode +
+                                    OrderInfo.recipient.country || ''
+                            }
+                            disabled
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <th>국가</th>
+                    <td colSpan="3">
+                        {UpdateState ? (
+                            <select
+                                name="country"
+                                onChange={e => HandleChange(e)}
+                                defaultValue={OrderInfo.country || ''}
+                            >
+                                <option value="">나라선택</option>
+                                {List.map(v => {
+                                    return (
+                                        <option value={v} key={v}>
+                                            {v}
+                                        </option>
+                                    );
+                                })}
+                            </select>
+                        ) : (
+                            <select
+                                name="country"
+                                onChange={e => HandleChange(e)}
+                                value={OrderInfo.recipient.country || ''}
+                                disabled
+                            >
+                                <option value="">나라선택</option>
+                                {List.map(v => {
+                                    return (
+                                        <option value={v} key={v}>
+                                            {v}
+                                        </option>
+                                    );
+                                })}
+                            </select>
+                        )}
                     </td>
                 </tr>
             </tbody>

@@ -45,43 +45,6 @@ const OrderDetailProductInfo = ({ UpdateState, HandleChange, Products, List }) =
                                 </td>
                             </tr>
                             <tr>
-                                <th>국가</th>
-                                <td colSpan="3">
-                                    {UpdateState ? (
-                                        <select
-                                            name="country"
-                                            onChange={e => HandleChange(e, index)}
-                                            defaultValue={product.country || ''}
-                                        >
-                                            <option value="">나라선택</option>
-                                            {List.map(v => {
-                                                return (
-                                                    <option value={v} key={v}>
-                                                        {v}
-                                                    </option>
-                                                );
-                                            })}
-                                        </select>
-                                    ) : (
-                                        <select
-                                            name="country"
-                                            onChange={e => HandleChange(e, index)}
-                                            value={product.country || ''}
-                                            disabled
-                                        >
-                                            <option value="">나라선택</option>
-                                            {List.map(v => {
-                                                return (
-                                                    <option value={v} key={v}>
-                                                        {v}
-                                                    </option>
-                                                );
-                                            })}
-                                        </select>
-                                    )}
-                                </td>
-                            </tr>
-                            <tr>
                                 <th>회원 운송장번호</th>
                                 <td colSpan="2">
                                     <input
