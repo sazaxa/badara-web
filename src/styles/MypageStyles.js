@@ -79,7 +79,27 @@ export const MypageContent = styled.article`
     }
     .memberOrders .data {
         display: flex;
+        width: 100%;
+        height: 100%;
+        padding: 25px 20px;
+        border-radius: 0 0 10px 10px;
+        border: 1px solid #ccc;
+        border-top: none;
+        box-sizing: border-box;
         flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .memberOrders .data > article {
+        width: 33%;
+        display: flex;
+        flex-wrap: wrap;
+        & > h2,
+        & h3,
+        & strong {
+            width: 100%;
+        }
     }
     strong {
         margin-right: 10px;
@@ -94,6 +114,73 @@ export const MypageContent = styled.article`
             justify-content: space-around;
             background: #1976d2;
             color: #fff;
+            border-bottom: 1px solid #fff;
+        }
+    }
+    article > h2 {
+        margin: 20px 0;
+    }
+    .productWrap h3 {
+        width: 100%;
+        padding: 10px 0;
+    }
+    .recipient {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .recipientItem {
+        width: 100%;
+        justify-content: flex-start;
+        // padding: 10px 0;
+        letter-spacing: -1px;
+        & string {
+            margin-bottom: 10px;
+            width: 30%;
+        }
+        & strong,
+        & span {
+            width: 50% !important;
+            // justify-content: center;
+        }
+    }
+    .productWrap {
+        width: 100%;
+        padding: 10px 0;
+        display: flex !important;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 20px 0;
+        margin: 0 10px;
+        & strong,
+        & span {
+            width: 50% !important;
+            font-size: 16px;
+            letter-spacing: -1.5px;
+            text-align: right;
+        }
+        & > .productItem {
+            width: 50%;
+        }
+    }
+    .box {
+        display: flex;
+        align-items: center;
+    }
+    .boxItem {
+        width: 60%;
+        letter-spacing: -1px;
+        padding: 10px 0;
+    }
+    .boxItem > p {
+        margin-bottom: 10px;
+    }
+    .boxstatus {
+        width: 40%;
+        & > strong {
+            width: 100%;
+            display: block;
+            margin-bottom: 10px;
         }
     }
 `;

@@ -76,9 +76,20 @@ const MypageComponent = ({
                                     <span>{order.recipient.country}</span>
                                 </div>
                             </article>
+                            <article className="orderHead" style={{ background: '#0080ff' }}>
+                                <div className="headData">
+                                    <strong>수취인</strong>
+                                </div>
+                                <div className="headData">
+                                    <strong>상품정보</strong>
+                                </div>
+                                <div className="headData">
+                                    <strong>박스정보</strong>
+                                </div>
+                            </article>
                             <article className="data">
                                 <article className="recipient">
-                                    <h2>수취인 정보</h2>
+                                    {/* <h2>수취인 정보</h2> */}
                                     <div className="recipientItem">
                                         <strong>이름 </strong>
                                         <span>{order.recipient.name}</span>
@@ -107,17 +118,17 @@ const MypageComponent = ({
                                     </div>
                                 </article>
                                 <article className="product">
-                                    <h2>상품 정보</h2>
+                                    {/* <h2>상품 정보</h2> */}
                                     {order.productResponses.map((product, index) => (
-                                        <>
-                                            <h3>상품정보 {index + 1}</h3>
+                                        <article className="productWrap">
+                                            {/* <h3>상품정보 {index + 1}</h3> */}
                                             <div className="productItem">
                                                 <strong>상품 </strong>
                                                 <span>{product.productDetail}</span>
                                             </div>
                                             <div className="productItem">
                                                 <strong>상품 가격</strong>
-                                                <span>{product.price.toLocaleString()}원</span>
+                                                <span>{Number(product.price).toLocaleString()}원</span>
                                             </div>
                                             <div className="productItem">
                                                 <strong>상품 개수</strong>
@@ -127,25 +138,23 @@ const MypageComponent = ({
                                                 <strong>상품 무게</strong>
                                                 <span>{product.weight}kg</span>
                                             </div>
-                                        </>
+                                        </article>
                                     ))}
                                 </article>
                                 <article className="box">
-                                    <h2>박스 정보</h2>
+                                    {/* <h2>박스 정보</h2> */}
                                     {order.boxResponses.map((box, index) => (
                                         <>
-                                            <h3>박스정보 {index + 1}</h3>
+                                            {/* <h3>박스정보 {index + 1}</h3> */}
                                             <div className="boxItem">
-                                                <strong>회원님이 직접 입력한 부피 무게</strong>
-                                                <span>{box.expectedVolumeWeight}kg</span>
+                                                <strong>회원님이 입력한 부피 무게</strong>
+                                                <p>{box.expectedVolumeWeight}kg</p>
+                                                <strong>회원님이 입력한 실 무게</strong>
+                                                <p>{box.expectedNetWeight}kg</p>
                                             </div>
-                                            <div className="boxItem">
-                                                <strong>회원님이 직접 입력한 실 무게</strong>
-                                                <span>{box.expectedNetWeight}kg</span>
-                                            </div>
-                                            <div className="boxItem">
+                                            <div className="boxstatus">
                                                 <strong>상태</strong>
-                                                <span>{box.koreanShippingStatus}</span>
+                                                <p>{box.koreanShippingStatus}</p>
                                             </div>
                                         </>
                                     ))}
