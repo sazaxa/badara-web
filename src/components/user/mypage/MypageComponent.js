@@ -155,6 +155,11 @@ const MypageComponent = ({
                                             <div className="boxstatus">
                                                 <strong>상태</strong>
                                                 <p>{box.koreanShippingStatus}</p>
+                                                {box.koreanShippingStatus === '송장입력' ? (
+                                                    <button type="onClick" onClick={() => handleProductInfo(box.id)}>
+                                                        송장 입력
+                                                    </button>
+                                                ) : null}
                                             </div>
                                         </>
                                     ))}
