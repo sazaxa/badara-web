@@ -1,10 +1,11 @@
+import Product from 'components/user/apply/product/Product';
 import React from 'react';
 import { Fragment } from 'react';
 
 const OrderDetailProductInfo = ({ UpdateState, HandleChange, Products, List }) => {
     return (
         <>
-            {Products.map((product, index) => {
+            {Products?.map((product, index) => {
                 return (
                     <table style={{ margin: '50px 0' }} key={product.id}>
                         <tbody>
@@ -12,6 +13,24 @@ const OrderDetailProductInfo = ({ UpdateState, HandleChange, Products, List }) =
                                 <th colSpan="4">상품정보 {index + 1}</th>
                             </tr>
                             <tr>
+                                <th>상품 이름</th>
+                                <td colSpan="3">
+                                    <input type="text" defaultValue={product.productDetail} disabled />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>개수</th>
+                                <td colSpan="3">
+                                    <input type="text" defaultValue={product.quantity} disabled />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>무게</th>
+                                <td colSpan="3">
+                                    <input type="text" defaultValue={product.weight} disabled />
+                                </td>
+                            </tr>
+                            {/* <tr>
                                 <th>주문상태</th>
                                 <td colSpan="3">
                                     {UpdateState ? (
@@ -43,28 +62,8 @@ const OrderDetailProductInfo = ({ UpdateState, HandleChange, Products, List }) =
                                         </select>
                                     )}
                                 </td>
-                            </tr>
-                            <tr>
-                                <th>회원 운송장번호</th>
-                                <td colSpan="2">
-                                    <input
-                                        type="text"
-                                        defaultValue={product.koreanInvoice || ''}
-                                        name="koreanInvoice"
-                                        disabled
-                                    />
-                                </td>
-                                <td>
-                                    <input
-                                        type="text"
-                                        defaultValue={product.koreanShippingCompany || ''}
-                                        name="koreanShippingCompany"
-                                        onChange={e => HandleChange(e, index)}
-                                        disabled
-                                    />
-                                </td>
-                            </tr>
-                            <tr>
+                            </tr> */}
+                            {/* <tr>
                                 <th colSpan="2">회원 무게</th>
                                 <th colSpan="2">쉽먼트 무게</th>
                             </tr>
@@ -142,23 +141,23 @@ const OrderDetailProductInfo = ({ UpdateState, HandleChange, Products, List }) =
                                         <input type="text" value={product.abroadShippingCompany || ''} disabled />
                                     )}
                                 </td>
-                            </tr>
+                            </tr> */}
                             <tr>
                                 <th>금액</th>
                                 <td colSpan="3">
                                     {UpdateState ? (
                                         <input
                                             type="text"
-                                            defaultValue={product.shippingPrice || ''}
-                                            name="shippingPrice"
+                                            defaultValue={product.price || ''}
+                                            name="price"
                                             onChange={e => HandleChange(e, index)}
                                         />
                                     ) : (
-                                        <input type="text" value={product.shippingPrice || ''} disabled />
+                                        <input type="text" value={product.price || ''} disabled />
                                     )}
                                 </td>
                             </tr>
-                            <tr>
+                            {/* <tr>
                                 <th colSpan="2">주문 특이사항</th>
                                 <th colSpan="2">관리자 특이사항</th>
                             </tr>
@@ -181,7 +180,7 @@ const OrderDetailProductInfo = ({ UpdateState, HandleChange, Products, List }) =
                                         <textarea name="adminMemo" value={product.adminMemo || ''} disabled />
                                     )}
                                 </td>
-                            </tr>
+                            </tr> */}
                         </tbody>
                     </table>
                 );

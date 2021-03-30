@@ -1,6 +1,6 @@
 import React from 'react';
 
-const OrderDetailUserInfo = ({ UpdateState, OrderInfo, HandleChange, List }) => {
+const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List, handleRecipientChange }) => {
     return (
         <table>
             <tbody>
@@ -13,7 +13,7 @@ const OrderDetailUserInfo = ({ UpdateState, OrderInfo, HandleChange, List }) => 
                 <tr>
                     <th>주문번호</th>
                     <td colSpan="3">
-                        <input type="text" value={OrderInfo.orderNumber || ''} disabled />
+                        <input type="text" value={UpdateValue.orderNumber || ''} disabled />
                     </td>
                 </tr>
                 <tr>
@@ -23,16 +23,53 @@ const OrderDetailUserInfo = ({ UpdateState, OrderInfo, HandleChange, List }) => 
                             <input
                                 type="number"
                                 name="orderPrice"
-                                defaultValue={OrderInfo.orderPrice || ''}
-                                onChange={e => HandleChange(e)}
+                                defaultValue={UpdateValue.orderPrice || ''}
+                                onChange={e => handleOrderChange(e)}
                             />
                         ) : (
                             <input
                                 type="text"
-                                value={OrderInfo.orderPrice || ''}
-                                onChange={e => HandleChange(e)}
+                                value={UpdateValue.orderPrice || ''}
+                                onChange={e => handleOrderChange(e)}
                                 disabled
                             />
+                        )}
+                    </td>
+                </tr>
+                <tr>
+                    <th>상태</th>
+                    <td colSpan="4">
+                        {UpdateState ? (
+                            <select
+                                name="koreanShippingStatus"
+                                onChange={e => handleOrderChange(e)}
+                                defaultValue={UpdateValue.orderStatus || ''}
+                            >
+                                <option value="송장입력">송장입력</option>
+                                <option value="센터입고중">센터입고중</option>
+                                <option value="결제대기">결제대기</option>
+                                <option value="결제요청">결제요청</option>
+                                <option value="무통장입금">무통장입금</option>
+                                <option value="결제완료">결제완료</option>
+                                <option value="해외배송중">해외배송중</option>
+                                <option value="해외배송완료">해외배송완료</option>
+                            </select>
+                        ) : (
+                            <select
+                                name="koreanShippingStatus"
+                                onChange={e => handleOrderChange(e)}
+                                value={UpdateValue.orderStatus || ''}
+                                disabled
+                            >
+                                <option value="송장입력">송장입력</option>
+                                <option value="센터입고중">센터입고중</option>
+                                <option value="결제대기">결제대기</option>
+                                <option value="결제요청">결제요청</option>
+                                <option value="무통장입금">무통장입금</option>
+                                <option value="결제완료">결제완료</option>
+                                <option value="해외배송중">해외배송중</option>
+                                <option value="해외배송완료">해외배송완료</option>
+                            </select>
                         )}
                     </td>
                 </tr>
@@ -42,11 +79,11 @@ const OrderDetailUserInfo = ({ UpdateState, OrderInfo, HandleChange, List }) => 
                 <tr>
                     <th>이름</th>
                     <td>
-                        <input type="text" value={OrderInfo.recipient.name || ''} disabled />
+                        <input type="text" value={UpdateValue.recipient.name || ''} disabled />
                     </td>
                     <th>휴대폰 번호</th>
                     <td>
-                        <input type="text" value={OrderInfo.recipient.phoneNumber || ''} disabled />
+                        <input type="text" value={UpdateValue.recipient.phoneNumber || ''} disabled />
                     </td>
                 </tr>
                 <tr>
@@ -55,12 +92,12 @@ const OrderDetailUserInfo = ({ UpdateState, OrderInfo, HandleChange, List }) => 
                         <input
                             type="text"
                             value={
-                                OrderInfo.recipient.address1 +
-                                    OrderInfo.recipient.address2 +
-                                    OrderInfo.recipient.address3 +
-                                    OrderInfo.recipient.state +
-                                    OrderInfo.recipient.zipcode +
-                                    OrderInfo.recipient.country || ''
+                                UpdateValue.recipient.address1 +
+                                    UpdateValue.recipient.address2 +
+                                    UpdateValue.recipient.address3 +
+                                    UpdateValue.recipient.state +
+                                    UpdateValue.recipient.zipcode +
+                                    UpdateValue.recipient.country || ''
                             }
                             disabled
                         />
@@ -72,8 +109,8 @@ const OrderDetailUserInfo = ({ UpdateState, OrderInfo, HandleChange, List }) => 
                         {UpdateState ? (
                             <select
                                 name="country"
-                                onChange={e => HandleChange(e)}
-                                defaultValue={OrderInfo.country || ''}
+                                onChange={e => handleRecipientChange(e)}
+                                defaultValue={UpdateValue.country || ''}
                             >
                                 <option value="">나라선택</option>
                                 {List.map(v => {
@@ -87,8 +124,8 @@ const OrderDetailUserInfo = ({ UpdateState, OrderInfo, HandleChange, List }) => 
                         ) : (
                             <select
                                 name="country"
-                                onChange={e => HandleChange(e)}
-                                value={OrderInfo.recipient.country || ''}
+                                onChange={e => handleRecipientChange(e)}
+                                value={UpdateValue.recipient.country || ''}
                                 disabled
                             >
                                 <option value="">나라선택</option>
@@ -100,6 +137,22 @@ const OrderDetailUserInfo = ({ UpdateState, OrderInfo, HandleChange, List }) => 
                                     );
                                 })}
                             </select>
+                        )}
+                    </td>
+                </tr>
+                <tr>
+                    <th colSpan="4">관리자 특이사항</th>
+                </tr>
+                <tr>
+                    <td colSpan="4">
+                        {UpdateState ? (
+                            <textarea
+                                name="adminMemo"
+                                onChange={e => handleOrderChange(e)}
+                                defaultValue={UpdateValue.adminMemo || ''}
+                            />
+                        ) : (
+                            <textarea name="adminMemo" value={UpdateValue.adminMemo || ''} disabled />
                         )}
                     </td>
                 </tr>
