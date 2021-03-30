@@ -7,16 +7,20 @@ import Product from './Product';
 
 const Products = ({ stepIndex, steps }) => {
     const dispatch = useDispatch();
-    const { activeStep, defaultProduct, products: applyProduct } = useSelector(
+    const { activeStep, products: applyProduct } = useSelector(
         state => ({
             activeStep: state.part.activeStep,
-            defaultProduct: state.product.defaultProduct,
             products: state.apply.apply.products,
         }),
         shallowEqual
     );
 
-    console.log(defaultProduct);
+    const defaultProduct = {
+        productDetail: null,
+        quantity: null,
+        price: null,
+        weight: null,
+    };
 
     const handlePrev = () => {
         dispatch(acitiveStepChange(activeStep - 1));
