@@ -16,8 +16,8 @@ const Detail = ({ match }) => {
         dispatch(getMemberInfoAction(id));
     }, []);
     if (error) return <div>없는 회원 입니다.</div>;
-    if (!memberInfo) return null;
     const { info, orders } = memberInfo;
+    if (info === null || orders === null) return null;
     return (
         <DetailWrap>
             <article className="title">
