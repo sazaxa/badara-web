@@ -7,7 +7,7 @@ import order, { orderSaga } from './order';
 import faq, { faqSaga } from './faq';
 import apply, { applySaga } from './apply';
 import part, { partSaga } from './part';
-import product, { productSaga } from './product';
+import box, { boxSaga } from './box';
 
 const rootReducer = combineReducers({
     auth,
@@ -16,11 +16,11 @@ const rootReducer = combineReducers({
     faq,
     apply,
     part,
-    product,
+    box,
 });
 
 export function* rootSaga() {
-    yield all([authSaga(), memberSaga(), orderSaga(), faqSaga(), partSaga(), applySaga(), productSaga()]);
+    yield all([authSaga(), memberSaga(), orderSaga(), faqSaga(), partSaga(), applySaga(), boxSaga()]);
 }
 
 export default rootReducer;
