@@ -41,7 +41,7 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                     <td colSpan="4">
                         {UpdateState ? (
                             <select
-                                name="koreanShippingStatus"
+                                name="orderStatus"
                                 onChange={e => handleOrderChange(e)}
                                 defaultValue={UpdateValue.orderStatus || ''}
                             >
@@ -56,7 +56,7 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                             </select>
                         ) : (
                             <select
-                                name="koreanShippingStatus"
+                                name="orderStatus"
                                 onChange={e => handleOrderChange(e)}
                                 value={UpdateValue.orderStatus || ''}
                                 disabled
