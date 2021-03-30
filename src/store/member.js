@@ -4,19 +4,23 @@ import { takeLatest, call, put, delay } from 'redux-saga/effects';
 import * as authAPI from '../lib/api/auth';
 import { createRequestActionTypes } from 'lib/createRequestActionTypes';
 
-export const [GET_MEMBER_LIST_REQUEST, GET_MEMBER_LIST_SUCCESS, GET_MEMBER_LIST_FAILURE] = createRequestActionTypes(
+const [GET_MEMBER_LIST_REQUEST, GET_MEMBER_LIST_SUCCESS, GET_MEMBER_LIST_FAILURE] = createRequestActionTypes(
     'auth/LIST_MEMBER'
 );
 
-export const [GET_MEMBER_INFO_REQUEST, GET_MEMBER_INFO_SUCCESS, GET_MEMBER_INFO_FAILURE] = createRequestActionTypes(
-    'auth/INFO_MEMBER'
+const [GET_MEMBER_ORDER_REQUEST, GET_MEMBER_ORDER_SUCCESS, GET_MEMBER_ORDER_FAILURE] = createRequestActionTypes(
+    'auth/MEMBER_ORDER'
 );
 
-export const [GET_MEMBER_CHECK_REQUEST, GET_MEMBER_CHECK_SUCCESS, GET_MEMBER_CHECK_FAILURE] = createRequestActionTypes(
+const [GET_MEMBER_INFO_REQUEST, GET_MEMBER_INFO_SUCCESS, GET_MEMBER_INFO_FAILURE] = createRequestActionTypes(
+    'auth/MEMBER_ORDER'
+);
+
+const [GET_MEMBER_CHECK_REQUEST, GET_MEMBER_CHECK_SUCCESS, GET_MEMBER_CHECK_FAILURE] = createRequestActionTypes(
     'user/CHECK'
 );
 
-export const [GET_ADMIN_CHECK_REQUEST, GET_ADMIN_CHECK_SUCCESS, GET_ADMIN_CHECK_FAILURE] = createRequestActionTypes(
+const [GET_ADMIN_CHECK_REQUEST, GET_ADMIN_CHECK_SUCCESS, GET_ADMIN_CHECK_FAILURE] = createRequestActionTypes(
     'admin/CHECK'
 );
 export const LOGOUT = 'auth/LOGOUT';
@@ -24,6 +28,7 @@ export const [ADMIN_LOGOUT, ADMIN_LOGOUT_SUCCESS, ADMIN_LOGOUT_FAILURE] = create
 
 export const getMemberListAction = createAction(GET_MEMBER_LIST_REQUEST);
 export const getMemberInfoAction = createAction(GET_MEMBER_INFO_REQUEST, id => id);
+export const getMemberOrderAction = createAction(GET_MEMBER_ORDER_REQUEST, id => id);
 export const getMemberCheckAction = createAction(GET_MEMBER_CHECK_REQUEST);
 export const getAdminCheckAction = createAction(GET_ADMIN_CHECK_REQUEST);
 export const logoutAction = createAction(LOGOUT);
@@ -38,14 +43,23 @@ function* getMemberListSaga() {
         yield put({ type: GET_MEMBER_LIST_FAILURE, payload: e });
     }
 }
-
 function* getMemberInfoSaga({ payload: id }) {
-    // 단일 회원 로직.
+    // 회원 목록 로직.
     try {
-        const { data } = yield call(authAPI.userOrders, id);
+        const { data } = yield call(authAPI.user, id);
         yield put({ type: GET_MEMBER_INFO_SUCCESS, payload: data });
     } catch (e) {
         yield put({ type: GET_MEMBER_INFO_FAILURE, payload: e });
+    }
+}
+
+function* getMemberOrderSaga({ payload: id }) {
+    // 단일 회원 로직.
+    try {
+        const { data } = yield call(authAPI.userOrders, id);
+        yield put({ type: GET_MEMBER_ORDER_SUCCESS, payload: data });
+    } catch (e) {
+        yield put({ type: GET_MEMBER_ORDER_FAILURE, payload: e });
         // localStorage.removeItem('accessToken');
         // window.location.href = '/';
     }
@@ -104,6 +118,7 @@ function* adminLogoutSaga() {
 export function* memberSaga() {
     yield takeLatest(GET_MEMBER_LIST_REQUEST, getMemberListSaga);
     yield takeLatest(GET_MEMBER_INFO_REQUEST, getMemberInfoSaga);
+    yield takeLatest(GET_MEMBER_ORDER_REQUEST, getMemberOrderSaga);
     yield takeLatest(GET_MEMBER_CHECK_REQUEST, checkSaga);
     yield takeLatest(GET_ADMIN_CHECK_REQUEST, adminCheckSaga);
     yield takeLatest(LOGOUT, logoutSaga);
@@ -116,6 +131,7 @@ const initialState = {
         list: [],
     },
     memberInfo: {
+        info: null,
         orders: null,
         error: null,
     },
@@ -152,9 +168,19 @@ export default handleActions(
                 draft.members.status = 'fail';
             });
         },
-        [GET_MEMBER_INFO_SUCCESS]: (state, { payload }) => {
+        [GET_MEMBER_ORDER_SUCCESS]: (state, { payload }) => {
             return produce(state, draft => {
                 draft.memberInfo.orders = payload;
+            });
+        },
+        [GET_MEMBER_ORDER_FAILURE]: (state, { payload }) => {
+            return produce(state, draft => {
+                draft.memberInfo.error = payload;
+            });
+        },
+        [GET_MEMBER_INFO_SUCCESS]: (state, { payload }) => {
+            return produce(state, draft => {
+                draft.memberInfo.info = payload;
             });
         },
         [GET_MEMBER_INFO_FAILURE]: (state, { payload }) => {
