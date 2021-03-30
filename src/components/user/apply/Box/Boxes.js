@@ -12,7 +12,6 @@ const Boxes = ({ stepIndex, steps }) => {
     const { activeStep, boxes } = useSelector(
         state => ({
             activeStep: state.part.activeStep,
-            defaultProduct: state.product.defaultProduct,
             boxes: state.apply.apply.boxes,
         }),
         shallowEqual
