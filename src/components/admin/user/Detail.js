@@ -3,19 +3,21 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import { getMemberInfoAction } from 'store/member';
+import { getMemberInfoAction, getMemberOrderAction } from 'store/member';
 import { DetailWrap } from 'styles/AdminUserPageStyles';
 
 const Detail = ({ match }) => {
     const dispatch = useDispatch();
-    const { member, error } = useSelector(state => state.member.memberInfo);
+    const { memberInfo, error } = useSelector(state => state.member);
     const { id } = match.params;
 
     useEffect(() => {
+        dispatch(getMemberOrderAction(id));
         dispatch(getMemberInfoAction(id));
     }, []);
     if (error) return <div>없는 회원 입니다.</div>;
-    if (!member) return null;
+    if (!memberInfo) return null;
+    const { info, orders } = memberInfo;
     return (
         <DetailWrap>
             <article className="title">
@@ -25,19 +27,19 @@ const Detail = ({ match }) => {
                 <tbody>
                     <tr>
                         <th>이메일</th>
-                        <td colSpan="3">{member.member.email}</td>
+                        <td colSpan="3">{info.email}</td>
                     </tr>
                     <tr>
                         <th>이름</th>
-                        <td colSpan="3">{member.member.name}</td>
+                        <td colSpan="3">{info.name}</td>
                     </tr>
                     <tr>
                         <th>휴대폰 번호</th>
-                        <td colSpan="3">{member.member.phoneNumber}</td>
+                        <td colSpan="3">{info.phoneNumber}</td>
                     </tr>
                     <tr>
                         <th>회원 등급</th>
-                        <td colSpan="3">{member.member.roles[0].roleName === 'ROLE_USER' ? '일반회원' : '관리자'}</td>
+                        <td colSpan="3">{info.roles[0].roleName === 'ROLE_USER' ? '일반회원' : '관리자'}</td>
                     </tr>
                 </tbody>
             </table>
@@ -55,13 +57,13 @@ const Detail = ({ match }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {member.orders.map(order => (
+                    {orders.map(order => (
                         <tr>
                             <Link to={`/admin/order/${order.id}`}>
                                 <td>{order.orderNumber}</td>
-                                <td>{order.products[0].productName}</td>
-                                <td>{order.products[0].status}</td>
-                                <td>{order.products[0].createdDate}</td>
+                                <td>{order.productResponses[0].productDetail}</td>
+                                <td>{order.orderStatus}</td>
+                                <td>{order.recipient.createdDate}</td>
                             </Link>
                         </tr>
                     ))}
