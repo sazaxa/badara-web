@@ -146,25 +146,85 @@ const MypageComponent = ({
                                     {order.boxResponses.map((box, index) => (
                                         <>
                                             {/* <h3>박스정보 {index + 1}</h3> */}
-                                            <div className="boxItem">
+                                            <div
+                                                className="boxItem"
+                                                style={
+                                                    box.koreanShippingStatus !== '송장입력' &&
+                                                    box.koreanShippingStatus !== '센터입고중'
+                                                        ? { width: '100%' }
+                                                        : null
+                                                }
+                                            >
                                                 <strong>회원님이 입력한 부피 무게</strong>
                                                 <p>{box.expectedVolumeWeight}kg</p>
                                                 <strong>회원님이 입력한 실 무게</strong>
                                                 <p>{box.expectedNetWeight}kg</p>
-                                            </div>
-                                            <div className="boxstatus">
-                                                <strong>상태</strong>
-                                                <p>{box.koreanShippingStatus}</p>
-                                                {box.koreanShippingStatus === '송장입력' ? (
-                                                    <button type="onClick" onClick={() => handleProductInfo(box.id)}>
-                                                        송장 입력
-                                                    </button>
+                                                {box.netWeight !== null || box.volumeWeight !== null ? (
+                                                    <>
+                                                        <strong>고래타고 부피 무게</strong>
+                                                        <p>{box.volumeWeight}kg</p>
+                                                        <strong>고래타고 실 무게</strong>
+                                                        <p>{box.netWeight}kg</p>
+                                                    </>
                                                 ) : null}
                                             </div>
+                                            {box.koreanShippingStatus === '송장입력' ||
+                                            box.koreanShippingStatus === '센터입고중' ? (
+                                                <div className="boxstatus">
+                                                    <strong>상태</strong>
+                                                    <p>{box.koreanShippingStatus}</p>
+                                                    {box.koreanShippingStatus === '송장입력' ? (
+                                                        <button
+                                                            type="onClick"
+                                                            onClick={() => handleProductInfo(box.id)}
+                                                        >
+                                                            송장 입력
+                                                        </button>
+                                                    ) : null}
+                                                </div>
+                                            ) : null}
                                         </>
                                     ))}
                                 </article>
                             </article>
+                            {order.orderStatus !== '결제대기' ? (
+                                <article className="total">
+                                    <h2>Total</h2>
+                                    <div className="item">
+                                        <strong>상태</strong>
+                                        <p>{order.orderStatus}</p>
+                                    </div>
+                                    <div className="item">
+                                        <strong>결제금액</strong>
+                                        <p>{Number(order.orderPrice).toLocaleString()}원</p>
+                                    </div>
+                                    {order.orderStatus === '결제요청' ? (
+                                        <button type="button" onClick={() => handlePaymentPopup()}>
+                                            결제하기
+                                        </button>
+                                    ) : null}
+                                    {order.orderStatus === '해외배송중' || order.orderStatus === '해외배송완료' ? (
+                                        <div className="item">
+                                            <strong>해외 운송장번호</strong>
+                                            <p>
+                                                {order.invoice}[{order.shippingCompany}]
+                                            </p>
+                                        </div>
+                                    ) : null}
+                                    {order.orderStatus === '무통장입금' ? (
+                                        <>
+                                            <div className="item">
+                                                <strong>은행</strong>
+                                                <p>..은행</p>
+                                            </div>
+                                            <div className="item">
+                                                <strong>계좌번호</strong>
+                                                <p>12312321312</p>
+                                            </div>
+                                        </>
+                                    ) : null}
+                                </article>
+                            ) : null}
                         </article>
                     ))}
                 </article>
