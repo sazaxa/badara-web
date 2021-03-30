@@ -141,6 +141,48 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                     </td>
                 </tr>
                 <tr>
+                    <th>해외 운송장번호</th>
+                    <td>
+                        {UpdateState ? (
+                            <input
+                                type="text"
+                                name="invoice"
+                                value={UpdateValue.invoice}
+                                onChange={e => handleOrderChange(e)}
+                            />
+                        ) : (
+                            <input
+                                type="text"
+                                name="invoice"
+                                value={UpdateValue.invoice}
+                                onChange={e => handleOrderChange(e)}
+                                disabled
+                            />
+                        )}
+                    </td>
+                    <th>택배사</th>
+                    <td>
+                        {UpdateState ? (
+                            <input
+                                type="text"
+                                name="shippingCompany"
+                                defaultValue="DHL"
+                                value={UpdateValue.shippingCompany}
+                                onChange={e => handleOrderChange(e)}
+                            />
+                        ) : (
+                            <input
+                                type="text"
+                                name="shippingCompany"
+                                defaultValue="DHL"
+                                value={UpdateValue.shippingCompany}
+                                onChange={e => handleOrderChange(e)}
+                                disabled
+                            />
+                        )}
+                    </td>
+                </tr>
+                <tr>
                     <th colSpan="4">관리자 특이사항</th>
                 </tr>
                 <tr>
