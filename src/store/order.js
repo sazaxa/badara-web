@@ -5,13 +5,20 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import * as orderAPI from '../lib/api/order';
 
 //  주문 목록 Action Types
-export const [GET_ORDER_LIST_REQUEST, GET_ORDER_LIST_SUCCESS, GET_ORDER_LIST_FAILURE] = createRequestActionTypes(
+const [GET_ORDER_LIST_REQUEST, GET_ORDER_LIST_SUCCESS, GET_ORDER_LIST_FAILURE] = createRequestActionTypes(
     'order/LIST_ORDER'
 );
 // 주문 단일 Action Types
-export const [GET_ORDER_INFO_REQUEST, GET_ORDER_INFO_SUCCESS, GET_ORDER_INFO_FAILURE] = createRequestActionTypes(
+const [GET_ORDER_INFO_REQUEST, GET_ORDER_INFO_SUCCESS, GET_ORDER_INFO_FAILURE] = createRequestActionTypes(
     'order/LIST_ORDER_INFO'
 );
+
+// 주문 상태 변경 Action Types.
+const [
+    ORDER_STATUS_CHANGE_REQUEST,
+    ORDER_STATUS_CHANGE_SUCCESS,
+    ORDER_STATUS_CHANGE_FAILURE,
+] = createRequestActionTypes('order/ORDER_STATUS_CHANGE');
 
 export const PUT_ORDER_INFO = 'order/PUT_ORDER_INFO';
 
@@ -19,6 +26,11 @@ export const getOrderListAction = createAction(GET_ORDER_LIST_REQUEST);
 export const getOrderInfoAction = createAction(GET_ORDER_INFO_REQUEST, id => id);
 export const putOrderInfoAction = createAction(PUT_ORDER_INFO, ({ updateData, callBack }) => ({
     updateData,
+    callBack,
+}));
+export const orderStatusChangeAction = createAction(ORDER_STATUS_CHANGE_REQUEST, ({ id, paymentMethod, callBack }) => ({
+    id,
+    paymentMethod,
     callBack,
 }));
 
@@ -52,10 +64,25 @@ function* putOrderInfoSaga({ payload: { updateData, callBack } }) {
     }
 }
 
+function* orderStatusChangeSaga({ payload: { id, paymentMethod, callBack } }) {
+    try {
+        const response = yield call(orderAPI.orderStatusChange, { id, paymentMethod });
+        yield put({ type: ORDER_STATUS_CHANGE_SUCCESS, payload: response.data });
+        if (callBack instanceof Function) {
+            callBack({
+                result: true,
+            });
+        }
+    } catch (e) {
+        yield put({ type: ORDER_STATUS_CHANGE_FAILURE, e });
+    }
+}
+
 export function* orderSaga() {
     yield takeLatest(GET_ORDER_LIST_REQUEST, getOrderListSaga);
     yield takeLatest(GET_ORDER_INFO_REQUEST, getOrderInfoSaga);
     yield takeLatest(PUT_ORDER_INFO, putOrderInfoSaga);
+    yield takeLatest(ORDER_STATUS_CHANGE_REQUEST, orderStatusChangeSaga);
 }
 
 const initialState = {
