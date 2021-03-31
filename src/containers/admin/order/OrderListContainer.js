@@ -48,7 +48,9 @@ const OrderListContainer = () => {
     };
     const rows = [
         // createData('India', 'IN', 1324171354, 3287263),
-        list.map(v => createData(v.id, v.orderNumber, v.recipient.email, v.orderStatus, v.recipient.createdDate)),
+        list.map(v =>
+            createData(v.id, v.orderNumber, v.recipient.member.email, v.orderStatus, v.recipient.createdDate)
+        ),
     ];
     // console.log(rows);
     // if (list.length === 0) {
