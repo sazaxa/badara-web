@@ -3,56 +3,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { acitiveStepChange } from 'store/part';
 import Button from '@material-ui/core/Button';
 import { recipientInsertAction } from 'store/apply';
-import styled from 'styled-components';
-
-const RecipientWrap = styled.article`
-    width: 100%;
-    h2 {
-        letter-spacing: -2.5px;
-        padding-bottom: 15px;
-        font-size: 32px;
-        border-bottom: 4px solid #0080ff;
-    }
-    input,
-    select {
-        width: 100%;
-        border: none;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        height: 40px;
-        padding: 10px;
-        box-sizing: border-box;
-    }
-    table {
-        width: 100%;
-        & > tbody > tr {
-            display: flex;
-            align-items: center;
-            width: 100%;
-            border-bottom: 1px solid #ccc;
-            padding: 15px 0;
-        }
-        & > tbody > tr > th {
-            width: 30%;
-        }
-        & > tbody > tr > td {
-            width: 70%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        & > tbody > tr > td > input {
-            width: 100%;
-        }
-    }
-    .agreeBox {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        margin: 20px 0;
-    }
-`;
+import { RecipientWrap } from 'styles/ApplyStyles';
 
 const Recipient = ({ stepIndex, steps }) => {
     const dispatch = useDispatch();
@@ -81,6 +32,7 @@ const Recipient = ({ stepIndex, steps }) => {
         if (updateRecipient) {
             setRecipinet(updateRecipient);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleChange = e => {

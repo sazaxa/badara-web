@@ -1,61 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { boxDataUpdateAction } from 'store/apply';
-import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
-
-const BoxWrap = styled.article`
-    width: 100%;
-    margin-bottom: 30px;
-    .titleBox {
-        width: 100%;
-        border-bottom: 4px solid #0080ff;
-        display: flex;
-        align-items: center;
-        padding-bottom: 15px;
-        box-sizing: border-box;
-        & > h2 {
-            letter-spacing: -2.5px;
-            font-size: 32px;
-            margin-right: 10px;
-        }
-        & > button {
-            height: 40px;
-        }
-    }
-    input,
-    select {
-        width: 100%;
-        border: none;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        height: 40px;
-        padding: 10px;
-        box-sizing: border-box;
-    }
-    table {
-        width: 100%;
-        & > tbody > tr {
-            display: flex;
-            align-items: center;
-            width: 100%;
-            border-bottom: 1px solid #ccc;
-            padding: 15px 0;
-        }
-        & > tbody > tr > th {
-            width: 30%;
-        }
-        & > tbody > tr > td {
-            width: 70%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        & > tbody > tr > td > input {
-            width: 100%;
-        }
-    }
-`;
+import { BoxWrap } from 'styles/ApplyStyles';
 
 const Box = ({ box, index, Remove }) => {
     // 받은 data를 수정하기 위해 state에 담는다.
@@ -73,6 +20,7 @@ const Box = ({ box, index, Remove }) => {
     // state가 변경 될때마다 redux state에 저장한다.
     useEffect(() => {
         dispatch(boxDataUpdateAction({ index: index, updateData: updateBoxData }));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [updateBoxData]);
 
     // 가로 세로 높이 구해서 부피무게를 구하고 state에 저장한다.

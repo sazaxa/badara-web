@@ -16,6 +16,7 @@ const Invoise = ({ index, box }) => {
 
     useEffect(() => {
         dispatch(boxDataUpdateAction({ index: index, updateData: boxData }));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [boxData]);
     return (
         <article className="shippingWrap">

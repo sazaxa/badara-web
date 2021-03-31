@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import produce from 'immer';
-import order, { getOrderInfoAction, putOrderInfoAction } from 'store/order';
+import { getOrderInfoAction, putOrderInfoAction } from 'store/order';
 
 const OrderDetailContainer = ({ match }) => {
     const dispatch = useDispatch();
@@ -54,6 +54,7 @@ const OrderDetailContainer = ({ match }) => {
             })
         );
         setUpdateState(!updateState);
+        console.log('업데이트후 :', updateValue);
     };
     // const handleChange = (e, index) => {
     //     const { name, value } = e.target;

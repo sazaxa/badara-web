@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearStoreAction } from 'store/auth';
 import { logoutAction } from 'store/member';
 
-const HeaderContainer = ({}) => {
+const HeaderContainer = () => {
     const [loginPopup, setLoginPopup] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const dispatch = useDispatch();

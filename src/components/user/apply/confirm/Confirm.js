@@ -4,91 +4,7 @@ import { applyPriseAction, applySaveAction } from 'store/apply';
 import Button from '@material-ui/core/Button';
 import { acitiveStepChange } from 'store/part';
 import { withRouter } from 'react-router';
-import styled from 'styled-components';
-
-const ConfirmWrap = styled.article`
-    width: 100%;
-    margin-bottom: 30px;
-    .titleBox {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        padding-bottom: 15px;
-        box-sizing: border-box;
-        & > h2 {
-            letter-spacing: -2.5px;
-            font-size: 32px;
-            margin-right: 10px;
-        }
-        & > button {
-            height: 40px;
-        }
-    }
-    input,
-    select {
-        width: 100%;
-        border: none;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        height: 40px;
-        padding: 10px;
-        box-sizing: border-box;
-    }
-    table {
-        width: 100%;
-        text-align: center;
-        margin-bottom: 50px;
-        & > tbody > tr {
-            display: flex;
-            align-items: center;
-            width: 100%;
-            border-bottom: 1px solid #ccc;
-            padding: 15px 0;
-        }
-        & > tbody > tr:first-child {
-            border-top: 4px solid #0080ff;
-        }
-        & > tbody > tr > th {
-            width: 50%;
-        }
-        & > tbody > tr > td {
-            width: 50%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        & > tbody > tr > td > input {
-            width: 100%;
-        }
-    }
-    .total {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        & > h2 {
-            width: 100%;
-            text-align: center;
-            background: #0080ff;
-            padding: 20px 0;
-            color: #fff;
-        }
-        & > div {
-            width: 50%;
-            & > h3 {
-                text-align: center;
-                padding: 20px 0;
-                box-sizing: border-box;
-                border-bottom: 1px solid #ccc;
-            }
-            & > p {
-                text-align: center;
-                padding: 20px 0;
-                box-sizing: border-box;
-                border-bottom: 1px solid #ccc;
-            }
-        }
-    }
-`;
+import { ConfirmWrap } from 'styles/ApplyStyles';
 
 const Confirm = ({ stepIndex, steps, history }) => {
     const [totalWeightData, setTotalWeightData] = useState({
@@ -108,6 +24,7 @@ const Confirm = ({ stepIndex, steps, history }) => {
 
     useEffect(() => {
         totalCalculation();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [apply]);
 
     useEffect(() => {
@@ -115,6 +32,7 @@ const Confirm = ({ stepIndex, steps, history }) => {
             alert('접수가 완료 되었습니다.');
             history.push('/');
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [status]);
 
     const { recipient, boxes, products } = apply;

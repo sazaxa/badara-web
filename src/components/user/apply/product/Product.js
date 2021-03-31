@@ -1,65 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { productDataUpdateAction } from 'store/apply';
-import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
-
-const ProductWrap = styled.article`
-    width: 100%;
-    margin-bottom: 30px;
-    .titleBox {
-        width: 100%;
-        border-bottom: 4px solid #0080ff;
-        display: flex;
-        align-items: center;
-        padding-bottom: 15px;
-        box-sizing: border-box;
-        & > h2 {
-            letter-spacing: -2.5px;
-            font-size: 32px;
-            margin-right: 10px;
-        }
-        & > button {
-            height: 40px;
-        }
-    }
-    input,
-    select {
-        width: 100%;
-        border: none;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        height: 40px;
-        padding: 10px;
-        box-sizing: border-box;
-    }
-    table {
-        width: 100%;
-        & > tbody > tr {
-            display: flex;
-            align-items: center;
-            width: 100%;
-            border-bottom: 1px solid #ccc;
-            padding: 15px 0;
-        }
-        & > tbody > tr > th {
-            width: 30%;
-        }
-        & > tbody > tr > td {
-            width: 70%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        & > tbody > tr > td > input {
-            width: 100%;
-        }
-    }
-`;
+import { ProductWrap } from 'styles/ApplyStyles';
 
 const Product = ({ stepIndex, steps, product, handlePrev, handleClick, index, ProductRemove }) => {
-    console.log(index);
-
     const [updateProductData, setUpdateProductData] = useState(product);
     const dispatch = useDispatch();
     console.log(updateProductData);
@@ -73,6 +18,7 @@ const Product = ({ stepIndex, steps, product, handlePrev, handleClick, index, Pr
 
     useEffect(() => {
         dispatch(productDataUpdateAction({ index: index, updateData: updateProductData }));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [updateProductData]);
 
     return (

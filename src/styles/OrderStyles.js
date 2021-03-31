@@ -7,6 +7,10 @@ export const OrderWrap = styled(Responsive)`
     padding: 50px;
     box-sizing: border-box;
     margin-left: 300px;
+    a {
+        color: #000;
+        font-weight: 600;
+    }
     .detailWrap {
         width: 100%;
         letter-spacing: -1.5px;
