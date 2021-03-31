@@ -203,6 +203,22 @@ const MypageComponent = ({
                                         <strong>결제금액</strong>
                                         <p>{Number(order.orderPrice).toLocaleString()}원</p>
                                     </div>
+                                    <span>+</span>
+                                    <div className="item">
+                                        <strong>부가세</strong>
+                                        <p>{(Number(order.orderPrice) * 0.1).toLocaleString()}원</p>
+                                    </div>
+                                    <span>=</span>
+                                    <div className="item">
+                                        <strong>결제금액</strong>
+                                        <p>
+                                            {(
+                                                Number(order.orderPrice) +
+                                                Number(order.orderPrice) * 0.1
+                                            ).toLocaleString()}
+                                            원
+                                        </p>
+                                    </div>
                                     {order.orderStatus === '결제요청' ? (
                                         <button type="button" onClick={() => handlePaymentPopup(order.id)}>
                                             결제하기
