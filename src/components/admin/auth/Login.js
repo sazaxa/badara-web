@@ -15,7 +15,7 @@ const Login = ({ loginData, handleChange, handleSubmit, onKeyPress }) => {
                     variant="outlined"
                     onChange={e => handleChange(e)}
                     value={loginData.email}
-                    onKeyPress={onKeyPress}
+                    onKeyPress={e => onKeyPress(e)}
                 />
                 <TextField
                     label="비밀번호"
@@ -24,7 +24,7 @@ const Login = ({ loginData, handleChange, handleSubmit, onKeyPress }) => {
                     type="password"
                     onChange={e => handleChange(e)}
                     value={loginData.password}
-                    onKeyPress={onKeyPress}
+                    onKeyPress={e => onKeyPress(e)}
                 />
                 <Button variant="contained" color="primary" type="button" onClick={handleSubmit}>
                     로그인
