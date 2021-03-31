@@ -58,7 +58,12 @@ const HeaderComponent = ({
                                 onClose={HandleMenuClose}
                             >
                                 <MenuItem onClick={HandleMenuClose}>
-                                    <Link to="/mypage">마이페이지</Link>
+                                    <Link
+                                        style={{ color: '#000', display: 'block', width: '100%', height: '100%' }}
+                                        to="/mypage"
+                                    >
+                                        마이페이지
+                                    </Link>
                                 </MenuItem>
                                 <MenuItem onClick={HandleLogout}>로그아웃</MenuItem>
                             </Menu>

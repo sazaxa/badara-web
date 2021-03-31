@@ -110,7 +110,7 @@ export const HeaderContent = styled.header`
     align-items: center;
     position: relative;
     .MuiButtonBase-root > a {
-        clolor: #000;
+        color: #000;
     }
     h2 > a {
         letter-spacing: -2.5px;
