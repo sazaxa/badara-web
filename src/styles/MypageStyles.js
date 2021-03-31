@@ -203,6 +203,17 @@ export const MypageContent = styled.article`
             margin-right: 0;
         }
     }
+    button {
+        width: 50%;
+        height: 40px;
+        margin-top: 5%;
+        margin-left: 3%;
+        border-radius: 15px;
+        border: none;
+        background: #1976d2;
+        color: #fff;
+        cursor: pointer;
+    }
 `;
 
 export const UpdateInvoiceWrap = styled.article`
