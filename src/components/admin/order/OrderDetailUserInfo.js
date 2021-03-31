@@ -7,7 +7,7 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                 <tr>
                     <th>주문자</th>
                     <td colSpan="3">
-                        <input type="text" value="강경원" disabled />
+                        <input type="text" value={UpdateValue.recipient.member.name} disabled />
                     </td>
                 </tr>
                 <tr>

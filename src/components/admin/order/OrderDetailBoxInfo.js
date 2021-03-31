@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import box from 'store/box';
+import React from 'react';
 
 const OrderDetailBoxInfo = ({ Boxes, UpdateState, HandleChange }) => {
     return (

@@ -1,6 +1,4 @@
-import Product from 'components/user/apply/product/Product';
 import React from 'react';
-import { Fragment } from 'react';
 
 const OrderDetailProductInfo = ({ UpdateState, HandleChange, Products, List }) => {
     return (
