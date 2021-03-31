@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { applyClearAction } from 'store/apply';
-import { getMemberInfoAction } from 'store/member';
+import { getMemberOrderAction } from 'store/member';
 import { resetStep } from 'store/part';
 import { Responsive } from 'styles/CommonStyles';
 import ApplyMain from '../../../components/user/apply/Main';
@@ -26,7 +26,7 @@ const Main = () => {
     useEffect(() => {
         if (accessToken) {
             if (logged) {
-                dispatch(getMemberInfoAction(logged.id));
+                dispatch(getMemberOrderAction(logged.id));
                 console.log('호출됨');
             }
         } else {

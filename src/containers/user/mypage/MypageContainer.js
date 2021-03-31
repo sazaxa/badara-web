@@ -2,9 +2,9 @@ import { MypageComponent } from 'components';
 import React, { useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router';
-import { getMemberCheckAction, getMemberInfoAction } from 'store/member';
-import { getOrderInfoAction } from 'store/order';
-import { getProductInfoAction } from 'store/product';
+import { getMemberOrderAction } from 'store/member';
+import { getOrderIdAction, getOrderInfoAction } from 'store/order';
+import { getProductInfoAction } from 'store/box';
 
 const MypageContainer = () => {
     const dispatch = useDispatch();
@@ -23,8 +23,9 @@ const MypageContainer = () => {
         setUpdatePopup(!updatePopup);
     };
 
-    const handlePaymentPopup = () => {
+    const handlePaymentPopup = id => {
         setPaymentPopup(!paymentPopup);
+        dispatch(getOrderIdAction(id));
     };
 
     const handlePaymentInfo = id => {
@@ -40,7 +41,7 @@ const MypageContainer = () => {
     useEffect(() => {
         if (accessToken) {
             if (logged) {
-                dispatch(getMemberInfoAction(logged.id));
+                dispatch(getMemberOrderAction(logged.id));
                 console.log('호출됨');
             }
         } else {

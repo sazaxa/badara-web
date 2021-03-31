@@ -199,7 +199,7 @@ const MypageComponent = ({
                                         <p>{Number(order.orderPrice).toLocaleString()}원</p>
                                     </div>
                                     {order.orderStatus === '결제요청' ? (
-                                        <button type="button" onClick={() => handlePaymentPopup()}>
+                                        <button type="button" onClick={() => handlePaymentPopup(order.id)}>
                                             결제하기
                                         </button>
                                     ) : null}

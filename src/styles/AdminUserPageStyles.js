@@ -20,6 +20,7 @@ export const DetailWrap = styled.article`
         width: 100%;
         height: 100%;
         display: flex;
+        color: #000;
     }
     table {
         width: 100%;
@@ -54,4 +55,8 @@ export const ListWrap = styled.article`
     width: 100%;
     padding: 0 50px 50px;
     box-sizing: border-box;
+    a {
+        color: #000;
+        font-weight: 600;
+    }
 `;

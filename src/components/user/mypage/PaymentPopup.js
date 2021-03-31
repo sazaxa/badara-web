@@ -9,6 +9,7 @@ const PaymentPopup = ({ handlePopup, updatePopup }) => {
     const dispatch = useDispatch();
     const { orders } = useSelector(state => state.member.memberInfo);
     const { logged } = useSelector(state => state.member.loggedInfo);
+    const { id } = useSelector(state => state.order);
     const [depositPopup, setDepositPopup] = useState(false);
 
     const handleDeposit = () => {
@@ -19,7 +20,7 @@ const PaymentPopup = ({ handlePopup, updatePopup }) => {
         // 운송장번호를 Insert 하고, callBack으로 order를 다시 불러온다.
         dispatch(
             orderStatusChangeAction({
-                id: 2,
+                id: id,
                 paymentMethod: { paymentMethod: '결제완료' },
                 callBack: () => {
                     dispatch(getMemberOrderAction(logged.id));

@@ -82,7 +82,6 @@ export const MypageContent = styled.article`
         width: 100%;
         height: 100%;
         padding: 25px 20px;
-        border-radius: 0 0 10px 10px;
         border: 1px solid #ccc;
         border-top: none;
         box-sizing: border-box;
@@ -181,6 +180,27 @@ export const MypageContent = styled.article`
             width: 100%;
             display: block;
             margin-bottom: 10px;
+        }
+    }
+    .total {
+        border: 1px solid #ccc;
+        border-top: none;
+        padding: 30px 0;
+        box-sizing: border-box;
+        text-align: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        & > h2 {
+            width: 100%;
+            margin: 0;
+            margin-bottom: 20px;
+        }
+        & > .item {
+            padding: 0 10px;
+        }
+        & > .item > strong {
+            margin-right: 0;
         }
     }
 `;

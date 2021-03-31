@@ -20,9 +20,12 @@ const [
     ORDER_STATUS_CHANGE_FAILURE,
 ] = createRequestActionTypes('order/ORDER_STATUS_CHANGE');
 
-export const PUT_ORDER_INFO = 'order/PUT_ORDER_INFO';
+const PUT_ORDER_INFO = 'order/PUT_ORDER_INFO';
+
+const GET_ORDER_ID = 'order/GET_ORDER_ID';
 
 export const getOrderListAction = createAction(GET_ORDER_LIST_REQUEST);
+export const getOrderIdAction = createAction(GET_ORDER_ID, id => id);
 export const getOrderInfoAction = createAction(GET_ORDER_INFO_REQUEST, id => id);
 export const putOrderInfoAction = createAction(PUT_ORDER_INFO, ({ updateData, callBack }) => ({
     updateData,
@@ -91,6 +94,7 @@ const initialState = {
         list: [],
     },
     orderInfo: null,
+    id: null,
     error: null,
 };
 
@@ -120,6 +124,16 @@ export default handleActions(
         [GET_ORDER_INFO_FAILURE]: (state, { payload }) => {
             return produce(state, draft => {
                 draft.errer = payload;
+            });
+        },
+        [ORDER_STATUS_CHANGE_SUCCESS]: (state, { payload }) => {
+            return produce(state, draft => {
+                draft.id = initialState.id;
+            });
+        },
+        [GET_ORDER_ID]: (state, { payload }) => {
+            return produce(state, draft => {
+                draft.id = payload;
             });
         },
     },
