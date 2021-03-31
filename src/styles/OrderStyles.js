@@ -7,6 +7,10 @@ export const OrderWrap = styled(Responsive)`
     padding: 50px;
     box-sizing: border-box;
     margin-left: 300px;
+    select {
+        text-align: center;
+        text-align-last: center;
+    }
     a {
         color: #000;
         font-weight: 600;
