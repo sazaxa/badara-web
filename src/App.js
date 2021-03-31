@@ -53,6 +53,7 @@ function App({ location }) {
                     <Route component={AdminOrderDetailPage} path="/admin/order/:id" />
                     <Route component={AdminFAQPage} path="/admin/faq" />
                     <Route component={AdminChargePage} path="/admin/insert" />
+                    <Redirect path="*" to="/admin" />
                 </section>
             ) : (
                 <section>
