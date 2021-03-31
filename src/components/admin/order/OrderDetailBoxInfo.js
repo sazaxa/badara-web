@@ -142,6 +142,7 @@ const OrderDetailBoxInfo = ({ Boxes, UpdateState, HandleChange }) => {
                                             name="koreanShippingStatus"
                                             onChange={e => HandleChange(e, index)}
                                             defaultValue={box.koreanShippingStatus || ''}
+                                            disabled
                                         >
                                             <option value="송장입력">송장입력</option>
                                             <option value="센터입고중">센터입고중</option>

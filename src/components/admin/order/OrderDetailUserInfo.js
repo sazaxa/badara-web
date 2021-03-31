@@ -138,6 +138,7 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                                 name="country"
                                 onChange={e => handleRecipientChange(e)}
                                 defaultValue={UpdateValue.country || ''}
+                                disabled
                             >
                                 <option value="">나라선택</option>
                                 {List.map(v => {

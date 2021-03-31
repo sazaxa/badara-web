@@ -149,6 +149,7 @@ const OrderDetailProductInfo = ({ UpdateState, HandleChange, Products, List }) =
                                             defaultValue={product.price || ''}
                                             name="price"
                                             onChange={e => HandleChange(e, index)}
+                                            disabled
                                         />
                                     ) : (
                                         <input type="text" value={product.price || ''} disabled />
