@@ -4,6 +4,7 @@ import { HeaderComponent } from 'components';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearStoreAction } from 'store/auth';
 import { logoutAction } from 'store/member';
+import { useLocation } from 'react-router';
 
 const HeaderContainer = () => {
     const [loginPopup, setLoginPopup] = useState(false);
@@ -11,6 +12,11 @@ const HeaderContainer = () => {
     const dispatch = useDispatch();
     const { logged } = useSelector(state => state.member.loggedInfo);
     const member = localStorage.getItem('accessToken');
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
     // 로그인 팝업 처리.
     const handleLoginPopup = e => {
         setLoginPopup(e);
