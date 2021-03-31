@@ -166,7 +166,6 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                             <input
                                 type="text"
                                 name="shippingCompany"
-                                defaultValue="DHL"
                                 value={UpdateValue.shippingCompany}
                                 onChange={e => handleOrderChange(e)}
                             />
@@ -174,7 +173,6 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                             <input
                                 type="text"
                                 name="shippingCompany"
-                                defaultValue="DHL"
                                 value={UpdateValue.shippingCompany}
                                 onChange={e => handleOrderChange(e)}
                                 disabled
