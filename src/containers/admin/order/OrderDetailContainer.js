@@ -29,6 +29,7 @@ const OrderDetailContainer = ({ match }) => {
                 orderPrice: orderInfo.orderPrice,
                 orderStatus: orderInfo.orderStatus,
                 invoice: orderInfo.invoice,
+                depositName: orderInfo.depositName,
                 shippingCompany: orderInfo.shippingCompany,
                 adminMemo: orderInfo.adminMemo,
                 userMemo: orderInfo.userMeomo,

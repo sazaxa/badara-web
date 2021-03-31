@@ -101,6 +101,12 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                     </td>
                 </tr>
                 <tr>
+                    <th>무통장입금 입금주</th>
+                    <td colSpan="3">
+                        <input type="text" value={UpdateValue.depositName ? UpdateValue.depositName : null} disabled />
+                    </td>
+                </tr>
+                <tr>
                     <th colSpan="4">보내는 정보</th>
                 </tr>
                 <tr>
