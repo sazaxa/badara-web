@@ -66,7 +66,8 @@ function App({ location }) {
                     <Route component={RegisterPage} path="/register" />
                     <Route component={SupportPage} path="/support" />
                     <Route component={Mypage} path="/mypage" />
-                    <Redirect path="*" to="/" />
+                    {/* TODO: 새로고침시 전부 / 로 이동되어 주석처리 */}
+                    {/* <Redirect path="*" to="/" /> */}
                     <FooterComponent />
                 </section>
             )}
