@@ -50,11 +50,11 @@ const MypageContainer = () => {
             }
             if (orders[i]?.orderStatus === '결제완료') {
                 // eslint-disable-next-line no-unused-vars
-                PAYMENT_BANK++;
+                PAYMENT_COMPLETE++;
             }
             if (orders[i]?.orderStatus === '무통장입금') {
                 // eslint-disable-next-line no-unused-vars
-                PAYMENT_COMPLETE++;
+                PAYMENT_BANK++;
             }
             if (orders[i]?.orderStatus === '해외배송중') {
                 // eslint-disable-next-line no-unused-vars
