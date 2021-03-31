@@ -66,7 +66,7 @@ const MypageComponent = ({
                 </article>
                 <article className="memberOrders">
                     {memberOrder.map(order => (
-                        <article className="order">
+                        <article className="order" key={order.id}>
                             <article className="orderHead">
                                 <div className="headData">
                                     <strong>주문번호 </strong>
@@ -125,7 +125,7 @@ const MypageComponent = ({
                                 <article className="product">
                                     {/* <h2>상품 정보</h2> */}
                                     {order.productResponses.map((product, index) => (
-                                        <article className="productWrap">
+                                        <article className="productWrap" key={product.id}>
                                             {/* <h3>상품정보 {index + 1}</h3> */}
                                             <div className="productItem">
                                                 <strong>상품 </strong>
@@ -153,6 +153,7 @@ const MypageComponent = ({
                                             {/* <h3>박스정보 {index + 1}</h3> */}
                                             <div
                                                 className="boxItem"
+                                                key={box.id}
                                                 style={
                                                     box.koreanShippingStatus !== '송장입력' &&
                                                     box.koreanShippingStatus !== '센터입고중'

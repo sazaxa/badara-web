@@ -45,6 +45,15 @@ const OrderDetailContainer = ({ match }) => {
         setUpdateState(!updateState);
     };
     const handleUpdateFinish = updateValue => {
+        if (updateValue.orderStatus === '결제요청') {
+            const boxes = updateValue.boxes;
+            for (let i = 0; i < boxes.length; i++) {
+                if (boxes[i].width === null || boxes[i].depth === null || boxes[i].height === null) {
+                    alert('박스에 가로 세로 높이 값을 입력하세요.');
+                    return;
+                }
+            }
+        }
         dispatch(
             putOrderInfoAction({
                 updateData: updateValue,

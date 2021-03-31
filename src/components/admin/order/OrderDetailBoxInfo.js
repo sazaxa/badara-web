@@ -52,17 +52,12 @@ const OrderDetailBoxInfo = ({ Boxes, UpdateState, HandleChange }) => {
                                     {UpdateState ? (
                                         <input
                                             type="text"
-                                            value={box.width ? box.width : '미입력'}
+                                            value={box.width ? box.width : ''}
                                             name="width"
                                             onChange={e => HandleChange(e, index)}
                                         />
                                     ) : (
-                                        <input
-                                            type="text"
-                                            name="width"
-                                            value={box.width ? box.width : '미입력'}
-                                            disabled
-                                        />
+                                        <input type="text" name="width" value={box.width ? box.width : ''} disabled />
                                     )}
                                 </td>
                                 <td>
@@ -70,30 +65,25 @@ const OrderDetailBoxInfo = ({ Boxes, UpdateState, HandleChange }) => {
                                         <input
                                             type="text"
                                             name="depth"
-                                            value={box.depth ? box.depth : '미입력'}
+                                            value={box.depth ? box.depth : ''}
                                             onChange={e => HandleChange(e, index)}
                                         />
                                     ) : (
-                                        <input
-                                            type="text"
-                                            value={box.depth ? box.depth : '미입력'}
-                                            name="depth"
-                                            disabled
-                                        />
+                                        <input type="text" value={box.depth ? box.depth : ''} name="depth" disabled />
                                     )}
                                 </td>
                                 <td>
                                     {UpdateState ? (
                                         <input
                                             type="text"
-                                            value={box.height ? box.height : '미입력'}
+                                            value={box.height ? box.height : ''}
                                             name="height"
                                             onChange={e => HandleChange(e, index)}
                                         />
                                     ) : (
                                         <input
                                             type="text"
-                                            value={box.height ? box.height : '미입력'}
+                                            value={box.height ? box.height : ''}
                                             name="height"
                                             disabled
                                         />
@@ -104,14 +94,15 @@ const OrderDetailBoxInfo = ({ Boxes, UpdateState, HandleChange }) => {
                                         <input
                                             type="text"
                                             name="volumeWeight"
-                                            value={box.volumeWeight ? box.volumeWeight : '미입력'}
+                                            value={box.volumeWeight ? box.volumeWeight : ''}
                                             onChange={e => HandleChange(e, index)}
+                                            disabled
                                         />
                                     ) : (
                                         <input
                                             type="text"
                                             name="volumeWeight"
-                                            value={box.volumeWeight ? box.volumeWeight : '미입력'}
+                                            value={box.volumeWeight ? box.volumeWeight : ''}
                                             disabled
                                         />
                                     )}
@@ -121,14 +112,14 @@ const OrderDetailBoxInfo = ({ Boxes, UpdateState, HandleChange }) => {
                                         <input
                                             type="text"
                                             name="netWeight"
-                                            value={box.netWeight ? box.netWeight : '미입력'}
+                                            value={box.netWeight ? box.netWeight : ''}
                                             onChange={e => HandleChange(e, index)}
                                         />
                                     ) : (
                                         <input
                                             type="text"
                                             name="netWeight"
-                                            value={box.netWeight ? box.netWeight : '미입력'}
+                                            value={box.netWeight ? box.netWeight : ''}
                                             disabled
                                         />
                                     )}
