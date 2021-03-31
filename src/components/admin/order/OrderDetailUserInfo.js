@@ -17,8 +17,8 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                     </td>
                 </tr>
                 <tr>
-                    <th>주문 총 가격</th>
-                    <td colSpan="3">
+                    <th>주문 가격</th>
+                    <td>
                         {UpdateState ? (
                             <input
                                 type="number"
@@ -34,6 +34,33 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                                 disabled
                             />
                         )}
+                    </td>
+                    <th>부가세</th>
+                    <td>
+                        <input
+                            type="text"
+                            name="vat"
+                            value={UpdateValue.orderPrice ? parseInt(UpdateValue.orderPrice) * 0.1 : ''}
+                            disabled
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <th>총 가격</th>
+                    <td colSpan="3">
+                        <input
+                            type="text"
+                            name="vat"
+                            value={
+                                UpdateValue.orderPrice
+                                    ? (
+                                          parseInt(UpdateValue.orderPrice) +
+                                          parseInt(UpdateValue.orderPrice) * 0.1
+                                      ).toLocaleString() + '원'
+                                    : ''
+                            }
+                            disabled
+                        />
                     </td>
                 </tr>
                 <tr>
