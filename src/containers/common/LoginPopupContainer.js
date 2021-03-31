@@ -44,8 +44,19 @@ const LoginPopupContainer = ({ close, location }) => {
         dispatch(loginAction({ email: email, password: password }));
     };
 
+    const onKeyPress = e => {
+        if (e.key === 'Enter') {
+            handleSubmit();
+        }
+    };
     return (
-        <LoginPopupComponent close={close} HandleChange={handleChange} onClick={onClick} HandleSubmit={handleSubmit} />
+        <LoginPopupComponent
+            close={close}
+            HandleChange={handleChange}
+            onClick={onClick}
+            HandleSubmit={handleSubmit}
+            onKeyPress={onKeyPress}
+        />
     );
 };
 

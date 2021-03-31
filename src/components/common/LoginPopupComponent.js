@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { LoginPopupWrap, LoginPopup, StyledInput } from 'styles/CommonStyles';
 import logo from '../../styles/img/logo.png';
 
-const LoginPopupComponent = ({ onClick, HandleChange, HandleSubmit }) => (
+const LoginPopupComponent = ({ onClick, HandleChange, HandleSubmit, onKeyPress }) => (
     <>
         <LoginPopupWrap onClick={onClick} />
         <LoginPopup>
@@ -14,11 +14,24 @@ const LoginPopupComponent = ({ onClick, HandleChange, HandleSubmit }) => (
             <form>
                 <div className="inputBox">
                     <label htmlFor="email">EMAIL</label>
-                    <StyledInput autoFocus type="email" name="email" id="email" onChange={HandleChange} />
+                    <StyledInput
+                        autoFocus
+                        type="email"
+                        name="email"
+                        id="email"
+                        onChange={HandleChange}
+                        onKeyPress={e => onKeyPress(e)}
+                    />
                 </div>
                 <div className="inputBox">
                     <label htmlFor="pw">PW</label>
-                    <StyledInput id="pw" type="password" name="password" onChange={HandleChange} />
+                    <StyledInput
+                        id="pw"
+                        type="password"
+                        name="password"
+                        onChange={HandleChange}
+                        onKeyPress={e => onKeyPress(e)}
+                    />
                 </div>
                 <Button variant="contained" color="primary" onClick={HandleSubmit} id="loginBtn">
                     로그인
