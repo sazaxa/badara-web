@@ -54,7 +54,17 @@ const OrderDetailContainer = ({ match }) => {
                     return;
                 }
             }
+        } else if (updateValue.orderStatus === '해외배송중') {
+            if (
+                updateValue.orderPrice === null ||
+                updateValue.invoice === null ||
+                updateValue.shippingCompany === null
+            ) {
+                alert('배송 금액과 운송장번호, 택배사를 입력하세요.');
+                return;
+            }
         }
+
         dispatch(
             putOrderInfoAction({
                 updateData: updateValue,
