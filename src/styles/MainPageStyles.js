@@ -80,3 +80,54 @@ export const MainWrap = styled.article`
         margin-right: 10px;
     }
 `;
+
+export const TarkingWrap = styled.article`
+    width: 100%;
+    padding: 50px 100px;
+    border-radius: 10px;
+    box-shadow: 0 0 8px #ccc;
+    margin-bottom: 50px;
+    .title_wrap {
+        display: flex;
+        justigy-content: left;
+        margin-bottom: 20px;
+        h2 {
+            font-size: 32px;
+            letter-spacing: -1.5px;
+        }
+    }
+    .trackingBox {
+        width: 100%;
+        border-top: 4px solid #0080ff;
+        padding: 15px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .inputBox {
+            width: 70%;
+        }
+        p {
+            padding-left: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: -1.5px;
+        }
+        input {
+            width: 80%;
+            padding: 15px;
+            border-radius: 5px 0 0 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 15px;
+            background: #fff;
+            cursor: pointer;
+            outline: none;
+            border: none;
+            background-color: #0049ff;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 0 5px 5px 0;
+        }
+    }
+`;
