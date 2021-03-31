@@ -1,37 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMemberInfoAction } from 'store/member';
-import { productPaymentAction } from 'store/product';
+import { getMemberOrderAction } from 'store/member';
+import { orderStatusChangeAction } from 'store/order';
 import { UpdateInvoiceWrap } from 'styles/MypageStyles';
+import DepositToAccount from './DepositToAccount';
 
 const PaymentPopup = ({ handlePopup, updatePopup }) => {
     const dispatch = useDispatch();
-    const { orderInfo } = useSelector(state => state.order);
+    const { orders } = useSelector(state => state.member.memberInfo);
     const { logged } = useSelector(state => state.member.loggedInfo);
+    const [depositPopup, setDepositPopup] = useState(false);
+
+    const handleDeposit = () => {
+        setDepositPopup(!depositPopup);
+    };
 
     const handlePayment = () => {
         // 운송장번호를 Insert 하고, callBack으로 order를 다시 불러온다.
         dispatch(
-            productPaymentAction({
-                id: orderInfo.id,
-                status: { status: '결제완료' },
+            orderStatusChangeAction({
+                id: 2,
+                paymentMethod: { paymentMethod: '결제완료' },
                 callBack: () => {
-                    dispatch(getMemberInfoAction(logged.id));
+                    dispatch(getMemberOrderAction(logged.id));
                 },
             })
         );
         handlePopup();
     };
-    if (!orderInfo) return null;
+    if (!orders) return null;
     return (
         <UpdateInvoiceWrap>
-            <h2>결제 확인창</h2>
-
+            {depositPopup ? (
+                <DepositToAccount popup={depositPopup} handlePopup={handleDeposit} paymentPopup={handlePopup} />
+            ) : null}
+            <h2>결제창</h2>
             <button type="button" onClick={() => handlePayment()}>
-                확인
+                네이버페이
+            </button>
+            <button type="button" onClick={handleDeposit}>
+                무통장 입금
             </button>
             <button type="button" onClick={handlePopup}>
-                취소
+                뒤로가기
             </button>
         </UpdateInvoiceWrap>
     );
