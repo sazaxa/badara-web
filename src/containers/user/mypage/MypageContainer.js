@@ -44,23 +44,23 @@ const MypageContainer = () => {
         let GLOBAL_DELIVERY_COMPLETED = 0;
         // const box = orders.boxResponses;
         for (let i = 0; i < orders.length; i++) {
-            if (orders[i]?.orderStatus === '결제요청') {
+            if (orders[i].orderStatus === '결제요청') {
                 // eslint-disable-next-line no-unused-vars
                 PAYMENT_REQUEST++;
             }
-            if (orders[i]?.orderStatus === '결제완료') {
+            if (orders[i].orderStatus === '결제완료') {
                 // eslint-disable-next-line no-unused-vars
                 PAYMENT_COMPLETE++;
             }
-            if (orders[i]?.orderStatus === '무통장입금') {
+            if (orders[i].orderStatus === '무통장입금') {
                 // eslint-disable-next-line no-unused-vars
                 PAYMENT_BANK++;
             }
-            if (orders[i]?.orderStatus === '해외배송중') {
+            if (orders[i].orderStatus === '해외배송중') {
                 // eslint-disable-next-line no-unused-vars
                 GLOBAL_DELIVERY++;
             }
-            if (orders[i]?.orderStatus === '해외배송완료') {
+            if (orders[i].orderStatus === '해외배송완료') {
                 // eslint-disable-next-line no-unused-vars
                 GLOBAL_DELIVERY_COMPLETED++;
             }

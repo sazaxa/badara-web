@@ -31,9 +31,9 @@ export const putOrderInfoAction = createAction(PUT_ORDER_INFO, ({ updateData, ca
     updateData,
     callBack,
 }));
-export const orderStatusChangeAction = createAction(ORDER_STATUS_CHANGE_REQUEST, ({ id, paymentMethod, callBack }) => ({
+export const orderStatusChangeAction = createAction(ORDER_STATUS_CHANGE_REQUEST, ({ id, data, callBack }) => ({
     id,
-    paymentMethod,
+    data,
     callBack,
 }));
 
@@ -67,9 +67,9 @@ function* putOrderInfoSaga({ payload: { updateData, callBack } }) {
     }
 }
 
-function* orderStatusChangeSaga({ payload: { id, paymentMethod, callBack } }) {
+function* orderStatusChangeSaga({ payload: { id, data, callBack } }) {
     try {
-        const response = yield call(orderAPI.orderStatusChange, { id, paymentMethod });
+        const response = yield call(orderAPI.orderStatusChange, { id, data });
         yield put({ type: ORDER_STATUS_CHANGE_SUCCESS, payload: response.data });
         if (callBack instanceof Function) {
             callBack({

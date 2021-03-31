@@ -11,33 +11,48 @@ const DepositToAccount = ({ handlePopup, popup, paymentPopup }) => {
     const { id } = useSelector(state => state.order);
 
     const [Deposit, setDeposit] = useState(false);
+    const [depositData, setDepositData] = useState({
+        paymentMethod: '무통장입금',
+        depositName: null,
+    });
+
+    const handleChange = e => {
+        setDepositData({
+            ...depositData,
+            depositName: e.target.value,
+        });
+    };
 
     const handleClose = () => {
         setDeposit(!Deposit);
         paymentPopup();
-        dispatch(
-            orderStatusChangeAction({
-                id: id,
-                paymentMethod: { paymentMethod: '무통장입금' },
-                callBack: () => {
-                    dispatch(getMemberInfoAction(logged.id));
-                },
-            })
-        );
-        window.location.reload();
-    };
-
-    const handlePayment = () => {
-        // 운송장번호를 Insert 하고, callBack으로 order를 다시 불러온다.
         // dispatch(
         //     orderStatusChangeAction({
         //         id: id,
-        //         paymentMethod: { paymentMethod: '결제완료' },
+        //         paymentMethod: { paymentMethod: '무통장입금' },
         //         callBack: () => {
         //             dispatch(getMemberInfoAction(logged.id));
         //         },
         //     })
         // );
+        window.location.reload();
+    };
+
+    const handlePayment = () => {
+        if (depositData.depositName === null) {
+            alert('입금주를 입력하세요.');
+            return;
+        }
+        // 운송장번호를 Insert 하고, callBack으로 order를 다시 불러온다.
+        dispatch(
+            orderStatusChangeAction({
+                id: id,
+                data: depositData,
+                callBack: () => {
+                    dispatch(getMemberInfoAction(logged.id));
+                },
+            })
+        );
         // handlePopup();
         setDeposit(!Deposit);
     };
@@ -47,7 +62,7 @@ const DepositToAccount = ({ handlePopup, popup, paymentPopup }) => {
             <UpdateInvoiceWrap>
                 <h2>결제 확인창</h2>
 
-                <input type="text" placeholder="입금주를 입력해주세요." />
+                <input type="text" placeholder="입금주를 입력해주세요." onChange={e => handleChange(e)} />
                 <button type="button" onClick={() => handlePayment()}>
                     확인
                 </button>

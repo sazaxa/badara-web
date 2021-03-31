@@ -14,7 +14,7 @@ export const put = updateData => {
     return client.put(`/api/v1/orders/${updateData.id}`, updateData);
 };
 
-export const orderStatusChange = ({ id, paymentMethod }) => {
-    console.log(id);
-    return client.put(`/api/v1/orders/payment/${id}`, paymentMethod);
+export const orderStatusChange = ({ id, data }) => {
+    console.log(data);
+    return client.put(`/api/v1/orders/payment/${id}`, data);
 };
