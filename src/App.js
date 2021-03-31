@@ -53,7 +53,8 @@ function App({ location }) {
                     <Route component={AdminOrderDetailPage} path="/admin/order/:id" />
                     <Route component={AdminFAQPage} path="/admin/faq" />
                     <Route component={AdminChargePage} path="/admin/insert" />
-                    <Redirect path="*" to="/admin" />
+                    {/* TODO: 계속 랜더링됨... 이유 확인중 */}
+                    {/* <Redirect path="*" to="/admin" /> */}
                 </section>
             ) : (
                 <section>
