@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMemberInfoAction } from 'store/member';
-import { porductInvoiceAction } from 'store/product';
+import { getMemberOrderAction } from 'store/member';
+import { porductInvoiceAction } from 'store/box';
 import { UpdateInvoiceWrap } from 'styles/MypageStyles';
 import { Courier } from '../../../containers/user/apply/courier';
 
 const UpdateInvoice = ({ handlePopup }) => {
     const dispatch = useDispatch();
-    const { product } = useSelector(state => state.product);
+    const { boxId } = useSelector(state => state.box);
     const { logged } = useSelector(state => state.member.loggedInfo);
     const [updateInvoice, setUpdateInvoice] = useState('');
 
@@ -22,16 +22,16 @@ const UpdateInvoice = ({ handlePopup }) => {
         // 운송장번호를 Insert 하고, callBack으로 order를 다시 불러온다.
         dispatch(
             porductInvoiceAction({
-                id: product.id,
+                id: boxId,
                 data: updateInvoice,
                 callBack: () => {
-                    dispatch(getMemberInfoAction(logged.id));
+                    dispatch(getMemberOrderAction(logged.id));
                 },
             })
         );
         handlePopup();
     };
-    if (!product) return null;
+    if (!boxId) return null;
     return (
         <UpdateInvoiceWrap>
             <h2>운송장번호 입력하기</h2>
@@ -45,7 +45,7 @@ const UpdateInvoice = ({ handlePopup }) => {
                     );
                 })}
             </select>
-            <input type="text" name="invoice" onChange={e => handleChange(e)} placeholder="운송장 번호" />
+            <input type="text" name="koreanInvoice" onChange={e => handleChange(e)} placeholder="운송장 번호" />
             <button type="button" onClick={() => handleUpdateInvoise()}>
                 확인
             </button>
