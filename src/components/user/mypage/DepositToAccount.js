@@ -15,19 +15,29 @@ const DepositToAccount = ({ handlePopup, popup, paymentPopup }) => {
     const handleClose = () => {
         setDeposit(!Deposit);
         paymentPopup();
-    };
-
-    const handlePayment = () => {
-        // 운송장번호를 Insert 하고, callBack으로 order를 다시 불러온다.
         dispatch(
             orderStatusChangeAction({
                 id: id,
-                paymentMethod: { paymentMethod: '결제완료' },
+                paymentMethod: { paymentMethod: '무통장입금' },
                 callBack: () => {
                     dispatch(getMemberInfoAction(logged.id));
                 },
             })
         );
+        window.location.reload();
+    };
+
+    const handlePayment = () => {
+        // 운송장번호를 Insert 하고, callBack으로 order를 다시 불러온다.
+        // dispatch(
+        //     orderStatusChangeAction({
+        //         id: id,
+        //         paymentMethod: { paymentMethod: '결제완료' },
+        //         callBack: () => {
+        //             dispatch(getMemberInfoAction(logged.id));
+        //         },
+        //     })
+        // );
         // handlePopup();
         setDeposit(!Deposit);
     };
