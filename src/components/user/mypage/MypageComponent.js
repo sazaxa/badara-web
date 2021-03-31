@@ -6,6 +6,7 @@ import UpdateInvoice from './UpdateInvoice';
 import PaymentPopup from './PaymentPopup';
 
 const MypageComponent = ({
+    status,
     memberOrder,
     handleUpdatePopup,
     handlePaymentPopup,
@@ -34,27 +35,31 @@ const MypageComponent = ({
                         <ul>
                             <li>
                                 <strong>송장입력</strong>
-                                <p>0</p>
+                                <p>{status.INVOICE}</p>
                             </li>
                             <li>
                                 <strong>센터입고중</strong>
-                                <p>0</p>
+                                <p>{status.CENTER_INCOME}</p>
                             </li>
                             <li>
                                 <strong>결제요청</strong>
-                                <p>0</p>
+                                <p>{status.PAYMENT_REQUEST}</p>
+                            </li>
+                            <li>
+                                <strong>무통장입금</strong>
+                                <p>{status.PAYMENT_BANK}</p>
                             </li>
                             <li>
                                 <strong>결제완료</strong>
-                                <p>0</p>
+                                <p>{status.PAYMENT_COMPLETE}</p>
                             </li>
                             <li>
                                 <strong>해외배송중</strong>
-                                <p>0</p>
+                                <p>{status.GLOBAL_DELIVERY}</p>
                             </li>
                             <li>
                                 <strong>해외배송완료</strong>
-                                <p>0</p>
+                                <p>{status.GLOBAL_DELIVERY_COMPLETED}</p>
                             </li>
                         </ul>
                     </article>
@@ -172,7 +177,7 @@ const MypageComponent = ({
                                             box.koreanShippingStatus === '센터입고중' ? (
                                                 <div className="boxstatus">
                                                     <strong>상태</strong>
-                                                    <p>{box.koreanShippingStatus}</p>
+                                                    <p style={{ marginBottom: '10px' }}>{box.koreanShippingStatus}</p>
                                                     {box.koreanShippingStatus === '송장입력' ? (
                                                         <button
                                                             type="onClick"
