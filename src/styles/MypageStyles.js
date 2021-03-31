@@ -204,10 +204,10 @@ export const MypageContent = styled.article`
         }
     }
     button {
-        width: 50%;
+        width: 66px;
         height: 40px;
-        margin-top: 5%;
-        margin-left: 3%;
+        // margin-top: 5%;
+        // margin-left: 3%;
         border-radius: 15px;
         border: none;
         background: #1976d2;
