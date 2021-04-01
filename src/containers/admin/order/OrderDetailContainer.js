@@ -48,23 +48,18 @@ const OrderDetailContainer = ({ match }) => {
     const handleUpdateFinish = updateValue => {
         if (updateValue.orderStatus === '결제요청') {
             const boxes = updateValue.boxes;
-            if (updateValue.orderPrice !== null && updateValue.orderPrice !== '') {
-                for (let i = 0; i < boxes.length; i++) {
-                    if (
-                        boxes[i].width === null ||
-                        boxes[i].depth === null ||
-                        boxes[i].height === '' ||
-                        boxes[i].width === '' ||
-                        boxes[i].depth === '' ||
-                        boxes[i].height === ''
-                    ) {
-                        alert('박스에 가로 세로 높이 값을 입력하세요.');
-                        return;
-                    }
+            for (let i = 0; i < boxes.length; i++) {
+                if (
+                    boxes[i].width === null ||
+                    boxes[i].depth === null ||
+                    boxes[i].height === '' ||
+                    boxes[i].width === '' ||
+                    boxes[i].depth === '' ||
+                    boxes[i].height === ''
+                ) {
+                    alert('박스에 가로 세로 높이 값을 입력하세요.');
+                    return;
                 }
-            } else {
-                alert('주문가격을 입력해주세요.');
-                return;
             }
         } else if (updateValue.orderStatus === '해외배송중') {
             if (updateValue.invoice === null || updateValue.shippingCompany === null) {

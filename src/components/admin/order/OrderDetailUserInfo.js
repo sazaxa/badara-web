@@ -23,13 +23,14 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                             <input
                                 type="number"
                                 name="orderPrice"
-                                defaultValue={UpdateValue.orderPrice || ''}
+                                defaultValue={Math.ceil(UpdateValue.orderPrice) || ''}
                                 onChange={e => handleOrderChange(e)}
+                                disabled
                             />
                         ) : (
                             <input
                                 type="text"
-                                value={UpdateValue.orderPrice || ''}
+                                value={Math.ceil(UpdateValue.orderPrice) || ''}
                                 onChange={e => handleOrderChange(e)}
                                 disabled
                             />
@@ -53,9 +54,8 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                             name="vat"
                             value={
                                 UpdateValue.orderPrice
-                                    ? (
-                                          parseInt(UpdateValue.orderPrice) +
-                                          parseInt(UpdateValue.orderPrice) * 0.1
+                                    ? Math.ceil(
+                                          parseInt(UpdateValue.orderPrice) + parseInt(UpdateValue.orderPrice) * 0.1
                                       ).toLocaleString() + '원'
                                     : ''
                             }
