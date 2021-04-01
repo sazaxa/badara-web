@@ -21,7 +21,7 @@ const PaymentPopup = ({ handlePopup, updatePopup }) => {
         dispatch(
             orderStatusChangeAction({
                 id: id,
-                paymentMethod: { paymentMethod: '결제완료' },
+                data: { paymentMethod: '결제완료' },
                 callBack: () => {
                     dispatch(getMemberOrderAction(logged.id));
                 },
