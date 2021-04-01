@@ -218,20 +218,19 @@ const MypageComponent = ({
                                         </div>
                                         <div className="item">
                                             <strong>결제금액</strong>
-                                            <p>{Number(order.orderPrice).toLocaleString()}원</p>
+                                            <p>{Math.ceil(Number(order.orderPrice)).toLocaleString()}원</p>
                                         </div>
                                         <span>+</span>
                                         <div className="item">
                                             <strong>부가세</strong>
-                                            <p>{(Number(order.orderPrice) * 0.1).toLocaleString()}원</p>
+                                            <p>{Math.ceil(Number(order.orderPrice) * 0.1).toLocaleString()}원</p>
                                         </div>
                                         <span>=</span>
                                         <div className="item">
                                             <strong>결제금액</strong>
                                             <p>
-                                                {(
-                                                    Number(order.orderPrice) +
-                                                    Number(order.orderPrice) * 0.1
+                                                {Math.ceil(
+                                                    Number(order.orderPrice) + Number(order.orderPrice) * 0.1
                                                 ).toLocaleString()}
                                                 원
                                             </p>
