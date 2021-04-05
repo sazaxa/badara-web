@@ -299,8 +299,12 @@ export const BoxWrap = styled.article`
             justify-content: space-between;
         }
         & > tbody > tr > td > input {
-            width: 100%;
+            width: 40%;
         }
+    }
+    .weight {
+        justify-content: flex-start;
+        align-items: center;
     }
 `;
 

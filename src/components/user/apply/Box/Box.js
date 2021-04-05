@@ -92,25 +92,44 @@ const Box = ({ box, index, Remove }) => {
                     </tr>
                     <tr>
                         <th>부피무게(단위:kg)</th>
-                        <td>
+                        <td className="weight">
                             <input
                                 type="number"
                                 name="expectedVolumeWeight"
-                                value={updateBoxData.expectedVolumeWeight ?? undefined}
+                                value={
+                                    updateBoxData.expectedVolumeWeight
+                                        ? updateBoxData.expectedVolumeWeight.toFixed(1)
+                                        : ''
+                                }
                                 disabled
                                 placeholder="계산하기 후 확인가능합니다."
                                 onChange={e => handleChange(e)}
                             />
+                            <span style={{ marginLeft: '10px' }}>kg</span>
                         </td>
                     </tr>
                     <tr>
                         <th>실 무게(단위:kg)</th>
-                        <td>
+                        <td className="weight">
                             <input
                                 type="number"
                                 name="expectedNetWeight"
                                 value={updateBoxData.expectedNetWeight ?? undefined}
                                 onChange={e => handleChange(e)}
+                                required
+                            />
+                            <span style={{ marginLeft: '10px' }}>kg</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>어떠한 물건이 있나요?</th>
+                        <td className="weight">
+                            <input
+                                type="text"
+                                name="userMeomo"
+                                value={updateBoxData.userMeomo ?? undefined}
+                                onChange={e => handleChange(e)}
+                                placeholder="안경,핸드폰"
                                 required
                             />
                         </td>

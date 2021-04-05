@@ -28,6 +28,7 @@ const Boxes = ({ stepIndex, steps }) => {
         expectedPrice: null,
         koreanInvoice: null,
         koreanShippingCompany: null,
+        userMemo: null,
     };
 
     const handlePrev = () => {
