@@ -7,7 +7,7 @@ import { ProductWrap } from 'styles/ApplyStyles';
 const Product = ({ stepIndex, steps, product, handlePrev, handleClick, index, ProductRemove }) => {
     const [updateProductData, setUpdateProductData] = useState(product);
     const dispatch = useDispatch();
-    console.log(updateProductData);
+
     const handleChange = e => {
         const { name, value } = e.target;
         setUpdateProductData({
@@ -22,7 +22,7 @@ const Product = ({ stepIndex, steps, product, handlePrev, handleClick, index, Pr
     }, [updateProductData]);
 
     return (
-        <ProductWrap>
+        <ProductWrap key={index}>
             <article className="titleBox">
                 <h2>상품정보 {index + 1}</h2>
                 {index !== 0 ? (
