@@ -5,7 +5,7 @@ const CountryCostComponent = ({ list, onHandleSelectCountry, countryPrise }) => 
     return (
         <CountryWrap>
             <article className="title_wrap">
-                <h2>비용 안내</h2>
+                <h2>운임표</h2>
                 <span>나라별 배송 비용을 알수 있습니다.</span>
             </article>
             <span className="countryTitle">나라선택</span>
