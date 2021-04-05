@@ -74,7 +74,7 @@ const CalculatorComponent = ({
                         </button>
                     </div>
                 </div>
-                <div className="wrap">
+                <div className={Material.selected === 'volume' ? 'selected wrap' : 'wrap'}>
                     <div className="title">
                         <h4>부피 무게</h4>
                         <p>(단위:kg)</p>
@@ -85,11 +85,12 @@ const CalculatorComponent = ({
                             name="volume"
                             disabled
                             onChange={OnChange}
-                            placeholder={Material.volume ? Material.volume + 'kg' : '부피무게'}
+                            placeholder={Material.volume ? Material.volume.toFixed(1) : '부피무게'}
                         />
+                        <span style={{ marginLeft: '10px' }}>kg</span>
                     </div>
                 </div>
-                <div className="wrap">
+                <div className={Material.selected === 'actual' ? 'selected wrap' : 'wrap'}>
                     <div className="title">
                         <h4>실 무게</h4>
                         <p>(단위:kg)</p>
@@ -102,6 +103,7 @@ const CalculatorComponent = ({
                             placeholder="실 무게"
                             value={Material.actual}
                         />
+                        <span style={{ marginLeft: '10px' }}>kg</span>
                     </div>
                 </div>
                 <div className={PriseOpen ? 'wrap pricebtn' : 'wrap pricebtn show'}>

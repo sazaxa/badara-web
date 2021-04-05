@@ -209,4 +209,7 @@ export const CalculatorWrap = styled.article`
         margin-left: 3%;
         border-radius: 15px;
     }
+    .selected {
+        border: 2px solid red;
+    }
 `;
