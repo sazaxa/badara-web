@@ -8,12 +8,12 @@ const CostComponent = ({ list, countryPrise, onHandleSelectCountry }) => {
     return (
         <Responsive>
             <CostWrap>
-                <CalculatorContainer />
                 <CountryCostComponent
                     list={list}
                     countryPrise={countryPrise}
                     onHandleSelectCountry={onHandleSelectCountry}
                 />
+                <CalculatorContainer />
             </CostWrap>
         </Responsive>
     );
