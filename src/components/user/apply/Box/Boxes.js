@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { acitiveStepChange } from 'store/part';
 import { boxDataAddAction, boxDataRemoveAction } from 'store/apply';
@@ -9,15 +9,33 @@ import InvoiceModal from './InvoiceModal';
 
 const Boxes = ({ stepIndex, steps }) => {
     const dispatch = useDispatch();
-    const { activeStep, boxes } = useSelector(
+    const { activeStep, boxes, products } = useSelector(
         state => ({
             activeStep: state.part.activeStep,
             boxes: state.apply.apply.boxes,
+            products: state.apply.apply.products,
         }),
         shallowEqual
     );
+
     const [AskPopop, setAskPopup] = useState(false);
+    const [weight, setWeight] = useState({
+        products: 0,
+        boxes: 0,
+    });
     const [InvoicePopup, setInvoicePopup] = useState(false);
+    console.log(weight);
+    // products에 총 무게를 구한다.
+    useEffect(() => {
+        let sum = 0;
+        for (let i = 0; i < products.length; i++) {
+            sum += Number(products[i].weight);
+        }
+        setWeight({
+            ...weight,
+            products: sum,
+        });
+    }, [products]);
 
     const defaultBoxData = {
         expectedWidth: null,
@@ -33,11 +51,32 @@ const Boxes = ({ stepIndex, steps }) => {
 
     const handlePrev = () => {
         dispatch(acitiveStepChange(activeStep - 1));
+        setWeight({
+            products: 0,
+            boxes: 0,
+        });
     };
 
-    const handleAskOpen = e => {
+    const handleAskOpen = async e => {
         e.preventDefault();
-        setAskPopup(true);
+        let sum = 0;
+        for (let i = 0; i < boxes.length; i++) {
+            if (boxes[i].expectedNetWeight >= boxes[i].expectedVolumeWeight) {
+                sum += Number(boxes[i].expectedNetWeight);
+            } else {
+                sum += Number(boxes[i].expectedVolumeWeight);
+            }
+        }
+        const promises = setWeight({
+            ...weight,
+            boxes: sum,
+        });
+        Promise.all(promises); //TODO: 박스 무게와 물품 무게 비교하여 박스무게가 커야지만 다음단계로 이동하는 로직 구현해야함
+        if (weight.products < weight.boxes) {
+            setAskPopup(true);
+        } else {
+            alert('입력하신 물품무게보다 박스무게가 작을 수 없습니다. \n 다시 입력해주세요.');
+        }
     };
     const handleAskClose = e => {
         e.preventDefault();
@@ -57,10 +96,10 @@ const Boxes = ({ stepIndex, steps }) => {
         e.preventDefault();
         setInvoicePopup(false);
     };
-    const handleClick = e => {
+    const handleClick = async e => {
         e.preventDefault();
-        //TODO: 클릭이벤트 생성해야함.
         //FIXME:2021-03-25 Submit 함수로 필수값을 체크하고 필수값이 입력이 안되면 넘어가지 않도록 조치
+
         dispatch(acitiveStepChange(activeStep + 1));
         setInvoicePopup(false);
     };
