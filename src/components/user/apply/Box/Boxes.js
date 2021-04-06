@@ -19,23 +19,31 @@ const Boxes = ({ stepIndex, steps }) => {
     );
 
     const [AskPopop, setAskPopup] = useState(false);
-    const [weight, setWeight] = useState({
-        products: 0,
-        boxes: 0,
-    });
+    const [productsWeight, setProductWeight] = useState(0);
+    const [boxesWeight, setBoxesWeight] = useState(0);
     const [InvoicePopup, setInvoicePopup] = useState(false);
-    console.log(weight);
+
     // products에 총 무게를 구한다.
     useEffect(() => {
-        let sum = 0;
+        let productsSum = 0;
         for (let i = 0; i < products.length; i++) {
-            sum += Number(products[i].weight);
+            productsSum += Number(products[i].weight);
         }
-        setWeight({
-            ...weight,
-            products: sum,
-        });
+        setProductWeight(productsSum);
     }, [products]);
+
+    // boxes에 총 무게를 구한다.
+    useEffect(() => {
+        let boxesSum = 0;
+        for (let i = 0; i < boxes.length; i++) {
+            if (boxes[i].expectedNetWeight >= boxes[i].expectedVolumeWeight) {
+                boxesSum += Number(boxes[i].expectedNetWeight);
+            } else {
+                boxesSum += Number(boxes[i].expectedVolumeWeight);
+            }
+            setBoxesWeight(boxesSum);
+        }
+    }, [boxes]);
 
     const defaultBoxData = {
         expectedWidth: null,
@@ -51,28 +59,14 @@ const Boxes = ({ stepIndex, steps }) => {
 
     const handlePrev = () => {
         dispatch(acitiveStepChange(activeStep - 1));
-        setWeight({
-            products: 0,
-            boxes: 0,
-        });
+        setProductWeight(0);
+        setBoxesWeight(0);
     };
 
     const handleAskOpen = async e => {
         e.preventDefault();
-        let sum = 0;
-        for (let i = 0; i < boxes.length; i++) {
-            if (boxes[i].expectedNetWeight >= boxes[i].expectedVolumeWeight) {
-                sum += Number(boxes[i].expectedNetWeight);
-            } else {
-                sum += Number(boxes[i].expectedVolumeWeight);
-            }
-        }
-        const promises = setWeight({
-            ...weight,
-            boxes: sum,
-        });
-        Promise.all(promises); //TODO: 박스 무게와 물품 무게 비교하여 박스무게가 커야지만 다음단계로 이동하는 로직 구현해야함
-        if (weight.products < weight.boxes) {
+        //TODO: 박스 무게와 물품 무게 비교하여 박스무게가 커야지만 다음단계로 이동하는 로직 구현해야함
+        if (productsWeight <= boxesWeight) {
             setAskPopup(true);
         } else {
             alert('입력하신 물품무게보다 박스무게가 작을 수 없습니다. \n 다시 입력해주세요.');
@@ -138,7 +132,7 @@ const Boxes = ({ stepIndex, steps }) => {
                         margin: '20px 0',
                     }}
                 >
-                    <Button disabled={stepIndex === 0} onClick={handlePrev}>
+                    <Button disabled={stepIndex === 0} onClick={() => handlePrev()}>
                         이전
                     </Button>
                     <Button variant="contained" color="primary" type="submit">
