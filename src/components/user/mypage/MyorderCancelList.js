@@ -1,11 +1,10 @@
 import React from 'react';
 import { Responsive } from 'styles/CommonStyles';
-import Paper from '@material-ui/core/Paper';
 import { MypageContent } from 'styles/MypageStyles';
 import UpdateInvoice from './UpdateInvoice';
 import PaymentPopup from './PaymentPopup';
 
-const MypageComponent = ({
+const MyorderCancelList = ({
     status,
     memberOrder,
     handleUpdatePopup,
@@ -14,6 +13,8 @@ const MypageComponent = ({
     handleProductInfo,
     paymentPopup,
     handlePaymentInfo,
+    handleCancel,
+    handleTabToggle,
 }) => {
     if (!memberOrder) {
         return null;
@@ -26,42 +27,36 @@ const MypageComponent = ({
                 {/* <Button variant="contained" color="primary">
                     내정보 수정
                 </Button> */}
+                <article className="menuBar">
+                    <ul>
+                        <li onClick={() => handleTabToggle(0)}>주문목록</li>
+                        <li className="active" onClick={() => handleTabToggle(1)}>
+                            취소목록
+                        </li>
+                    </ul>
+                </article>
                 <article className="mypageHeader">
                     <article className="left">
                         MY <br />
                         고래타고
                     </article>
-                    <article className="right">
-                        <ul>
-                            <li>
-                                <strong>송장입력</strong>
-                                <p>{status.INVOICE}</p>
-                            </li>
-                            <li>
-                                <strong>센터입고중</strong>
-                                <p>{status.CENTER_INCOME}</p>
-                            </li>
-                            <li>
-                                <strong>결제요청</strong>
-                                <p>{status.PAYMENT_REQUEST}</p>
-                            </li>
-                            <li>
-                                <strong>무통장입금</strong>
-                                <p>{status.PAYMENT_BANK}</p>
-                            </li>
-                            <li>
-                                <strong>결제완료</strong>
-                                <p>{status.PAYMENT_COMPLETE}</p>
-                            </li>
-                            <li>
-                                <strong>해외배송중</strong>
-                                <p>{status.GLOBAL_DELIVERY}</p>
-                            </li>
-                            <li>
-                                <strong>해외배송완료</strong>
-                                <p>{status.GLOBAL_DELIVERY_COMPLETED}</p>
-                            </li>
-                        </ul>
+                    <article className="rightWrap">
+                        <article className="right">
+                            <ul>
+                                <li>
+                                    <strong>환불대기</strong>
+                                    <p>{status.PAYMENT_COMPLETE}</p>
+                                </li>
+                                <li>
+                                    <strong>환불</strong>
+                                    <p>{status.GLOBAL_DELIVERY}</p>
+                                </li>
+                                <li>
+                                    <strong>취소</strong>
+                                    <p>{status.GLOBAL_DELIVERY_COMPLETED}</p>
+                                </li>
+                            </ul>
+                        </article>
                     </article>
                 </article>
                 <article className="memberOrders">
@@ -81,6 +76,20 @@ const MypageComponent = ({
                     ) : (
                         memberOrder.map(order => (
                             <article className="order" key={order.id}>
+                                <button
+                                    type="button"
+                                    key={order.id}
+                                    onClick={() =>
+                                        handleCancel(
+                                            order.id,
+                                            order.orderStatus === '해외배송중' || order.orderStatus === '결제완료'
+                                                ? '환불대기'
+                                                : '취소'
+                                        )
+                                    }
+                                >
+                                    주문 취소
+                                </button>
                                 <article className="orderHead">
                                     <div className="headData">
                                         <strong>주문번호 </strong>
@@ -271,4 +280,4 @@ const MypageComponent = ({
     );
 };
 
-export default MypageComponent;
+export default MyorderCancelList;

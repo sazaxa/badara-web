@@ -26,6 +26,7 @@ export { default as SupportConponent } from './user/support/SupportConponent';
 
 export { default as Responsive } from './common/Responsive';
 
-export { default as MypageComponent } from './user/mypage/MypageComponent';
+export { default as MyorderList } from './user/mypage/MyorderList';
+export { default as MyorderCancelList } from './user/mypage/MyorderCancelList';
 
 export { default as AdminLogin } from './admin/auth/Login';

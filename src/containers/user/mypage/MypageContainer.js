@@ -1,16 +1,22 @@
-import { MypageComponent } from 'components';
+import { MyorderList } from 'components';
 import React, { useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { withRouter } from 'react-router';
 import { getMemberOrderAction } from 'store/member';
-import { getOrderIdAction, getOrderInfoAction } from 'store/order';
+import { getOrderIdAction, getOrderInfoAction, orderStatusChangeAction } from 'store/order';
 import { getProductInfoAction } from 'store/box';
+import { MyorderCancelList } from 'components/index';
 
 const MypageContainer = () => {
     const dispatch = useDispatch();
     const accessToken = localStorage.getItem('accessToken');
+    const [orderTab, setOrderTab] = useState(0);
     const [updatePopup, setUpdatePopup] = useState(false);
     const [paymentPopup, setPaymentPopup] = useState(false);
+    const [order, setOrder] = useState({
+        normalOrder: [],
+        cancelOrder: [],
+    });
+
     const [status, setStatus] = useState({
         INVOICE: 0,
         CENTER_INCOME: 0,
@@ -20,7 +26,11 @@ const MypageContainer = () => {
         GLOBAL_DELIVERY: 0,
         GLOBAL_DELIVERY_COMPLETED: 0,
     });
-    console.log(status);
+
+    const handleTabToggle = tab => {
+        setOrderTab(tab);
+    };
+
     const { logged, orders } = useSelector(
         state => ({
             logged: state.member.loggedInfo.logged,
@@ -33,6 +43,30 @@ const MypageContainer = () => {
             statusLength();
         }
     }, [orders]);
+
+    // 취소 order 분리
+    useEffect(() => {
+        if (orders) {
+            orderSeparation();
+        }
+    }, [orders]);
+    const orderSeparation = () => {
+        let normalOrder = [];
+        let cancelOrder = [];
+        for (let i = 0; i < orders.length; i++) {
+            let orderStatus = orders[i].orderStatus;
+            if (orderStatus === '취소' || orderStatus === '환불' || orderStatus === '환불대기') {
+                cancelOrder.push(orders[i]);
+            } else {
+                normalOrder.push(orders[i]);
+            }
+            setOrder({
+                cancelOrder: cancelOrder,
+                normalOrder: normalOrder,
+            });
+        }
+    };
+    console.log(order);
 
     const statusLength = () => {
         let INVOICE = 0;
@@ -104,11 +138,25 @@ const MypageContainer = () => {
         dispatch(getProductInfoAction(id));
     };
 
+    // 주문 취소
+    const handleCancel = (id, method) => {
+        console.log(id);
+        // 운송장번호를 Insert 하고, callBack으로 order를 다시 불러온다.
+        dispatch(
+            orderStatusChangeAction({
+                id: id,
+                data: { paymentMethod: method },
+                callBack: () => {
+                    dispatch(getMemberOrderAction(logged.id));
+                },
+            })
+        );
+    };
+
     useEffect(() => {
         if (accessToken) {
             if (logged) {
                 dispatch(getMemberOrderAction(logged.id));
-                console.log('호출됨');
             }
         } else {
             alert('로그인이 필요합니다.');
@@ -116,18 +164,37 @@ const MypageContainer = () => {
         }
     }, [accessToken, logged]);
     if (!logged && !accessToken) return null;
-    return (
-        <MypageComponent
-            status={status}
-            memberOrder={orders}
-            handleUpdatePopup={handleUpdatePopup}
-            updatePopup={updatePopup}
-            handleProductInfo={handleProductInfo}
-            handlePaymentInfo={handlePaymentInfo}
-            paymentPopup={paymentPopup}
-            handlePaymentPopup={handlePaymentPopup}
-        />
-    );
+    if (orderTab === 0)
+        return (
+            <MyorderList
+                status={status}
+                handleTabToggle={handleTabToggle}
+                memberOrder={order.normalOrder}
+                handleUpdatePopup={handleUpdatePopup}
+                updatePopup={updatePopup}
+                handleProductInfo={handleProductInfo}
+                handlePaymentInfo={handlePaymentInfo}
+                paymentPopup={paymentPopup}
+                handlePaymentPopup={handlePaymentPopup}
+                handleCancel={handleCancel}
+            />
+        );
+    if (orderTab === 1) {
+        return (
+            <MyorderCancelList
+                status={status}
+                handleTabToggle={handleTabToggle}
+                memberOrder={order.cancelOrder}
+                handleUpdatePopup={handleUpdatePopup}
+                updatePopup={updatePopup}
+                handleProductInfo={handleProductInfo}
+                handlePaymentInfo={handlePaymentInfo}
+                paymentPopup={paymentPopup}
+                handlePaymentPopup={handlePaymentPopup}
+                handleCancel={handleCancel}
+            />
+        );
+    }
 };
 
 export default MypageContainer;

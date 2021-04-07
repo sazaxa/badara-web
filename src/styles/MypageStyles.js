@@ -25,35 +25,72 @@ export const MypageContent = styled.article`
         margin: 0 90%;
         margin-bottom: 20px;
     }
+    & > .menuBar {
+        width: 100%;
+        height: 60px;
+        margin-bottom: 30px;
+        & ul {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        & li {
+            width: 48%;
+            height: 100%;
+            display: flex;
+            border-bottom: 1px solid #ccc;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 18px;
+            letter-spacing: -1px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        & li.active {
+            background-color: #1976d2;
+            color: #fff;
+            font-weight: 600;
+        }
+    }
     & > .mypageHeader {
         width: 100%;
-        height: 180px;
+        height: 100%;
         background: #1976d2;
         display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
         color: #fff;
         border-radius: 5px;
         margin-bottom: 50px;
         & > .left {
-            width: 14.285%;
+            width: 16%;
+            // height: 338px;
             font-size: 26px;
             font-weight: 600;
-            text-align: center;
             letter-spacing: -2px;
             display: flex;
             align-items: center;
             justify-content: center;
+            text-align: center;
         }
-        & > .right {
-            width: 100%;
+        & > .rightWrap {
+            width: 84%;
             height: 100%;
             background-color: rgb(130, 188, 226);
-            padding: 50px 0px 0px 0px;
             box-sizing: border-box;
+            padding-bottom: 50px;
             border-radius: 0 5px 5px 0;
+            & .right {
+                padding: 50px 0px 0px 0px;
+            }
             & ul {
                 display: flex;
                 & > li {
-                    width: 16.6666%;
+                    width: 18.6666%;
+                    // max-width: 129px;
                     height: 100%;
                     border-right: 1px solid rgb(155, 201, 232);
                     border-left: 1px solid rgb(120, 173, 208);
@@ -106,6 +143,13 @@ export const MypageContent = styled.article`
     .order {
         width: 100%;
         margin-bottom: 30px;
+        padding-top: 50px;
+        position: relative;
+        & > button {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
         & > .orderHead {
             width: 100%;
             padding: 20px 0;
@@ -229,6 +273,7 @@ export const UpdateInvoiceWrap = styled.article`
     text-align: center;
     padding: 50px;
     box-sizing: border-box;
+    z-index: 999;
     h2 {
         margin-bottom: 20px;
     }
