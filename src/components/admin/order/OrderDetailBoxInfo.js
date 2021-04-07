@@ -143,6 +143,9 @@ const OrderDetailBoxInfo = ({ Boxes, UpdateState, HandleChange }) => {
                                             <option value="결제완료">결제완료</option>
                                             <option value="해외배송중">해외배송중</option>
                                             <option value="해외배송완료">해외배송완료</option>
+                                            <option value="취소">취소</option>
+                                            <option value="환불">환불</option>
+                                            <option value="환불대기">환불대기</option>
                                         </select>
                                     ) : (
                                         <select
@@ -159,6 +162,9 @@ const OrderDetailBoxInfo = ({ Boxes, UpdateState, HandleChange }) => {
                                             <option value="결제완료">결제완료</option>
                                             <option value="해외배송중">해외배송중</option>
                                             <option value="해외배송완료">해외배송완료</option>
+                                            <option value="취소">취소</option>
+                                            <option value="환불">환불</option>
+                                            <option value="환불대기">환불대기</option>
                                         </select>
                                     )}
                                 </td>
