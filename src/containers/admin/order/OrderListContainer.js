@@ -74,14 +74,14 @@ const OrderListContainer = () => {
     console.log(order);
     const normalOrderRows = [
         // createData('India', 'IN', 1324171354, 3287263),
-        order.normalOrder.map(v =>
-            createData(v.id, v.orderNumber, v.recipient.member.email, v.orderStatus, v.recipient.createdDate)
+        order.normalOrder.map((v, index) =>
+            createData(index + 1, v.orderNumber, v.recipient.member.email, v.orderStatus, v.recipient.createdDate)
         ),
     ];
     const cancelOrderRows = [
         // createData('India', 'IN', 1324171354, 3287263),
-        order.cancelOrder.map(v =>
-            createData(v.id, v.orderNumber, v.recipient.member.email, v.orderStatus, v.recipient.createdDate)
+        order.cancelOrder.map((v, index) =>
+            createData(index + 1, v.orderNumber, v.recipient.member.email, v.orderStatus, v.recipient.createdDate)
         ),
     ];
     // console.log(rows);
