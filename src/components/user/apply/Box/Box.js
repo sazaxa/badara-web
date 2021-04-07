@@ -126,8 +126,8 @@ const Box = ({ box, index, Remove }) => {
                         <td className="weight">
                             <input
                                 type="text"
-                                name="userMeomo"
-                                value={updateBoxData.userMeomo ?? undefined}
+                                name="userMemo"
+                                value={updateBoxData.userMemo ?? undefined}
                                 onChange={e => handleChange(e)}
                                 placeholder="안경,핸드폰"
                                 required

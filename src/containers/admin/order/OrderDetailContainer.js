@@ -32,7 +32,7 @@ const OrderDetailContainer = ({ match }) => {
                 depositName: orderInfo.depositName,
                 shippingCompany: orderInfo.shippingCompany,
                 adminMemo: orderInfo.adminMemo,
-                userMemo: orderInfo.userMeomo,
+                userMemo: orderInfo.userMemo,
                 products: orderInfo.productResponses,
                 boxes: orderInfo.boxResponses,
                 recipient: orderInfo.recipient,
