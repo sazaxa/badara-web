@@ -1,28 +1,13 @@
 import React from 'react';
 import { Responsive } from 'styles/CommonStyles';
 import { MypageContent } from 'styles/MypageStyles';
-import UpdateInvoice from './UpdateInvoice';
-import PaymentPopup from './PaymentPopup';
 
-const MyorderCancelList = ({
-    status,
-    memberOrder,
-    handleUpdatePopup,
-    handlePaymentPopup,
-    updatePopup,
-    handleProductInfo,
-    paymentPopup,
-    handlePaymentInfo,
-    handleCancel,
-    handleTabToggle,
-}) => {
+const MyorderCancelList = ({ status, memberOrder, handleTabToggle }) => {
     if (!memberOrder) {
         return null;
     }
     return (
         <Responsive>
-            {updatePopup === true ? <UpdateInvoice handlePopup={handleUpdatePopup} updatePopup={updatePopup} /> : null}
-            {paymentPopup === true ? <PaymentPopup handlePopup={handlePaymentPopup} /> : null}
             <MypageContent>
                 {/* <Button variant="contained" color="primary">
                     내정보 수정
@@ -43,17 +28,17 @@ const MyorderCancelList = ({
                     <article className="rightWrap">
                         <article className="right">
                             <ul>
-                                <li>
+                                <li style={{ width: '33%' }}>
                                     <strong>환불대기</strong>
-                                    <p>{status.PAYMENT_COMPLETE}</p>
+                                    <p>{status.REFUND_WAITING}</p>
                                 </li>
-                                <li>
+                                <li style={{ width: '33%' }}>
                                     <strong>환불</strong>
-                                    <p>{status.GLOBAL_DELIVERY}</p>
+                                    <p>{status.REFUND}</p>
                                 </li>
-                                <li>
+                                <li style={{ width: '33%' }}>
                                     <strong>취소</strong>
-                                    <p>{status.GLOBAL_DELIVERY_COMPLETED}</p>
+                                    <p>{status.CANCEL}</p>
                                 </li>
                             </ul>
                         </article>
@@ -76,20 +61,6 @@ const MyorderCancelList = ({
                     ) : (
                         memberOrder.map(order => (
                             <article className="order" key={order.id}>
-                                <button
-                                    type="button"
-                                    key={order.id}
-                                    onClick={() =>
-                                        handleCancel(
-                                            order.id,
-                                            order.orderStatus === '해외배송중' || order.orderStatus === '결제완료'
-                                                ? '환불대기'
-                                                : '취소'
-                                        )
-                                    }
-                                >
-                                    주문 취소
-                                </button>
                                 <article className="orderHead">
                                     <div className="headData">
                                         <strong>주문번호 </strong>
@@ -204,21 +175,13 @@ const MyorderCancelList = ({
                                                         <p style={{ marginBottom: '10px' }}>
                                                             {box.koreanShippingStatus}
                                                         </p>
-                                                        {box.koreanShippingStatus === '송장입력' ? (
-                                                            <button
-                                                                type="onClick"
-                                                                onClick={() => handleProductInfo(box.id)}
-                                                            >
-                                                                송장 입력
-                                                            </button>
-                                                        ) : null}
                                                     </div>
                                                 ) : null}
                                             </>
                                         ))}
                                     </article>
                                 </article>
-                                {order.orderStatus !== '결제대기' ? (
+                                {order.orderStatus !== '취소' ? (
                                     <article className="total">
                                         <h2>Total</h2>
                                         <div className="item">
@@ -244,33 +207,16 @@ const MyorderCancelList = ({
                                                 원
                                             </p>
                                         </div>
-                                        {order.orderStatus === '결제요청' ? (
-                                            <button type="button" onClick={() => handlePaymentPopup(order.id)}>
-                                                결제하기
-                                            </button>
-                                        ) : null}
-                                        {order.orderStatus === '해외배송중' || order.orderStatus === '해외배송완료' ? (
-                                            <div className="item">
-                                                <strong>해외 운송장번호</strong>
-                                                <p>
-                                                    {order.invoice}[{order.shippingCompany}]
-                                                </p>
-                                            </div>
-                                        ) : null}
-                                        {order.orderStatus === '무통장입금' ? (
-                                            <>
-                                                <div className="item">
-                                                    <strong>은행</strong>
-                                                    <p>..은행</p>
-                                                </div>
-                                                <div className="item">
-                                                    <strong>계좌번호</strong>
-                                                    <p>12312321312</p>
-                                                </div>
-                                            </>
-                                        ) : null}
                                     </article>
-                                ) : null}
+                                ) : (
+                                    <article className="total">
+                                        <h2>Total</h2>
+                                        <div className="item">
+                                            <strong>상태</strong>
+                                            <p>{order.orderStatus}</p>
+                                        </div>
+                                    </article>
+                                )}
                             </article>
                         ))
                     )}

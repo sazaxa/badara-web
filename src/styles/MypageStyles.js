@@ -99,6 +99,7 @@ export const MypageContent = styled.article`
             & strong {
                 display: block;
                 margin-bottom: 13px;
+                margin-right: 0;
                 height: 21px;
                 color: rgb(255, 255, 255);
                 font-size: 18px;

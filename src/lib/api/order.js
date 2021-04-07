@@ -11,10 +11,10 @@ export const get = id => {
 };
 
 export const put = updateData => {
-    return client.put(`/api/v1/status/${updateData.id}`, updateData);
+    return client.put(`/api/v1/orders/${updateData.id}`, updateData);
 };
 
 export const orderStatusChange = ({ id, data }) => {
     console.log(data);
-    return client.put(`/api/v1/orders/payment/${id}`, data);
+    return client.put(`/api/v1/orders/status/${id}`, data);
 };

@@ -25,6 +25,9 @@ const MypageContainer = () => {
         PAYMENT_COMPLETE: 0,
         GLOBAL_DELIVERY: 0,
         GLOBAL_DELIVERY_COMPLETED: 0,
+        REFUND: 0,
+        REFUND_WAITING: 0,
+        CANCEL: 0,
     });
 
     const handleTabToggle = tab => {
@@ -76,6 +79,9 @@ const MypageContainer = () => {
         let PAYMENT_COMPLETE = 0;
         let GLOBAL_DELIVERY = 0;
         let GLOBAL_DELIVERY_COMPLETED = 0;
+        let REFUND = 0;
+        let REFUND_WAITING = 0;
+        let CANCEL = 0;
         // const box = orders.boxResponses;
         for (let i = 0; i < orders.length; i++) {
             if (orders[i].orderStatus === '결제요청') {
@@ -98,6 +104,18 @@ const MypageContainer = () => {
                 // eslint-disable-next-line no-unused-vars
                 GLOBAL_DELIVERY_COMPLETED++;
             }
+            if (orders[i].orderStatus === '취소') {
+                // eslint-disable-next-line no-unused-vars
+                CANCEL++;
+            }
+            if (orders[i].orderStatus === '환불') {
+                // eslint-disable-next-line no-unused-vars
+                REFUND++;
+            }
+            if (orders[i].orderStatus === '환불대기') {
+                // eslint-disable-next-line no-unused-vars
+                REFUND_WAITING++;
+            }
             for (let j = 0; j < orders[i].boxResponses.length; j++) {
                 if (orders[i].boxResponses[j].koreanShippingStatus === '송장입력') {
                     INVOICE++;
@@ -116,6 +134,9 @@ const MypageContainer = () => {
             PAYMENT_COMPLETE: PAYMENT_COMPLETE,
             GLOBAL_DELIVERY: GLOBAL_DELIVERY,
             GLOBAL_DELIVERY_COMPLETED: GLOBAL_DELIVERY_COMPLETED,
+            CANCEL: CANCEL,
+            REFUND: REFUND,
+            REFUND_WAITING: REFUND_WAITING,
         });
     };
 
@@ -180,20 +201,7 @@ const MypageContainer = () => {
             />
         );
     if (orderTab === 1) {
-        return (
-            <MyorderCancelList
-                status={status}
-                handleTabToggle={handleTabToggle}
-                memberOrder={order.cancelOrder}
-                handleUpdatePopup={handleUpdatePopup}
-                updatePopup={updatePopup}
-                handleProductInfo={handleProductInfo}
-                handlePaymentInfo={handlePaymentInfo}
-                paymentPopup={paymentPopup}
-                handlePaymentPopup={handlePaymentPopup}
-                handleCancel={handleCancel}
-            />
-        );
+        return <MyorderCancelList status={status} handleTabToggle={handleTabToggle} memberOrder={order.cancelOrder} />;
     }
 };
 
