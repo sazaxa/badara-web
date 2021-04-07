@@ -37,6 +37,10 @@ const OrderListContainer = () => {
         dispatch(getOrderListAction());
     }, []);
     const [page, setPage] = useState(0);
+    const [order, setOrder] = useState({
+        normalOrder: [],
+        cancelOrder: [],
+    });
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -46,9 +50,37 @@ const OrderListContainer = () => {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
-    const rows = [
+
+    useEffect(() => {
+        console.log('탔다!');
+        if (list) {
+            let normalOrder = [];
+            let cancelOrder = [];
+            for (let i = 0; i < list.length; i++) {
+                let orderStatus = list[i].orderStatus;
+                if (orderStatus === '취소' || orderStatus === '환불' || orderStatus === '환불대기') {
+                    cancelOrder.push(list[i]);
+                } else {
+                    normalOrder.push(list[i]);
+                }
+                setOrder({
+                    ...order,
+                    normalOrder: normalOrder,
+                    cancelOrder: cancelOrder,
+                });
+            }
+        }
+    }, [list]);
+    console.log(order);
+    const normalOrderRows = [
         // createData('India', 'IN', 1324171354, 3287263),
-        list.map(v =>
+        order.normalOrder.map(v =>
+            createData(v.id, v.orderNumber, v.recipient.member.email, v.orderStatus, v.recipient.createdDate)
+        ),
+    ];
+    const cancelOrderRows = [
+        // createData('India', 'IN', 1324171354, 3287263),
+        order.cancelOrder.map(v =>
             createData(v.id, v.orderNumber, v.recipient.member.email, v.orderStatus, v.recipient.createdDate)
         ),
     ];
@@ -58,7 +90,8 @@ const OrderListContainer = () => {
     // }
     return (
         <OrderListComponent
-            Rows={rows}
+            Rows={normalOrderRows}
+            cancalRows={cancelOrderRows}
             RowsPerPage={rowsPerPage}
             Page={page}
             HandleChangePage={handleChangePage}
