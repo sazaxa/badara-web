@@ -26,6 +26,8 @@ const Box = ({ box, index, Remove }) => {
     // 가로 세로 높이 구해서 부피무게를 구하고 state에 저장한다.
     const onClickVolume = () => {
         const { expectedWidth, expectedDepth, expectedHeight } = updateBoxData;
+        console.log(expectedWidth);
+        console.log(Number.isInteger(expectedWidth));
         if ((expectedWidth, expectedDepth, expectedHeight !== null)) {
             const sum = (expectedWidth * expectedDepth * expectedHeight) / 5000;
             setUpdateBoxData({

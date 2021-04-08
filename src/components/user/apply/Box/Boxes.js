@@ -63,7 +63,7 @@ const Boxes = ({ stepIndex, steps }) => {
         setBoxesWeight(0);
     };
 
-    const handleAskOpen = async e => {
+    const handleAskOpen = e => {
         e.preventDefault();
         //TODO: 박스 무게와 물품 무게 비교하여 박스무게가 커야지만 다음단계로 이동하는 로직 구현해야함
         if (productsWeight <= boxesWeight) {
@@ -90,7 +90,7 @@ const Boxes = ({ stepIndex, steps }) => {
         e.preventDefault();
         setInvoicePopup(false);
     };
-    const handleClick = async e => {
+    const handleClick = e => {
         e.preventDefault();
         //FIXME:2021-03-25 Submit 함수로 필수값을 체크하고 필수값이 입력이 안되면 넘어가지 않도록 조치
 

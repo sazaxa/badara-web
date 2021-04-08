@@ -4,6 +4,7 @@ import { acitiveStepChange } from 'store/part';
 import Button from '@material-ui/core/Button';
 import { recipientInsertAction } from 'store/apply';
 import { RecipientWrap } from 'styles/ApplyStyles';
+import { countryList } from 'components/common/CountryList';
 
 const Recipient = ({ stepIndex, steps }) => {
     const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const Recipient = ({ stepIndex, steps }) => {
         zipcode: null,
         countryCode: null,
         phoneNumber: null,
+        isCountryCode: true,
     });
 
     useEffect(() => {
@@ -37,6 +39,25 @@ const Recipient = ({ stepIndex, steps }) => {
 
     const handleChange = e => {
         const { name, value } = e.target;
+        if (name === 'country') {
+            const found = countryList.find(country => country.name === value);
+            if (!found) {
+                setRecipinet({
+                    ...recipient,
+                    country: value,
+                    countryCode: '직접입력',
+                    isCountryCode: false,
+                });
+            } else {
+                setRecipinet({
+                    ...recipient,
+                    country: value,
+                    countryCode: found.dial_code,
+                    isCountryCode: true,
+                });
+            }
+            return;
+        }
         setRecipinet({
             ...recipient,
             [name]: value,
@@ -47,8 +68,12 @@ const Recipient = ({ stepIndex, steps }) => {
     };
     const handleClick = e => {
         e.preventDefault();
-        dispatch(recipientInsertAction({ recipient: recipient }));
-        dispatch(acitiveStepChange(activeStep + 1));
+        if (recipient.countryCode === '직접입력') {
+            alert('나라 코드를 입력해주세요.');
+        } else {
+            dispatch(recipientInsertAction({ recipient: recipient }));
+            dispatch(acitiveStepChange(activeStep + 1));
+        }
         // if (
         //     recipient.name !== null &&
         //     recipient.email !== null &&
@@ -179,18 +204,31 @@ const Recipient = ({ stepIndex, steps }) => {
                         <tr>
                             <th>휴대폰번호</th>
                             <td>
+                                {recipient.isCountryCode ? (
+                                    <input
+                                        type="text"
+                                        placeholder="국가번호"
+                                        name="countryCode"
+                                        value={recipient.countryCode ?? undefined}
+                                        onChange={e => handleChange(e)}
+                                        style={{ width: '29.5%' }}
+                                        required
+                                        disabled
+                                    />
+                                ) : (
+                                    <input
+                                        type="text"
+                                        placeholder="국가번호"
+                                        name="countryCode"
+                                        value={recipient.countryCode ?? undefined}
+                                        onChange={e => handleChange(e)}
+                                        style={{ width: '29.5%' }}
+                                        required
+                                    />
+                                )}
                                 <input
-                                    type="text"
-                                    placeholder="국가번호"
-                                    name="countryCode"
-                                    value={recipient.countryCode ?? undefined}
-                                    onChange={e => handleChange(e)}
-                                    style={{ width: '29.5%' }}
-                                    required
-                                />
-                                <input
-                                    type="text"
-                                    placeholder="휴대폰번호"
+                                    type="number"
+                                    placeholder="휴대폰번호(-없이 작성)"
                                     name="phoneNumber"
                                     value={recipient.phoneNumber ?? undefined}
                                     onChange={e => handleChange(e)}
