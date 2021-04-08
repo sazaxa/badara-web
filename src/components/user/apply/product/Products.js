@@ -29,7 +29,19 @@ const Products = ({ stepIndex, steps }) => {
         e.preventDefault();
         //TODO: 클릭이벤트 생성해야함.
         //FIXME:2021-03-25 Submit 함수로 필수값을 체크하고 필수값이 입력이 안되면 넘어가지 않도록 조치
-        dispatch(acitiveStepChange(activeStep + 1));
+        //TODO:갯수 음수가 안들어 오도록 구현
+        for (let i = 0; i < applyProduct.length; i++) {
+            const quantity = Number(applyProduct[i].quantity);
+            const price = Number(applyProduct[i].price);
+            const weight = Number(applyProduct[i].weight);
+            if (quantity > 0 && price > 0 && weight > 0) {
+                if (Number.isInteger(quantity) && Number.isInteger(price)) {
+                    dispatch(acitiveStepChange(activeStep + 1));
+                }
+            } else {
+                alert('음수가 들어 갈수 없습니다.\n다시 입력하세요.');
+            }
+        }
     };
 
     const ProductAdd = () => {

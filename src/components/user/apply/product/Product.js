@@ -49,7 +49,7 @@ const Product = ({ stepIndex, steps, product, handlePrev, handleClick, index, Pr
                         <th>개수</th>
                         <td>
                             <input
-                                type="text"
+                                type="number"
                                 name="quantity"
                                 value={updateProductData.quantity ?? undefined}
                                 onChange={e => handleChange(e)}
@@ -61,7 +61,7 @@ const Product = ({ stepIndex, steps, product, handlePrev, handleClick, index, Pr
                         <th>금액(단위:원)</th>
                         <td>
                             <input
-                                type="text"
+                                type="number"
                                 name="price"
                                 value={updateProductData.price ?? undefined}
                                 onChange={e => handleChange(e)}
@@ -73,7 +73,7 @@ const Product = ({ stepIndex, steps, product, handlePrev, handleClick, index, Pr
                         <th>실 무게(단위:kg)</th>
                         <td>
                             <input
-                                type="text"
+                                type="number"
                                 name="weight"
                                 value={updateProductData.weight ?? undefined}
                                 onChange={e => handleChange(e)}
