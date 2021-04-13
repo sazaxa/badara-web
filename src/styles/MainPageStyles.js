@@ -6,10 +6,18 @@ export const MainBannerWrap = styled.article`
     background: url(${main});
     background-size: cover;
     background-position: center center;
+    background-repeat: no-repeat;
     border-radius: 10px;
     box-shadow: 0 0 8px #ccc;
     margin-bottom: 50px;
     position: relative;
+    @media screen and (max-width: 1140px) {
+        width: 100%;
+        height: 50vw;
+        padding: 0 15px;
+        background-size: cover;
+        box-sizing: border-box;
+    }
     p {
         text-align: right;
         color: #fff;
@@ -19,6 +27,20 @@ export const MainBannerWrap = styled.article`
         bottom: 130px;
         right: 50px;
         line-height: 1.5;
+        @media screen and (max-width: 1140px) {
+            font-size: 3vw;
+            bottom: 15vw;
+        }
+        @media screen and (max-width: 1140px) {
+            font-size: 3vw;
+        }
+        @media screen and (max-width: 800px) {
+            font-size: 3.5vw;
+        }
+        @media screen and (max-width: 600px) {
+            font-size: 4vw;
+            right: 20px;
+        }
     }
     .BannerBtn {
         width: 150px;
@@ -33,12 +55,33 @@ export const MainBannerWrap = styled.article`
         bottom: 50px;
         right: 50px;
         cursor: pointer;
-
+        @media screen and (max-width: 1140px) {
+            font-size: 16px;
+            bottom: 5vw;
+            width: 15vw;
+            // height: 7vw;
+        }
+        @media screen and (max-width: 800px) {
+            font-size: 3vw;
+            bottom: 3vw;
+            height: 7vw;
+            line-height: 7vw;
+        }
+        @media screen and (max-width: 600px) {
+            font-size: 3vw;
+            right: 20px;
+        }
         a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: #fff;
-            display: block;
-            width: 100%;
-            height: 100%;
+            @media screen and (max-width: 800px) {
+                font-size: 3vw;
+            }
+            @media screen and (max-width: 600px) {
+                font-size: 3vw;
+            }
         }
     }
 `;
@@ -49,6 +92,9 @@ export const MainWrap = styled.article`
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    @media screen and (max-width: 1140px) {
+        width: 100%;
+    }
     & > article:first-child {
         width: 100%;
         display: flex;
@@ -87,13 +133,29 @@ export const TarkingWrap = styled.article`
     border-radius: 10px;
     box-shadow: 0 0 8px #ccc;
     margin-bottom: 50px;
+    @media screen and (max-width: 1140px) {
+        padding: 20px 10px;
+    }
     .title_wrap {
         display: flex;
-        justigy-content: left;
+        justify-content: left;
         margin-bottom: 20px;
+        @media screen and (max-width: 1140px) {
+            justify-content: center;
+            margin-bottom: 3vw;
+        }
         h2 {
             font-size: 32px;
             letter-spacing: -1.5px;
+            @media screen and (max-width: 1140px) {
+                font-size: 3vw;
+            }
+            @media screen and (max-width: 800px) {
+                font-size: 3.5vw;
+            }
+            @media screen and (max-width: 600px) {
+                font-size: 5vw;
+            }
         }
     }
     .trackingBox {
@@ -117,9 +179,23 @@ export const TarkingWrap = styled.article`
             padding: 15px;
             border-radius: 5px 0 0 5px;
             border: 1px solid #ccc;
+            @media screen and (max-width: 1140px) {
+                width: 70%;
+            }
+            @media screen and (max-width: 800px) {
+                width: 85%;
+                height: 6vw;
+                padding: 0 2vw;
+                box-sizing: border-box;
+            }
+            @media screen and (max-width: 600px) {
+                height: 8vw;
+                min-height: 40px;
+            }
         }
         button {
-            padding: 15px;
+            height: 47px;
+            // padding: 15px;
             background: #fff;
             cursor: pointer;
             outline: none;
@@ -128,6 +204,15 @@ export const TarkingWrap = styled.article`
             color: #fff;
             font-size: 16px;
             border-radius: 0 5px 5px 0;
+            width: 15%;
+            @media screen and (max-width: 800px) {
+                width: 15%;
+                height: 6vw;
+            }
+            @media screen and (max-width: 600px) {
+                height: 8vw;
+                min-height: 40px;
+            }
         }
     }
 `;

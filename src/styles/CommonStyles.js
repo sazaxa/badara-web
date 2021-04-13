@@ -5,6 +5,9 @@ export const Responsive = styled.section`
     padding: 100px 0 100px 0;
     box-sizing: border-box;
     background: #fff;
+    @media screen and (max-width: 1140px) {
+        padding: 95px 3vw 50px 3vw;
+    }
 `;
 
 export const AdminHeaderContent = styled.article`
@@ -80,6 +83,11 @@ export const FooterContent = styled.article`
     padding: 20px 0;
     box-sizing: border-box;
     color: #343a40;
+    @media screen and (max-width: 1140px) {
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+    }
     p {
         margin-bottom: 5px;
         letter-spacing: -1px;
@@ -99,6 +107,11 @@ export const HeaderWrap = styled.section`
     height: 110px;
     border-bottom: 1px solid #eee;
     background: #fff;
+    @media screen and (max-width: 1140px) {
+        position: fixed;
+        height: 90px;
+        z-index: 999;
+    }
 `;
 
 export const HeaderContent = styled.header`
@@ -109,18 +122,37 @@ export const HeaderContent = styled.header`
     justify-content: start;
     align-items: center;
     position: relative;
+    @media screen and (max-width: 1140px) {
+        width: 100%;
+        height: 90px;
+        padding: 0 5vw;
+        box-sizing: border-box;
+    }
     .MuiButtonBase-root > a {
         color: #000;
     }
     h2 > a {
+        width: 100%;
         letter-spacing: -2.5px;
         font-size: 32px;
         color: #1976d2;
         margin-right: 180px;
         font-weight: 900;
+        @media screen and (max-width: 1140px) {
+            width: 50%;
+        }
+    }
+    h2 > a > img {
+        width: 45%;
+        @media screen and (max-width: 1140px) {
+            width: 40%;
+        }
     }
     nav ul {
         display: flex;
+        @media screen and (max-width: 1040px) {
+            display: none;
+        }
     }
     nav ul li {
         padding: 0 45px;
@@ -151,12 +183,19 @@ export const HeaderContent = styled.header`
         right: 20px;
         font-size: 35px;
         cursor: pointer;
+        @media screen and (max-width: 1140px) {
+            top: 20px;
+            right: 25px;
+        }
     }
     p.username {
         position: absolute;
         right: 0;
         bottom: 10px;
         letter-spacing: -1px;
+        @media screen and (max-width: 1140px) {
+            right: 10px;
+        }
     }
 `;
 

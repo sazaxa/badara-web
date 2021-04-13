@@ -70,7 +70,7 @@ const CalculatorComponent = ({
                             value={Material.height}
                         />
                         <button type="button" onClick={OnClickVolume}>
-                            계산하기
+                            계산
                         </button>
                     </div>
                 </div>
