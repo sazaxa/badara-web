@@ -128,8 +128,17 @@ export const HeaderContent = styled.header`
         padding: 0 5vw;
         box-sizing: border-box;
     }
+    .MuiButtonBase-root {
+        @media screnn and(max-width:600) {
+            width: 22%;
+        }
+    }
     .MuiButtonBase-root > a {
         color: #000;
+    }
+    .MuiButton-label {
+        letter-spacing: -1.5px;
+        font-size: 14px;
     }
     h2 > a {
         width: 100%;
@@ -140,12 +149,13 @@ export const HeaderContent = styled.header`
         font-weight: 900;
         @media screen and (max-width: 1140px) {
             width: 50%;
+            margin-right: 0px;
         }
     }
     h2 > a > img {
         width: 45%;
         @media screen and (max-width: 1140px) {
-            width: 40%;
+            width: 70%;
         }
     }
     nav ul {
@@ -173,6 +183,10 @@ export const HeaderContent = styled.header`
         background-color: #0049ff;
         font-weight: 600;
         font-size: 16px;
+        position: absolute;
+        top: 50%;
+        right: 25px;
+        transform: translateY(-50%);
     }
     button:hover {
         background-color: #0049ff;
