@@ -42,7 +42,7 @@ const PaymentPopup = ({ handlePopup, updatePopup }) => {
         const tossPayments = await loadTossPayments(clientKey);
         tossPayments.requestPayment('카드', {
             amount: getOrder.orderPrice,
-            orderId: 'ABCD-123',
+            orderId: 'ABCD-1237',
             orderName: '해외배송서비스',
             customerName: getOrder.recipient.member.name,
             successUrl: window.location.origin + '/mypage',

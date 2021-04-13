@@ -9,7 +9,7 @@ import { withRouter } from 'react-router';
 import queryStirng from 'query-string';
 import axios from '../../../../node_modules/axios/index';
 
-const MypageContainer = ({ location }) => {
+const MypageContainer = ({ location, history }) => {
     const dispatch = useDispatch();
     const accessToken = localStorage.getItem('accessToken');
     const [orderTab, setOrderTab] = useState(0);
@@ -26,7 +26,7 @@ const MypageContainer = ({ location }) => {
         if (queryObj.orderId) {
             paymentRequest();
         }
-    }, [queryObj]);
+    }, []);
 
     const [status, setStatus] = useState({
         INVOICE: 0,
@@ -197,7 +197,14 @@ const MypageContainer = ({ location }) => {
                 amount: queryObj.amount,
             },
         };
-        axios(options).then(response => console.log(response));
+        axios(options)
+            .then(response => {
+                console.log(response);
+                history.push('/mypage');
+            })
+            .catch(e => {
+                console.log(e);
+            });
     };
 
     useEffect(() => {
