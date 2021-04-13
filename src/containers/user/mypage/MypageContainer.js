@@ -5,8 +5,11 @@ import { getMemberOrderAction } from 'store/member';
 import { getOrderIdAction, getOrderInfoAction, orderStatusChangeAction } from 'store/order';
 import { getProductInfoAction } from 'store/box';
 import { MyorderCancelList } from 'components/index';
+import { withRouter } from 'react-router';
+import queryStirng from 'query-string';
+import axios from '../../../../node_modules/axios/index';
 
-const MypageContainer = () => {
+const MypageContainer = ({ location }) => {
     const dispatch = useDispatch();
     const accessToken = localStorage.getItem('accessToken');
     const [orderTab, setOrderTab] = useState(0);
@@ -16,6 +19,14 @@ const MypageContainer = () => {
         normalOrder: [],
         cancelOrder: [],
     });
+    const { search } = location;
+    const queryObj = queryStirng.parse(search);
+
+    useEffect(() => {
+        if (queryObj.orderId) {
+            paymentRequest();
+        }
+    }, [queryObj]);
 
     const [status, setStatus] = useState({
         INVOICE: 0,
@@ -69,7 +80,6 @@ const MypageContainer = () => {
             });
         }
     };
-    console.log(order);
 
     const statusLength = () => {
         let INVOICE = 0;
@@ -174,6 +184,22 @@ const MypageContainer = () => {
         );
     };
 
+    const paymentRequest = () => {
+        console.log(process.env.REACT_APP_PAYMENT_SECRET_KEY);
+        const options = {
+            url: `https://api.tosspayments.com/v1/payments/${queryObj.paymentKey}`,
+            method: 'post',
+            headers: {
+                Authorization: `Basic ${process.env.REACT_APP_PAYMENT_SECRET_KEY}`,
+            },
+            data: {
+                orderId: queryObj.orderId,
+                amount: queryObj.amount,
+            },
+        };
+        axios(options).then(response => console.log(response));
+    };
+
     useEffect(() => {
         if (accessToken) {
             if (logged) {
@@ -205,4 +231,4 @@ const MypageContainer = () => {
     }
 };
 
-export default MypageContainer;
+export default withRouter(MypageContainer);
