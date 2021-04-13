@@ -8,9 +8,12 @@ const LoginPopupComponent = ({ onClick, HandleChange, HandleSubmit, onKeyPress }
     <>
         <LoginPopupWrap onClick={onClick} />
         <LoginPopup>
-            <h3>
-                <img src={logo} alt="logo" />
-            </h3>
+            <div className="titleWrap">
+                <h3>
+                    <img src={logo} alt="logo" />
+                </h3>
+                <p>손쉽고 편안한 해외배송 바다라와 함께하세요</p>
+            </div>
             <form>
                 <div className="inputBox">
                     <label htmlFor="email">EMAIL</label>

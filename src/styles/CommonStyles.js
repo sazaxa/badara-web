@@ -140,20 +140,22 @@ export const HeaderContent = styled.header`
         letter-spacing: -1.5px;
         font-size: 14px;
     }
+    h2 {
+        width: 150px;
+        margin-right: 180px;
+        @media screen and (max-width: 1140px) {
+            margin-right: 30px;
+        }
+    }
     h2 > a {
         width: 100%;
         letter-spacing: -2.5px;
         font-size: 32px;
         color: #1976d2;
-        margin-right: 180px;
         font-weight: 900;
-        @media screen and (max-width: 1140px) {
-            width: 50%;
-            margin-right: 0px;
-        }
     }
     h2 > a > img {
-        width: 45%;
+        width: 100%;
         @media screen and (max-width: 1140px) {
             width: 70%;
         }
@@ -222,7 +224,7 @@ export const LoginPopupWrap = styled.section`
 `;
 export const LoginPopup = styled.article`
     width: 600px;
-    height: 415px;
+    // height: 415px;
     background: #fff;
     position: absolute;
     top: 50%;
@@ -234,14 +236,28 @@ export const LoginPopup = styled.article`
     z-index: 2;
     padding: 30px;
     box-sizing: border-box;
+    @media screen and (max-width: 1140px) {
+        width: 100%;
+        padding: 10vw 5vw;
+        box-sizing: border-box;
+    }
     h3 {
+        width: 150px;
         text-align: center;
         font-size: 30px;
         font-weight: 900;
         letter-spacing: -1.5px;
-        margin-bottom: 30px;
         color: #1976d2;
         font-weight: 600;
+        margin: 0 auto;
+        & > img {
+            width: 100%;
+        }
+    }
+    .titleWrap {
+        margin-bottom: 30px;
+        text-align: center;
+        letter-spacing: -1px;
     }
 
     button {
