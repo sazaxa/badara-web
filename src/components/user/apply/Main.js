@@ -27,29 +27,29 @@ const useStyles = makeStyles(theme => ({
 
 //  getSteps
 const getSteps = () => {
-    return ['이용약관', '수취인', '물품', '박스', '확인'];
+    return ['수취인', '물품', '박스', '확인'];
 };
 
 // getStepContent
 
 const getStepContent = (stepIndex, steps) => {
     switch (stepIndex) {
+        // case 0:
+        //     return <Tos stepIndex={stepIndex} steps={steps} />;
         case 0:
-            return <Tos stepIndex={stepIndex} steps={steps} />;
-        case 1:
             return <Recipient stepIndex={stepIndex} steps={steps} />;
-        case 2:
+        case 1:
             return <Products stepIndex={stepIndex} steps={steps} />;
-        case 3:
+        case 2:
             return <Boxes stepIndex={stepIndex} steps={steps} />;
-        case 4:
+        case 3:
             return <Confirm stepIndex={stepIndex} steps={steps} />;
         default:
             return 'Unknown stepIndex';
     }
 };
 
-const ApplyMain = ({ activeStep, handleNext, handleBack, handleReset }) => {
+const ApplyMain = ({ activeStep }) => {
     const classes = useStyles();
     const steps = getSteps();
     return (
