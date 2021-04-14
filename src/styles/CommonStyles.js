@@ -368,10 +368,12 @@ export const MoblieMenuBlock = styled.div`
         cursor: pointer;
         div {
             width: 18%;
-            max-width: 75px;
+            max-width: 77px;
         }
         img {
             width: 100%;
+            box-shadow: 0 0 5px #999;
+            border-radius: 55px;
         }
     }
     .menuList {

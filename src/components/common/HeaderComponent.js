@@ -98,22 +98,22 @@ const HeaderComponent = ({
                         닫기
                     </div>
                     <div className="guide">
-                        <Link to="/guide">
+                        <Link to="/guide" onClick={() => HandletoggleMoblieMenu()}>
                             <img src={guide} alt={guide} />
                         </Link>
                     </div>
-                    <div className="cost">
+                    <div className="cost" onClick={() => HandletoggleMoblieMenu()}>
                         <Link to="/cost">
                             <img src={cost} alt={cost} />
                         </Link>
                     </div>
                     <div className="apply">
-                        <Link to="/apply">
+                        <Link to="/apply" onClick={() => HandletoggleMoblieMenu()}>
                             <img src={apply} alt={apply} />
                         </Link>
                     </div>
                     <div className="support">
-                        <Link to="support">
+                        <Link to="support" onClick={() => HandletoggleMoblieMenu()}>
                             <img src={support} alt={support} />
                         </Link>
                     </div>
