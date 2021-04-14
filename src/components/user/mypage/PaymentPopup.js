@@ -19,8 +19,18 @@ const PaymentPopup = ({ handlePopup, updatePopup }) => {
         setGetOrder(order);
     }, []);
 
-    const handleDeposit = () => {
-        setDepositPopup(!depositPopup);
+    const handleDeposit = async () => {
+        // setDepositPopup(!depositPopup);
+        const clientKey = 'test_ck_lpP2YxJ4K87PxeNb69p3RGZwXLOb';
+        const tossPayments = await loadTossPayments(clientKey);
+        tossPayments.requestPayment('가상계좌', {
+            amount: getOrder.orderPrice,
+            orderId: getOrder.orderNumber,
+            orderName: '해외배송서비스',
+            customerName: getOrder.recipient.member.name,
+            successUrl: window.location.origin + '/mypage',
+            failUrl: window.location.origin + '/mypage',
+        });
     };
 
     const handlePayment = () => {
@@ -42,7 +52,7 @@ const PaymentPopup = ({ handlePopup, updatePopup }) => {
         const tossPayments = await loadTossPayments(clientKey);
         tossPayments.requestPayment('카드', {
             amount: getOrder.orderPrice,
-            orderId: 'ABCD-1237',
+            orderId: getOrder.orderNumber,
             orderName: '해외배송서비스',
             customerName: getOrder.recipient.member.name,
             successUrl: window.location.origin + '/mypage',
@@ -59,7 +69,7 @@ const PaymentPopup = ({ handlePopup, updatePopup }) => {
             <button type="button" onClick={() => handleToss()}>
                 토스
             </button>
-            <button type="button" onClick={handleDeposit}>
+            <button type="button" onClick={() => handleDeposit()}>
                 무통장 입금
             </button>
             <button type="button" onClick={handlePopup}>

@@ -200,10 +200,19 @@ const MypageContainer = ({ location, history }) => {
         axios(options)
             .then(response => {
                 console.log(response);
-                history.push('/mypage');
+                dispatch(
+                    orderStatusChangeAction({
+                        id: response.data.orderId,
+                        data: { paymentMethod: '결제완료' },
+                        callBack: () => {
+                            dispatch(getMemberOrderAction(logged.id));
+                        },
+                    })
+                );
             })
             .catch(e => {
                 console.log(e);
+                alert(e);
             });
     };
 
