@@ -34,7 +34,7 @@ const Product = ({ stepIndex, steps, product, handlePrev, handleClick, index, Pr
             <table>
                 <tbody>
                     <tr>
-                        <th>상품</th>
+                        <th>상품명</th>
                         <td>
                             <input
                                 type="text"
@@ -58,7 +58,7 @@ const Product = ({ stepIndex, steps, product, handlePrev, handleClick, index, Pr
                         </td>
                     </tr>
                     <tr>
-                        <th>금액(단위:원)</th>
+                        <th>개당 금액(단위:원)</th>
                         <td>
                             <input
                                 type="number"
@@ -70,7 +70,7 @@ const Product = ({ stepIndex, steps, product, handlePrev, handleClick, index, Pr
                         </td>
                     </tr>
                     <tr>
-                        <th>실 무게(단위:kg)</th>
+                        <th>개당 실 무게(단위:kg)</th>
                         <td>
                             <input
                                 type="number"
