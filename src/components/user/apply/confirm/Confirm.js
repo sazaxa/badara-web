@@ -5,8 +5,10 @@ import Button from '@material-ui/core/Button';
 import { acitiveStepChange } from 'store/part';
 import { withRouter } from 'react-router';
 import { ConfirmWrap } from 'styles/ApplyStyles';
+import WaringModal from './WarningModal';
 
 const Confirm = ({ stepIndex, steps, history }) => {
+    const [warningPopup, setWarningPopup] = useState(false);
     const [totalWeightData, setTotalWeightData] = useState({
         weight: null,
     });
@@ -65,12 +67,17 @@ const Confirm = ({ stepIndex, steps, history }) => {
         e.preventDefault();
         dispatch(applySaveAction({ data: apply }));
     };
+
+    const handleWaringOpen = e => {
+        e.preventDefault();
+        setWarningPopup(!warningPopup);
+    };
     return (
         <ConfirmWrap>
             <article className="titleBox">
                 <h2>수취인</h2>
             </article>
-            <form onSubmit={e => hadleApplySaveSumbit(e)}>
+            <form onSubmit={e => handleWaringOpen(e)}>
                 <table>
                     <tbody>
                         <tr>
@@ -204,6 +211,7 @@ const Confirm = ({ stepIndex, steps, history }) => {
                     </Button>
                 </article>
             </form>
+            <WaringModal visible={warningPopup} close={handleWaringOpen} apply={hadleApplySaveSumbit} />
         </ConfirmWrap>
     );
 };
