@@ -109,7 +109,7 @@ export const HeaderWrap = styled.section`
     background: #fff;
     @media screen and (max-width: 1140px) {
         position: fixed;
-        height: 90px;
+        height: 65px;
         z-index: 999;
     }
 `;
@@ -124,7 +124,7 @@ export const HeaderContent = styled.header`
     position: relative;
     @media screen and (max-width: 1140px) {
         width: 100%;
-        height: 90px;
+        height: 65px;
         padding: 0 5vw;
         box-sizing: border-box;
     }
@@ -194,14 +194,17 @@ export const HeaderContent = styled.header`
         background-color: #0049ff;
         opacity: 0.5;
     }
-    .MuiSvgIcon-root {
+    .profile {
         position: absolute;
+        width: 35px;
+        height: 35px;
+        top: 50%;
+        transform: translateY(-50%);
         right: 20px;
         font-size: 35px;
         cursor: pointer;
-        @media screen and (max-width: 1140px) {
-            top: 20px;
-            right: 25px;
+        img {
+            width: 100%;
         }
     }
     p.username {
@@ -209,8 +212,10 @@ export const HeaderContent = styled.header`
         right: 0;
         bottom: 10px;
         letter-spacing: -1px;
+        display: block;
         @media screen and (max-width: 1140px) {
             right: 10px;
+            display: none;
         }
     }
 `;
@@ -335,5 +340,47 @@ export const ResponsiveBlock = styled.div`
     // padding-left: 300px;
     @media (max-width: 780px) {
         width: 100%;
+    }
+`;
+
+export const MoblieMenuBlock = styled.div`
+    width: 100%;
+    height: 80px;
+    // padding: 0 2vw;
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+    & > .hamburger {
+        justify-content: flex-start;
+        padding: 0 2vw;
+        display: none;
+    }
+    & > .hamburger.active {
+        display: flex;
+    }
+    & > div {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 100%;
+        cursor: pointer;
+        div {
+            width: 18%;
+            max-width: 75px;
+        }
+        img {
+            width: 100%;
+        }
+    }
+    .menuList {
+        display: none;
+    }
+    .menuList.active {
+        display: flex;
+    }
+    @media (max-width: 1140px) {
+        display: block;
     }
 `;

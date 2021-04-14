@@ -8,6 +8,7 @@ import { useLocation } from 'react-router';
 
 const HeaderContainer = () => {
     const [loginPopup, setLoginPopup] = useState(false);
+    const [toggleState, setToggleState] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const dispatch = useDispatch();
     const { logged } = useSelector(state => state.member.loggedInfo);
@@ -38,6 +39,10 @@ const HeaderContainer = () => {
     const handleMenuClose = () => {
         setAnchorEl(null);
     };
+
+    const handletoggleMoblieMenu = () => {
+        setToggleState(!toggleState);
+    };
     return (
         <HeaderComponent
             HandleLoginPopup={e => handleLoginPopup(e)}
@@ -48,6 +53,8 @@ const HeaderContainer = () => {
             HandleMenuClick={handleMenuClick}
             HandleMenuClose={handleMenuClose}
             HandleLogout={handleLogout}
+            HandletoggleMoblieMenu={handletoggleMoblieMenu}
+            ToggleState={toggleState}
         />
     );
 };

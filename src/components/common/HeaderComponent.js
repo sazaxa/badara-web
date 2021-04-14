@@ -5,8 +5,15 @@ import MenuItem from '@material-ui/core/MenuItem';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Link } from 'react-router-dom';
 import { LoginPopupContainer } from 'containers';
-import { HeaderWrap, HeaderContent } from 'styles/CommonStyles';
+import { HeaderWrap, HeaderContent, MoblieMenuBlock } from 'styles/CommonStyles';
 import logo from '../../styles/img/logo.png';
+import hamburger from '../../styles/img/menu_btn.png';
+// import close from '../../styles/img/close.png';
+import cost from '../../styles/img/cost.png';
+import apply from '../../styles/img/apply.png';
+import guide from '../../styles/img/guide.png';
+import support from '../../styles/img/support.png';
+import profile from '../../styles/img/profile.png';
 
 const HeaderComponent = ({
     HandleLoginPopup,
@@ -17,6 +24,8 @@ const HeaderComponent = ({
     HandleMenuClose,
     HandleLogout,
     loggedUser,
+    HandletoggleMoblieMenu,
+    ToggleState,
 }) => {
     return (
         <>
@@ -46,7 +55,10 @@ const HeaderComponent = ({
                     </nav>
                     {Auth ? (
                         <>
-                            <AccountCircleIcon onClick={HandleMenuClick} />
+                            {/* <AccountCircleIcon onClick={HandleMenuClick} /> */}
+                            <div className="profile">
+                                <img src={profile} alt="profile" onClick={HandleMenuClick} />
+                            </div>
                             <p className="username">
                                 <strong>{loggedUser ? loggedUser.name : null}</strong> 님
                             </p>
@@ -75,6 +87,38 @@ const HeaderComponent = ({
                     )}
                 </HeaderContent>
             </HeaderWrap>
+            <MoblieMenuBlock>
+                <div className={ToggleState ? 'hamburger' : 'hamburger active'}>
+                    <div class="toggle" onClick={() => HandletoggleMoblieMenu()}>
+                        <img src={hamburger} alt="toggleBtn" />
+                    </div>
+                </div>
+                <div className={ToggleState ? 'menuList active' : 'menuList'}>
+                    <div className="close" onClick={() => HandletoggleMoblieMenu()}>
+                        닫기
+                    </div>
+                    <div className="guide">
+                        <Link to="/guide">
+                            <img src={guide} alt={guide} />
+                        </Link>
+                    </div>
+                    <div className="cost">
+                        <Link to="/cost">
+                            <img src={cost} alt={cost} />
+                        </Link>
+                    </div>
+                    <div className="apply">
+                        <Link to="/apply">
+                            <img src={apply} alt={apply} />
+                        </Link>
+                    </div>
+                    <div className="support">
+                        <Link to="support">
+                            <img src={support} alt={support} />
+                        </Link>
+                    </div>
+                </div>
+            </MoblieMenuBlock>
         </>
     );
 };
