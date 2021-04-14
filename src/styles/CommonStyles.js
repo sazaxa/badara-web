@@ -88,10 +88,16 @@ export const FooterContent = styled.article`
         padding: 20px;
         box-sizing: border-box;
     }
-    p {
+    span {
         margin-bottom: 5px;
         letter-spacing: -1px;
         font-size: 13px;
+        a {
+            color: #000;
+        }
+    }
+    .bar {
+        margin: 0 10px;
     }
     p:last-child {
         margin-top: 20px;
