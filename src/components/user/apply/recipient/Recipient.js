@@ -109,6 +109,8 @@ const Recipient = ({ stepIndex, steps }) => {
                                     name="name"
                                     value={recipient.name ?? undefined}
                                     onChange={e => handleChange(e)}
+                                    placeholder="영어로 입력 해주세요."
+                                    pattern="[a-zA-Z\s]+$"
                                     required
                                 />
                             </td>
@@ -149,13 +151,13 @@ const Recipient = ({ stepIndex, steps }) => {
                                 <input
                                     type="text"
                                     name="address1"
-                                    placeholder="address1"
+                                    placeholder="상세주소"
                                     value={recipient.address1 ?? undefined}
                                     onChange={e => handleChange(e)}
-                                    style={{ width: '33%' }}
+                                    style={{ width: '100%', marginBottom: '5px' }}
                                     required
                                 />
-                                <input
+                                {/* <input
                                     type="text"
                                     name="address2"
                                     placeholder="address2"
@@ -171,7 +173,7 @@ const Recipient = ({ stepIndex, steps }) => {
                                     value={recipient.address3 ?? undefined}
                                     onChange={e => handleChange(e)}
                                     style={{ width: '33%' }}
-                                />
+                                /> */}
                                 <input
                                     type="text"
                                     name="zipcode"
@@ -204,8 +206,18 @@ const Recipient = ({ stepIndex, steps }) => {
                         <tr>
                             <th>휴대폰번호</th>
                             <td>
-                                {recipient.isCountryCode ? (
-                                    <input
+                                {/* {recipient.isCountryCode ? ( */}
+                                <input
+                                    type="text"
+                                    placeholder="국가번호"
+                                    name="countryCode"
+                                    value={recipient.countryCode ?? undefined}
+                                    onChange={e => handleChange(e)}
+                                    style={{ width: '29.5%' }}
+                                    required
+                                />
+                                {/*  ) : (
+                                   <input
                                         type="text"
                                         placeholder="국가번호"
                                         name="countryCode"
@@ -213,19 +225,8 @@ const Recipient = ({ stepIndex, steps }) => {
                                         onChange={e => handleChange(e)}
                                         style={{ width: '29.5%' }}
                                         required
-                                        disabled
                                     />
-                                ) : (
-                                    <input
-                                        type="text"
-                                        placeholder="국가번호"
-                                        name="countryCode"
-                                        value={recipient.countryCode ?? undefined}
-                                        onChange={e => handleChange(e)}
-                                        style={{ width: '29.5%' }}
-                                        required
-                                    />
-                                )}
+                                )} */}
                                 <input
                                     type="number"
                                     placeholder="휴대폰번호(-없이 작성)"
