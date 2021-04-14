@@ -7,25 +7,39 @@ const GuideComponent = () => {
         <GuideWrap>
             <GuideContents>
                 <article className="GuideContent">
-                    <h2>
+                    <div className="GuideHeader">
                         <img src={logo} alt="logo" />
                         <span>서비스 소개</span>
-                    </h2>
+                    </div>
                     <p>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                        but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                        popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                        and more recently with desktop publishing software like Aldus PageMaker including versions of
-                        Lorem Ipsum.
+                        해외 배송 대행사 “BADARA”의 한글 발음은 <strong>“바다라”</strong>입니다. <br />
+                        <br />
+                        <br />
+                        “BADARA”는 부담스러운 운송비와 복잡한 절차로 해외 배송 서비스를 사용하지 못한 분들에게 더 나은
+                        가격과 서비스를 제안합니다. <br />
+                        “BADARA”의 주 협력업체는 DHL입니다. 대부분의 상품은 DHL로 발송됩니다. “BADARA”의 운송료는 기존
+                        DHL 운임보다 70%이상의 할인되어, <br /> 타사보다 최소 20% 이상 저렴합니다.
+                        <br />
+                        <strong>
+                            “BADARA”로 상품을 보내주세요! <br />
+                            고객님이 원하는 방식으로 빠르고 안전한 서비스를 제공합니다. <br />
+                            <br />
+                            “BADARA”의 고객님들은 다양합니다.
+                            <br />
+                        </strong>
+                        1) 영국 대학교에 원서를 보내야 하시는 분<br />
+                        2) 미국 친구에게 한국 라면세트를 선물하는 분<br />
+                        3) 싱가폴에 살고 있지만 한국 사이트에서 옷을 구매하고 싶으신 분<br />
+                        4) 해외 다양한 지역으로 전자상거래를 하는 분 <br />
+                        <br />
+                        이제 “BADARA”에서 쉽고 간단하게 해외 배송을 보내세요!
                     </p>
                 </article>
                 <article className="GuideContent">
-                    <h2>
+                    <div className="GuideHeader">
                         <img src={logo} alt="logo" />
                         <span>서비스 이용안내</span>
-                    </h2>
+                    </div>
                     <ul>
                         <li>
                             <span className="num">01</span>
@@ -39,7 +53,8 @@ const GuideComponent = () => {
                         </li>
                         <li>
                             <span className="num">03</span>
-                            상품 센터 발송
+                            상품 센터 <br />
+                            발송
                             <span className="next">></span>
                         </li>
                         <li>
@@ -59,12 +74,12 @@ const GuideComponent = () => {
                         </li>
                         <li>
                             <span className="num">07</span>
-                            해외송장
+                            해외출발
                             <span className="next">></span>
                         </li>
                         <li>
                             <span className="num">08</span>
-                            해외출발
+                            해외송장
                             <span className="next">></span>
                         </li>
                         <li>
