@@ -38,10 +38,10 @@ const SupportComponent = ({ FaqLists, Expanded, HandleChange }) => {
     return (
         <SupportWrap>
             <SupportContents>
-                <h2>
+                <div className="supportHeader">
                     <img src={logo} alt="logo" />
                     <span>자주하는 질문</span>
-                </h2>
+                </div>
                 {FaqLists.length > 0 ? (
                     FaqLists.map(faq => {
                         return (
