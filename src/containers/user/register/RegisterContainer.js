@@ -14,6 +14,7 @@ const RegisterContainer = ({ history }) => {
         name: '',
         phoneNumber: '',
     });
+    const [agree, setAgree] = useState(false);
 
     useEffect(() => {
         if (status === 'success') {
@@ -33,6 +34,10 @@ const RegisterContainer = ({ history }) => {
             [name]: value,
         });
     };
+    const handleAgree = () => {
+        setAgree(!agree);
+    };
+
     const emailCheck = email => {
         let regex = /([\w-\\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
         return email !== '' && email !== 'undefined' && regex.test(email);
@@ -64,7 +69,15 @@ const RegisterContainer = ({ history }) => {
         }
         dispatch(registerAction(registerInfo));
     };
-    return <ReigisterComponent HandleChange={handleChange} HandleFinish={handleFinish} RegisterInfo={registerInfo} />;
+    return (
+        <ReigisterComponent
+            HandleAgree={handleAgree}
+            Agree={agree}
+            HandleChange={handleChange}
+            HandleFinish={handleFinish}
+            RegisterInfo={registerInfo}
+        />
+    );
 };
 
 export default withRouter(RegisterContainer);

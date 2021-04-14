@@ -72,3 +72,56 @@ export const RegisterContent = styled.article`
         transition:all 0.3s;
     }
 `;
+
+export const TosWrap = styled.article`
+    width: 1140px;
+    margin: 0 auto;
+    padding: 150px 0;
+    @media screen and (max-width: 1140px) {
+        width: 100%;
+        padding: 120px 2vw;
+        box-sizing: border-box;
+    }
+    h2 {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    .agreeBox {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 0;
+        border-radius: 10px;
+    }
+    .agreeBox > .inputBox {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 0;
+    }
+    .agreeBox > .inputBox > label {
+        margin: 0 10px;
+        display: inline-block;
+    }
+`;
+
+export const TosBox = styled.article`
+    width: 100%;
+    height: 500px;
+    overflow-y: auto;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    line-height: 1.6;
+    strong {
+        font-size: 18px;
+        letter-spacing: -1.5px;
+    }
+    @media screen and (max-width: 1140px) {
+        font-size: 15px;
+        letter-spacing: -1px;
+    }
+`;

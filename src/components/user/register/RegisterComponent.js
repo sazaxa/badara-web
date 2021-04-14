@@ -1,8 +1,15 @@
 import React from 'react';
 import { RegisterWrap, RegisterContent } from '../../../styles/RegisterStyles';
 import logo from '../../../styles/img/logo.png';
+import Tos from './Tos';
 
-const ReigisterComponent = ({ HandleChange, HandleFinish, RegisterInfo }) => {
+const ReigisterComponent = ({ Agree, HandleAgree, HandleChange, HandleFinish, RegisterInfo }) => {
+    if (!Agree)
+        return (
+            <RegisterWrap>
+                <Tos HandleAgree={HandleAgree} />
+            </RegisterWrap>
+        );
     return (
         <RegisterWrap>
             <RegisterContent>
