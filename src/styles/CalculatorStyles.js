@@ -225,7 +225,7 @@ export const CalculatorWrap = styled.article`
         padding: 10px;
         box-sizing: border-box;
         @media screen and (max-width: 1140px) {
-            width: 80%;
+            width: 70%;
             height: 100%;
             border-radius: 5px;
             font-size: 14px;

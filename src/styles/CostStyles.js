@@ -3,6 +3,9 @@ import styled from 'styled-components';
 export const CostWrap = styled.article`
     width: 1140px;
     margin: 0 auto;
+    @media screen and (max-width: 1140px) {
+        width: 100%;
+    }
 `;
 
 export const CostTable = styled.table`
@@ -17,6 +20,9 @@ export const CostTable = styled.table`
         height: 60px;
         text-align: center;
         width: 50%;
+        @media screen and (max-width: 1140px) {
+            height: 40px;
+        }
     }
     & > thead {
         width: 100%;
