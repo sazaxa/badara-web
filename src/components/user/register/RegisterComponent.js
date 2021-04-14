@@ -1,12 +1,16 @@
 import React from 'react';
 import { RegisterWrap, RegisterContent } from '../../../styles/RegisterStyles';
+import logo from '../../../styles/img/logo.png';
 
 const ReigisterComponent = ({ HandleChange, HandleFinish, RegisterInfo }) => {
     return (
         <RegisterWrap>
             <RegisterContent>
-                <h2>회원가입</h2>
-                <p>회원가입 후 고래타고 서비스를 이용하세요.</p>
+                <div class="header">
+                    <img src={logo} alt="logo" />
+                    <h2>회원가입</h2>
+                    {/* <p>회원가입 후 고래타고 서비스를 이용하세요.</p> */}
+                </div>
                 <form>
                     <input
                         type="email"

@@ -12,6 +12,18 @@ export const RegisterContent = styled.article`
     text-align: center;
     padding: 100px 0 150px 0;
     box-sizing: border-box;
+    @media screen and (max-width: 1140px) {
+        width:100%;
+        padding:130px 5vw;
+        box-sizing:border-box;
+    }
+    .header img {
+        width:120px;
+        margin-bottom:10px;
+        @media screen and (max-width: 1140px) {
+           margin-bottom:1vw;
+        }
+    }
     h2 {
         font-size: 26px;
         letter-spacing: -2px;
@@ -47,7 +59,7 @@ export const RegisterContent = styled.article`
     }
     button {
         color: #fff;
-        background-color: #609ae9;
+        background-color: #0049ff;
         border-color: #609ae9;
         padding: .53125rem 1.125rem;
         font-size: 1rem;
@@ -58,11 +70,5 @@ export const RegisterContent = styled.article`
         outline:none;
         cursor:pointer;
         transition:all 0.3s;
-        &:hover {
-            background-color:#1976d2;
-        }
-        &:focus {
-            border:4px solid #609ae9;
-        }
     }
 `;
