@@ -492,4 +492,10 @@ export const RecipientWrap = styled.article`
         align-items: center;
         margin: 20px 0;
     }
+    .warning {
+        text-align: center;
+        margin: 10px 0;
+        color: red;
+        font-weight: 600;
+    }
 `;

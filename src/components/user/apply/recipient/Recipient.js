@@ -239,6 +239,9 @@ const Recipient = ({ stepIndex, steps }) => {
                             </td>
                         </tr>
                     </tbody>
+                    <article className="warning">
+                        <p>*수취인 번호로 배송 일정이 공유됩니다. 정확하게 입력하여주세요.</p>
+                    </article>
                     <article className="agreeBox">
                         <Button disabled={stepIndex === 0} onClick={handlePrev}>
                             이전
