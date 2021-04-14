@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import Box from './Box';
 import AskModal from './AskModal';
 import InvoiceModal from './InvoiceModal';
+import WaringModal from './WarningModal';
 
 const Boxes = ({ stepIndex, steps }) => {
     const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const Boxes = ({ stepIndex, steps }) => {
     );
 
     const [AskPopop, setAskPopup] = useState(false);
+    const [warningPopop, setWarningPopup] = useState(false);
     const [productsWeight, setProductWeight] = useState(0);
     const [boxesWeight, setBoxesWeight] = useState(0);
     const [InvoicePopup, setInvoicePopup] = useState(false);
@@ -63,11 +65,12 @@ const Boxes = ({ stepIndex, steps }) => {
         setBoxesWeight(0);
     };
 
-    const handleAskOpen = e => {
+    const handleWaringOpen = e => {
         e.preventDefault();
         //TODO: 박스 무게와 물품 무게 비교하여 박스무게가 커야지만 다음단계로 이동하는 로직 구현해야함
         if (productsWeight <= boxesWeight) {
-            setAskPopup(true);
+            // setAskPopup(true);
+            handleWarningModal();
         } else {
             alert('입력하신 물품무게보다 박스무게가 작을 수 없습니다. \n 다시 입력해주세요.');
         }
@@ -80,6 +83,11 @@ const Boxes = ({ stepIndex, steps }) => {
     const handleAskCancel = e => {
         e.preventDefault();
         setAskPopup(false);
+    };
+    const handleAskOpen = e => {
+        e.preventDefault();
+        setAskPopup(true);
+        setWarningPopup(false);
     };
     const handleInvoiceOpen = e => {
         e.preventDefault();
@@ -105,9 +113,16 @@ const Boxes = ({ stepIndex, steps }) => {
     const boxRemove = index => {
         dispatch(boxDataRemoveAction({ index: index }));
     };
+
+    /**
+     * @summary 경고모달창
+     */
+    const handleWarningModal = () => {
+        setWarningPopup(!warningPopop);
+    };
     return (
         <>
-            <form onSubmit={handleAskOpen}>
+            <form onSubmit={e => handleWaringOpen(e)}>
                 {boxes?.map((v, index) => (
                     <Box
                         stepIndex={stepIndex}
@@ -142,6 +157,7 @@ const Boxes = ({ stepIndex, steps }) => {
             </form>
             <AskModal visible={AskPopop} close={handleAskClose} open={handleInvoiceOpen} cancel={handleAskCancel} />
             <InvoiceModal visible={InvoicePopup} close={handleInvoiceClose} open={handleClick} />
+            <WaringModal visible={warningPopop} close={handleWarningModal} Ask={handleAskOpen} />
         </>
     );
 };

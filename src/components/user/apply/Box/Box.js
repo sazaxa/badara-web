@@ -131,7 +131,7 @@ const Box = ({ box, index, Remove }) => {
                                 name="userMemo"
                                 value={updateBoxData.userMemo ?? undefined}
                                 onChange={e => handleChange(e)}
-                                placeholder="안경,핸드폰"
+                                placeholder="ex)안경,핸드폰"
                                 required
                             />
                         </td>
