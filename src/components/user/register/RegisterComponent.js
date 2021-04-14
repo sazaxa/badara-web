@@ -13,7 +13,7 @@ const ReigisterComponent = ({ Agree, HandleAgree, HandleChange, HandleFinish, Re
     return (
         <RegisterWrap>
             <RegisterContent>
-                <div class="header">
+                <div className="header">
                     <img src={logo} alt="logo" />
                     <h2>회원가입</h2>
                     {/* <p>회원가입 후 고래타고 서비스를 이용하세요.</p> */}
