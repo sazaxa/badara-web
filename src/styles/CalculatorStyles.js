@@ -248,6 +248,18 @@ export const CalculatorWrap = styled.article`
         margin-top: 20px;
         font-weight: 600;
         color: red;
+        @media screen and (max-width: 1140px) {
+            font-size: 1vw;
+        }
+        @media screen and (max-width: 800px) {
+            font-size: 1.5vw;
+        }
+        @media screen and (max-width: 600px) {
+            font-size: 2vw;
+        }
+        @media screen and (max-width: 500px) {
+            font-size: 3.5vw;
+        }
     }
     .pricebtn > .content {
         display: flex;
