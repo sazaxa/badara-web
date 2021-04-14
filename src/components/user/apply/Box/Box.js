@@ -83,12 +83,12 @@ const Box = ({ box, index, Remove }) => {
                             />
                             <Button
                                 variant="contained"
-                                color="primary"
+                                className="btn"
                                 type="button"
                                 onClick={onClickVolume}
                                 style={{ width: '20%' }}
                             >
-                                부피무게 계산하기
+                                계산
                             </Button>
                         </td>
                     </tr>

@@ -11,6 +11,9 @@ export const ApplyContent = styled.article`
     width: 1140px;
     box-sizing: border-box;
     margin: 0 auto;
+    @media screen and (max-width: 1140px) {
+        padding: 100%;
+    }
     h2 {
         // margin-bottom: 1rem;
         letter-spacing: -4px;
@@ -258,6 +261,7 @@ export const BoxWrap = styled.article`
         width: 100%;
         border-bottom: 4px solid #0080ff;
         display: flex;
+        justify-content: center;
         align-items: center;
         padding-bottom: 15px;
         box-sizing: border-box;
@@ -265,6 +269,21 @@ export const BoxWrap = styled.article`
             letter-spacing: -2.5px;
             font-size: 32px;
             margin-right: 10px;
+            @media screen and (max-width: 1140px) {
+                font-size: 3vw;
+            }
+            @media screen and (max-width: 1140px) {
+                font-size: 3vw;
+            }
+            @media screen and (max-width: 800px) {
+                font-size: 3.5vw;
+            }
+            @media screen and (max-width: 600px) {
+                font-size: 6vw;
+            }
+            @media screen and (max-width: 400px) {
+                font-size: 7vw;
+            }
         }
         & > button {
             height: 40px;
@@ -300,12 +319,22 @@ export const BoxWrap = styled.article`
         }
         & > tbody > tr > td > input {
             width: 40%;
+            @media screen and (max-width: 1140px) {
+                width: 80%;
+            }
         }
     }
     .weight {
         justify-content: flex-start;
         align-items: center;
     }
+    .btn {
+        background-color: #0080ff;
+        color: #fff;
+        &:hover {
+            background-color: #0080ff;
+            color: #fff;
+        }
 `;
 
 export const ConfirmWrap = styled.article`
@@ -321,6 +350,18 @@ export const ConfirmWrap = styled.article`
             letter-spacing: -2.5px;
             font-size: 32px;
             margin-right: 10px;
+            @media screen and (max-width: 1140px) {
+                font-size: 3vw;
+            }
+            @media screen and (max-width: 800px) {
+                font-size: 3.5vw;
+            }
+            @media screen and (max-width: 600px) {
+                font-size: 6vw;
+            }
+            @media screen and (max-width: 400px) {
+                font-size: 7vw;
+            }
         }
         & > button {
             height: 40px;
@@ -400,12 +441,25 @@ export const ProductWrap = styled.article`
         border-bottom: 4px solid #0080ff;
         display: flex;
         align-items: center;
+        justify-content: center;
         padding-bottom: 15px;
         box-sizing: border-box;
         & > h2 {
             letter-spacing: -2.5px;
             font-size: 32px;
             margin-right: 10px;
+            @media screen and (max-width: 1140px) {
+                font-size: 3vw;
+            }
+            @media screen and (max-width: 800px) {
+                font-size: 3.5vw;
+            }
+            @media screen and (max-width: 600px) {
+                font-size: 6vw;
+            }
+            @media screen and (max-width: 400px) {
+                font-size: 7vw;
+            }
         }
         & > button {
             height: 40px;
@@ -452,6 +506,19 @@ export const RecipientWrap = styled.article`
         padding-bottom: 15px;
         font-size: 32px;
         border-bottom: 4px solid #0080ff;
+        text-align: center;
+        @media screen and (max-width: 1140px) {
+            font-size: 3vw;
+        }
+        @media screen and (max-width: 800px) {
+            font-size: 3.5vw;
+        }
+        @media screen and (max-width: 600px) {
+            font-size: 6vw;
+        }
+        @media screen and (max-width: 400px) {
+            font-size: 7vw;
+        }
     }
     input,
     select {
@@ -497,5 +564,13 @@ export const RecipientWrap = styled.article`
         margin: 10px 0;
         color: red;
         font-weight: 600;
+    }
+    .btn {
+        background-color: #0080ff;
+        color: #fff;
+        &:hover {
+            background-color: #0080ff;
+            color: #fff;
+        }
     }
 `;

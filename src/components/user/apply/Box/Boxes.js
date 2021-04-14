@@ -150,7 +150,7 @@ const Boxes = ({ stepIndex, steps }) => {
                     <Button disabled={stepIndex === 0} onClick={() => handlePrev()}>
                         이전
                     </Button>
-                    <Button variant="contained" color="primary" type="submit">
+                    <Button variant="contained" style={{ backgroundColor: '#0080ff', color: '#fff' }} type="submit">
                         {stepIndex === steps.length - 1 ? '접수하기' : '다음'}
                     </Button>
                 </article>

@@ -81,7 +81,12 @@ const Products = ({ stepIndex, steps }) => {
                     <Button disabled={stepIndex === 0} onClick={handlePrev}>
                         이전
                     </Button>
-                    <Button variant="contained" color="primary" type="submit">
+                    <Button
+                        variant="contained"
+                        className="btn"
+                        type="submit"
+                        style={{ backgroundColor: '#0080ff', color: '#fff' }}
+                    >
                         {stepIndex === steps.length - 1 ? '접수하기' : '다음'}
                     </Button>
                 </article>

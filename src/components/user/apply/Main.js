@@ -15,6 +15,9 @@ const useStyles = makeStyles(theme => ({
     root: {
         width: '1140px',
         margin: '0 auto',
+        '@media (max-width:1140px)': {
+            width: '100%',
+        },
     },
     backButton: {
         marginRight: theme.spacing(1),
