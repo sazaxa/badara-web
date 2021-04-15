@@ -1,7 +1,7 @@
 import React from 'react';
 import { CalculatorWrap as CountryWrap } from 'styles/CalculatorStyles';
 import { CostTable } from 'styles/CostStyles';
-const CountryCostComponent = ({ list, onHandleSelectCountry, countryPrise }) => {
+const CountryCostComponent = ({ list, onHandleSelectCountry, countryPrise, selected }) => {
     return (
         <CountryWrap>
             <article className="title_wrap">
@@ -9,8 +9,8 @@ const CountryCostComponent = ({ list, onHandleSelectCountry, countryPrise }) => 
                 <span>나라별 배송 비용을 알수 있습니다.</span>
             </article>
             <span className="countryTitle">나라선택</span>
-            <select onChange={e => onHandleSelectCountry(e)} value="USA">
-                <option value="">나라 선택</option>
+            <select onChange={e => onHandleSelectCountry(e)} value={selected}>
+                <option value="">나라선택</option>
                 {list.map((country, index) => {
                     return (
                         <option key={index} value={country}>

@@ -20,7 +20,14 @@ const CostContainer = () => {
         }
     }, [selectedValue]);
 
-    return <CostComponent list={list} countryPrise={countryPrise} onHandleSelectCountry={onHandleSelectCountry} />;
+    return (
+        <CostComponent
+            list={list}
+            countryPrise={countryPrise}
+            onHandleSelectCountry={onHandleSelectCountry}
+            selected={selectedValue}
+        />
+    );
 };
 
 export default CostContainer;
