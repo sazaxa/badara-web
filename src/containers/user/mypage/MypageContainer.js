@@ -15,6 +15,7 @@ const MypageContainer = ({ location, history }) => {
     const [orderTab, setOrderTab] = useState(0);
     const [updatePopup, setUpdatePopup] = useState(false);
     const [paymentPopup, setPaymentPopup] = useState(false);
+    const [cancelPopup, setCancelPopup] = useState(false);
     const [order, setOrder] = useState({
         normalOrder: [],
         cancelOrder: [],
@@ -169,15 +170,20 @@ const MypageContainer = ({ location, history }) => {
         dispatch(getProductInfoAction(id));
     };
 
+    const handleCancelPopup = id => {
+        setCancelPopup(!cancelPopup);
+        dispatch(getOrderIdAction(id));
+    };
+
     // 주문 취소
-    const handleCancel = (id, method) => {
-        console.log(id);
+    const handleCancel = (orderNumber, method) => {
         // 운송장번호를 Insert 하고, callBack으로 order를 다시 불러온다.
         dispatch(
             orderStatusChangeAction({
-                id: id,
+                id: orderNumber,
                 data: { paymentMethod: method },
                 callBack: () => {
+                    setCancelPopup(!cancelPopup);
                     dispatch(getMemberOrderAction(logged.id));
                 },
             })
@@ -240,6 +246,8 @@ const MypageContainer = ({ location, history }) => {
                 paymentPopup={paymentPopup}
                 handlePaymentPopup={handlePaymentPopup}
                 handleCancel={handleCancel}
+                cancelPopup={cancelPopup}
+                handleCancelPopup={handleCancelPopup}
             />
         );
     if (orderTab === 1) {
