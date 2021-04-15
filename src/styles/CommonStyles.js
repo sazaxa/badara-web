@@ -320,6 +320,9 @@ export const LoginPopup = styled.article`
             align-items: center;
             justify-content: center;
             color: #fff;
+            @media (max-width: 780px) {
+                font-size: 13px;
+            }
         }
     }
 `;
@@ -383,10 +386,14 @@ export const MoblieMenuBlock = styled.div`
         }
     }
     .menuList {
-        display: none;
+        display: flex;
+        transform: translateX(-100%);
+        transition: all 0.3s;
     }
     .menuList.active {
         display: flex;
+        transform: translateX(0);
+        transition: all 0.3s;
     }
     @media (max-width: 1140px) {
         display: block;
