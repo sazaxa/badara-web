@@ -8,7 +8,7 @@ import { LoginPopupContainer } from 'containers';
 import { HeaderWrap, HeaderContent, MoblieMenuBlock } from 'styles/CommonStyles';
 import logo from '../../styles/img/logo.png';
 import hamburger from '../../styles/img/menu_btn.png';
-// import close from '../../styles/img/close.png';
+import close from '../../styles/img/close.png';
 import cost from '../../styles/img/cost.png';
 import apply from '../../styles/img/apply.png';
 import guide from '../../styles/img/guide.png';
@@ -95,7 +95,7 @@ const HeaderComponent = ({
                 </div>
                 <div className={ToggleState ? 'menuList active' : 'menuList'}>
                     <div className="close" onClick={() => HandletoggleMoblieMenu()}>
-                        닫기
+                        <img src={close} alt="close" />
                     </div>
                     <div className="guide">
                         <Link to="/guide" onClick={() => HandletoggleMoblieMenu()}>
