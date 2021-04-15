@@ -191,7 +191,6 @@ const MypageContainer = ({ location, history }) => {
     };
 
     const paymentRequest = () => {
-        console.log(process.env.REACT_APP_PAYMENT_SECRET_KEY);
         const options = {
             url: `https://api.tosspayments.com/v1/payments/${queryObj.paymentKey}`,
             method: 'post',
@@ -209,15 +208,25 @@ const MypageContainer = ({ location, history }) => {
                 dispatch(
                     orderStatusChangeAction({
                         id: response.data.orderId,
-                        data: { paymentMethod: '결제완료' },
+                        data: {
+                            paymentMethod: '결제완료',
+                            cardType: response.data.card.cardType,
+                            cardCompany: response.data.card.company,
+                            cardNumber: response.data.card.number,
+                            cardOwnerType: response.data.card.ownerType,
+                            paymentKey: response.data.paymentKey,
+                            cardRequestedDate: response.data.requestedAt,
+                        },
                         callBack: () => {
                             dispatch(getMemberOrderAction(logged.id));
+                            window.location.href = '/mypage';
                         },
                     })
                 );
             })
             .catch(e => {
-                alert(e);
+                alert('결제가 실패하였습니다.');
+                window.location.href = '/mypage';
             });
     };
 

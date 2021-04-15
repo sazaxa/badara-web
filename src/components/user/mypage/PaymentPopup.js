@@ -19,8 +19,9 @@ const PaymentPopup = ({ handlePopup, updatePopup }) => {
     const [getOrder, setGetOrder] = useState('');
 
     useEffect(() => {
-        const order = orders.find(order => order.id === id);
+        const order = orders.find(order => order.orderNumber === id);
         setGetOrder(order);
+        console.log(getOrder);
     }, []);
 
     const handleDeposit = async () => {
