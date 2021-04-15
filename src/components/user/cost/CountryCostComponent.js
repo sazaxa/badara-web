@@ -9,7 +9,7 @@ const CountryCostComponent = ({ list, onHandleSelectCountry, countryPrise }) => 
                 <span>나라별 배송 비용을 알수 있습니다.</span>
             </article>
             <span className="countryTitle">나라선택</span>
-            <select onChange={e => onHandleSelectCountry(e)}>
+            <select onChange={e => onHandleSelectCountry(e)} value="USA">
                 <option value="">나라 선택</option>
                 {list.map((country, index) => {
                     return (

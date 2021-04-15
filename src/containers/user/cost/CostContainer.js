@@ -9,7 +9,7 @@ const CostContainer = () => {
         list: state.part.country.list,
         countryPrise: state.part.countryPrise,
     }));
-    const [selectedValue, setSelectedValue] = useState();
+    const [selectedValue, setSelectedValue] = useState('USA');
 
     const onHandleSelectCountry = e => {
         setSelectedValue(e.target.value);
