@@ -53,23 +53,25 @@ const NormalOrderList = ({ Rows, RowsPerPage, Page, HandleChangePage, HandleChan
                         </TableHead>
                         <TableBody>
                             {Rows[0].length > 0 ? (
-                                Rows[0].slice(Page * RowsPerPage, Page * RowsPerPage + RowsPerPage).map(row => {
-                                    return (
-                                        <TableRow key={row.id}>
-                                            <TableCell component="th" scope="row" align="center">
-                                                {row.id}
-                                            </TableCell>
-                                            <TableCell align="center">
-                                                <Link to={`/admin/order/${row.id}`} key={row.id}>
-                                                    {row.orderId}
-                                                </Link>
-                                            </TableCell>
-                                            <TableCell align="center">{row.member}</TableCell>
-                                            <TableCell align="center">{row.status}</TableCell>
-                                            <TableCell align="center">{row.days}</TableCell>
-                                        </TableRow>
-                                    );
-                                })
+                                Rows[0]
+                                    .slice(Page * RowsPerPage, Page * RowsPerPage + RowsPerPage)
+                                    .map((row, index) => {
+                                        return (
+                                            <TableRow key={row.id}>
+                                                <TableCell component="th" scope="row" align="center">
+                                                    {index + 1}
+                                                </TableCell>
+                                                <TableCell align="center">
+                                                    <Link to={`/admin/order/${row.id}`} key={row.id}>
+                                                        {row.orderId}
+                                                    </Link>
+                                                </TableCell>
+                                                <TableCell align="center">{row.member}</TableCell>
+                                                <TableCell align="center">{row.status}</TableCell>
+                                                <TableCell align="center">{row.days}</TableCell>
+                                            </TableRow>
+                                        );
+                                    })
                             ) : (
                                 <TableRow>
                                     <TableCell colSpan="6" align="center">
