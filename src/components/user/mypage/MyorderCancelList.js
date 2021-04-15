@@ -1,6 +1,7 @@
 import React from 'react';
 import { Responsive } from 'styles/CommonStyles';
 import { MypageContent } from 'styles/MypageStyles';
+import moment from '../../../../node_modules/moment/moment';
 
 const MyorderCancelList = ({ status, memberOrder, handleTabToggle }) => {
     if (!memberOrder) {
@@ -22,8 +23,8 @@ const MyorderCancelList = ({ status, memberOrder, handleTabToggle }) => {
                 </article>
                 <article className="mypageHeader">
                     <article className="left">
-                        MY <br />
-                        고래타고
+                        My <br />
+                        BADARA
                     </article>
                     <article className="rightWrap">
                         <article className="right">
@@ -68,7 +69,7 @@ const MyorderCancelList = ({ status, memberOrder, handleTabToggle }) => {
                                     </div>
                                     <div className="headData">
                                         <strong>신청일자 </strong>
-                                        <span>{order.recipient.createdDate}</span>
+                                        <span>{moment(order.recipient.createdDate).format('LLL')}</span>
                                     </div>
                                     <div className="headData">
                                         <strong>도착국가 </strong>
@@ -107,7 +108,7 @@ const MyorderCancelList = ({ status, memberOrder, handleTabToggle }) => {
                                         </div>
                                     </article>
                                     <article className="product">
-                                        <div class="titleWrap">
+                                        <div className="titleWrap">
                                             <h2>상품 정보</h2>
                                         </div>
                                         {order.productResponses.map((product, index) => (
@@ -133,7 +134,7 @@ const MyorderCancelList = ({ status, memberOrder, handleTabToggle }) => {
                                         ))}
                                     </article>
                                     <article className="box">
-                                        <div class="titleWrap">
+                                        <div className="titleWrap">
                                             <h2>박스 정보</h2>
                                         </div>
                                         {order.boxResponses.map((box, index) => (

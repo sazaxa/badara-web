@@ -183,10 +183,10 @@ const MyorderList = ({
                                         </article>
                                     </article>
                                     <article className="product">
-                                        <div class="titleWrap">
+                                        <div className="titleWrap">
                                             <h2>상품 정보</h2>
                                         </div>
-                                        {order.productResponses.map((product, index) => (
+                                        {order.productResponses.map(product => (
                                             <article className="productWrap" key={product.id}>
                                                 {/* <h3>상품정보 {index + 1}</h3> */}
                                                 <div className="productItem">
@@ -209,14 +209,13 @@ const MyorderList = ({
                                         ))}
                                     </article>
                                     <article className="box">
-                                        <div class="titleWrap">
+                                        <div className="titleWrap">
                                             <h2>박스 정보</h2>
                                         </div>
-                                        {order.boxResponses.map((box, index) => (
-                                            <>
+                                        {order.boxResponses.map(box => (
+                                            <div key={box.id} style={{ width: '100%' }}>
                                                 <div
                                                     className="boxItem"
-                                                    key={box.id}
                                                     style={
                                                         box.koreanShippingStatus !== '송장입력' &&
                                                         box.koreanShippingStatus !== '센터입고중'
@@ -271,7 +270,7 @@ const MyorderList = ({
                                                         ) : null}
                                                     </div>
                                                 ) : null}
-                                            </>
+                                            </div>
                                         ))}
                                     </article>
                                 </article>
@@ -301,22 +300,22 @@ const MyorderList = ({
                                             </span>
                                         </div>
                                         {order.orderStatus === '해외배송중' || order.orderStatus === '해외배송완료' ? (
-                                            <div className="item">
+                                            <div className="item" style={{ width: '100%', marginTop: '10px' }}>
                                                 <strong>해외 운송장번호</strong>
-                                                <p>
+                                                <span>
                                                     {order.invoice}[{order.shippingCompany}]
-                                                </p>
+                                                </span>
                                             </div>
                                         ) : null}
                                         {order.orderStatus === '무통장입금' ? (
                                             <>
-                                                <div className="item">
+                                                <div className="item" style={{ marginTop: '10px' }}>
                                                     <strong>은행</strong>
-                                                    <p>..은행</p>
+                                                    <span>국민은행</span>
                                                 </div>
-                                                <div className="item">
+                                                <div className="item" style={{ marginTop: '10px' }}>
                                                     <strong>계좌번호</strong>
-                                                    <p>12312321312</p>
+                                                    <span>061701-04-240916</span>
                                                 </div>
                                             </>
                                         ) : null}
@@ -324,7 +323,7 @@ const MyorderList = ({
                                 ) : null}
                                 {order.orderStatus === '결제요청' ? (
                                     <article className="paymentBtn">
-                                        <button type="button" onClick={() => handlePaymentPopup(order.id)}>
+                                        <button type="button" onClick={() => handlePaymentPopup(order.orderNumber)}>
                                             결제하기
                                         </button>
                                     </article>

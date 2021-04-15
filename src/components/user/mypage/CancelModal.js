@@ -29,7 +29,7 @@ const CancelModal = ({ visible, handleCancel, handlePopup }) => {
                 <div className="buttons">
                     <Button
                         variant="contained"
-                        color="primary"
+                        style={{ backgroundColor: '#0049ff', color: '#fff' }}
                         type="button"
                         onClick={() =>
                             handleCancel(
@@ -42,7 +42,12 @@ const CancelModal = ({ visible, handleCancel, handlePopup }) => {
                     >
                         확인
                     </Button>
-                    <Button variant="outlined" color="primary" type="button" onClick={e => handlePopup(e)}>
+                    <Button
+                        variant="outlined"
+                        style={{ border: '1px solid #0049ff', color: '#0049ff' }}
+                        type="button"
+                        onClick={e => handlePopup(e)}
+                    >
                         취소
                     </Button>
                 </div>

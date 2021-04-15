@@ -32,6 +32,9 @@ export const MypageContent = styled.article`
         width: 100%;
         height: 60px;
         margin-bottom: 30px;
+        @media screen and (max-width: 1140px) {
+            height: 40px;
+        }
         & ul {
             width: 100%;
             height: 100%;
@@ -438,7 +441,7 @@ export const MypageContent = styled.article`
             }
         }
         & > .item > strong {
-            margin-right: 20px;
+            // margin-right: 20px;
         }
         & > span {
             @media screen and (max-width: 1140px) {
@@ -481,6 +484,13 @@ export const UpdateInvoiceWrap = styled.article`
     padding: 50px;
     box-sizing: border-box;
     z-index: 999;
+    p {
+        line-height: 1.5;
+    }
+
+    @media screen and (max-width: 1140px) {
+        width: 95%;
+    }
     h2 {
         margin-bottom: 20px;
     }
@@ -503,5 +513,38 @@ export const UpdateInvoiceWrap = styled.article`
         margin: 20px 10px;
         outline: none;
         cursor: pointer;
+    }
+    .paymentBtnWrap {
+        display: flex;
+        justify-content: center;
+    }
+    .paymentBtn {
+        width: 130px;
+        height: 50px;
+        &:first-child {
+            border: 2px solid #0049ff;
+            background: #fff;
+            box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%),
+                0px 1px 5px 0px rgb(0 0 0 / 12%);
+        }
+        img {
+            width: 75%;
+        }
+    }
+    label {
+        display: block;
+        margin-bottom: 30px;
+    }
+`;
+
+export const PaymentWrap = styled(UpdateInvoiceWrap)`
+    width: 800px;
+    height: 500px;
+    padding: 20px;
+    @media screen and (max-width: 1140px) {
+        width: 95%;
+    }
+    .header {
+        margin-bottom: 30px;
     }
 `;

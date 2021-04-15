@@ -60,22 +60,25 @@ const DepositToAccount = ({ handlePopup, popup, paymentPopup }) => {
     if (!Deposit)
         return (
             <UpdateInvoiceWrap>
-                <h2>결제 확인창</h2>
+                <h2>무통장 입금</h2>
 
                 <input type="text" placeholder="입금주를 입력해주세요." onChange={e => handleChange(e)} />
-                <button type="button" onClick={() => handlePayment()}>
-                    확인
-                </button>
                 <button type="button" onClick={() => handlePopup()}>
                     뒤로가기
+                </button>
+                <button type="button" onClick={() => handlePayment()}>
+                    확인
                 </button>
             </UpdateInvoiceWrap>
         );
     return (
         <UpdateInvoiceWrap>
-            <h2>결제 확인창</h2>
+            <h2>무통장 입금 확인</h2>
 
-            <p>계좌번호: 살라살라살라 입금주: 살라살라</p>
+            <p>
+                계좌번호: 061701-04-240916 <br />
+                입금주: 주식회사 후스구스
+            </p>
             <p>(메모후 닫기 버튼을 눌러주세요)</p>
             {/* <button type="button">확인</button> */}
             <button type="button" onClick={() => handleClose()}>

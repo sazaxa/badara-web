@@ -217,7 +217,6 @@ const MypageContainer = ({ location, history }) => {
                 );
             })
             .catch(e => {
-                console.log(e);
                 alert(e);
             });
     };
