@@ -128,7 +128,19 @@ export const GuideContents = styled.article`
                     &:nth-child(3n) {
                         @media screen and (max-width: 1140px) {
                             margin: 0 0 49px 49px;
+                            .next {
+                                display:none;
+                            }
                          }
+                    }
+                    &:nth-child(4),
+                    &:nth-child(8) {
+                        .next {
+                            display:none;
+                            @media screen and (max-width: 1140px) {
+                                display:block;
+                             }
+                        }
                     }
                     &:nth-child(4),
                     &:nth-child(7),
