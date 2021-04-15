@@ -112,14 +112,14 @@ const OrderDetailBoxInfo = ({ Boxes, UpdateState, HandleChange }) => {
                                         <input
                                             type="text"
                                             name="netWeight"
-                                            defaultValue={box.netWeight ? box.netWeight : '0'}
+                                            value={box.netWeight ? box.netWeight : ''}
                                             onChange={e => HandleChange(e, index)}
                                         />
                                     ) : (
                                         <input
                                             type="text"
                                             name="netWeight"
-                                            defaultValue={box.netWeight ? box.netWeight : '0'}
+                                            value={box.netWeight ? box.netWeight : ''}
                                             disabled
                                         />
                                     )}
