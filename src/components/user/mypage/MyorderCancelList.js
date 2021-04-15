@@ -75,20 +75,10 @@ const MyorderCancelList = ({ status, memberOrder, handleTabToggle }) => {
                                         <span>{order.recipient.country}</span>
                                     </div>
                                 </article>
-                                <article className="orderHead" style={{ background: '#0080ff' }}>
-                                    <div className="headData">
-                                        <strong>수취인</strong>
-                                    </div>
-                                    <div className="headData">
-                                        <strong>상품정보</strong>
-                                    </div>
-                                    <div className="headData">
-                                        <strong>박스정보</strong>
-                                    </div>
-                                </article>
+
                                 <article className="data">
                                     <article className="recipient">
-                                        {/* <h2>수취인 정보</h2> */}
+                                        <h2>배송지 정보</h2>
                                         <div className="recipientItem">
                                             <strong>이름 </strong>
                                             <span>{order.recipient.name}</span>
@@ -117,7 +107,9 @@ const MyorderCancelList = ({ status, memberOrder, handleTabToggle }) => {
                                         </div>
                                     </article>
                                     <article className="product">
-                                        {/* <h2>상품 정보</h2> */}
+                                        <div class="titleWrap">
+                                            <h2>상품 정보</h2>
+                                        </div>
                                         {order.productResponses.map((product, index) => (
                                             <article className="productWrap" key={product.id}>
                                                 {/* <h3>상품정보 {index + 1}</h3> */}
@@ -141,7 +133,9 @@ const MyorderCancelList = ({ status, memberOrder, handleTabToggle }) => {
                                         ))}
                                     </article>
                                     <article className="box">
-                                        {/* <h2>박스 정보</h2> */}
+                                        <div class="titleWrap">
+                                            <h2>박스 정보</h2>
+                                        </div>
                                         {order.boxResponses.map((box, index) => (
                                             <>
                                                 {/* <h3>박스정보 {index + 1}</h3> */}
@@ -155,17 +149,34 @@ const MyorderCancelList = ({ status, memberOrder, handleTabToggle }) => {
                                                             : null
                                                     }
                                                 >
-                                                    <strong>회원님이 입력한 부피 무게</strong>
-                                                    <p>{box.expectedVolumeWeight}kg</p>
-                                                    <strong>회원님이 입력한 실 무게</strong>
-                                                    <p>{box.expectedNetWeight}kg</p>
+                                                    <div
+                                                        className="userWeight"
+                                                        style={
+                                                            box.netWeight === null || box.volumeWeight === null
+                                                                ? { width: '100%' }
+                                                                : { width: '60%', float: 'left' }
+                                                        }
+                                                    >
+                                                        <strong>회원님이 입력한 부피 무게</strong>
+                                                        <p>{box.expectedVolumeWeight}kg</p>
+                                                        <strong>회원님이 입력한 실 무게</strong>
+                                                        <p>{box.expectedNetWeight}kg</p>
+                                                    </div>
+
                                                     {box.netWeight !== null || box.volumeWeight !== null ? (
-                                                        <>
-                                                            <strong>고래타고 부피 무게</strong>
+                                                        <div
+                                                            className="badaraWeight"
+                                                            style={
+                                                                box.netWeight === null || box.volumeWeight === null
+                                                                    ? null
+                                                                    : { width: '40%', float: 'left' }
+                                                            }
+                                                        >
+                                                            <strong>바다라 부피 무게</strong>
                                                             <p>{box.volumeWeight}kg</p>
-                                                            <strong>고래타고 실 무게</strong>
+                                                            <strong>바다라 실 무게</strong>
                                                             <p>{box.netWeight}kg</p>
-                                                        </>
+                                                        </div>
                                                     ) : null}
                                                 </div>
                                                 {box.koreanShippingStatus === '송장입력' ||
@@ -210,10 +221,9 @@ const MyorderCancelList = ({ status, memberOrder, handleTabToggle }) => {
                                     </article>
                                 ) : (
                                     <article className="total">
-                                        <h2>Total</h2>
-                                        <div className="item">
+                                        <div className="item" style={{ marginBottom: '0' }}>
                                             <strong>상태</strong>
-                                            <p>{order.orderStatus}</p>
+                                            <span>{order.orderStatus}</span>
                                         </div>
                                     </article>
                                 )}

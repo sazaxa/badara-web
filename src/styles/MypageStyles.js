@@ -5,6 +5,9 @@ export const MypageContent = styled.article`
     margin: 0 auto;
     padding-top: 50px;
     box-sizing: border-box;
+    @media screen and (max-width: 1140px) {
+        width: 100%;
+    }
     & > h2 {
         font-size: 32px;
         letter-spacing: -1.5px;
@@ -50,7 +53,7 @@ export const MypageContent = styled.article`
             cursor: pointer;
         }
         & li.active {
-            background-color: #1976d2;
+            background-color: #0049ff;
             color: #fff;
             font-weight: 600;
         }
@@ -58,42 +61,62 @@ export const MypageContent = styled.article`
     & > .mypageHeader {
         width: 100%;
         height: 100%;
-        background: #1976d2;
         display: flex;
+        box-shadow: 0 0 5px #999;
         flex-wrap: wrap;
         justify-content: center;
         color: #fff;
         border-radius: 5px;
         margin-bottom: 50px;
+        overflow: hidden;
         & > .left {
             width: 16%;
             // height: 338px;
             font-size: 26px;
+            background: #0049ff;
             font-weight: 600;
             letter-spacing: -2px;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
+            @media screen and (max-width: 1140px) {
+                width: 100%;
+                font-size: 18px;
+                padding: 10px 0;
+            }
         }
         & > .rightWrap {
             width: 84%;
             height: 100%;
-            background-color: rgb(130, 188, 226);
+            background-color: #fff;
             box-sizing: border-box;
-            padding-bottom: 50px;
+            padding: 50px 0;
             border-radius: 0 5px 5px 0;
-            & .right {
-                padding: 50px 0px 0px 0px;
+            @media screen and (max-width: 1140px) {
+                width: 100%;
+                padding: 20px 0;
             }
             & ul {
                 display: flex;
+                flex-wrap: wrap;
+                @media screen and (max-width: 1140px) {
+                    justify-content: end;
+                }
                 & > li {
-                    width: 18.6666%;
+                    width: 14%;
                     // max-width: 129px;
                     height: 100%;
-                    border-right: 1px solid rgb(155, 201, 232);
-                    border-left: 1px solid rgb(120, 173, 208);
+                    // border-right: 1px solid #ccc;
+                    border-left: 1px solid #ccc;
+                    @media screen and (max-width: 1140px) {
+                        width: 24.7%;
+                        margin-bottom: 10px;
+                        &:nth-child(1),
+                        &:nth-child(5) {
+                            border-left: 0;
+                        }
+                    }
                 }
             }
             & strong {
@@ -101,17 +124,73 @@ export const MypageContent = styled.article`
                 margin-bottom: 13px;
                 margin-right: 0;
                 height: 21px;
-                color: rgb(255, 255, 255);
+                color: #000;
                 font-size: 18px;
                 text-align: center;
                 font-weight: bold;
                 text-shadow: rgb(0 0 0 / 20%) 0px 1px 0px;
+                @media screen and (max-width: 1140px) {
+                    margin-bottom: 0px;
+                    font-size: 13px;
+                }
             }
             & p {
-                color: rgb(255, 255, 255);
+                color: #0049ff;
                 font-size: 50px;
                 line-height: 60px;
                 text-align: center;
+                @media screen and (max-width: 1140px) {
+                    font-size: 30px;
+                }
+            }
+        }
+    }
+    .centerAddress {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        height: 50px;
+        align-items: center;
+        background-color: #0049ff;
+        box-shadow: 0 0 5px #999;
+        border-radius: 5px;
+        letter-spacing: -1.5px;
+        margin-bottom: 50px;
+        @media screen and (max-width: 1140px) {
+            height: 100%;
+        }
+        article.title {
+            width: 30%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            h2 {
+                color: #fff;
+                margin: 0;
+                text-align: center;
+                font-size: 20px;
+            }
+            @media screen and (max-width: 1140px) {
+                width: 100%;
+                padding: 20px 0;
+            }
+        }
+        article.address {
+            width: 70%;
+            height: 100%;
+            line-height: 1.6;
+            box-sizing: border-box;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 10px;
+            p {
+                text-align: center;
+            }
+            @media screen and (max-width: 1140px) {
+                width: 100%;
+                padding: 20px 10px;
             }
         }
     }
@@ -119,23 +198,23 @@ export const MypageContent = styled.article`
         display: flex;
         width: 100%;
         height: 100%;
-        padding: 25px 20px;
-        border: 1px solid #ccc;
-        border-top: none;
         box-sizing: border-box;
         flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
+        box-shadow: 0 0 5px #999;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 10px;
     }
+
     .memberOrders .data > article {
-        width: 33%;
-        display: flex;
-        flex-wrap: wrap;
-        & > h2,
-        & h3,
-        & strong {
+        width: 30%;
+        // display: flex;
+        // flex-wrap: wrap;
+        padding: 20px 15px;
+        box-sizing: border-box;
+        @media screen and (max-width: 1140px) {
             width: 100%;
+            height: 100%;
         }
     }
     strong {
@@ -155,29 +234,81 @@ export const MypageContent = styled.article`
             width: 100%;
             padding: 20px 0;
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-around;
-            background: #1976d2;
-            color: #fff;
+            align-items: center;
+            color: #000;
             border-bottom: 1px solid #fff;
+            box-shadow: 0 0 5px #999;
+            border-radius: 10px;
+            font-size: 17px;
+            position: relative;
+            letter-spacing: -1.5px;
+            margin-bottom: 10px;
+            button {
+                width: 10%;
+                position: absolute;
+                top: 0;
+                right: 0;
+                height: 61px;
+                border-radius: 0 10px 10px 0;
+                background: #0049ff;
+            }
+            .headData {
+                @media screen and (max-width: 1140px) {
+                    width: 100%;
+                    text-align: center;
+                    &:last-child {
+                        display: none;
+                    }
+                    &: first;
+                }
+            }
         }
-    }
-    article > h2 {
-        margin: 20px 0;
     }
     .productWrap h3 {
         width: 100%;
         padding: 10px 0;
     }
     .recipient {
-        width: 100%;
+        width: 40% !important;
+        background-color: #0049ff;
+        color: #fff;
         display: flex;
         flex-wrap: wrap;
+        align-items: stretch;
+        @media screen and (max-width: 1140px) {
+            width: 100% !important;
+        }
+        .itemWrap {
+            width: 100%;
+        }
+        h2 {
+            width: 100%;
+            text-align: left;
+            margin-bottom: 10px;
+            @media screen and (max-width: 1140px) {
+                width: 100%;
+                height: 100%;
+                text-align: center;
+            }
+        }
     }
     .recipientItem {
         width: 100%;
         justify-content: flex-start;
-        // padding: 10px 0;
+
         letter-spacing: -1px;
+        text-align: left;
+        margin-bottom: 10px;
+        @media screen and (max-width: 1140px) {
+            width: 50%;
+            text-align: center;
+            float: left;
+        }
+        @media screen and (max-width: 655px) {
+            width: 100%;
+        }
         & string {
             margin-bottom: 10px;
             width: 30%;
@@ -188,12 +319,29 @@ export const MypageContent = styled.article`
             // justify-content: center;
         }
     }
+    .product {
+        .titleWrap {
+            width: 100%;
+            margin-bottom: 10px;
+            display: flex;
+            @media screen and (max-width: 1140px) {
+                justify-content: center;
+            }
+            h2 {
+                // width: 100%;
+                display: inline-block;
+                border-bottom: 3px solid #0049ff;
+                padding-bottom: 10px;
+                letter-spacing: -1.5px;
+            }
+        }
+    }
     .productWrap {
         width: 100%;
         padding: 10px 0;
         display: flex !important;
         flex-wrap: wrap;
-        align-items: center;
+        align-items: stretch;
         padding: 20px 0;
         margin: 0 10px;
         & strong,
@@ -204,23 +352,63 @@ export const MypageContent = styled.article`
             text-align: right;
         }
         & > .productItem {
-            width: 50%;
+            width: 100%;
+            margin-bottom: 10px;
+            @media screen and (max-width: 1140px) {
+                text-align: center;
+            }
         }
     }
     .box {
-        display: flex;
-        align-items: center;
+        border-left: 3px solid #0049ff;
+        box-sizing: border-box;
+        display: flex !important;
+        flex-wrap: wrap;
+        align-items: stretch;
+        @media screen and (max-width: 1140px) {
+            border-top: 3px solid #0049ff;
+            border-left: 0;
+        }
+        .titleWrap {
+            width: 100%;
+            height: 41px;
+            margin-bottom: 10px;
+            display: flex;
+            @media screen and (max-width: 1140px) {
+                justify-content: center;
+            }
+            h2 {
+                border-bottom: 3px solid #0049ff;
+                padding-bottom: 10px;
+                letter-spacing: -1.5px;
+            }
+        }
     }
     .boxItem {
         width: 60%;
         letter-spacing: -1px;
         padding: 10px 0;
+        float: left;
+        @media screen and (max-width: 1140px) {
+            text-align: center;
+        }
+        div {
+            width: 100%;
+            p {
+                margin-bottom: 10px;
+            }
+        }
+        .userWeight {
+            width: 100%;
+        }
     }
     .boxItem > p {
         margin-bottom: 10px;
     }
     .boxstatus {
         width: 40%;
+        float: left;
+        text-align: center;
         & > strong {
             width: 100%;
             display: block;
@@ -228,36 +416,54 @@ export const MypageContent = styled.article`
         }
     }
     .total {
-        border: 1px solid #ccc;
-        border-top: none;
-        padding: 30px 0;
+        box-shadow: 0 0 5px #999;
+        border-radius: 10px;
+        padding: 20px 0;
         box-sizing: border-box;
         text-align: center;
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
+        justify-content: space-around;
         & > h2 {
             width: 100%;
             margin: 0;
             margin-bottom: 20px;
         }
         & > .item {
+            width: 20%;
             padding: 0 10px;
+            @media screen and (max-width: 1140px) {
+                width: 100%;
+                margin-bottom: 10px;
+            }
         }
         & > .item > strong {
-            margin-right: 0;
+            margin-right: 20px;
+        }
+        & > span {
+            @media screen and (max-width: 1140px) {
+                width: 100%;
+                display: block;
+                margin-bottom: 10px;
+            }
         }
     }
     button {
         width: 66px;
         height: 40px;
-        // margin-top: 5%;
-        // margin-left: 3%;
         border-radius: 15px;
         border: none;
-        background: #1976d2;
+        background: #0049ff;
         color: #fff;
         cursor: pointer;
+    }
+    .paymentBtn {
+        button {
+            width: 100%;
+            height: 50px;
+            font-size: 16px;
+            border-radius: 0 0 10px 10px;
+        }
     }
 `;
 

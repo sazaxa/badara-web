@@ -4,6 +4,8 @@ import Paper from '@material-ui/core/Paper';
 import { MypageContent } from 'styles/MypageStyles';
 import UpdateInvoice from './UpdateInvoice';
 import PaymentPopup from './PaymentPopup';
+import moment from '../../../../node_modules/moment/moment';
+import CancelModal from './CancelModal';
 
 const MyorderList = ({
     status,
@@ -16,12 +18,17 @@ const MyorderList = ({
     handlePaymentInfo,
     handleCancel,
     handleTabToggle,
+    handleCancelPopup,
+    cancelPopup,
 }) => {
     if (!memberOrder) {
         return null;
     }
     return (
         <Responsive>
+            {cancelPopup === true ? (
+                <CancelModal handlePopup={handleCancelPopup} handleCancel={handleCancel} visible={cancelPopup} />
+            ) : null}
             {updatePopup === true ? <UpdateInvoice handlePopup={handleUpdatePopup} updatePopup={updatePopup} /> : null}
             {paymentPopup === true ? <PaymentPopup handlePopup={handlePaymentPopup} /> : null}
             <MypageContent>
@@ -38,8 +45,8 @@ const MyorderList = ({
                 </article>
                 <article className="mypageHeader">
                     <article className="left">
-                        MY <br />
-                        고래타고
+                        My <br />
+                        BADARA
                     </article>
                     <article className="rightWrap">
                         <article className="right">
@@ -76,6 +83,14 @@ const MyorderList = ({
                         </article>
                     </article>
                 </article>
+                <article className="centerAddress">
+                    <article className="title">
+                        <h2>센터주소</h2>
+                    </article>
+                    <article className="address">
+                        <p>서울특별시 금천구 가산디지털1로 5 대륭테크노타운 20차 1411호 주식회사 후스구스</p>
+                    </article>
+                </article>
                 <article className="memberOrders">
                     {memberOrder.length === 0 ? (
                         <article className="order">
@@ -93,18 +108,21 @@ const MyorderList = ({
                     ) : (
                         memberOrder.map(order => (
                             <article className="order" key={order.id}>
-                                <button
+                                {/* <button
                                     type="button"
                                     key={order.id}
                                     onClick={() =>
                                         handleCancel(
-                                            order.id,
+                                            order.orderNumber,
                                             order.orderStatus === '해외배송중' || order.orderStatus === '결제완료'
                                                 ? '환불대기'
                                                 : '취소'
                                         )
                                     }
                                 >
+                                    주문 취소
+                                </button> */}
+                                <button type="button" onClick={() => handleCancelPopup(order.orderNumber)}>
                                     주문 취소
                                 </button>
                                 <article className="orderHead">
@@ -114,14 +132,14 @@ const MyorderList = ({
                                     </div>
                                     <div className="headData">
                                         <strong>신청일자 </strong>
-                                        <span>{order.recipient.createdDate}</span>
+                                        <span>{moment(order.recipient.createdDate).format('LLL')}</span>
                                     </div>
                                     <div className="headData">
                                         <strong>도착국가 </strong>
                                         <span>{order.recipient.country}</span>
                                     </div>
                                 </article>
-                                <article className="orderHead" style={{ background: '#0080ff' }}>
+                                {/* <article className="orderHead" style={{ background: '#0080ff' }}>
                                     <div className="headData">
                                         <strong>수취인</strong>
                                     </div>
@@ -131,44 +149,48 @@ const MyorderList = ({
                                     <div className="headData">
                                         <strong>박스정보</strong>
                                     </div>
-                                </article>
+                                </article> */}
                                 <article className="data">
                                     <article className="recipient">
-                                        {/* <h2>수취인 정보</h2> */}
-                                        <div className="recipientItem">
-                                            <strong>이름 </strong>
-                                            <span>{order.recipient.name}</span>
-                                        </div>
-                                        <div className="recipientItem">
-                                            <strong>이메일 </strong>
-                                            <span>{order.recipient.email}</span>
-                                        </div>
-                                        <div className="recipientItem">
-                                            <strong>주소 </strong>
-                                            <span>
-                                                {order.recipient.address1}
-                                                {order.recipient.address2 ?? order.recipient.address2}
-                                                {order.recipient.address3 ?? order.recipient.address3}
-                                                {order.recipient.city +
-                                                    order.recipient.state +
-                                                    order.recipient.country +
-                                                    order.recipient.zipcode}
-                                            </span>
-                                        </div>
-                                        <div className="recipientItem">
-                                            <strong>휴대폰 번호 </strong>
-                                            <span>
-                                                ({order.recipient.countryCode}){order.recipient.phoneNumber}
-                                            </span>
-                                        </div>
+                                        <h2>배송지 정보</h2>
+                                        <article className="itemWrap">
+                                            <div className="recipientItem">
+                                                <strong>수취인 </strong>
+                                                <span>{order.recipient.name}</span>
+                                            </div>
+                                            <div className="recipientItem">
+                                                <strong>이메일 </strong>
+                                                <span>{order.recipient.email}</span>
+                                            </div>
+                                            <div className="recipientItem">
+                                                <strong>주소 </strong>
+                                                <span>
+                                                    {order.recipient.address1}
+                                                    {order.recipient.address2 ?? order.recipient.address2}
+                                                    {order.recipient.address3 ?? order.recipient.address3}
+                                                    {order.recipient.city +
+                                                        order.recipient.state +
+                                                        order.recipient.country +
+                                                        order.recipient.zipcode}
+                                                </span>
+                                            </div>
+                                            <div className="recipientItem">
+                                                <strong>연락처 </strong>
+                                                <span>
+                                                    ({order.recipient.countryCode}){order.recipient.phoneNumber}
+                                                </span>
+                                            </div>
+                                        </article>
                                     </article>
                                     <article className="product">
-                                        {/* <h2>상품 정보</h2> */}
+                                        <div class="titleWrap">
+                                            <h2>상품 정보</h2>
+                                        </div>
                                         {order.productResponses.map((product, index) => (
                                             <article className="productWrap" key={product.id}>
                                                 {/* <h3>상품정보 {index + 1}</h3> */}
                                                 <div className="productItem">
-                                                    <strong>상품 </strong>
+                                                    <strong>상품명 </strong>
                                                     <span>{product.productDetail}</span>
                                                 </div>
                                                 <div className="productItem">
@@ -187,10 +209,11 @@ const MyorderList = ({
                                         ))}
                                     </article>
                                     <article className="box">
-                                        {/* <h2>박스 정보</h2> */}
+                                        <div class="titleWrap">
+                                            <h2>박스 정보</h2>
+                                        </div>
                                         {order.boxResponses.map((box, index) => (
                                             <>
-                                                {/* <h3>박스정보 {index + 1}</h3> */}
                                                 <div
                                                     className="boxItem"
                                                     key={box.id}
@@ -201,17 +224,34 @@ const MyorderList = ({
                                                             : null
                                                     }
                                                 >
-                                                    <strong>회원님이 입력한 부피 무게</strong>
-                                                    <p>{box.expectedVolumeWeight}kg</p>
-                                                    <strong>회원님이 입력한 실 무게</strong>
-                                                    <p>{box.expectedNetWeight}kg</p>
+                                                    <div
+                                                        className="userWeight"
+                                                        style={
+                                                            box.netWeight === null || box.volumeWeight === null
+                                                                ? { width: '100%' }
+                                                                : { width: '60%', float: 'left' }
+                                                        }
+                                                    >
+                                                        <strong>회원님이 입력한 부피 무게</strong>
+                                                        <p>{box.expectedVolumeWeight}kg</p>
+                                                        <strong>회원님이 입력한 실 무게</strong>
+                                                        <p>{box.expectedNetWeight}kg</p>
+                                                    </div>
+
                                                     {box.netWeight !== null || box.volumeWeight !== null ? (
-                                                        <>
-                                                            <strong>고래타고 부피 무게</strong>
+                                                        <div
+                                                            className="badaraWeight"
+                                                            style={
+                                                                box.netWeight === null || box.volumeWeight === null
+                                                                    ? null
+                                                                    : { width: '40%', float: 'left' }
+                                                            }
+                                                        >
+                                                            <strong>바다라 부피 무게</strong>
                                                             <p>{box.volumeWeight}kg</p>
-                                                            <strong>고래타고 실 무게</strong>
+                                                            <strong>바다라 실 무게</strong>
                                                             <p>{box.netWeight}kg</p>
-                                                        </>
+                                                        </div>
                                                     ) : null}
                                                 </div>
                                                 {box.koreanShippingStatus === '송장입력' ||
@@ -237,35 +277,29 @@ const MyorderList = ({
                                 </article>
                                 {order.orderStatus !== '결제대기' ? (
                                     <article className="total">
-                                        <h2>Total</h2>
                                         <div className="item">
                                             <strong>상태</strong>
-                                            <p>{order.orderStatus}</p>
+                                            <span>{order.orderStatus}</span>
                                         </div>
                                         <div className="item">
                                             <strong>결제금액</strong>
-                                            <p>{Math.ceil(Number(order.orderPrice)).toLocaleString()}원</p>
+                                            <span>{Math.ceil(Number(order.orderPrice)).toLocaleString()}원</span>
                                         </div>
                                         <span>+</span>
                                         <div className="item">
                                             <strong>부가세</strong>
-                                            <p>{Math.ceil(Number(order.orderPrice) * 0.1).toLocaleString()}원</p>
+                                            <span>{Math.ceil(Number(order.orderPrice) * 0.1).toLocaleString()}원</span>
                                         </div>
                                         <span>=</span>
-                                        <div className="item">
+                                        <div className="item price">
                                             <strong>결제금액</strong>
-                                            <p>
+                                            <span style={{ fontSize: '20px', fontWeight: '600' }}>
                                                 {Math.ceil(
                                                     Number(order.orderPrice) + Number(order.orderPrice) * 0.1
                                                 ).toLocaleString()}
                                                 원
-                                            </p>
+                                            </span>
                                         </div>
-                                        {order.orderStatus === '결제요청' ? (
-                                            <button type="button" onClick={() => handlePaymentPopup(order.id)}>
-                                                결제하기
-                                            </button>
-                                        ) : null}
                                         {order.orderStatus === '해외배송중' || order.orderStatus === '해외배송완료' ? (
                                             <div className="item">
                                                 <strong>해외 운송장번호</strong>
@@ -286,6 +320,13 @@ const MyorderList = ({
                                                 </div>
                                             </>
                                         ) : null}
+                                    </article>
+                                ) : null}
+                                {order.orderStatus === '결제요청' ? (
+                                    <article className="paymentBtn">
+                                        <button type="button" onClick={() => handlePaymentPopup(order.id)}>
+                                            결제하기
+                                        </button>
                                     </article>
                                 ) : null}
                             </article>
