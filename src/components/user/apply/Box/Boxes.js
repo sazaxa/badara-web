@@ -29,7 +29,7 @@ const Boxes = ({ stepIndex, steps }) => {
     useEffect(() => {
         let productsSum = 0;
         for (let i = 0; i < products.length; i++) {
-            productsSum += Number(products[i].weight);
+            productsSum += Number(products[i].weight) * Number(products[i].quantity);
         }
         setProductWeight(productsSum);
     }, [products]);
