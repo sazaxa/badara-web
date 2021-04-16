@@ -317,6 +317,10 @@ const MyorderList = ({
                                                     <strong>계좌번호</strong>
                                                     <span>061701-04-240916</span>
                                                 </div>
+                                                <div className="item" style={{ marginTop: '10px' }}>
+                                                    <strong>예금주</strong>
+                                                    <span>주식회사 후스구스</span>
+                                                </div>
                                             </>
                                         ) : null}
                                     </article>
