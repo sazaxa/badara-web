@@ -110,7 +110,13 @@ const CalculatorComponent = ({
                     <button type="button" onClick={OnClickWeight}>
                         예상가격 구하기
                     </button>
-                    <p>(예상가격은 부피무게와 실무게 중 무거운 것으로 측정되어 표기됩니다.)</p>
+                    <p>
+                        (예상가격은 부피무게와 실무게 중 무거운 것으로 측정되어 표기됩니다.) <br />
+                    </p>
+                    <p>
+                        (“BADARA”는 배송업이 아닌, “회원”과 “배송사”의 대행업무입니다. <br />
+                        부가세는 10%가 별도로 발생됩니다.)
+                    </p>
                 </div>
                 <article className={PriseOpen ? 'priceWrap show' : 'priceWrap'}>
                     <div className="wrap">

@@ -431,6 +431,29 @@ export const ConfirmWrap = styled.article`
             }
         }
     }
+    .VAT {
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+        font-weight: 600;
+        color: red;
+        margin-bottom: 20px;
+        @media screen and (max-width: 1140px) {
+            font-size: 1.8vw;
+        }
+        @media screen and (max-width: 800px) {
+            font-size: 2vw;
+        }
+        @media screen and (max-width: 600px) {
+            font-size: 2.5vw;
+        }
+        @media screen and (max-width: 500px) {
+            font-size: 3vw;
+        }
+        @media screen and (max-width: 400px) {
+            font-size: 3.5vw;
+        }
+    }
 `;
 
 export const ProductWrap = styled.article`

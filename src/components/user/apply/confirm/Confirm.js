@@ -203,6 +203,10 @@ const Confirm = ({ stepIndex, steps, history }) => {
                         margin: '20px 0',
                     }}
                 >
+                    <p className="VAT">
+                        (“BADARA”는 배송업이 아닌, “회원”과 “배송사”의 대행업무입니다. <br />
+                        부가세는 10%가 별도로 발생됩니다.)
+                    </p>
                     <Button type="button" disabled={stepIndex === 0} onClick={handlePrev}>
                         이전
                     </Button>
