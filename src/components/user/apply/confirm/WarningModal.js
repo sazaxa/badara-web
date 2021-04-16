@@ -1,9 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { AskModalBlock, Fullscreen } from 'styles/ApplyStyles';
 import Button from '@material-ui/core/Button';
 
-const WaringModal = ({ visible, close, apply }) => {
+const WaringModal = ({ visible, close, apply, weight, weightPopup, weightConfirm, handleWeightPopup }) => {
+    const [Popup, setPopup] = useState(false);
+    useEffect(() => {
+        if (weight > 30) {
+            setPopup(true);
+            handleWeightPopup();
+        }
+    }, [weight, weightPopup]);
+    const handlePopup = () => {
+        setPopup(false);
+    };
     if (!visible) return null;
+    if (Popup)
+        return (
+            <Fullscreen>
+                <AskModalBlock>
+                    <div className="wrap">
+                        <h3 style={{ color: 'red', fontSize: '20px', margin: '10px 0' }}>무게가 너무 무겁습니다!!</h3>
+                        <strong>
+                            30kg 이상 발송물에 대해서는 바다라에서 (영업일 기준) 1일 내로 연락을 드립니다! <br />
+                            잠시만 기다리세요~
+                        </strong>
+                    </div>
+                    <div className="buttons" style={{ marginTop: '30px' }}>
+                        <Button variant="contained" color="primary" type="button" onClick={() => handlePopup()}>
+                            신청하러 가기
+                        </Button>
+                        <Button variant="outlined" color="primary" type="button" onClick={e => close(e)}>
+                            취소
+                        </Button>
+                    </div>
+                </AskModalBlock>
+            </Fullscreen>
+        );
     return (
         <Fullscreen>
             <AskModalBlock style={{ width: '80%', height: '450px' }}>

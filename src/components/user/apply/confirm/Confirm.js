@@ -12,6 +12,7 @@ const Confirm = ({ stepIndex, steps, history }) => {
     const [totalWeightData, setTotalWeightData] = useState({
         weight: null,
     });
+    const [weightGuidPopup, setWeightGuidPopup] = useState(false);
     const dispatch = useDispatch();
     const { country, apply, price, activeStep, status } = useSelector(
         state => ({
@@ -23,7 +24,9 @@ const Confirm = ({ stepIndex, steps, history }) => {
         }),
         shallowEqual
     );
-
+    const handleWeightPopup = () => {
+        setWeightGuidPopup(true);
+    };
     useEffect(() => {
         totalCalculation();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -50,7 +53,6 @@ const Confirm = ({ stepIndex, steps, history }) => {
             }
             return sum;
         });
-        console.log(sum);
         setTotalWeightData({
             ...totalWeightData,
             weight: sum,
@@ -71,6 +73,16 @@ const Confirm = ({ stepIndex, steps, history }) => {
     const handleWaringOpen = e => {
         e.preventDefault();
         setWarningPopup(!warningPopup);
+    };
+
+    const handleWaringClose = e => {
+        e.preventDefault();
+        setWarningPopup(!warningPopup);
+        setWeightGuidPopup(false);
+    };
+    const handleWeightConfirm = () => {
+        setWeightGuidPopup(false);
+        console.log('클릭됨');
     };
     return (
         <ConfirmWrap>
@@ -191,7 +203,11 @@ const Confirm = ({ stepIndex, steps, history }) => {
                     </div>
                     <div className="price">
                         <h3>총 예상가격</h3>
-                        <p>{Math.ceil(price).toLocaleString() + '원'}</p>
+                        <p>
+                            {Number(totalWeightData.weight) > 30
+                                ? '30kg 이상 발송물 가격'
+                                : Math.ceil(price).toLocaleString() + '원'}
+                        </p>
                     </div>
                 </div>
                 <article
@@ -215,7 +231,15 @@ const Confirm = ({ stepIndex, steps, history }) => {
                     </Button>
                 </article>
             </form>
-            <WaringModal visible={warningPopup} close={handleWaringOpen} apply={hadleApplySaveSumbit} />
+            <WaringModal
+                visible={warningPopup}
+                close={handleWaringClose}
+                apply={hadleApplySaveSumbit}
+                weight={totalWeightData.weight}
+                weightPopup={weightGuidPopup}
+                weightConfirm={handleWeightConfirm}
+                handleWeightPopup={handleWeightPopup}
+            />
         </ConfirmWrap>
     );
 };
