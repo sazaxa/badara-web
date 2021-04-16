@@ -219,13 +219,13 @@ const MypageContainer = ({ location, history }) => {
                         },
                         callBack: () => {
                             dispatch(getMemberOrderAction(logged.id));
-                            window.location.href = '/mypage';
                         },
                     })
                 );
+                window.location.href = '/mypage';
             })
             .catch(e => {
-                alert('결제가 실패하였습니다.');
+                alert(e.message);
                 window.location.href = '/mypage';
             });
     };
