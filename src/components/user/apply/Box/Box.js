@@ -96,7 +96,7 @@ const Box = ({ box, index, Remove }) => {
                         <th>부피무게(단위:kg)</th>
                         <td className="weight">
                             <input
-                                type="number"
+                                type="text"
                                 name="expectedVolumeWeight"
                                 value={
                                     updateBoxData.expectedVolumeWeight
@@ -114,7 +114,7 @@ const Box = ({ box, index, Remove }) => {
                         <th>실 무게(단위:kg)</th>
                         <td className="weight">
                             <input
-                                type="number"
+                                type="text"
                                 name="expectedNetWeight"
                                 value={updateBoxData.expectedNetWeight ?? undefined}
                                 onChange={e => handleChange(e)}

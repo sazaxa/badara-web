@@ -73,7 +73,7 @@ const Product = ({ stepIndex, steps, product, handlePrev, handleClick, index, Pr
                         <th>개당 실 무게(단위:kg)</th>
                         <td>
                             <input
-                                type="number"
+                                type="text"
                                 name="weight"
                                 value={updateProductData.weight ?? undefined}
                                 onChange={e => handleChange(e)}

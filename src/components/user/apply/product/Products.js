@@ -37,9 +37,11 @@ const Products = ({ stepIndex, steps }) => {
             if (quantity > 0 && price > 0 && weight > 0) {
                 if (Number.isInteger(quantity) && Number.isInteger(price)) {
                     dispatch(acitiveStepChange(activeStep + 1));
+                } else {
+                    alert('금액에 소수점을 넣을수 없습니다.');
                 }
             } else {
-                alert('음수가 들어 갈수 없습니다.\n다시 입력하세요.');
+                alert('해당 정보에 맞게 다시 입력해주세요.\n다시 입력하세요.');
             }
         }
     };

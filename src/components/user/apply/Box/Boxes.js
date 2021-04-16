@@ -67,6 +67,8 @@ const Boxes = ({ stepIndex, steps }) => {
 
     const handleWaringOpen = e => {
         e.preventDefault();
+        const boxWeight = Number(boxesWeight);
+        const porductWeight = Number(productsWeight);
         //TODO: 박스 무게와 물품 무게 비교하여 박스무게가 커야지만 다음단계로 이동하는 로직 구현해야함
         if (productsWeight <= boxesWeight) {
             // setAskPopup(true);
