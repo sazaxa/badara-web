@@ -18,6 +18,36 @@ const PaymentPopup = ({ handlePopup, updatePopup }) => {
     const [paymentAgree, setPaymentAgree] = useState(false);
     const [getOrder, setGetOrder] = useState('');
 
+    const [checked, setChecked] = useState({
+        AllChecked: false,
+        checked1: false,
+        checked2: false,
+        checked3: false,
+        checked4: false,
+        checked5: false,
+    });
+
+    const handleChecked = e => {
+        const { name } = e.target;
+        if (name === 'AllChecked') {
+            setChecked({
+                AllChecked: !checked.AllChecked,
+                checked1: checked.AllChcked ? true : !checked.AllChecked,
+                checked2: checked.AllChcked ? true : !checked.AllChecked,
+                checked3: checked.AllChcked ? true : !checked.AllChecked,
+                checked4: checked.AllChcked ? true : !checked.AllChecked,
+                checked5: checked.AllChcked ? true : !checked.AllChecked,
+            });
+        } else {
+            setChecked({
+                ...checked,
+                AllChecked: false,
+                [name]: e.target.checked,
+            });
+        }
+    };
+    console.log(checked);
+
     useEffect(() => {
         const order = orders.find(order => order.orderNumber === id);
         setGetOrder(order);
@@ -79,16 +109,49 @@ const PaymentPopup = ({ handlePopup, updatePopup }) => {
                     style={{ marginBottom: '10px', padding: '5px 0', borderBottom: '1px solid #ccc' }}
                 >
                     <strong style={{ fontSize: '22px' }}>결제 전 약관 동의</strong>
-                    <p>(모두 체크후 다음 버튼을 눌러주세요)</p>
+                    <p style={{ marginBottom: '30px' }}>(모두 체크후 다음 버튼을 눌러주세요)</p>
+                    <label
+                        htmlFor="All"
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            marginBottom: '10px',
+                        }}
+                    >
+                        <input
+                            type="checkbox"
+                            id="All"
+                            name="AllChecked"
+                            onChange={e => handleChecked(e)}
+                            checked={checked.AllChecked}
+                            style={{ width: '20px', margin: '0' }}
+                        />
+                        전체동의
+                    </label>
                 </div>
                 <form onSubmit={e => handlePaymentAgree(e)}>
                     <div className="wrap" style={{ overflowY: 'scroll', height: '300px' }}>
-                        <input type="checkbox" id="1" required />
+                        <input
+                            type="checkbox"
+                            id="1"
+                            required
+                            name="checked1"
+                            onChange={e => handleChecked(e)}
+                            checked={checked.checked1}
+                        />
                         <label htmlFor="1">
                             상대국 통관으로 인한 배송지연이 발생할 수 있습니다. <br />
                             또한 신고금액 및 물품에 따라 수취인에게 관부가세를 청구할 수 있습니다.
                         </label>
-                        <input type="checkbox" id="2" required />
+                        <input
+                            type="checkbox"
+                            id="2"
+                            name="checked2"
+                            onChange={e => handleChecked(e)}
+                            required
+                            checked={checked.checked2}
+                        />
                         <label htmlFor="2">
                             원칙적으로 관부가세는 수취인이 납부해야 하지만 지불조건 변경 시, 발송인이 납부가능 합니다.{' '}
                             <br /> 이 경우 수수료가 청구됩니다. <br />
@@ -96,17 +159,38 @@ const PaymentPopup = ({ handlePopup, updatePopup }) => {
                             - 수취인의 수취거절 및 관련비용(관부가세) 지불거절 <br />- 상품가치 오기입으로 발생한
                             통관상의 문제
                         </label>
-                        <input type="checkbox" id="3" required />
+                        <input
+                            type="checkbox"
+                            id="3"
+                            required
+                            name="checked3"
+                            onChange={e => handleChecked(e)}
+                            checked={checked.checked3}
+                        />
                         <label htmlFor="3">
                             BADARA는 최선을 다해 회원님의 상품을 배송할 것입니다. <br />
                             하지만 아래와 같은 경우로 발생하는 서비스비용과 기타 행정처리 비용은 발송인에게 부과됩니다.
                         </label>
-                        <input type="checkbox" id="4" required />
+                        <input
+                            type="checkbox"
+                            id="4"
+                            required
+                            name="checked4"
+                            onChange={e => handleChecked(e)}
+                            checked={checked.checked4}
+                        />
                         <label htmlFor="4">
                             상대국 통관으로 인한 배송지연이 발생할 수 있습니다. <br />
                             또한 신고금액 및 물품에 따라 수취인에게 관부가세를 청구할 수 있습니다.
                         </label>
-                        <input type="checkbox" id="5" required />
+                        <input
+                            type="checkbox"
+                            id="5"
+                            required
+                            name="checked5"
+                            onChange={e => handleChecked(e)}
+                            checked={checked.checked5}
+                        />
                         <label htmlFor="5">
                             운임은 각 배송사별 중량측정기준으로 계산 청구됩니다. <br />
                             발송물이 센터로 입고된 후 정확한 요금산정을 위해 박스 크기와 무게는 재측정됩니다.

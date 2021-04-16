@@ -539,7 +539,7 @@ export const UpdateInvoiceWrap = styled.article`
 
 export const PaymentWrap = styled(UpdateInvoiceWrap)`
     width: 800px;
-    height: 500px;
+    height: 550px;
     padding: 20px;
     @media screen and (max-width: 1140px) {
         width: 95%;
