@@ -129,12 +129,11 @@ export const GuideContents = styled.article`
                         @media screen and (max-width: 1140px) {
                             margin: 0 0 49px 49px;
                             .next {
-                                display:none;
+                                // display:none;
                             }
                          }
                     }
-                    &:nth-child(4),
-                    &:nth-child(8) {
+                    &:nth-child(5) {
                         .next {
                             display:none;
                             @media screen and (max-width: 1140px) {
