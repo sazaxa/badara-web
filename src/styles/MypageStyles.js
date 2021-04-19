@@ -468,6 +468,18 @@ export const MypageContent = styled.article`
             border-radius: 0 0 10px 10px;
         }
     }
+    .tracking {
+        display: inline-block;
+        width: 66px;
+        height: 40px;
+        line-height: 40px;
+        margin-left: 10px;
+        border-radius: 15px;
+        border: none;
+        background: #0049ff;
+        color: #fff;
+        cursor: pointer;
+    }
 `;
 
 export const UpdateInvoiceWrap = styled.article`

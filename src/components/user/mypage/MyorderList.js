@@ -305,6 +305,14 @@ const MyorderList = ({
                                                 <span>
                                                     {order.invoice}[{order.shippingCompany}]
                                                 </span>
+                                                <a
+                                                    className="tracking"
+                                                    href={`https://www.dhl.com/kr-ko/home/tracking/tracking-global-forwarding.html?submit=1&tracking-id=${order.invoice}`}
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                >
+                                                    조회
+                                                </a>
                                             </div>
                                         ) : null}
                                         {order.orderStatus === '무통장입금' ? (
