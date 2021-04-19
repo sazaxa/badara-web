@@ -32,16 +32,15 @@ const PaymentPopup = ({ handlePopup, updatePopup }) => {
         if (name === 'AllChecked') {
             setChecked({
                 AllChecked: !checked.AllChecked,
-                checked1: checked.AllChcked ? true : !checked.AllChecked,
-                checked2: checked.AllChcked ? true : !checked.AllChecked,
-                checked3: checked.AllChcked ? true : !checked.AllChecked,
-                checked4: checked.AllChcked ? true : !checked.AllChecked,
-                checked5: checked.AllChcked ? true : !checked.AllChecked,
+                checked1: !checked.AllChecked,
+                checked2: !checked.AllChecked,
+                checked3: !checked.AllChecked,
+                checked4: !checked.AllChecked,
+                checked5: !checked.AllChecked,
             });
         } else {
             setChecked({
                 ...checked,
-                AllChecked: false,
                 [name]: e.target.checked,
             });
         }
