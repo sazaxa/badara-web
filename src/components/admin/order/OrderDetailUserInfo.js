@@ -132,10 +132,11 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                             type="text"
                             value={
                                 UpdateValue.recipient.address1 +
-                                    UpdateValue.recipient.address2 +
-                                    UpdateValue.recipient.address3 +
+                                    ' ' +
                                     UpdateValue.recipient.state +
+                                    ' ' +
                                     UpdateValue.recipient.zipcode +
+                                    ' ' +
                                     UpdateValue.recipient.country || ''
                             }
                             disabled
