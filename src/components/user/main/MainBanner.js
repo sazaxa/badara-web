@@ -7,7 +7,7 @@ const MainBanner = () => {
         <MainBannerWrap>
             <p>
                 복잡한 해외배송 <br />
-                goraetago 와 함께 <br />
+                Badara 와 함께 <br />
                 쉽고 간편하게 이용해 보세요
             </p>
             <div className="BannerBtn">
