@@ -45,7 +45,7 @@ const Recipient = ({ stepIndex, steps }) => {
                 setRecipinet({
                     ...recipient,
                     country: value,
-                    countryCode: '직접입력',
+                    countryCode: '',
                     isCountryCode: false,
                 });
             } else {
@@ -68,7 +68,7 @@ const Recipient = ({ stepIndex, steps }) => {
     };
     const handleClick = e => {
         e.preventDefault();
-        if (recipient.countryCode === '직접입력') {
+        if (recipient.countryCode === '') {
             alert('나라 코드를 입력해주세요.');
         } else {
             dispatch(recipientInsertAction({ recipient: recipient }));
@@ -121,6 +121,7 @@ const Recipient = ({ stepIndex, steps }) => {
                                 <input
                                     type="text"
                                     name="email"
+                                    placeholder="수취인 이메일를 입력해주세요."
                                     value={recipient.email ?? undefined}
                                     onChange={e => handleChange(e)}
                                     required
