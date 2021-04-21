@@ -2,6 +2,7 @@
 import { CalculatorComponent } from 'components';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { loginPopupAction } from 'store/auth';
 import { clearPredictionpriceAction, predictionpriceAction } from 'store/part';
 
 const CalculatorContainer = () => {
@@ -102,6 +103,10 @@ const CalculatorContainer = () => {
             selected: '',
         });
     };
+
+    const handleLoginPopup = boolen => {
+        dispatch(loginPopupAction(boolen));
+    };
     return (
         <CalculatorComponent
             OnClickWeight={onClickWeight}
@@ -112,6 +117,7 @@ const CalculatorContainer = () => {
             CountryLists={getCountry}
             OnReset={onReset}
             PriseOpen={priceOpen}
+            handleLoginPopup={handleLoginPopup}
         />
     );
 };

@@ -13,6 +13,7 @@ const CalculatorComponent = ({
     CountryLists,
     OnReset,
     PriseOpen,
+    handleLoginPopup,
 }) => {
     return (
         <CalculatorWrap>
@@ -136,22 +137,18 @@ const CalculatorComponent = ({
                             />
                             <span>({Material.selected === 'volume' ? '부피 무게' : '실 무게'})</span>
                             <button type="button" className="resetBtn" onClick={OnReset}>
-                                리셋
+                                다시 계산
                             </button>
                         </div>
                     </div>
                     <article className="btnWrap">
                         <button type="button" className="applybtn">
-                            <Link to="/apply">
-                                <CreateIcon />
-                                배송대행신청
+                            <Link to="/register" style={{ display: 'block', width: '100%' }}>
+                                회원가입
                             </Link>
                         </button>
-                        <button type="button" className="mypagebtn">
-                            <Link to="/mypage">
-                                <SearchIcon />
-                                접수내역보기
-                            </Link>
+                        <button type="button" className="mypagebtn" onClick={() => handleLoginPopup(true)}>
+                            로그인
                         </button>
                     </article>
                 </article>

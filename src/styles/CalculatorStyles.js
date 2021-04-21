@@ -390,19 +390,21 @@ export const CalculatorWrap = styled.article`
         margin-left: 3%;
         border-radius: 5px;
         @media screen and (max-width: 1140px) {
-            width: 7vw !important;
+            width: 30% !important;
             height: 3vw !important;
         }
         @media screen and (max-width: 800px) {
+            width: 28% !important;
             height: 4vw !important;
             font-size: 2.5vw;
         }
         @media screen and (max-width: 600px) {
-            font-size: 2.6vw !important;
+            font-size: 2.3vw !important;
             height: 7vw;
         }
         @media screen and (max-width: 500px) {
-            font-size: 3vw !important;
+            width: 25% !important;
+            font-size: 2.5vw !important;
             height: 7vw !important;
         }
     }
