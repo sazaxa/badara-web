@@ -48,16 +48,7 @@ const MyorderCancelList = ({ status, memberOrder, handleTabToggle }) => {
                 <article className="memberOrders">
                     {memberOrder.length === 0 ? (
                         <article className="order">
-                            <p
-                                style={{
-                                    textAlign: 'center',
-                                    fontSize: 40,
-                                    padding: '50px 0',
-                                    letterSpacing: '-1.5px',
-                                }}
-                            >
-                                주문 내역이 없습니다.
-                            </p>
+                            <p className="orderNone">주문 내역이 없습니다.</p>
                         </article>
                     ) : (
                         memberOrder.map(order => (

@@ -480,6 +480,15 @@ export const MypageContent = styled.article`
         color: #fff;
         cursor: pointer;
     }
+    .orderNone {
+        text-align: center;
+        font-size: 40px;
+        padding: 50px 0;
+        letter-spacing: -1.5px;
+        @media screen and (max-width: 1140px) {
+            font-size: 24px;
+        }
+    }
 `;
 
 export const UpdateInvoiceWrap = styled.article`
