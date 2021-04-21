@@ -46,7 +46,7 @@ const HeaderComponent = ({
                                 <Link to="/cost">비용안내</Link>
                             </li>
                             <li>
-                                <Link to="/apply">배송대행</Link>
+                                <Link to="/apply">신청하기</Link>
                             </li>
                             <li>
                                 <Link to="/support">고객센터</Link>
