@@ -24,7 +24,7 @@ const Product = ({ stepIndex, steps, product, handlePrev, handleClick, index, Pr
     return (
         <ProductWrap key={index}>
             <article className="titleBox">
-                <h2>상품정보 {index + 1}</h2>
+                <h2>{index + 1}번째 상품정보</h2>
                 {index !== 0 ? (
                     <Button variant="contained" color="secondary" onClick={() => ProductRemove()}>
                         삭제
@@ -34,13 +34,14 @@ const Product = ({ stepIndex, steps, product, handlePrev, handleClick, index, Pr
             <table>
                 <tbody>
                     <tr>
-                        <th>상품명</th>
+                        <th>상품명(영문)</th>
                         <td>
                             <input
                                 type="text"
                                 name="productDetail"
                                 value={updateProductData.productDetail ?? undefined}
                                 onChange={e => handleChange(e)}
+                                placeholder="영문으로 입력해주세요."
                                 required
                             />
                         </td>
@@ -53,6 +54,7 @@ const Product = ({ stepIndex, steps, product, handlePrev, handleClick, index, Pr
                                 name="quantity"
                                 value={updateProductData.quantity ?? undefined}
                                 onChange={e => handleChange(e)}
+                                placeholder="해당 상품의 대한 갯수를 입력해주세요."
                                 required
                             />
                         </td>
@@ -64,20 +66,27 @@ const Product = ({ stepIndex, steps, product, handlePrev, handleClick, index, Pr
                                 type="number"
                                 name="price"
                                 value={updateProductData.price ?? undefined}
+                                placeholder="해당 상품의 대한 가격를 입력해주세요."
                                 onChange={e => handleChange(e)}
                                 required
                             />
                         </td>
                     </tr>
                     <tr>
-                        <th>개당 실 무게(단위:kg)</th>
+                        <th>개당 총 가격(단위:원)</th>
                         <td>
                             <input
                                 type="text"
-                                name="weight"
-                                value={updateProductData.weight ?? undefined}
+                                name="totalPrise"
+                                value={
+                                    updateProductData.quantity && updateProductData.price
+                                        ? (updateProductData.quantity * updateProductData.price).toLocaleString() + '원'
+                                        : ''
+                                }
+                                placeholder="개수와 금액을 입력하시면 자동으로 입력됩니다."
                                 onChange={e => handleChange(e)}
                                 required
+                                disabled
                             />
                         </td>
                     </tr>
