@@ -1180,7 +1180,7 @@ export const countryList = [
         code: 'GB',
     },
     {
-        name: 'United States',
+        name: 'USA',
         dial_code: '+1',
         code: 'US',
     },
