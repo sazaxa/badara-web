@@ -102,6 +102,7 @@ export const MainWrap = styled.article`
     & > article:last-child {
         width: 100%;
         display: flex;
+        flex-wrap: wrap;
     }
     & > article > button {
         display: flex;
@@ -138,6 +139,8 @@ export const TarkingWrap = styled.article`
     }
     .title_wrap {
         display: flex;
+        flex-wrap: wrap;
+        width: 100%;
         justify-content: left;
         margin-bottom: 20px;
         @media screen and (max-width: 1140px) {
@@ -145,6 +148,7 @@ export const TarkingWrap = styled.article`
             margin-bottom: 3vw;
         }
         h2 {
+            width: 100%;
             font-size: 32px;
             letter-spacing: -1.5px;
             @media screen and (max-width: 1140px) {

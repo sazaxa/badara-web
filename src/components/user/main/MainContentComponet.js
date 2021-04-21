@@ -10,8 +10,8 @@ const MainContentComponent = () => {
         <Responsive>
             <MainWrap>
                 <MainBanner />
-                <Tracking />
                 <CalculatorContainer />
+                <Tracking />
             </MainWrap>
         </Responsive>
     );

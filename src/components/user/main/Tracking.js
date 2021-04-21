@@ -16,13 +16,13 @@ const Tracking = () => {
     };
     return (
         <TarkingWrap>
-            <article className="title_wrap">
+            <article className="title_wrap" style={{}}>
                 <h2>DHL 배송조회</h2>
             </article>
             <article className="trackingBox">
                 <p>배송조회</p>
                 <article className="inputBox">
-                    <input type="text" placeholder="운송장 번호" onChange={e => handleChange(e)} />
+                    <input type="text" placeholder="해외 운송장번호 조회" onChange={e => handleChange(e)} />
                     <button type="button" onClick={handleClick}>
                         조회
                     </button>
