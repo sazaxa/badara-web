@@ -153,6 +153,7 @@ export const TarkingWrap = styled.article`
             letter-spacing: -1.5px;
             @media screen and (max-width: 1140px) {
                 font-size: 3vw;
+                text-align: center;
             }
             @media screen and (max-width: 800px) {
                 font-size: 3.5vw;
