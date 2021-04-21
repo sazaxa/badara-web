@@ -143,7 +143,10 @@ const CalculatorComponent = ({
                     </div>
                     <article className="btnWrap">
                         <button type="button" className="applybtn">
-                            <Link to="/register" style={{ display: 'block', width: '100%' }}>
+                            <Link
+                                to="/register"
+                                style={{ display: 'flex', width: '100%', height: '100%', justifyContent: 'center' }}
+                            >
                                 회원가입
                             </Link>
                         </button>
