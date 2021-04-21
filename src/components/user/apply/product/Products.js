@@ -69,7 +69,7 @@ const Products = ({ stepIndex, steps }) => {
                     />
                 ))}
                 <Button variant="outlined" color="primary" type="button" onClick={ProductAdd}>
-                    추가
+                    다른 상품 추가하기
                 </Button>
                 <article
                     style={{
