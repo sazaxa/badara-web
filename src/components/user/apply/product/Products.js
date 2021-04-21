@@ -33,8 +33,7 @@ const Products = ({ stepIndex, steps }) => {
         for (let i = 0; i < applyProduct.length; i++) {
             const quantity = Number(applyProduct[i].quantity);
             const price = Number(applyProduct[i].price);
-            const weight = Number(applyProduct[i].weight);
-            if (quantity > 0 && price > 0 && weight > 0) {
+            if (quantity > 0 && price > 0) {
                 if (Number.isInteger(quantity) && Number.isInteger(price)) {
                     dispatch(acitiveStepChange(activeStep + 1));
                 } else {
