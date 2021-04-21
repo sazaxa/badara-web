@@ -4,10 +4,11 @@ import { createRequestActionTypes } from 'lib/createRequestActionTypes';
 import * as authAPI from '../lib/api/auth';
 import produce from 'immer';
 
-export const [LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE] = createRequestActionTypes('auth/LOGIN');
-export const [ADMIN_LOGIN, ADMIN_LOGIN_SUCCESS, ADMIN_LOGIN_FAILURE] = createRequestActionTypes('auth/ADMIN_LOGIN');
-export const [REGISTER_REQUEST, REGISTER_SUCCESS, REIGSTER_FAILURE] = createRequestActionTypes('auth/REGISER');
-export const CLEAR_STORE = 'auth/CLEAR_STORE';
+const [LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE] = createRequestActionTypes('auth/LOGIN');
+const LOGIN_POPUP = 'auth/LOGIN_POPUP';
+const [ADMIN_LOGIN, ADMIN_LOGIN_SUCCESS, ADMIN_LOGIN_FAILURE] = createRequestActionTypes('auth/ADMIN_LOGIN');
+const [REGISTER_REQUEST, REGISTER_SUCCESS, REIGSTER_FAILURE] = createRequestActionTypes('auth/REGISER');
+const CLEAR_STORE = 'auth/CLEAR_STORE';
 
 export const loginAction = createAction(LOGIN_REQUEST, ({ email, password }) => ({
     email,
@@ -21,6 +22,7 @@ export const adminLoginAction = createAction(ADMIN_LOGIN, ({ email, password }) 
 
 export const registerAction = createAction(REGISTER_REQUEST, data => data);
 export const clearStoreAction = createAction(CLEAR_STORE);
+export const loginPopupAction = createAction(LOGIN_POPUP, boolean => boolean);
 
 function* loginSaga({ payload: { email, password } }) {
     try {
@@ -77,6 +79,7 @@ const initialState = {
         role: null,
         auth: null,
     },
+    popup: false,
 };
 
 export default handleActions(
@@ -132,6 +135,11 @@ export default handleActions(
             return produce(state, draft => {
                 draft.login.status = 'fail';
                 draft.login.auth = payload;
+            });
+        },
+        [LOGIN_POPUP]: (state, { payload }) => {
+            return produce(state, draft => {
+                draft.popup = payload;
             });
         },
     },
