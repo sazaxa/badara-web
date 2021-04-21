@@ -35,7 +35,7 @@ const Confirm = ({ stepIndex, steps, history }) => {
     useEffect(() => {
         if (status === 'success') {
             alert('접수가 완료 되었습니다.');
-            history.push('/');
+            history.push('/mypage');
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [status]);
