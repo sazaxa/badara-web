@@ -143,13 +143,17 @@ const Confirm = ({ stepIndex, steps, history }) => {
                                         <th>상품정보</th>
                                         <th>개수</th>
                                         <th>가격</th>
-                                        <th>실 무게</th>
+                                        <th>총가격</th>
                                     </tr>
                                     <tr>
                                         <td>{product.productDetail}</td>
                                         <td>{product.quantity}개</td>
                                         <td>{Number(product.price).toLocaleString()}원</td>
-                                        <td>{product.weight ? product.weight + 'kg' : null}</td>
+                                        <td>
+                                            {product.quantity && product.price
+                                                ? (product.quantity * product.price).toLocaleString() + '원'
+                                                : null}
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
