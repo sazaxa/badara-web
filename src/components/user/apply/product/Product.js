@@ -73,7 +73,7 @@ const Product = ({ stepIndex, steps, product, handlePrev, handleClick, index, Pr
                         </td>
                     </tr>
                     <tr>
-                        <th>개당 총 가격(단위:원)</th>
+                        <th>총 가격(단위:원)</th>
                         <td>
                             <input
                                 type="text"
