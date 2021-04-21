@@ -138,7 +138,7 @@ const Boxes = ({ stepIndex, steps }) => {
                     />
                 ))}
                 <Button variant="outlined" color="primary" onClick={BoxAdd}>
-                    추가
+                    다른 박스 추가하기
                 </Button>
                 <article
                     style={{
