@@ -361,10 +361,18 @@ export const MoblieMenuBlock = styled.div`
     bottom: 0;
     left: 0;
     z-index: 999;
+    &.hamburger {
+        width: 80px;
+    }
     & > .hamburger {
+        width: 80px;
+        display: flex;
         justify-content: flex-start;
         padding: 0 2vw;
         display: none;
+        .toggle {
+            width: 80%;
+        }
     }
     & > .hamburger.active {
         display: flex;

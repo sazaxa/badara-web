@@ -87,7 +87,7 @@ const HeaderComponent = ({
                     )}
                 </HeaderContent>
             </HeaderWrap>
-            <MoblieMenuBlock>
+            <MoblieMenuBlock className={!ToggleState ? 'hamburger' : null}>
                 <div className={ToggleState ? 'hamburger' : 'hamburger active'}>
                     <div className="toggle" onClick={() => HandletoggleMoblieMenu()}>
                         <img src={hamburger} alt="toggleBtn" />
