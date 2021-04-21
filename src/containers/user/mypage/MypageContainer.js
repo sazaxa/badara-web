@@ -8,6 +8,7 @@ import { MyorderCancelList } from 'components/index';
 import { withRouter } from 'react-router';
 import queryStirng from 'query-string';
 import axios from '../../../../node_modules/axios/index';
+import { loginPopupAction } from 'store/auth';
 
 const MypageContainer = ({ location, history }) => {
     const dispatch = useDispatch();
@@ -237,7 +238,9 @@ const MypageContainer = ({ location, history }) => {
             }
         } else {
             alert('로그인이 필요합니다.');
-            window.location.href = '/';
+            // window.location.href = '/';
+            history.push('/');
+            dispatch(loginPopupAction(true));
         }
     }, [accessToken, logged]);
     if (!logged && !accessToken) return null;

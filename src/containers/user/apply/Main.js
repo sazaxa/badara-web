@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { withRouter } from 'react-router';
 import { applyClearAction } from 'store/apply';
+import { loginPopupAction } from 'store/auth';
 import { getMemberOrderAction } from 'store/member';
 import { resetStep } from 'store/part';
 import { Responsive } from 'styles/CommonStyles';
 import ApplyMain from '../../../components/user/apply/Main';
 
-const Main = () => {
+const Main = ({ history }) => {
     const { activeStep, logged } = useSelector(
         state => ({
             activeStep: state.part.activeStep,
@@ -31,7 +33,9 @@ const Main = () => {
             }
         } else {
             alert('로그인이 필요합니다.');
-            window.location.href = '/';
+            // window.location.href = '/';
+            history.push('/');
+            dispatch(loginPopupAction(true));
         }
     }, [accessToken, logged]);
     if (!logged && !accessToken) return null;
@@ -43,4 +47,4 @@ const Main = () => {
     );
 };
 
-export default Main;
+export default withRouter(Main);
