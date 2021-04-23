@@ -42,7 +42,10 @@ const Box = ({ box, index, Remove }) => {
     return (
         <BoxWrap>
             <article className="titleBox">
-                <h2>{index + 1}번째 박스정보</h2>
+                <h2>{index + 1}번 박스정보</h2>
+                <p>
+                    센터에 보내시는 <strong>박스의 수량만큼</strong> 박스를 추가해주세요.
+                </p>
                 {index !== 0 ? (
                     <Button variant="contained" color="secondary" onClick={() => Remove(index)}>
                         삭제
@@ -90,6 +93,7 @@ const Box = ({ box, index, Remove }) => {
                             >
                                 계산
                             </Button>
+                            <p>(부피무게는 가로x세로x높이/5000 으로 계산됩니다.)</p>
                         </td>
                     </tr>
                     <tr>
@@ -114,11 +118,12 @@ const Box = ({ box, index, Remove }) => {
                         <th>실 무게(단위:kg)</th>
                         <td className="weight">
                             <input
-                                type="text"
+                                type="number"
                                 name="expectedNetWeight"
                                 value={updateBoxData.expectedNetWeight ?? undefined}
                                 onChange={e => handleChange(e)}
-                                placeholder="박스의 무게를 입력해주세요."
+                                placeholder="박스의 무게를 숫자만 입력해주세요."
+                                step="0.01"
                                 required
                             />
                             <span style={{ marginLeft: '10px' }}>kg</span>
