@@ -196,7 +196,7 @@ const MypageContainer = ({ location, history }) => {
             url: `https://api.tosspayments.com/v1/payments/${queryObj.paymentKey}`,
             method: 'post',
             headers: {
-                Authorization: `Basic ${process.env.REACT_APP_PAYMENT_SECRET_KEY}`,
+                Authorization: `Basic ${process.env.REACT_APP_PATMENT_AUTHORIZATION}`,
             },
             data: {
                 orderId: queryObj.orderId,

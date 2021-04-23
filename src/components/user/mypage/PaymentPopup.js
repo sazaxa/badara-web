@@ -67,6 +67,19 @@ const PaymentPopup = ({ handlePopup, updatePopup }) => {
         //     failUrl: window.location.origin + '/mypage',
         // });
     };
+    // TODO:토스페이먼츠 가상계좌 연동!
+    const handleBankTransfer = async () => {
+        const clientKey = 'test_ck_lpP2YxJ4K87PxeNb69p3RGZwXLOb';
+        const tossPayments = await loadTossPayments(clientKey);
+        tossPayments.requestPayment('가상계좌', {
+            amount: getOrder.orderPrice,
+            orderId: getOrder.orderNumber,
+            orderName: '해외배송서비스',
+            customerName: getOrder.recipient.member.name,
+            successUrl: window.location.origin + '/mypage',
+            failUrl: window.location.origin + '/mypage',
+        });
+    };
 
     const handlePaymentAgree = e => {
         e.preventDefault();
@@ -89,7 +102,7 @@ const PaymentPopup = ({ handlePopup, updatePopup }) => {
 
     const handleToss = async () => {
         // alert('준비중입니다.');
-        const clientKey = 'test_ck_lpP2YxJ4K87PxeNb69p3RGZwXLOb';
+        const clientKey = `${process.env.REACT_APP_PAYMENT_CLIENT_KEY}`;
         const tossPayments = await loadTossPayments(clientKey);
         tossPayments.requestPayment('카드', {
             amount: getOrder.orderPrice,
@@ -235,18 +248,18 @@ const PaymentPopup = ({ handlePopup, updatePopup }) => {
                         variant="contained"
                         className="paymentBtn"
                         startIcon={<PaymentIcon />}
-                        onClick={() => handleDeposit()}
+                        onClick={() => handleToss()}
                     >
                         카드결제
                     </Button>
-                    <Button
+                    {/* <Button
                         variant="contained"
                         className="paymentBtn"
                         startIcon={<AccountBalanceIcon />}
-                        onClick={() => handleDeposit()}
+                        onClick={() => handleBankTransfer()}
                     >
                         계좌이체
-                    </Button>
+                    </Button> */}
                     <Button
                         variant="contained"
                         className="paymentBtn"

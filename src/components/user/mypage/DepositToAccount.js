@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getMemberInfoAction } from 'store/member';
 import { orderStatusChangeAction } from 'store/order';
 // import { productPaymentAction } from 'store/box';
-import { UpdateInvoiceWrap } from 'styles/MypageStyles';
+import { Fullscreen, PaymentWrap } from 'styles/MypageStyles';
 
 const DepositToAccount = ({ handlePopup, popup, paymentPopup }) => {
     const dispatch = useDispatch();
@@ -59,32 +59,43 @@ const DepositToAccount = ({ handlePopup, popup, paymentPopup }) => {
     if (!popup) return null;
     if (!Deposit)
         return (
-            <UpdateInvoiceWrap>
-                <h2>무통장 입금</h2>
+            <PaymentWrap>
+                <div
+                    className="header"
+                    style={{ marginBottom: '10px', padding: '20px 0', borderBottom: '1px solid #ccc' }}
+                >
+                    <strong style={{ fontSize: '22px' }}>무통장 입금</strong>
+                </div>
 
-                <input type="text" placeholder="입금주를 입력해주세요." onChange={e => handleChange(e)} />
-                <button type="button" onClick={() => handlePopup()}>
+                <div style={{ padding: '60px 0' }}>
+                    <input type="text" placeholder="입금주를 입력해주세요." onChange={e => handleChange(e)} />
+                </div>
+                <button type="button" className="cancel" onClick={() => handlePopup()}>
                     뒤로가기
                 </button>
-                <button type="button" onClick={() => handlePayment()}>
+                <button type="button" className="next" onClick={() => handlePayment()}>
                     확인
                 </button>
-            </UpdateInvoiceWrap>
+            </PaymentWrap>
         );
     return (
-        <UpdateInvoiceWrap>
-            <h2>무통장 입금 확인</h2>
+        <PaymentWrap>
+            <div className="header" style={{ marginBottom: '10px', padding: '20px 0', borderBottom: '1px solid #ccc' }}>
+                <strong style={{ fontSize: '22px' }}>무통장 입금 확인</strong>
+            </div>
 
-            <p>
-                계좌번호: 061701-04-240916 <br />
-                입금주: 주식회사 후스구스
-            </p>
-            <p>(메모후 닫기 버튼을 눌러주세요)</p>
+            <div style={{ padding: '50px 0' }}>
+                <p>
+                    계좌번호: 061701-04-240916 <br />
+                    입금주: 주식회사 후스구스
+                </p>
+                <p>(메모후 닫기 버튼을 눌러주세요)</p>
+            </div>
             {/* <button type="button">확인</button> */}
-            <button type="button" onClick={() => handleClose()}>
+            <button type="button" className="next" onClick={() => handleClose()} style={{ width: '100%' }}>
                 닫기
             </button>
-        </UpdateInvoiceWrap>
+        </PaymentWrap>
     );
 };
 

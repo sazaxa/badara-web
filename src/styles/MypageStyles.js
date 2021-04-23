@@ -504,7 +504,7 @@ export const Fullscreen = styled.section`
 `;
 
 export const UpdateInvoiceWrap = styled.article`
-    width: 600px;
+    width: 800px;
     background: #fff;
     position: fixed;
     top: 50%;
