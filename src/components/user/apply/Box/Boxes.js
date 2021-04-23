@@ -10,29 +10,18 @@ import WaringModal from './WarningModal';
 
 const Boxes = ({ stepIndex, steps }) => {
     const dispatch = useDispatch();
-    const { activeStep, boxes, products } = useSelector(
+    const { activeStep, boxes } = useSelector(
         state => ({
             activeStep: state.part.activeStep,
             boxes: state.apply.apply.boxes,
-            products: state.apply.apply.products,
         }),
         shallowEqual
     );
 
     const [AskPopop, setAskPopup] = useState(false);
     const [warningPopop, setWarningPopup] = useState(false);
-    const [productsWeight, setProductWeight] = useState(0);
     const [boxesWeight, setBoxesWeight] = useState(0);
     const [InvoicePopup, setInvoicePopup] = useState(false);
-
-    // products에 총 무게를 구한다.
-    useEffect(() => {
-        let productsSum = 0;
-        for (let i = 0; i < products.length; i++) {
-            productsSum += Number(products[i].weight) * Number(products[i].quantity);
-        }
-        setProductWeight(productsSum);
-    }, [products]);
 
     // boxes에 총 무게를 구한다.
     useEffect(() => {
@@ -61,20 +50,19 @@ const Boxes = ({ stepIndex, steps }) => {
 
     const handlePrev = () => {
         dispatch(acitiveStepChange(activeStep - 1));
-        setProductWeight(0);
         setBoxesWeight(0);
     };
 
     const handleWaringOpen = e => {
         e.preventDefault();
         const boxWeight = Number(boxesWeight);
-        const porductWeight = Number(productsWeight);
         //TODO: 박스 무게와 물품 무게 비교하여 박스무게가 커야지만 다음단계로 이동하는 로직 구현해야함
-        if (productsWeight <= boxesWeight) {
+        //FIXME: 물품 무게 삭제로, 0이상인지만 판단 2021-04-23
+        if (boxWeight > 0) {
             // setAskPopup(true);
             handleWarningModal();
         } else {
-            alert('입력하신 물품무게보다 박스무게가 작을 수 없습니다. \n 다시 입력해주세요.');
+            alert('박스무게가 0보다 작을수 없습니다. \n 다시 입력해주세요.');
         }
     };
     const handleAskClose = e => {
