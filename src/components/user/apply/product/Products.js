@@ -19,7 +19,6 @@ const Products = ({ stepIndex, steps }) => {
         productDetail: null,
         quantity: null,
         price: null,
-        weight: null,
     };
 
     const handlePrev = () => {

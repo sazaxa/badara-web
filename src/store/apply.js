@@ -88,7 +88,6 @@ export const initialState = {
                 productDetail: null,
                 quantity: null,
                 price: null,
-                weight: null,
             },
         ],
         boxes: [
