@@ -490,10 +490,21 @@ export const MypageContent = styled.article`
         }
     }
 `;
+export const Fullscreen = styled.section`
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
 
 export const UpdateInvoiceWrap = styled.article`
-    width: 500px;
-    height: 300px;
+    width: 600px;
     background: #fff;
     position: fixed;
     top: 50%;
@@ -502,9 +513,18 @@ export const UpdateInvoiceWrap = styled.article`
     border: 1px solid #ccc;
     border-radius: 5px;
     text-align: center;
-    padding: 50px;
+    // padding: 50px;
     box-sizing: border-box;
     z-index: 999;
+    .body {
+        padding: 15px 10px;
+        p {
+            font-size: 18px;
+            margin-bottom: 10px;
+            letter-spacing: -1.5px;
+            font-weight: 600;
+        }
+    }
     p {
         line-height: 1.5;
     }
@@ -525,15 +545,23 @@ export const UpdateInvoiceWrap = styled.article`
         margin-bottom: 10px;
     }
     button {
-        width: 80px;
-        height: 40px;
-        border: none;
-        background: #0049ff;
-        border-radius: 15px;
-        color: #fff;
-        margin: 20px 10px;
-        outline: none;
+        padding: 10px;
+        height: 50px;
+        border-radius: 3px 0 0 0;
+        letter-spacing: -1px;
         cursor: pointer;
+        outline: none;
+        border: none;
+        color: #fff;
+        font-size: 16px;
+        & + button {
+            border: 1px solid #0049ff;
+            border-left: 0;
+            border-bottom: 0;
+            border-right: 0;
+            background: #fff;
+            color: #0049ff;
+        }
     }
     .paymentBtnWrap {
         display: flex;
