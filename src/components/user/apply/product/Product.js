@@ -24,7 +24,11 @@ const Product = ({ stepIndex, steps, product, handlePrev, handleClick, index, Pr
     return (
         <ProductWrap key={index}>
             <article className="titleBox">
-                <h2>{index + 1}번째 상품정보</h2>
+                <h2>{index + 1}번 상품정보</h2>
+                <p>
+                    {' '}
+                    보내시는 상품의 정보를 <strong>'각각'</strong> 입력해주세요.
+                </p>
                 {index !== 0 ? (
                     <Button variant="contained" color="secondary" onClick={() => ProductRemove()}>
                         삭제

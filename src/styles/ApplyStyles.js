@@ -463,16 +463,25 @@ export const ProductWrap = styled.article`
         width: 100%;
         border-bottom: 4px solid #0080ff;
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
-        justify-content: center;
+        justify-content: left;
         padding-bottom: 15px;
         box-sizing: border-box;
+        position: relative;
+        @media screen and (max-width: 1140px) {
+            justify-content: center;
+        }
         & > h2 {
+            width: 15%;
             letter-spacing: -2.5px;
             font-size: 32px;
             margin-right: 10px;
             @media screen and (max-width: 1140px) {
+                width: 100%;
+                text-align: center;
                 font-size: 3vw;
+                margin-bottom: 5px;
             }
             @media screen and (max-width: 800px) {
                 font-size: 3.5vw;
@@ -484,7 +493,24 @@ export const ProductWrap = styled.article`
                 font-size: 7vw;
             }
         }
+        & > p {
+            width: 75%;
+            text-align: center;
+            letter-spacing: -1.5px;
+            font-size: 18px;
+            & > strong {
+                font-size: 22px;
+                color: red;
+            }
+            @media screen and (max-width: 1140px) {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 5px;
+                font-size: 16px;
+            }
+        }
         & > button {
+            width: 6%;
             height: 40px;
         }
     }
