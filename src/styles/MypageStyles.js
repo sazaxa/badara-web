@@ -516,6 +516,7 @@ export const UpdateInvoiceWrap = styled.article`
     // padding: 50px;
     box-sizing: border-box;
     z-index: 999;
+    overflow: hidden;
     .body {
         padding: 15px 10px;
         p {
@@ -566,15 +567,22 @@ export const UpdateInvoiceWrap = styled.article`
     .paymentBtnWrap {
         display: flex;
         justify-content: center;
+        flex-wrap: wrap;
+        padding: 20px;
     }
     .paymentBtn {
-        width: 130px;
+        width: 100%;
         height: 50px;
-        &:first-child {
-            border: 2px solid #0049ff;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        background: #fff;
+        color: #333;
+        font-weight: 400;
+        box-shadow: none;
+        font-size: 18px;
+        letter-spacing: -1.5px;
+        &:hover {
             background: #fff;
-            box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%),
-                0px 1px 5px 0px rgb(0 0 0 / 12%);
         }
         img {
             width: 75%;
@@ -588,12 +596,35 @@ export const UpdateInvoiceWrap = styled.article`
 
 export const PaymentWrap = styled(UpdateInvoiceWrap)`
     width: 800px;
-    height: 550px;
-    padding: 20px;
+    // height: 550px;
+    // padding: 20px;
     @media screen and (max-width: 1140px) {
         width: 95%;
     }
     .header {
         margin-bottom: 30px;
+    }
+    button {
+        width: 50%;
+    }
+    .allCheckedWrap {
+        // border-bottom: 1px solid #ccc;
+        padding: 10px 0;
+    }
+    .body {
+        padding: 0;
+    }
+    .wrap {
+        padding: 10px;
+        border: 1px solid #ccc;
+    }
+    .next {
+        background: #0049ff;
+        color: #fff;
+    }
+    .cancel {
+        background: #fff;
+        color: #0049ff;
+        border-top: 1px solid #0049ff;
     }
 `;
