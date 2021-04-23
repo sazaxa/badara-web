@@ -30,9 +30,9 @@ const WaringModal = ({ visible, close, Ask }) => {
                     <div className="wrap">
                         <div
                             className="header"
-                            style={{ marginBottom: '15px', borderBottom: '1px solid #ccc', padding: '10px' }}
+                            style={{ marginBottom: '15px', borderBottom: '1px solid #ccc', padding: '13px' }}
                         >
-                            <strong style={{ fontSize: '24px', letterSpacing: '-2px' }}>확인 해주세요!</strong>
+                            <strong style={{ fontSize: '20px', letterSpacing: '-1.5px' }}>확인 해주세요!</strong>
                         </div>
                         <div className="body" style={{ padding: '20px' }}>
                             <div className="price" style={{ marginBottom: '15px' }}>
@@ -44,18 +44,18 @@ const WaringModal = ({ visible, close, Ask }) => {
                                             fontWeight: '600',
                                             marginBottom: '10px',
                                             display: 'inline-block',
-                                            fontSize: '19px',
+                                            fontSize: '16px',
                                         }}
                                     >
                                         <strong style={{ color: 'red', marginRight: '5px' }}>(필수)</strong>
                                         가격 책정 안내
                                     </span>
-                                    <p style={{ letterSpacing: '-1px' }}>
-                                        <strong style={{ color: 'red', fontSize: '18px', margin: '0px 5px' }}>
+                                    <p style={{ letterSpacing: '-1px', fontSize: '14px' }}>
+                                        <strong style={{ color: 'red', fontSize: '16px', margin: '0px 5px' }}>
                                             실무게
                                         </strong>
                                         와{' '}
-                                        <strong style={{ color: 'red', fontSize: '18px', margin: '0px 5px' }}>
+                                        <strong style={{ color: 'red', fontSize: '16px', margin: '0px 5px' }}>
                                             부피무게
                                         </strong>{' '}
                                         중 더 큰 값으로 배송비가 측정되며, 센터 입고 후 치수와 무게가 재측정되어 요금이
@@ -72,20 +72,20 @@ const WaringModal = ({ visible, close, Ask }) => {
                                             fontWeight: '600',
                                             marginBottom: '10px',
                                             display: 'inline-block',
-                                            fontSize: '19px',
+                                            fontSize: '16px',
                                         }}
                                     >
                                         <strong style={{ color: 'red', marginRight: '5px' }}>(필수)</strong>
                                         박스 입력 확인
                                     </span>
-                                    <p style={{ letterSpacing: '-1px' }}>
+                                    <p style={{ letterSpacing: '-1px', fontSize: '14px' }}>
                                         보내시는 박스가
-                                        <strong style={{ color: 'red', fontSize: '18px', margin: '0px 5px' }}>
+                                        <strong style={{ color: 'red', fontSize: '17px', margin: '0px 5px' }}>
                                             {' '}
                                             세 개
                                         </strong>
                                         라면, 송장번호도{' '}
-                                        <strong style={{ color: 'red', fontSize: '18px', margin: '0px 5px' }}>
+                                        <strong style={{ color: 'red', fontSize: '16px', margin: '0px 5px' }}>
                                             세 개
                                         </strong>
                                         가 맞는지 확인해주세요.

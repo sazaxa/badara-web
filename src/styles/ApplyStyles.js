@@ -255,7 +255,7 @@ export const AskModalBlock = styled.article`
     }
 `;
 export const CofirmModalBlock = styled.article`
-    width: 450px;
+    width: 600px;
     background: #fff;
     // padding: 1.5rem;
     border-radius: 4px;
@@ -292,7 +292,7 @@ export const CofirmModalBlock = styled.article`
             // outline: none;
             // border: none;
             // color: #000;
-            border-radius: 3px;
+            border-radius: 3px 0 0 0;
             letter-spacing: -1px;
             cursor: pointer;
         }
@@ -306,17 +306,30 @@ export const CofirmModalBlock = styled.article`
         //     }
         }
         button:nth-child(2) {
-            margin: 0 0.5rem;
+            // margin: 0 0.5rem;
+            border-radius: 0 3px 0 0;
+            border:1px solid #0080ff;
+            border-right:0;
+            border-bottom:0;
+            color:#0080ff;
         }
     }
     .shippingWrap {
-        padding: 15px;
+        padding:0 20px 20px 20px;
         box-sizing: border-box;
         height: 100px;
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:space-between;
+        h4 {
+            width:100%;
+            font-size:18px;
+            letter-spacing:-1.3px;
+        }
         & > input,
         & > select {
             float: left;
-            width: 50%;
+            width: 48%;
             height: 30px;
             border: none;
             outline: none;

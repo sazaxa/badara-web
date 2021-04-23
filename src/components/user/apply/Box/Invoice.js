@@ -20,7 +20,7 @@ const Invoise = ({ index, box }) => {
     }, [boxData]);
     return (
         <article className="shippingWrap">
-            <h4>{index + 1}번째 박스</h4>
+            <h4>{index + 1}번 박스</h4>
             <input
                 type="number"
                 name="koreanInvoice"
