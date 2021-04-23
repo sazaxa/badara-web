@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { acitiveStepChange } from 'store/part';
+import { acitiveStepChange, getCountryCodeAction } from 'store/part';
 import Button from '@material-ui/core/Button';
 import { recipientInsertAction } from 'store/apply';
 import { RecipientWrap } from 'styles/ApplyStyles';
-import { countryList } from 'components/common/CountryList';
 
 const Recipient = ({ stepIndex, steps }) => {
     const dispatch = useDispatch();
-    const { activeStep, country, recipient: updateRecipient } = useSelector(
+    const { activeStep, country, recipient: updateRecipient, code: countryList } = useSelector(
         state => ({
             activeStep: state.part.activeStep,
             country: state.part.country,
             recipient: state.apply.apply.recipient,
+            code: state.part.country.code,
         }),
         shallowEqual
     );
@@ -36,11 +36,15 @@ const Recipient = ({ stepIndex, steps }) => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+    useEffect(() => {
+        dispatch(getCountryCodeAction());
+    }, []);
 
     const handleChange = e => {
         const { name, value } = e.target;
         if (name === 'country') {
             const found = countryList.find(country => country.name === value);
+            console.log(found);
             if (!found) {
                 setRecipinet({
                     ...recipient,
@@ -52,7 +56,7 @@ const Recipient = ({ stepIndex, steps }) => {
                 setRecipinet({
                     ...recipient,
                     country: value,
-                    countryCode: found.dial_code,
+                    countryCode: found.number,
                     isCountryCode: true,
                 });
             }
@@ -212,7 +216,7 @@ const Recipient = ({ stepIndex, steps }) => {
                                     type="text"
                                     placeholder="국가번호"
                                     name="countryCode"
-                                    value={recipient.countryCode ?? undefined}
+                                    value={recipient.countryCode === '' ? '' : '+' + recipient.countryCode}
                                     onChange={e => handleChange(e)}
                                     style={{ width: '29.5%' }}
                                     required

@@ -2,12 +2,17 @@ import styled from 'styled-components';
 import { ResponsiveBlock } from '../styles/CommonStyles';
 
 export const ChargeWrap = styled(ResponsiveBlock)`
-    padding-top: 50px;
-    position: reletive;
-    form {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transfrom: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    div {
+        h2 {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        & + div {
+            margin-left: 50px;
+        }
     }
 `;

@@ -21,7 +21,7 @@ const AdminHeaderComponent = ({ location, handleLogout }) => {
                         <Link to="/admin/faq">FAQ</Link>
                     </li>
                     <li className={pathname === '/admin/insert' ? 'active' : null}>
-                        <Link to="/admin/insert">배송비 등록</Link>
+                        <Link to="/admin/insert">엑셀 등록</Link>
                     </li>
                 </ul>
                 <button type="button" onClick={handleLogout}>
