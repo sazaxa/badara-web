@@ -88,17 +88,17 @@ const PaymentPopup = ({ handlePopup, updatePopup }) => {
     };
 
     const handleToss = async () => {
-        alert('준비중입니다.');
-        // const clientKey = 'test_ck_lpP2YxJ4K87PxeNb69p3RGZwXLOb';
-        // const tossPayments = await loadTossPayments(clientKey);
-        // tossPayments.requestPayment('카드', {
-        //     amount: getOrder.orderPrice,
-        //     orderId: getOrder.orderNumber,
-        //     orderName: '해외배송서비스',
-        //     customerName: getOrder.recipient.member.name,
-        //     successUrl: window.location.origin + '/mypage',
-        //     failUrl: window.location.origin + '/mypage',
-        // });
+        // alert('준비중입니다.');
+        const clientKey = 'test_ck_lpP2YxJ4K87PxeNb69p3RGZwXLOb';
+        const tossPayments = await loadTossPayments(clientKey);
+        tossPayments.requestPayment('카드', {
+            amount: getOrder.orderPrice,
+            orderId: getOrder.orderNumber,
+            orderName: '해외배송서비스',
+            customerName: getOrder.recipient.member.name,
+            successUrl: window.location.origin + '/mypage',
+            failUrl: window.location.origin + '/mypage',
+        });
     };
     if (!orders) return null;
     if (!paymentAgree)
