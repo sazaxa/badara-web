@@ -113,9 +113,11 @@ const MyorderList = ({
                                 >
                                     주문 취소
                                 </button> */}
-                                <button type="button" onClick={() => handleCancelPopup(order.orderNumber)}>
-                                    주문 취소
-                                </button>
+                                {order.orderStatus === '해외배송중' || order.orderStatus === '해외배송완료' ? null : (
+                                    <button type="button" onClick={() => handleCancelPopup(order.orderNumber)}>
+                                        주문 취소
+                                    </button>
+                                )}
                                 <article className="orderHead">
                                     <div className="headData">
                                         <strong>주문번호 </strong>
