@@ -30,7 +30,7 @@ const Product = ({ stepIndex, steps, product, handlePrev, handleClick, index, Pr
                     보내시는 상품의 정보를 <strong>'각각'</strong> 입력해주세요.
                 </p>
                 {index !== 0 ? (
-                    <Button variant="contained" color="secondary" onClick={() => ProductRemove()}>
+                    <Button variant="contained" color="secondary" onClick={() => ProductRemove(index)}>
                         삭제
                     </Button>
                 ) : null}
