@@ -118,8 +118,13 @@ const MyorderCancelList = ({ status, memberOrder, handleTabToggle }) => {
                                                     <span>{product.quantity}개</span>
                                                 </div>
                                                 <div className="productItem">
-                                                    <strong>상품 무게</strong>
-                                                    <span>{product.weight}kg</span>
+                                                    <strong>상품 총가격</strong>
+                                                    <span>
+                                                        {(
+                                                            Number(product.price) * Number(product.quantity)
+                                                        ).toLocaleString()}
+                                                        원
+                                                    </span>
                                                 </div>
                                             </article>
                                         ))}
