@@ -19,13 +19,13 @@ const Recipient = ({ stepIndex, steps }) => {
     const [recipient, setRecipinet] = useState({
         name: null,
         email: null,
-        country: null,
+        country: 'USA',
         state: null,
         address1: null,
         address2: null,
         address3: null,
         zipcode: null,
-        countryCode: null,
+        countryCode: '1',
         phoneNumber: null,
         isCountryCode: true,
     });
