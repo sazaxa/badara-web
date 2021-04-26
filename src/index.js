@@ -13,9 +13,11 @@ import rootReducer, { rootSaga } from './store';
 const sagaMiddleWare = createSagaMiddleware();
 const store = createStore(
     rootReducer,
-    `${process.env.APP_ENV}` === 'prod' ? null : composeWithDevTools(applyMiddleware(sagaMiddleWare))
+    `${process.env.REACT_APP_ENV}` === 'prod'
+        ? applyMiddleware(sagaMiddleWare)
+        : composeWithDevTools(applyMiddleware(sagaMiddleWare))
 );
-
+console.log(process.env.REACT_APP_ENV);
 sagaMiddleWare.run(rootSaga);
 ReactDOM.render(
     <Provider store={store}>
