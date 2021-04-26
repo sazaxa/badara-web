@@ -1,5 +1,7 @@
 import React from 'react';
 import { FooterWrap, FooterContent } from 'styles/CommonStyles';
+import naver from '../../styles/img/naver.png';
+import kakao from '../../styles/img/kakao.png';
 
 const FooterComponent = () => (
     <FooterWrap>
@@ -37,6 +39,14 @@ const FooterComponent = () => (
                         통신판매업신고번호 : 2020-서울금천-2715
                     </a>
                 </span>
+            </div>
+            <div className="sns">
+                <a href="https://blog.naver.com/click_black" target="_blank" rel="noreferrer">
+                    <img src={naver} alt="naver" />
+                </a>
+                <a href="https://open.kakao.com/o/gIkjjr3c" target="_blank" rel="noreferrer">
+                    <img src={kakao} alt="kakao" />
+                </a>
             </div>
             <p>COPYRIGHT © WHOSEGOODS. ALL RIGHTS RESERVED</p>
         </FooterContent>

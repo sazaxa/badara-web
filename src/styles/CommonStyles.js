@@ -83,9 +83,10 @@ export const FooterContent = styled.article`
     padding: 20px 0;
     box-sizing: border-box;
     color: #343a40;
+    position: relative;
     @media screen and (max-width: 1140px) {
         width: 100%;
-        padding: 20px;
+        padding: 80px 20px 20px 20px;
         box-sizing: border-box;
     }
     span {
@@ -105,6 +106,29 @@ export const FooterContent = styled.article`
         font-weight: 600;
         font-size: 11px;
         letter-spacing: -0.5px;
+    }
+    .sns {
+        display: flex;
+        position: absolute;
+        top: 20px;
+        right: 0;
+        @media screen and (max-width: 1140px) {
+            left: 50%;
+            transform: translateX(-50%);
+            justify-content: center;
+        }
+        & > a {
+            width: 40px;
+            @media screen and (max-width: 1140px) {
+                width: 35px;
+            }
+            & + a {
+                margin-left: 15px;
+            }
+            & > img {
+                width: 100%;
+            }
+        }
     }
 `;
 
