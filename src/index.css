@@ -15,6 +15,9 @@ ul {
 a {
   text-decoration: none;
 }
+img {
+  width:100%;
+}
 .adminWrap {
   display: flex;
   flex-direction: row;

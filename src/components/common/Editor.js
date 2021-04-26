@@ -4,6 +4,10 @@ import 'quill/dist/quill.snow.css';
 import styled from 'styled-components';
 import Responsive from './Responsive';
 import { QuillWrapper } from 'styles/CommonStyles';
+import ImageUploader from 'quill-image-uploader';
+
+// #2 register module
+Quill.register('modules/imageUploader', ImageUploader);
 
 const EditorBlock = styled(Responsive)`
     height: 400px;
@@ -25,6 +29,28 @@ const Editor = ({ body, onChangeField }) => {
                     ['blockquote', 'code-block', 'link', 'image', 'video'],
                     [{ color: [] }, { background: [] }],
                 ],
+                imageUploader: {
+                    upload: file => {
+                        return new Promise((resolve, reject) => {
+                            const formData = new FormData();
+                            formData.append('upload', file);
+
+                            fetch('http://localhost:3000/api/v1/upload', {
+                                method: 'POST',
+                                body: formData,
+                            })
+                                .then(response => response.json())
+                                .then(result => {
+                                    console.log(result);
+                                    resolve(result.file);
+                                })
+                                .catch(error => {
+                                    reject('Upload failed');
+                                    console.error('Error:', error);
+                                });
+                        });
+                    },
+                },
             },
         });
         // 텍스트 체인지 이벤트 핸들러 등록
