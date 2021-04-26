@@ -57,8 +57,9 @@ export const AdminHeaderContent = styled.article`
 
 export const QuillWrapper = styled.div`
     .ql-editor {
+        // width: 100%;
         padding: 10px;
-        min-height: 320px;
+        max-height: 320px;
         font-size: 1.125rem;
         line-height: 1.5;
     }

@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { FaqAddWrap, FaqAddPopup } from 'styles/FaqStyles';
+import EditorContainer from 'containers/common/EditorContainer';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -35,7 +36,7 @@ const FaqUpdateComponent = ({ close, onSubmit, onChange, FaqInfo }) => {
                         name="title"
                         defaultValue={FaqInfo.title}
                     />
-                    <TextField
+                    {/* <TextField
                         id="outlined-multiline-flexible"
                         label="content"
                         multiline
@@ -44,7 +45,8 @@ const FaqUpdateComponent = ({ close, onSubmit, onChange, FaqInfo }) => {
                         variant="outlined"
                         name="content"
                         defaultValue={FaqInfo.content}
-                    />
+                    /> */}
+                    <EditorContainer />
                     <Button variant="contained" color="primary" type="submit">
                         수정하기
                     </Button>

@@ -88,7 +88,10 @@ const FaqComponent = ({
                                         />
                                     </AccordionSummary>
                                     <AccordionDetails>
-                                        <Typography color="textSecondary">{element.content}</Typography>
+                                        <Typography
+                                            color="textSecondary"
+                                            dangerouslySetInnerHTML={{ __html: element.content }}
+                                        ></Typography>
                                     </AccordionDetails>
                                     <Divider />
                                     <AccordionActions>

@@ -6,7 +6,7 @@ import Responsive from './Responsive';
 import { QuillWrapper } from 'styles/CommonStyles';
 
 const EditorBlock = styled(Responsive)`
-    padding-top: 5rem;
+    height: 400px;
 `;
 
 const Editor = ({ body, onChangeField }) => {
@@ -27,14 +27,11 @@ const Editor = ({ body, onChangeField }) => {
                 ],
             },
         });
-        const qlEditor = document.querySelector('.ql-editor');
-        const qlEditorContent = qlEditor.querySelector('p');
-        qlEditorContent.setAttribute('name', 'content');
         // 텍스트 체인지 이벤트 핸들러 등록
         const quill = quillInstance.current;
         quill.on('text-change', (delta, oldDelta, source) => {
             if (source === 'user') {
-                onChangeField({ key: 'body', value: quill.root.innerHTML });
+                onChangeField({ key: 'content', value: quill.root.innerHTML });
             }
         });
     }, [onChangeField]);

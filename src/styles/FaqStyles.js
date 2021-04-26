@@ -14,8 +14,8 @@ export const FaqAddWrap = styled.section`
     z-index: 1;
 `;
 export const FaqAddPopup = styled.article`
-    width: 500px;
-    height: 360px;
+    width: 800px;
+    height: 650px;
     background: #fff;
     position: absolute;
     top: 50%;

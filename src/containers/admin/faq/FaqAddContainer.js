@@ -1,36 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import { FaqAddComponent } from 'components';
 
-import { saveFaqAction, getFaqListAction } from 'store/faq';
+import { saveFaqAction, getFaqListAction, changeField, clearFaqInfoAction } from 'store/faq';
 
 const FaqAddContainer = ({ close }) => {
     const dispatch = useDispatch();
 
-    const [editData, setEditData] = useState({
-        title: '',
-        content: '',
-    });
+    // const [editData, setEditData] = useState({
+    //     title: '',
+    //     content: '',
+    // });
+    const { title, content } = useSelector(state => state.faq.write);
 
     const onSubmit = e => {
         e.preventDefault();
 
-        if (editData.title === '') {
+        if (title === '') {
             alert('제목을 입력해 주세요.');
             return;
         }
 
-        if (editData.content === '') {
+        if (content === '') {
             alert('내용을 입력해 주세요.');
             return;
         }
 
         dispatch(
             saveFaqAction({
-                title: editData.title,
-                content: editData.content,
+                title: title,
+                content: content,
                 callBack: e => {
                     const { result } = e;
                     if (result === true) {
@@ -46,26 +47,16 @@ const FaqAddContainer = ({ close }) => {
     };
     const handleChange = e => {
         const { name, value } = e.target;
-        setEditData({
-            ...editData,
-            [name]: value,
-        });
+        dispatch(changeField({ key: name, value: value }));
     };
 
     useEffect(() => {
         return () => {
-            setEditData({});
+            dispatch(clearFaqInfoAction());
         };
     }, []);
 
-    return (
-        <FaqAddComponent
-            onSubmit={onSubmit}
-            onChange={e => handleChange(e)}
-            close={e => close(e)}
-            body={editData.content}
-        />
-    );
+    return <FaqAddComponent onSubmit={onSubmit} onChange={e => handleChange(e)} close={e => close(e)} body={content} />;
 };
 
 export default withRouter(FaqAddContainer);

@@ -11,6 +11,7 @@ const CLEAR_FAQ_INFO = 'faq/CLEAR_FAQ_INFO';
 const CHANGE_FAQ_INFO = 'faq/CHANGE_FAQ_INFO';
 const SAVE_FAQ = 'faq/SAVE_FAQ';
 const UPDATE_FAQ_INFO = 'faq/UPDATE_FAQ_INFO';
+const CHANGE_FIELD = 'write/CHANGE_FIELD';
 
 export const getFaqListAction = createAction(GET_FAQ_LIST, state => state);
 export const clearFaqInfoAction = createAction(CLEAR_FAQ_INFO);
@@ -20,6 +21,10 @@ export const updateFaqInfoAction = createAction(UPDATE_FAQ_INFO, ({ callBack }) 
 export const deleteFaqAction = createAction(DELETE_FAQ, ({ faqs, callBack }) => ({ faqs, callBack }));
 export const getFaqInfoAction = createAction(GET_FAQ_INFO, ({ id }) => ({
     id,
+}));
+export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
+    key,
+    value,
 }));
 
 function* getFaqListSaga() {
@@ -53,7 +58,8 @@ function* getFaqInfoSaga({ payload: { id } }) {
 }
 
 function* updateFaqSaga({ payload: { callBack } }) {
-    const faqinfo = yield select(store => store.faq.faqinfo);
+    const faqinfo = yield select(store => store.faq.write);
+    console.log(faqinfo);
     const { status } = yield call(FaqAPI.Update, { ...faqinfo });
 
     if (callBack instanceof Function) {
@@ -94,6 +100,10 @@ export const initialState = {
         title: '',
         content: '',
     },
+    write: {
+        title: '',
+        content: '',
+    },
 };
 
 export default handleActions(
@@ -119,6 +129,9 @@ export default handleActions(
         [GET_FAQ_INFO_SUCCESS]: (state, { payload }) => {
             return produce(state, draft => {
                 draft.faqinfo = payload;
+                draft.write.id = payload.id;
+                draft.write.title = payload.title;
+                draft.write.content = payload.content;
             });
         },
         [CHANGE_FAQ_INFO]: (state, { payload }) => {
@@ -129,6 +142,12 @@ export default handleActions(
         [CLEAR_FAQ_INFO]: state => {
             return produce(state, draft => {
                 draft.faqinfo = initialState.faqinfo;
+                draft.write = initialState.write;
+            });
+        },
+        [CHANGE_FIELD]: (state, { payload: { key, value } }) => {
+            return produce(state, draft => {
+                draft.write[key] = value;
             });
         },
     },

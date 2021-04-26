@@ -3,12 +3,14 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { FaqAddWrap, FaqAddPopup } from 'styles/FaqStyles';
+import Editor from 'components/common/Editor';
+import EditorContainer from 'containers/common/EditorContainer';
 
 const useStyles = makeStyles(theme => ({
     root: {
         '& > *': {
             width: '100%',
-            marginBottom: '20px',
+            marginBottom: '5px',
         },
         '& >#outlined-multiline-flexible': {
             height: '50px',
@@ -26,7 +28,7 @@ const FaqAddComponent = ({ close, onSubmit, onChange }) => {
                 <form className={classes.root} noValidate autoComplete="off" onSubmit={onSubmit}>
                     <h2>FAQ</h2>
                     <TextField id="outlined-basic" label="title" variant="outlined" onChange={onChange} name="title" />
-                    <TextField
+                    {/* <TextField
                         id="outlined-multiline-flexible"
                         label="content"
                         multiline
@@ -34,7 +36,8 @@ const FaqAddComponent = ({ close, onSubmit, onChange }) => {
                         onChange={onChange}
                         variant="outlined"
                         name="content"
-                    />
+                    /> */}
+                    <EditorContainer />
                     <Button variant="contained" color="primary" type="submit">
                         추가하기
                     </Button>
