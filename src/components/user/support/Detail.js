@@ -8,7 +8,6 @@ import { SupportContents, SupportWrap } from 'styles/SupportStyles';
 const Detail = ({ match }) => {
     const dispatch = useDispatch();
     const { faqinfo } = useSelector(state => state.faq);
-    console.log(faqinfo);
 
     useEffect(() => {
         dispatch(getFaqInfoAction({ id: match.params.id }));

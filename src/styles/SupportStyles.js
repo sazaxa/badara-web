@@ -65,10 +65,16 @@ export const SupportContents = styled.article`
         letter-spacing: -0.5px;
         padding: 16px 0;
         color: #333;
+        @media screen and (max-width: 1140px) {
+            font-size: 14px;
+        }
         & > span {
             color: #0049ff;
             font-weight: 600;
             margin-right: 15px;
+            @media screen and (max-width: 1140px) {
+                margin-right: 10px;
+            }
         }
     }
     .title {
@@ -83,7 +89,8 @@ export const SupportContents = styled.article`
             letter-spacing: -1.5px;
             @media screen and (max-width: 1140px) {
                 width: 100%;
-                font-size: 17px;
+                font-size: 18px;
+                margin-bottom: 10px;
             }
         }
         a {
@@ -95,7 +102,7 @@ export const SupportContents = styled.article`
             padding: 10px;
             @media screen and (max-width: 1140px) {
                 font-size: 13px;
-                padding: 6px;
+                padding: 8px;
             }
         }
     }
