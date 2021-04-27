@@ -1,7 +1,5 @@
 import React from 'react';
 import { CalculatorWrap } from 'styles/CalculatorStyles';
-import CreateIcon from '@material-ui/icons/Create';
-import SearchIcon from '@material-ui/icons/Search';
 import { Link } from 'react-router-dom';
 
 const CalculatorComponent = ({
@@ -21,6 +19,7 @@ const CalculatorComponent = ({
                 <div className="title_wrap">
                     <h2>배송비 계산기</h2>
                     <span>쉽고 빠르게 배송비를 계산해 보세요</span>
+                    <p>배송신청은 신청하기를 통해 진행해주세요!</p>
                 </div>
                 {/* <div className="wrap top">
                     <div className="title">

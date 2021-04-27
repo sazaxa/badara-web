@@ -55,6 +55,24 @@ export const CalculatorWrap = styled.article`
             font-size: 2.5vw;
         }
     }
+    .title_wrap > p {
+        font-size: 14px;
+        font-weight: 600;
+        color: red;
+        margin-left: 20px;
+        @media screen and (max-width: 1140px) {
+            width: 100%;
+            margin-left: 0;
+            margin-top: 10px;
+            text-align: center;
+        }
+        @media screen and (max-width: 800px) {
+            font-size: 2vw;
+        }
+        @media screen and (max-width: 600px) {
+            font-size: 2.5vw;
+        }
+    }
     .countryTitle {
         margin-right: 20px;
     }
