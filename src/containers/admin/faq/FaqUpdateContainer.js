@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { FaqUpdateComponent } from 'components';
-import { clearFaqInfoAction, changeFaqInfoAction, updateFaqInfoAction, getFaqListAction } from 'store/faq';
+import { clearFaqInfoAction, changeFaqInfoAction, updateFaqInfoAction, getFaqListAction, changeField } from 'store/faq';
 
 const FaqUpdateContainer = ({ close }) => {
     const dispatch = useDispatch();
@@ -13,12 +13,7 @@ const FaqUpdateContainer = ({ close }) => {
 
     const handleChange = e => {
         const { value, name } = e.target;
-        dispatch(
-            changeFaqInfoAction({
-                ...faqinfo,
-                [name]: value,
-            })
-        );
+        dispatch(changeField({ key: name, value: value }));
     };
 
     // 수정하기 버튼을 눌렀을 때.
