@@ -18,6 +18,7 @@ const CostContainer = () => {
         if (selectedValue) {
             dispatch(countryPriseAction({ country: selectedValue }));
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedValue]);
 
     return (

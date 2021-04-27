@@ -24,6 +24,7 @@ const Main = ({ history }) => {
             dispatch(resetStep());
             dispatch(applyClearAction());
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     useEffect(() => {
         if (accessToken) {

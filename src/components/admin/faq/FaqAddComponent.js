@@ -3,7 +3,6 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { FaqAddWrap, FaqAddPopup } from 'styles/FaqStyles';
-import Editor from 'components/common/Editor';
 import EditorContainer from 'containers/common/EditorContainer';
 
 const useStyles = makeStyles(theme => ({
