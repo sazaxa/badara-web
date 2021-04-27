@@ -1,39 +1,8 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Accordion from '@material-ui/core/Accordion';
-import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
-import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
 import { SupportContents, SupportWrap } from 'styles/SupportStyles';
 import logo from '../../../styles/img/logo.png';
+import { Link } from 'react-router-dom';
 
-const AccordionSummary = withStyles({
-    root: {
-        backgroundColor: '#0049ff',
-        borderBottom: '1px solid #fff',
-        borderRadius: '10px 10px 0 0',
-        color: '#fff',
-        fontWeight: '600',
-        fontSize: '24px',
-        marginBottom: -1,
-        minHeight: 56,
-        '&$expanded': {
-            minHeight: 56,
-        },
-    },
-    content: {
-        '&$expanded': {
-            margin: '12px 0',
-        },
-    },
-    expanded: {},
-})(MuiAccordionSummary);
-
-const AccordionDetails = withStyles(theme => ({
-    root: {
-        padding: theme.spacing(2),
-    },
-}))(MuiAccordionDetails);
 const SupportComponent = ({ FaqLists, Expanded, HandleChange }) => {
     return (
         <SupportWrap>
@@ -43,21 +12,14 @@ const SupportComponent = ({ FaqLists, Expanded, HandleChange }) => {
                     <span>자주하는 질문</span>
                 </div>
                 {FaqLists.length > 0 ? (
-                    FaqLists.map(faq => {
+                    FaqLists.map((faq, index) => {
                         return (
-                            <Accordion
-                                key={faq.id}
-                                square
-                                expanded={Expanded === 'panel' + faq.id}
-                                onChange={HandleChange('panel' + faq.id)}
-                            >
-                                <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-                                    <Typography id="faqTitle">{faq.title}</Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                    <Typography id="faqContent">{faq.content}</Typography>
-                                </AccordionDetails>
-                            </Accordion>
+                            <Link to={`/support/${faq.id}`}>
+                                <div className="faq">
+                                    <span>{index + 1}.</span>
+                                    <p dangerouslySetInnerHTML={{ __html: faq.title }} />
+                                </div>
+                            </Link>
                         );
                     })
                 ) : (

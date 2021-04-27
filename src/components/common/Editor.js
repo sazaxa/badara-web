@@ -10,7 +10,7 @@ import ImageUploader from 'quill-image-uploader';
 Quill.register('modules/imageUploader', ImageUploader);
 
 const EditorBlock = styled(Responsive)`
-    height: 400px;
+    min-height: 400px;
 `;
 
 const Editor = ({ body, onChangeField }) => {

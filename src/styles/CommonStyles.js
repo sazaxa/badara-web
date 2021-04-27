@@ -59,6 +59,7 @@ export const QuillWrapper = styled.div`
     .ql-editor {
         // width: 100%;
         padding: 10px;
+        min-height: 320px;
         max-height: 320px;
         font-size: 1.125rem;
         line-height: 1.5;
@@ -370,7 +371,7 @@ export const ResponsiveBlock = styled.div`
     // padding: 0 0.8rem;
     box-sizing: border-box;
     width: 100%;
-    height: 980px;
+    min-height: 980px;
     // padding-left: 300px;
     @media (max-width: 780px) {
         width: 100%;

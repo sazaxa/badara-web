@@ -23,6 +23,7 @@ import { getCountryAction } from 'store/part';
 import { useDispatch } from 'react-redux';
 import AdminUserDetailPage from 'pages/admin/AdminUserDetailPage';
 import { getMemberCheckAction } from 'store/member';
+import Detail from 'components/user/support/Detail';
 
 function App({ location }) {
     const dispatch = useDispatch();
@@ -64,7 +65,8 @@ function App({ location }) {
                     <Route component={GuidePage} path="/guide" />
                     <Route component={ApplyPage} path="/apply" exact />
                     <Route component={RegisterPage} path="/register" />
-                    <Route component={SupportPage} path="/support" />
+                    <Route component={SupportPage} path="/support" exact />
+                    <Route component={Detail} path="/support/:id" />
                     <Route component={Mypage} path="/mypage" />
                     {/* TODO: 새로고침시 전부 / 로 이동되어 주석처리 */}
                     {/* <Redirect path="*" to="/" /> */}

@@ -12,6 +12,8 @@ export const SupportContents = styled.article`
     padding-bottom: 200px;
     @media screen and (max-width: 1140px) {
         width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
     }
     .supportHeader {
         margin-bottom: 50px;
@@ -53,17 +55,65 @@ export const SupportContents = styled.article`
             font-size: 24px;
         }
     }
-    #faqTitle {
-        font-size: 24px;
-        border-radius: 10px 10px 0 0;
-        letter-spacing: -2px;
+    .faq {
+        width: 100%;
+        border-bottom: 1px solid #ccc;
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: -0.5px;
+        padding: 16px 0;
+        color: #333;
+        & > span {
+            color: #0049ff;
+            font-weight: 600;
+            margin-right: 15px;
+        }
     }
-    #faqContent {
-        font-size: 18px;
-        border-radius: 0 0 10px 10px;
+    .title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+        flex-wrap: wrap;
+        border-bottom: 1px solid #ccc;
+        h3 {
+            font-size: 24px;
+            letter-spacing: -1.5px;
+            @media screen and (max-width: 1140px) {
+                width: 100%;
+                font-size: 17px;
+            }
+        }
+        a {
+            color: #fff;
+            border-radius: 5px;
+            font-size: 14px;
+            letter-spacing: -1px;
+            background: #0049ff;
+            padding: 10px;
+            @media screen and (max-width: 1140px) {
+                font-size: 13px;
+                padding: 6px;
+            }
+        }
     }
-    .MuiAccordion-root {
-        border-radius: 10px;
-        margin-bottom: 20px;
+    .content {
+        padding: 15px 0;
+        border-bottom: 1px solid #ccc;
+        p {
+            width: 100%;
+            letter-spacing: -1px;
+            line-height: 1.5;
+            img {
+                display: block;
+                width: 50%;
+                margin: 0 auto;
+                @media screen and (max-width: 1140px) {
+                    width: 100%;
+                }
+            }
+        }
     }
 `;

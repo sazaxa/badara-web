@@ -91,7 +91,7 @@ const FaqComponent = ({
                                         <Typography
                                             color="textSecondary"
                                             dangerouslySetInnerHTML={{ __html: element.content }}
-                                        ></Typography>
+                                        />
                                     </AccordionDetails>
                                     <Divider />
                                     <AccordionActions>
