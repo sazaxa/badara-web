@@ -11,7 +11,7 @@ const MainBanner = () => {
                 쉽고 간편하게 이용해 보세요
             </p>
             <div className="BannerBtn">
-                <Link to="/guide">이용안내</Link>
+                <Link to="/apply">신청하기</Link>
             </div>
         </MainBannerWrap>
     );
