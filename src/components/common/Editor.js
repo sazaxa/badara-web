@@ -33,16 +33,16 @@ const Editor = ({ body, onChangeField }) => {
                     upload: file => {
                         return new Promise((resolve, reject) => {
                             const formData = new FormData();
-                            formData.append('upload', file);
+                            formData.append('image', file);
 
-                            fetch('http://localhost:3000/api/v1/upload', {
+                            fetch(`${process.env.REACT_APP_API_URL}/api/v1/faq/upload`, {
                                 method: 'POST',
                                 body: formData,
                             })
                                 .then(response => response.json())
                                 .then(result => {
                                     console.log(result);
-                                    resolve(result.file);
+                                    resolve('https://image.badara.kr/faq/' + result.imgUrl);
                                 })
                                 .catch(error => {
                                     reject('Upload failed');

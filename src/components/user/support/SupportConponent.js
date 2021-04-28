@@ -14,7 +14,7 @@ const SupportComponent = ({ FaqLists, Expanded, HandleChange }) => {
                 {FaqLists.length > 0 ? (
                     FaqLists.map((faq, index) => {
                         return (
-                            <Link to={`/support/${faq.id}`}>
+                            <Link to={`/support/${faq.id}`} key={faq.id}>
                                 <div className="faq">
                                     <span>{index + 1}.</span>
                                     <p dangerouslySetInnerHTML={{ __html: faq.title }} />
