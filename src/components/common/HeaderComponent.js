@@ -40,13 +40,15 @@ const HeaderComponent = ({
                     <nav>
                         <ul>
                             <li>
+                                <Link to="/apply" className="apply">
+                                    신청하기
+                                </Link>
+                            </li>
+                            <li>
                                 <Link to="/guide">이용안내</Link>
                             </li>
                             <li>
                                 <Link to="/cost">비용안내</Link>
-                            </li>
-                            <li>
-                                <Link to="/apply">신청하기</Link>
                             </li>
                             <li>
                                 <Link to="/support">고객센터</Link>

@@ -208,6 +208,12 @@ export const HeaderContent = styled.header`
         letter-spacing: -1px;
         transition: all 0.3s;
     }
+    nav ul li a.apply {
+        font-weight: 600;
+        color: #1976d2;
+        animation: flutter 2s linear infinite;
+        display: block;
+    }
     nav ul li a:hover {
         color: #1976d2;
         font-weight: 900;
@@ -248,6 +254,26 @@ export const HeaderContent = styled.header`
         @media screen and (max-width: 1140px) {
             right: 10px;
             display: none;
+        }
+    }
+    @keyframes flutter {
+        0% {
+            transform: rotate(0deg);
+        }
+        35% {
+            transform: rotate(0deg);
+        }
+        40% {
+            transform: rotate(-6deg);
+        }
+        60% {
+            transform: rotate(6deg);
+        }
+        65% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(0deg);
         }
     }
 `;
