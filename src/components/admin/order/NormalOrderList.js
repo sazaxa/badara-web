@@ -10,6 +10,8 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import { Link } from 'react-router-dom';
 import { columns } from 'containers/admin/order/OrderListContainer';
+import moment from 'moment';
+import 'moment/locale/ko';
 
 const StyledTableCell = withStyles(theme => ({
     head: {
@@ -67,7 +69,7 @@ const NormalOrderList = ({ Rows, RowsPerPage, Page, HandleChangePage, HandleChan
                                                 </TableCell>
                                                 <TableCell align="center">{row.member}</TableCell>
                                                 <TableCell align="center">{row.status}</TableCell>
-                                                <TableCell align="center">{row.days}</TableCell>
+                                                <TableCell align="center">{moment(row.days).format('LLLL')}</TableCell>
                                             </TableRow>
                                         );
                                     })

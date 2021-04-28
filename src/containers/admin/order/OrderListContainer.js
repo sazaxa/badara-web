@@ -52,7 +52,6 @@ const OrderListContainer = () => {
     };
 
     useEffect(() => {
-        console.log('탔다!');
         if (list) {
             let normalOrder = [];
             let cancelOrder = [];
@@ -71,7 +70,6 @@ const OrderListContainer = () => {
             }
         }
     }, [list]);
-    console.log(order);
     const normalOrderRows = [
         // createData('India', 'IN', 1324171354, 3287263),
         order.normalOrder.map(v =>

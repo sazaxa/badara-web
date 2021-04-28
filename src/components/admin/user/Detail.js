@@ -5,6 +5,7 @@ import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { getMemberInfoAction, getMemberOrderAction } from 'store/member';
 import { DetailWrap } from 'styles/AdminUserPageStyles';
+import moment from 'moment';
 
 const Detail = ({ match }) => {
     const dispatch = useDispatch();
@@ -63,7 +64,7 @@ const Detail = ({ match }) => {
                                 <td>{order.orderNumber}</td>
                                 <td>{order.productResponses[0].productDetail}</td>
                                 <td>{order.orderStatus}</td>
-                                <td>{order.recipient.createdDate}</td>
+                                <td>{moment(order.recipient.createdDate).format('LLLL')}</td>
                             </Link>
                         </tr>
                     ))}
