@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Responsive = styled.section`
     width: 100%;
-    padding: 100px 0 100px 0;
+    padding: 150px 0 100px 0;
     box-sizing: border-box;
     background: #fff;
     @media screen and (max-width: 1140px) {
@@ -139,10 +139,10 @@ export const HeaderWrap = styled.section`
     height: 110px;
     border-bottom: 1px solid #eee;
     background: #fff;
+    position: fixed;
+    z-index: 999;
     @media screen and (max-width: 1140px) {
-        position: fixed;
         height: 65px;
-        z-index: 999;
     }
 `;
 
