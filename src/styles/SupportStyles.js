@@ -2,9 +2,12 @@ import styled from 'styled-components';
 
 export const SupportWrap = styled.section`
     width: 100%;
-    padding: 150px 0;
+    padding: 230px 0;
     box-sizing: border-box;
     background: #fff;
+    @media screen and (max-width: 1140px) {
+        padding: 100px 0;
+    }
 `;
 export const SupportContents = styled.article`
     width: 1140px;
