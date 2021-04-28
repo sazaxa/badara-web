@@ -158,7 +158,7 @@ export const MypageContent = styled.article`
         box-shadow: 0 0 5px #999;
         border-radius: 5px;
         letter-spacing: -1.5px;
-        margin-bottom: 50px;
+        margin-bottom: 10px;
         @media screen and (max-width: 1140px) {
             height: 100%;
         }
@@ -196,6 +196,9 @@ export const MypageContent = styled.article`
                 padding: 20px 10px;
             }
         }
+    }
+    .centerAddress + .centerAddress {
+        margin-bottom: 50px;
     }
     .memberOrders .data {
         display: flex;

@@ -91,6 +91,14 @@ const MyorderList = ({
                         <p>서울특별시 금천구 가산디지털1로 5 대륭테크노타운 20차 1411호 주식회사 후스구스</p>
                     </article>
                 </article>
+                <article className="centerAddress">
+                    <article className="title">
+                        <h2>무통장입금 계좌정보</h2>
+                    </article>
+                    <article className="address">
+                        <p>국민은행 061701-04-240916 주식회사 후스구스</p>
+                    </article>
+                </article>
                 <article className="memberOrders">
                     {memberOrder.length === 0 ? (
                         <article className="order">
