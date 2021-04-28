@@ -453,7 +453,7 @@ export const MoblieMenuBlock = styled.div`
     position: fixed;
     bottom: 0;
     left: 0;
-    z-index: 999;
+    z-index: 1001;
     &.hamburger {
         width: 80px;
     }

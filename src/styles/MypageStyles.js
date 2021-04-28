@@ -518,7 +518,7 @@ export const UpdateInvoiceWrap = styled.article`
     text-align: center;
     // padding: 50px;
     box-sizing: border-box;
-    z-index: 999;
+    z-index: 1001;
     overflow: hidden;
     .body {
         padding: 15px 10px;

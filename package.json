@@ -35,6 +35,7 @@
     },
     "scripts": {
         "start": "cp .config/.env.local .env && react-scripts start",
+        "start:prod": "cp .config/.env.prod .env && react-scripts start",
         "build": "cp .config/.env.local .env && react-scripts build",
         "build:prod": "cp .config/.env.prod .env && react-scripts build",
         "test": "react-scripts test",
