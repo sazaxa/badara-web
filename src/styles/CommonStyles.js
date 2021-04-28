@@ -88,7 +88,7 @@ export const FooterContent = styled.article`
     position: relative;
     @media screen and (max-width: 1140px) {
         width: 100%;
-        padding: 80px 20px 20px 20px;
+        padding: 100px 20px 20px 20px;
         box-sizing: border-box;
     }
     span {
@@ -115,8 +115,8 @@ export const FooterContent = styled.article`
         top: 20px;
         right: 0;
         @media screen and (max-width: 1140px) {
-            left: 50%;
-            transform: translateX(-50%);
+            right: 8%;
+            transform: translateX(-8%);
             justify-content: center;
         }
         & > a {
@@ -130,6 +130,47 @@ export const FooterContent = styled.article`
             & > img {
                 width: 100%;
             }
+        }
+    }
+    .bank {
+        width: 200px;
+        padding: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        position: absolute;
+        top: 10px;
+        right: 250px;
+        letter-spacing: -1.5px;
+        @media screen and (max-width: 1140px) {
+            width: 150px;
+            left: 10%;
+            transform: translateX(-10%);
+            justify-content: center;
+            font-size: 14px;
+        }
+        span {
+            @media screen and (max-width: 1140px) {
+                font-size: 12px;
+            }
+        }
+        span + span {
+            margin-left: 10px;
+        }
+        p {
+            margin-top: 5px;
+            font-size: 13px;
+            @media screen and (max-width: 1140px) {
+                font-size: 12px;
+            }
+        }
+        h4 {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 5px;
+            border-bottom: 1px solid #000;
+            padding: 5px 0;
         }
     }
 `;

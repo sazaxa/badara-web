@@ -13,6 +13,12 @@ const FooterComponent = () => (
             <p>Zip Code: 08594 Phone:+82-2-2634-1121 Fax: +82-2-2633-1124</p>
             <p>CS Email: sazaxa.info@whosegoods.com</p>
             <p>COPYRIGHT © WHOSEGOODS. ALL RIGHTS RESERVED</p> */}
+            <div className="bank">
+                <h4>무통장입금 입금 계좌정보</h4>
+                <span>국민은행</span>
+                <span>061701-04-240916</span>
+                <p>주식회사 후스구스</p>
+            </div>
             <div className="footer">
                 <span>대표이사 : 김용현</span>
                 <span className="bar">|</span>
