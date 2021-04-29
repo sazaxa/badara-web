@@ -92,6 +92,35 @@ const WaringModal = ({ visible, close, Ask }) => {
                                     </p>
                                 </label>
                             </div>
+                            <div className="price">
+                                <label htmlFor="3">
+                                    <input type="checkbox" id="3" style={{ marginRight: '10px' }} required />
+                                    <span
+                                        style={{
+                                            letterSpacing: '-1.5px',
+                                            fontWeight: '600',
+                                            marginBottom: '10px',
+                                            display: 'inline-block',
+                                            fontSize: '16px',
+                                        }}
+                                    >
+                                        <strong style={{ color: 'red', marginRight: '5px' }}>(필수)</strong>
+                                        박스 내용물 확인
+                                    </span>
+                                    <p style={{ letterSpacing: '-1px', fontSize: '14px' }}>
+                                        보내주신 상품의 정확한
+                                        <strong style={{ color: 'red', fontSize: '17px', margin: '0px 5px' }}>
+                                            {' '}
+                                            정보 확인
+                                        </strong>
+                                        을 위해 박스를 임의로
+                                        <strong style={{ color: 'red', fontSize: '16px', margin: '0px 5px' }}>
+                                            개봉
+                                        </strong>
+                                        할 경우도 있습니다.
+                                    </p>
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <div className="buttons">
