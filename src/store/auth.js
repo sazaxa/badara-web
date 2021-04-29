@@ -34,8 +34,8 @@ function* loginSaga({ payload: { email, password } }) {
         localStorage.setItem('accessToken', response.data.accessToken);
         window.location.href = '/';
     } catch (e) {
-        console.log(e.status);
-        yield put({ type: LOGIN_FAILURE, payload: e });
+        yield put({ type: LOGIN_FAILURE, payload: e.response.data });
+        console.log('e', e.response.data);
     }
 }
 
