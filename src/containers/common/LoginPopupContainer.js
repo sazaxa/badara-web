@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 
 const LoginPopupContainer = ({ close, location }) => {
     const dispatch = useDispatch();
-    const { status } = useSelector(state => state.auth.login);
+    const { status, auth } = useSelector(state => state.auth.login);
     const [loginData, setLoginData] = useState({
         email: '',
         password: '',
@@ -17,7 +17,7 @@ const LoginPopupContainer = ({ close, location }) => {
             close();
         }
         if (status === 'fail') {
-            alert('이메일과 비밀번호를 확인하세요.');
+            alert(auth);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [status]);
