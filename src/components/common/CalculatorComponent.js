@@ -85,7 +85,8 @@ const CalculatorComponent = ({
                             name="volume"
                             disabled
                             onChange={OnChange}
-                            placeholder={Material.volume ? Material.volume.toFixed(1) : '부피무게'}
+                            placeholder="부피무게"
+                            value={Material.volume ? Material.volume.toFixed(1) : ''}
                         />
                         <span style={{ marginLeft: '10px' }}>kg</span>
                     </div>

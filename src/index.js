@@ -17,7 +17,6 @@ const store = createStore(
         ? applyMiddleware(sagaMiddleWare)
         : composeWithDevTools(applyMiddleware(sagaMiddleWare))
 );
-console.log(process.env.REACT_APP_ENV);
 sagaMiddleWare.run(rootSaga);
 ReactDOM.render(
     <Provider store={store}>
