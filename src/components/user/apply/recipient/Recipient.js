@@ -25,6 +25,7 @@ const Recipient = ({ stepIndex, steps }) => {
         address2: null,
         address3: null,
         zipcode: null,
+        memo: null,
         countryCode: '1',
         phoneNumber: null,
         isCountryCode: true,
@@ -204,6 +205,20 @@ const Recipient = ({ stepIndex, steps }) => {
                                     value={recipient.state ?? undefined}
                                     onChange={e => handleChange(e)}
                                     style={{ width: '33%' }}
+                                    required
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>특이사항</th>
+                            <td>
+                                <input
+                                    type="text"
+                                    name="memo"
+                                    placeholder="특이사항을 입력해주세요."
+                                    value={recipient.memo ?? undefined}
+                                    onChange={e => handleChange(e)}
+                                    style={{ width: '100%', marginBottom: '5px' }}
                                     required
                                 />
                             </td>
