@@ -20,6 +20,12 @@ const [GET_MEMBER_CHECK_REQUEST, GET_MEMBER_CHECK_SUCCESS, GET_MEMBER_CHECK_FAIL
     'user/CHECK'
 );
 
+const [
+    PUT_PASSWORD_MODIFY_REQUEST,
+    PUT_PASSWORD_MODIFY_SUCCESS,
+    PUT_PASSWORD_MODIFY_FAILURE,
+] = createRequestActionTypes('user/PASSWORD_MDDIFY');
+
 const [GET_ADMIN_CHECK_REQUEST, GET_ADMIN_CHECK_SUCCESS, GET_ADMIN_CHECK_FAILURE] = createRequestActionTypes(
     'admin/CHECK'
 );
@@ -30,6 +36,7 @@ export const getMemberListAction = createAction(GET_MEMBER_LIST_REQUEST);
 export const getMemberInfoAction = createAction(GET_MEMBER_INFO_REQUEST, id => id);
 export const getMemberOrderAction = createAction(GET_MEMBER_ORDER_REQUEST, id => id);
 export const getMemberCheckAction = createAction(GET_MEMBER_CHECK_REQUEST);
+export const putPasswordModfiyAction = createAction(PUT_PASSWORD_MODIFY_REQUEST, ({ id, data }) => ({ id, data }));
 export const getAdminCheckAction = createAction(GET_ADMIN_CHECK_REQUEST);
 export const logoutAction = createAction(LOGOUT);
 export const adminLogoutAction = createAction(ADMIN_LOGOUT);
@@ -54,12 +61,24 @@ function* getMemberInfoSaga({ payload: id }) {
 }
 
 function* getMemberOrderSaga({ payload: id }) {
-    // 단일 회원 로직.
+    // 단일 회원
     try {
         const { data } = yield call(authAPI.userOrders, id);
         yield put({ type: GET_MEMBER_ORDER_SUCCESS, payload: data });
     } catch (e) {
         yield put({ type: GET_MEMBER_ORDER_FAILURE, payload: e });
+        // localStorage.removeItem('accessToken');
+        // window.location.href = '/';
+    }
+}
+
+function* putPasswordModifyrSaga({ payload: { id, data } }) {
+    // 비밀번호
+    try {
+        const response = yield call(authAPI.passwordModify, { id, data });
+        yield put({ type: PUT_PASSWORD_MODIFY_SUCCESS, payload: response.data });
+    } catch (e) {
+        yield put({ type: PUT_PASSWORD_MODIFY_FAILURE, payload: e });
         // localStorage.removeItem('accessToken');
         // window.location.href = '/';
     }
@@ -123,6 +142,7 @@ export function* memberSaga() {
     yield takeLatest(GET_ADMIN_CHECK_REQUEST, adminCheckSaga);
     yield takeLatest(LOGOUT, logoutSaga);
     yield takeLatest(ADMIN_LOGOUT, adminLogoutSaga);
+    yield takeLatest(PUT_PASSWORD_MODIFY_REQUEST, putPasswordModifyrSaga);
 }
 
 const initialState = {

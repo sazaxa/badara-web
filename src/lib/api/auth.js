@@ -39,3 +39,9 @@ export const adminCheck = () => {
 export const adminLogin = (email, password) => {
     return client.post('/api/v1/auth/signin/admin', email, password);
 };
+
+// 회원 비밀번호 변경
+
+export const passwordModify = ({ id, data }) => {
+    return client.put(`/api/v1/members/${id}`, data);
+};
