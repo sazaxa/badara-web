@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -32,8 +32,17 @@ const useStyles = makeStyles({
     },
 });
 
-const NormalOrderList = ({ Rows, RowsPerPage, Page, HandleChangePage, HandleChangeRowsPerPage }) => {
+const ShippingOrderList = ({ Rows }) => {
     const classes = useStyles();
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+    const handleChangeRowsPerPage = event => {
+        setRowsPerPage(+event.target.value);
+        setPage(0);
+    };
     return (
         <>
             <Paper className={classes.root}>
@@ -55,7 +64,7 @@ const NormalOrderList = ({ Rows, RowsPerPage, Page, HandleChangePage, HandleChan
                         <TableBody>
                             {Rows[0].length > 0 ? (
                                 Rows[0]
-                                    .slice(Page * RowsPerPage, Page * RowsPerPage + RowsPerPage)
+                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((row, index) => {
                                         return (
                                             <TableRow key={row.id}>
@@ -87,14 +96,14 @@ const NormalOrderList = ({ Rows, RowsPerPage, Page, HandleChangePage, HandleChan
                     rowsPerPageOptions={[10, 25, 100]}
                     component="div"
                     count={Rows[0].length}
-                    rowsPerPage={RowsPerPage}
-                    page={Page}
-                    onChangePage={HandleChangePage}
-                    onChangeRowsPerPage={HandleChangeRowsPerPage}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onChangePage={handleChangePage}
+                    onChangeRowsPerPage={handleChangeRowsPerPage}
                 />
             </Paper>
         </>
     );
 };
 
-export default NormalOrderList;
+export default ShippingOrderList;

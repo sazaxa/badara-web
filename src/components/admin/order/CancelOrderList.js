@@ -25,18 +25,19 @@ const StyledTableCell = withStyles(theme => ({
 const useStyles = makeStyles({
     root: {
         width: '100%',
+        padding: '0',
     },
     container: {
-        maxHeight: 440,
+        // maxHeight: 440,
     },
 });
 
 const CancelOrderList = ({ Rows, RowsPerPage, Page, HandleChangePage, HandleChangeRowsPerPage }) => {
     const classes = useStyles();
-    console.log(Rows);
+
+    if (!Rows) return null;
     return (
         <>
-            <h2 style={{ margin: '50px 0 20px 0' }}>취소 주문</h2>
             <Paper className={classes.root}>
                 <TableContainer className={classes.container}>
                     <Table stickyHeader aria-label="sticky table">

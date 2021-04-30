@@ -59,4 +59,14 @@ export const OrderWrap = styled(Responsive)`
             }
         }
     }
+    .MuiTab-textColorPrimary.Mui-selected {
+        color: #2191f3;
+    }
+    .PrivateTabIndicator-colorPrimary-3 {
+        background-color: #2191f3;
+    }
+    .MuiBox-root-6 {
+        padding: 0;
+        margin-top: 30px;
+    }
 `;

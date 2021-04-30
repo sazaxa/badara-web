@@ -6,19 +6,19 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
             <tbody>
                 <tr>
                     <th>주문자</th>
-                    <td colSpan="3">
+                    <td colSpan="5">
                         <input type="text" value={UpdateValue.recipient.member.name} disabled />
                     </td>
                 </tr>
                 <tr>
                     <th>주문번호</th>
-                    <td colSpan="3">
+                    <td colSpan="5">
                         <input type="text" value={UpdateValue.orderNumber || ''} disabled />
                     </td>
                 </tr>
                 <tr>
                     <th>주문 가격</th>
-                    <td>
+                    <td colSpan="2">
                         {UpdateState ? (
                             <input
                                 type="number"
@@ -37,7 +37,7 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                         )}
                     </td>
                     <th>부가세</th>
-                    <td>
+                    <td colSpan="2">
                         <input
                             type="text"
                             name="vat"
@@ -48,7 +48,7 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                 </tr>
                 <tr>
                     <th>총 가격</th>
-                    <td colSpan="3">
+                    <td colSpan="5">
                         <input
                             type="text"
                             name="vat"
@@ -65,7 +65,7 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                 </tr>
                 <tr>
                     <th>상태</th>
-                    <td colSpan="4">
+                    <td colSpan="5">
                         {UpdateState ? (
                             <select
                                 name="orderStatus"
@@ -108,26 +108,58 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                 </tr>
                 <tr>
                     <th>무통장입금 입금주</th>
-                    <td colSpan="3">
+                    <td colSpan="5">
                         <input type="text" value={UpdateValue.depositName ? UpdateValue.depositName : null} disabled />
                     </td>
                 </tr>
                 <tr>
-                    <th colSpan="4">보내는 정보</th>
+                    <th colSpan="6">보내는 정보</th>
                 </tr>
                 <tr>
                     <th>이름</th>
-                    <td>
+                    <td colSpan="2">
                         <input type="text" value={UpdateValue.recipient.name || ''} disabled />
                     </td>
                     <th>휴대폰 번호</th>
-                    <td>
+                    <td colSpan="2">
                         <input type="text" value={UpdateValue.recipient.phoneNumber || ''} disabled />
                     </td>
                 </tr>
                 <tr>
+                    <th>상세주소</th>
+                    <td>
+                        <input
+                            type="text"
+                            name="address1"
+                            value={UpdateValue.recipient.address1}
+                            onChange={e => handleRecipientChange(e)}
+                            disabled={UpdateState ? false : true}
+                        />
+                    </td>
+                    <th>주/도</th>
+                    <td>
+                        <input
+                            type="text"
+                            value={UpdateValue.recipient.state}
+                            disabled={UpdateState ? false : true}
+                            name="state"
+                            onChange={e => handleRecipientChange(e)}
+                        />
+                    </td>
+                    <th>우편번호</th>
+                    <td>
+                        <input
+                            type="text"
+                            value={UpdateValue.recipient.zipcode}
+                            disabled={UpdateState ? false : true}
+                            name="zipcode"
+                            onChange={e => handleRecipientChange(e)}
+                        />
+                    </td>
+                </tr>
+                <tr>
                     <th>주소</th>
-                    <td colSpan="3">
+                    <td colSpan="5">
                         <input
                             type="text"
                             value={
@@ -145,13 +177,12 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                 </tr>
                 <tr>
                     <th>국가</th>
-                    <td colSpan="3">
+                    <td colSpan="5">
                         {UpdateState ? (
                             <select
                                 name="country"
                                 onChange={e => handleRecipientChange(e)}
                                 defaultValue={UpdateValue.country || ''}
-                                disabled
                             >
                                 <option value="">나라선택</option>
                                 {List.map(v => {
@@ -183,7 +214,7 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                 </tr>
                 <tr>
                     <th>해외 운송장번호</th>
-                    <td>
+                    <td colSpan="2">
                         {UpdateState ? (
                             <input
                                 type="text"
@@ -202,7 +233,7 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                         )}
                     </td>
                     <th>택배사</th>
-                    <td>
+                    <td colSpan="2">
                         {UpdateState ? (
                             <input
                                 type="text"
@@ -222,10 +253,10 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                     </td>
                 </tr>
                 <tr>
-                    <th colSpan="4">관리자 특이사항</th>
+                    <th colSpan="6">관리자 특이사항</th>
                 </tr>
                 <tr>
-                    <td colSpan="4">
+                    <td colSpan="6">
                         {UpdateState ? (
                             <textarea
                                 name="adminMemo"
