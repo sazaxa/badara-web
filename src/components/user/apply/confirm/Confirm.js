@@ -124,6 +124,10 @@ const Confirm = ({ stepIndex, steps, history }) => {
                                 ({recipient.country})
                             </td>
                         </tr>
+                        <tr>
+                            <th>특이사항</th>
+                            <td>{recipient.memo}</td>
+                        </tr>
                     </tbody>
                 </table>
                 <article className="titleBox">
