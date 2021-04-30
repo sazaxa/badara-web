@@ -44,7 +44,7 @@ const Recipient = ({ stepIndex, steps }) => {
     const handleChange = e => {
         const { name, value } = e.target;
         if (name === 'country') {
-            const found = countryList.find(country => country.name === value);
+            const found = countryList.find(country => country.name.replace(/ /g, '') === value);
             console.log(found);
             if (!found) {
                 setRecipinet({
