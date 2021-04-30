@@ -126,16 +126,6 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                     </td>
                 </tr>
                 <tr>
-                    <th>상세주소</th>
-                    <td>
-                        <input
-                            type="text"
-                            name="address1"
-                            value={UpdateValue.recipient.address1}
-                            onChange={e => handleRecipientChange(e)}
-                            disabled={UpdateState ? false : true}
-                        />
-                    </td>
                     <th>주/도</th>
                     <td>
                         <input
@@ -143,6 +133,16 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                             value={UpdateValue.recipient.state}
                             disabled={UpdateState ? false : true}
                             name="state"
+                            onChange={e => handleRecipientChange(e)}
+                        />
+                    </td>
+                    <th>도시</th>
+                    <td>
+                        <input
+                            type="text"
+                            value={UpdateValue.recipient.city}
+                            disabled={UpdateState ? false : true}
+                            name="city"
                             onChange={e => handleRecipientChange(e)}
                         />
                     </td>
@@ -154,6 +154,18 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                             disabled={UpdateState ? false : true}
                             name="zipcode"
                             onChange={e => handleRecipientChange(e)}
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <th>상세주소</th>
+                    <td colSpan="5">
+                        <input
+                            type="text"
+                            name="address1"
+                            value={UpdateValue.recipient.address1}
+                            onChange={e => handleRecipientChange(e)}
+                            disabled={UpdateState ? false : true}
                         />
                     </td>
                 </tr>
@@ -253,10 +265,11 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                     </td>
                 </tr>
                 <tr>
-                    <th colSpan="6">관리자 특이사항</th>
+                    <th colSpan="4">관리자 특이사항</th>
+                    <th colSpan="2">유저 특이사항</th>
                 </tr>
                 <tr>
-                    <td colSpan="6">
+                    <td colSpan="4">
                         {UpdateState ? (
                             <textarea
                                 name="adminMemo"
@@ -265,6 +278,17 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                             />
                         ) : (
                             <textarea name="adminMemo" value={UpdateValue.adminMemo || ''} disabled />
+                        )}
+                    </td>
+                    <td colSpan="2">
+                        {UpdateState ? (
+                            <textarea
+                                name="memo"
+                                onChange={e => handleOrderChange(e)}
+                                defaultValue={UpdateValue.memo || ''}
+                            />
+                        ) : (
+                            <textarea name="memo" value={UpdateValue.memo || ''} disabled />
                         )}
                     </td>
                 </tr>
