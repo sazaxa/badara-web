@@ -105,7 +105,7 @@ const PaymentPopup = ({ handlePopup, updatePopup }) => {
         const clientKey = `${process.env.REACT_APP_PAYMENT_CLIENT_KEY}`;
         const tossPayments = await loadTossPayments(clientKey);
         tossPayments.requestPayment('카드', {
-            amount: Number(getOrder.orderPrice) + Number(getOrder.orderPrice) * 0.1,
+            amount: Math.ceil(Number(getOrder.orderPrice) + Number(getOrder.orderPrice) * 0.1),
             orderId: getOrder.orderNumber,
             orderName: '해외배송서비스',
             customerName: getOrder.recipient.member.name,
