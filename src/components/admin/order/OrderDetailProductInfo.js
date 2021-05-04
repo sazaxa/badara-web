@@ -22,12 +22,6 @@ const OrderDetailProductInfo = ({ UpdateState, HandleChange, Products, List }) =
                                     <input type="text" defaultValue={product.quantity} disabled />
                                 </td>
                             </tr>
-                            <tr>
-                                <th>무게</th>
-                                <td colSpan="3">
-                                    <input type="text" defaultValue={product.weight} disabled />
-                                </td>
-                            </tr>
                             {/* <tr>
                                 <th>주문상태</th>
                                 <td colSpan="3">
@@ -154,6 +148,12 @@ const OrderDetailProductInfo = ({ UpdateState, HandleChange, Products, List }) =
                                     ) : (
                                         <input type="text" value={product.price || ''} disabled />
                                     )}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>총 금액</th>
+                                <td colSpan="3">
+                                    <input type="text" value={product.price * product.quantity + '원'} disabled />
                                 </td>
                             </tr>
                             {/* <tr>
