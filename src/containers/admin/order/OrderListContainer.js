@@ -44,6 +44,7 @@ const OrderListContainer = () => {
         pandingOrder: [],
         depositOrder: [],
         shippingOrder: [],
+        requestOrder: [],
     });
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [cancelRowsPerPage, setCancelRowsPerPage] = useState(10);
@@ -71,6 +72,7 @@ const OrderListContainer = () => {
             let cancelOrder = [];
             let depositOrder = [];
             let shippingOrder = [];
+            let requestOrder = [];
             for (let i = 0; i < list.length; i++) {
                 let orderStatus = list[i].orderStatus;
                 if (orderStatus === '취소' || orderStatus === '환불' || orderStatus === '환불대기') {
@@ -79,6 +81,8 @@ const OrderListContainer = () => {
                     pandingOrder.push(list[i]);
                 } else if (orderStatus === '무통장입금') {
                     depositOrder.push(list[i]);
+                } else if (orderStatus === '결제요청') {
+                    requestOrder.push(list[i]);
                 } else if (orderStatus === '결제완료') {
                     normalOrder.push(list[i]);
                 } else {
@@ -91,6 +95,7 @@ const OrderListContainer = () => {
                     pandingOrder: pandingOrder,
                     depositOrder: depositOrder,
                     shippingOrder: shippingOrder,
+                    requestOrder: requestOrder,
                 });
             }
         }
@@ -125,6 +130,12 @@ const OrderListContainer = () => {
             createData(v.id, v.orderNumber, v.recipient.member.email, v.orderStatus, v.recipient.createdDate)
         ),
     ];
+    const requestOrderRows = [
+        // createData('India', 'IN', 1324171354, 3287263),
+        order.requestOrder.map(v =>
+            createData(v.id, v.orderNumber, v.recipient.member.email, v.orderStatus, v.recipient.createdDate)
+        ),
+    ];
     // console.log(rows);
     // if (list.length === 0) {
     //     return null;
@@ -136,6 +147,7 @@ const OrderListContainer = () => {
             cancalRows={cancelOrderRows}
             pandingOrderRows={pandingOrderRows}
             shippingOrderRows={shippingOrderRows}
+            requestOrderRows={requestOrderRows}
             handleCancelChangePage={handleCancelChangePage}
             handleChangeCancelRowsPerPage={handleChangeCancelRowsPerPage}
             RowsPerPage={rowsPerPage}

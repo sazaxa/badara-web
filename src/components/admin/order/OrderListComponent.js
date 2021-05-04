@@ -13,6 +13,7 @@ import SwipeableViews from 'react-swipeable-views';
 import PandingOrderList from './PandingOrderList';
 import DepositOrderList from './DepositOrderList';
 import ShippingOrderList from './ShippingOrderList';
+import RequestOrderList from './RequestOrderList ';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -62,6 +63,7 @@ const OrderListComponent = ({
     pandingOrderRows,
     depositOrderRows,
     shippingOrderRows,
+    requestOrderRows,
 }) => {
     const classes = useStyles();
     const theme = useTheme();
@@ -87,9 +89,10 @@ const OrderListComponent = ({
                 >
                     <Tab label="결제대기" {...a11yProps(0)} />
                     <Tab label="무통장입금" {...a11yProps(1)} />
-                    <Tab label="결제완료" {...a11yProps(2)} />
-                    <Tab label="해외배송중" {...a11yProps(3)} />
-                    <Tab label="취소" {...a11yProps(4)} />
+                    <Tab label="결제요청" {...a11yProps(2)} />
+                    <Tab label="결제완료" {...a11yProps(3)} />
+                    <Tab label="해외배송중" {...a11yProps(4)} />
+                    <Tab label="취소" {...a11yProps(5)} />
                 </Tabs>
             </AppBar>
             <SwipeableViews
@@ -104,6 +107,9 @@ const OrderListComponent = ({
                     <DepositOrderList Rows={depositOrderRows} />
                 </TabPanel>
                 <TabPanel value={value} index={2} dir={theme.direction}>
+                    <RequestOrderList Rows={requestOrderRows} />
+                </TabPanel>
+                <TabPanel value={value} index={3} dir={theme.direction}>
                     <NormalOrderList
                         Rows={Rows}
                         RowsPerPage={RowsPerPage}
@@ -112,10 +118,10 @@ const OrderListComponent = ({
                         HandleChangeRowsPerPage={HandleChangeRowsPerPage}
                     />
                 </TabPanel>
-                <TabPanel value={value} index={3} dir={theme.direction}>
+                <TabPanel value={value} index={4} dir={theme.direction}>
                     <ShippingOrderList Rows={shippingOrderRows} />
                 </TabPanel>
-                <TabPanel value={value} index={4} dir={theme.direction}>
+                <TabPanel value={value} index={5} dir={theme.direction}>
                     <CancelOrderList
                         Rows={cancalRows}
                         RowsPerPage={cancelRowsPerPage}
