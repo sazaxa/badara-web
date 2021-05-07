@@ -27,6 +27,7 @@ const OrderDetailContainer = ({ match }) => {
                 id: orderInfo.id,
                 orderNumber: orderInfo.orderNumber,
                 orderPrice: orderInfo.orderPrice,
+                extraPrice: orderInfo.extraPrice === null ? 0 : orderInfo.extraPrice,
                 orderStatus: orderInfo.orderStatus,
                 invoice: orderInfo.invoice,
                 depositName: orderInfo.depositName,

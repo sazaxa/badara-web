@@ -18,7 +18,7 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                 </tr>
                 <tr>
                     <th>주문 가격</th>
-                    <td colSpan="2">
+                    <td colSpan="1">
                         {UpdateState ? (
                             <input
                                 type="number"
@@ -36,12 +36,26 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                             />
                         )}
                     </td>
+                    <th>추가금액</th>
+                    <td colSpan="1">
+                        <input
+                            type="text"
+                            name="extraPrice"
+                            value={UpdateValue.extraPrice === null ? '' : UpdateValue.extraPrice}
+                            disabled={UpdateState ? false : true}
+                            onChange={e => handleOrderChange(e)}
+                        />
+                    </td>
                     <th>부가세</th>
-                    <td colSpan="2">
+                    <td colSpan="1">
                         <input
                             type="text"
                             name="vat"
-                            value={UpdateValue.orderPrice ? parseInt(UpdateValue.orderPrice) * 0.1 : ''}
+                            value={
+                                UpdateValue.orderPrice && UpdateValue.extraPrice
+                                    ? parseInt(UpdateValue.orderPrice + UpdateValue.extraPrice) * 0.1
+                                    : ''
+                            }
                             disabled
                         />
                     </td>
@@ -118,11 +132,23 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                 <tr>
                     <th>이름</th>
                     <td colSpan="2">
-                        <input type="text" value={UpdateValue.recipient.name || ''} disabled />
+                        <input
+                            type="text"
+                            name="name"
+                            value={UpdateValue.recipient.name}
+                            disabled={UpdateState ? false : true}
+                            onChange={e => handleRecipientChange(e)}
+                        />
                     </td>
                     <th>휴대폰 번호</th>
                     <td colSpan="2">
-                        <input type="text" value={UpdateValue.recipient.phoneNumber || ''} disabled />
+                        <input
+                            type="text"
+                            name="phoneNumber"
+                            value={UpdateValue.recipient.phoneNumber || ''}
+                            disabled={UpdateState ? false : true}
+                            onChange={e => handleRecipientChange(e)}
+                        />
                     </td>
                 </tr>
                 <tr>
