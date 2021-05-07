@@ -69,7 +69,8 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                             value={
                                 UpdateValue.orderPrice
                                     ? Math.ceil(
-                                          parseInt(UpdateValue.orderPrice) + parseInt(UpdateValue.orderPrice) * 0.1
+                                          parseInt(UpdateValue.orderPrice + UpdateValue.extraPrice) +
+                                              parseInt(UpdateValue.orderPrice) * 0.1
                                       ).toLocaleString() + '원'
                                     : ''
                             }
