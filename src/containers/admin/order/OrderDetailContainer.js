@@ -41,8 +41,6 @@ const OrderDetailContainer = ({ match }) => {
         }
     }, [orderInfo]);
 
-    console.log(updateValue);
-
     const handleUpdateClick = () => {
         setUpdateState(!updateState);
     };
@@ -78,7 +76,6 @@ const OrderDetailContainer = ({ match }) => {
             })
         );
         setUpdateState(!updateState);
-        console.log('업데이트후 :', updateValue);
     };
     // const handleChange = (e, index) => {
     //     const { name, value } = e.target;
