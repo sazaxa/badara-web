@@ -219,7 +219,6 @@ const Recipient = ({ stepIndex, steps }) => {
                                     value={recipient.memo ?? undefined}
                                     onChange={e => handleChange(e)}
                                     style={{ width: '100%', marginBottom: '5px' }}
-                                    required
                                 />
                             </td>
                         </tr>
