@@ -20,6 +20,8 @@ const MyorderList = ({
     handleTabToggle,
     handleCancelPopup,
     cancelPopup,
+    handlePriceDetail,
+    priceDetail,
 }) => {
     if (!memberOrder) {
         return null;
@@ -282,7 +284,7 @@ const MyorderList = ({
                                 </article>
                                 {order.orderStatus !== '결제대기' ? (
                                     <article className="total">
-                                        <div className="item">
+                                        {/* <div className="item">
                                             <strong>상태</strong>
                                             <span>{order.orderStatus}</span>
                                         </div>
@@ -304,6 +306,42 @@ const MyorderList = ({
                                                 ).toLocaleString()}
                                                 원
                                             </span>
+                                        </div> */}
+                                        <div className="item" style={{ width: '100%' }}>
+                                            <strong>총 금액</strong>
+                                            <span style={{ fontSize: '20px', fontWeight: '600' }}>
+                                                {Math.ceil(
+                                                    Number(order.orderPrice) +
+                                                        Number(order.extraPrice) +
+                                                        Number(order.orderPrice) * 0.1
+                                                ).toLocaleString()}
+                                                원
+                                            </span>
+                                            <span
+                                                className={priceDetail ? 'detailBtn active' : 'detailBtn'}
+                                                onClick={() => handlePriceDetail()}
+                                            >
+                                                >
+                                            </span>
+                                        </div>
+                                        <div className={priceDetail ? 'detailPrice active' : 'detailPrice'}>
+                                            <div className="item" style={{ marginTop: '10px' }}>
+                                                <strong>결제금액</strong>
+                                                <span>{Math.ceil(Number(order.orderPrice)).toLocaleString()}원</span>
+                                            </div>
+                                            <div className="item">
+                                                <strong>추가금액</strong>
+                                                <span>{Math.ceil(Number(order.extraPrice)).toLocaleString()}원</span>
+                                            </div>
+                                            <div className="item">
+                                                <strong>부가세</strong>
+                                                <span>
+                                                    {Math.ceil(
+                                                        (Number(order.orderPrice) + Number(order.extraPrice)) * 0.1
+                                                    ).toLocaleString()}
+                                                    원
+                                                </span>
+                                            </div>
                                         </div>
                                         {order.orderStatus === '해외배송중' || order.orderStatus === '해외배송완료' ? (
                                             <div className="item" style={{ width: '100%', marginTop: '10px' }}>

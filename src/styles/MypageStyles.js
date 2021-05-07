@@ -440,7 +440,7 @@ export const MypageContent = styled.article`
             padding: 0 10px;
             @media screen and (max-width: 1140px) {
                 width: 100%;
-                margin-bottom: 10px;
+                // margin-bottom: 10px;
             }
         }
         & > .item > strong {
@@ -453,6 +453,38 @@ export const MypageContent = styled.article`
                 margin-bottom: 10px;
             }
         }
+        .detailPrice {
+            visibility: hidden;
+            opacity: 0;
+            height: 0vh;
+            transition: all 0.3s;
+            .item {
+                width: 300px;
+            }
+            .item > strong,
+            .item > span {
+                width: 100px;
+                display: inline-block;
+                padding: 10px 0;
+                border-bottom: 1px solid #ccc;
+            }
+        }
+        .detailPrice.active {
+            visibility: visible;
+            opacity: 1;
+            height: 15vh;
+        }
+    }
+    .detailBtn {
+        display: inline-block;
+        margin-left: 20px;
+        font-weight: 600;
+        transform: rotate(-90deg);
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    .detailBtn.active {
+        transform: rotate(90deg);
     }
     button {
         width: 66px;
