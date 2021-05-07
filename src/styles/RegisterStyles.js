@@ -10,7 +10,7 @@ export const RegisterContent = styled.article`
     width: 388px;
     margin: 0 auto;
     text-align: center;
-    padding: 100px 0 150px 0;
+    padding:200px 0 150px 0;
     box-sizing: border-box;
     @media screen and (max-width: 1140px) {
         width:100%;
