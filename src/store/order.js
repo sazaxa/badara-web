@@ -64,6 +64,7 @@ function* putOrderInfoSaga({ payload: { updateData, callBack } }) {
                 result: true,
             });
         }
+        alert('수정 되었습니다.');
     } catch (e) {
         alert('처리중 오류가 발생했습니다. 관리자에게 문의하세요.\n' + e);
     }
