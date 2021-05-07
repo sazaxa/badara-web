@@ -57,13 +57,15 @@ function* getOrderInfoSaga({ payload: id }) {
 
 function* putOrderInfoSaga({ payload: { updateData, callBack } }) {
     // console.log(updateData);
-    yield call(orderAPI.put, updateData);
-    if (callBack instanceof Function) {
-        callBack({
-            result: true,
-        });
-    } else {
-        alert('처리중 문제 발생했습니다.');
+    try {
+        yield call(orderAPI.put, updateData);
+        if (callBack instanceof Function) {
+            callBack({
+                result: true,
+            });
+        }
+    } catch (e) {
+        alert('처리중 오류가 발생했습니다. 관리자에게 문의하세요.\n' + e);
     }
 }
 
