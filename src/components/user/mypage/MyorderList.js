@@ -326,11 +326,11 @@ const MyorderList = ({
                                         </div>
                                         <div className={priceDetail ? 'detailPrice active' : 'detailPrice'}>
                                             <div className="item" style={{ marginTop: '10px' }}>
-                                                <strong>결제금액</strong>
+                                                <strong>배송비용</strong>
                                                 <span>{Math.ceil(Number(order.orderPrice)).toLocaleString()}원</span>
                                             </div>
                                             <div className="item">
-                                                <strong>추가금액</strong>
+                                                <strong>추가비용</strong>
                                                 <span>{Math.ceil(Number(order.extraPrice)).toLocaleString()}원</span>
                                             </div>
                                             <div className="item">
