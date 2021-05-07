@@ -15,6 +15,7 @@ const MypageContainer = ({ location, history }) => {
     const dispatch = useDispatch();
     const accessToken = localStorage.getItem('accessToken');
     const [orderTab, setOrderTab] = useState(0);
+    const [priceDetail, setPriceDeatail] = useState(false);
     const [updatePopup, setUpdatePopup] = useState(false);
     const [paymentPopup, setPaymentPopup] = useState(false);
     const [cancelPopup, setCancelPopup] = useState(false);
@@ -46,6 +47,10 @@ const MypageContainer = ({ location, history }) => {
 
     const handleTabToggle = tab => {
         setOrderTab(tab);
+    };
+
+    const handlePriceDetail = () => {
+        setPriceDeatail(!priceDetail);
     };
 
     const { logged, orders } = useSelector(
@@ -260,6 +265,8 @@ const MypageContainer = ({ location, history }) => {
                 handleCancel={handleCancel}
                 cancelPopup={cancelPopup}
                 handleCancelPopup={handleCancelPopup}
+                handlePriceDetail={handlePriceDetail}
+                priceDetail={priceDetail}
             />
         );
     if (orderTab === 1) {
