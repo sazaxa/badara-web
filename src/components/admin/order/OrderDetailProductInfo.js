@@ -13,13 +13,25 @@ const OrderDetailProductInfo = ({ UpdateState, HandleChange, Products, List }) =
                             <tr>
                                 <th>상품 이름</th>
                                 <td colSpan="3">
-                                    <input type="text" defaultValue={product.productDetail} disabled />
+                                    <input
+                                        type="text"
+                                        name="productDetail"
+                                        value={product.productDetail}
+                                        disabled={UpdateState ? false : true}
+                                        onChange={e => HandleChange(e, index)}
+                                    />
                                 </td>
                             </tr>
                             <tr>
                                 <th>개수</th>
                                 <td colSpan="3">
-                                    <input type="text" defaultValue={product.quantity} disabled />
+                                    <input
+                                        type="text"
+                                        value={product.quantity}
+                                        name="quantity"
+                                        disabled={UpdateState ? false : true}
+                                        onChange={e => HandleChange(e, index)}
+                                    />
                                 </td>
                             </tr>
                             {/* <tr>
@@ -143,7 +155,7 @@ const OrderDetailProductInfo = ({ UpdateState, HandleChange, Products, List }) =
                                             defaultValue={product.price || ''}
                                             name="price"
                                             onChange={e => HandleChange(e, index)}
-                                            disabled
+                                            disabled={UpdateState ? false : true}
                                         />
                                     ) : (
                                         <input type="text" value={product.price || ''} disabled />
