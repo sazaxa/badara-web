@@ -22,3 +22,5 @@ export { default as AdminLoginContainer } from './admin/auth/Login';
 export { default as RegisterContainer } from './user/register/RegisterContainer';
 
 export { default as CostContainer } from './user/cost/CostContainer';
+
+export { default as Print } from './admin/print/Print';

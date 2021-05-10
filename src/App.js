@@ -16,6 +16,7 @@ import {
     AdminOrderDetailPage,
     AdminLoginPage,
     Mypage,
+    AdminPrintPage,
 } from 'pages';
 import { FooterComponent } from 'components';
 import { HeaderContainer, AdminHeaderContainer } from 'containers';
@@ -47,7 +48,8 @@ function App({ location }) {
             {pathname.startsWith(BASE_ADMIN_URL) ? (
                 <section className="adminWrap">
                     <Route component={AdminLoginPage} path="/admin" exact />
-                    {pathname === '/admin' ? null : <AdminHeaderContainer />}
+                    <Route component={AdminPrintPage} path="/admin/print" />
+                    {pathname === '/admin' || pathname === '/admin/print' ? null : <AdminHeaderContainer />}
                     <Route component={AdminUserPage} path="/admin/user" exact />
                     <Route component={AdminUserDetailPage} path="/admin/user/:id" />
                     <Route component={AdminOrderPage} path="/admin/order" exact />

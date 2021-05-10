@@ -11,4 +11,6 @@ export { default as AdminChargePage } from './admin/AdminChargePage';
 export { default as AdminLoginPage } from './admin/AdminLoginPage';
 export { default as Mypage } from './user/Mypage';
 
+export { default as AdminPrintPage } from './admin/AdminPrintPage';
+
 export { default as MainPage } from './user/MainPage';
