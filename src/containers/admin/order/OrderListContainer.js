@@ -27,9 +27,6 @@ export const columns = [
     { id: 'days', label: '날짜', minWidth: 200, align: 'center' },
 ];
 
-function createData(id, orderId, member, status, days) {
-    return { id, orderId, member, status, days };
-}
 const OrderListContainer = () => {
     const dispatch = useDispatch();
     const { list } = useSelector(state => state.order.orders);
@@ -100,54 +97,18 @@ const OrderListContainer = () => {
             }
         }
     }, [list]);
-    const normalOrderRows = [
-        // createData('India', 'IN', 1324171354, 3287263),
-        order.normalOrder.map(v =>
-            createData(v.id, v.orderNumber, v.recipient.member.email, v.orderStatus, v.recipient.createdDate)
-        ),
-    ];
-    const cancelOrderRows = [
-        // createData('India', 'IN', 1324171354, 3287263),
-        order.cancelOrder.map(v =>
-            createData(v.id, v.orderNumber, v.recipient.member.email, v.orderStatus, v.recipient.createdDate)
-        ),
-    ];
-    const pandingOrderRows = [
-        // createData('India', 'IN', 1324171354, 3287263),
-        order.pandingOrder.map(v =>
-            createData(v.id, v.orderNumber, v.recipient.member.email, v.orderStatus, v.recipient.createdDate)
-        ),
-    ];
-    const depositOrderRows = [
-        // createData('India', 'IN', 1324171354, 3287263),
-        order.depositOrder.map(v =>
-            createData(v.id, v.orderNumber, v.recipient.member.email, v.orderStatus, v.recipient.createdDate)
-        ),
-    ];
-    const shippingOrderRows = [
-        // createData('India', 'IN', 1324171354, 3287263),
-        order.shippingOrder.map(v =>
-            createData(v.id, v.orderNumber, v.recipient.member.email, v.orderStatus, v.recipient.createdDate)
-        ),
-    ];
-    const requestOrderRows = [
-        // createData('India', 'IN', 1324171354, 3287263),
-        order.requestOrder.map(v =>
-            createData(v.id, v.orderNumber, v.recipient.member.email, v.orderStatus, v.recipient.createdDate)
-        ),
-    ];
     // console.log(rows);
     // if (list.length === 0) {
     //     return null;
     // }
     return (
         <OrderListComponent
-            Rows={normalOrderRows}
-            depositOrderRows={depositOrderRows}
-            cancalRows={cancelOrderRows}
-            pandingOrderRows={pandingOrderRows}
-            shippingOrderRows={shippingOrderRows}
-            requestOrderRows={requestOrderRows}
+            Rows={order.normalOrder}
+            depositOrderRows={order.depositOrder}
+            cancalRows={order.cancelOrder}
+            pandingOrderRows={order.pandingOrder}
+            shippingOrderRows={order.shippingOrder}
+            requestOrderRows={order.shippingOrder}
             handleCancelChangePage={handleCancelChangePage}
             handleChangeCancelRowsPerPage={handleChangeCancelRowsPerPage}
             RowsPerPage={rowsPerPage}

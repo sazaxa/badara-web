@@ -24,6 +24,9 @@ const PUT_ORDER_INFO = 'order/PUT_ORDER_INFO';
 
 const GET_ORDER_ID = 'order/GET_ORDER_ID';
 
+// 프린트를 위한 주문번호 보내기
+const PRINT_ORDER_NUMBER_LIST = 'print/PRINT_ORDER_NUMBER_LIST';
+
 export const getOrderListAction = createAction(GET_ORDER_LIST_REQUEST);
 export const getOrderIdAction = createAction(GET_ORDER_ID, id => id);
 export const getOrderInfoAction = createAction(GET_ORDER_INFO_REQUEST, id => id);
@@ -36,6 +39,7 @@ export const orderStatusChangeAction = createAction(ORDER_STATUS_CHANGE_REQUEST,
     data,
     callBack,
 }));
+export const printOrderNumberListAction = createAction(PRINT_ORDER_NUMBER_LIST, selectedOrders => selectedOrders);
 
 function* getOrderListSaga() {
     try {
@@ -96,6 +100,9 @@ const initialState = {
         status: 'idle',
         list: [],
     },
+    print: {
+        seletedOrders: [],
+    },
     orderInfo: null,
     id: null,
     error: null,
@@ -137,6 +144,11 @@ export default handleActions(
         [GET_ORDER_ID]: (state, { payload }) => {
             return produce(state, draft => {
                 draft.id = payload;
+            });
+        },
+        [PRINT_ORDER_NUMBER_LIST]: (state, { payload }) => {
+            return produce(state, draft => {
+                draft.print.seletedOrders = payload.selectedOrders;
             });
         },
     },

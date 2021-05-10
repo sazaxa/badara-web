@@ -8,8 +8,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
 import { Link, withRouter } from 'react-router-dom';
 import { columns } from 'containers/admin/order/OrderListContainer';
 import moment from 'moment';
@@ -36,10 +36,19 @@ const useStyles = makeStyles({
     },
 });
 
-const NormalOrderList = ({ Rows, RowsPerPage, Page, HandleChangePage, HandleChangeRowsPerPage, history }) => {
-    const classes = useStyles();
+const RequestOrderList = ({ Rows, history }) => {
     const dispatch = useDispatch();
+    const classes = useStyles();
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
     const [selected, setSelected] = useState([]);
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+    const handleChangeRowsPerPage = event => {
+        setRowsPerPage(+event.target.value);
+        setPage(0);
+    };
     const handleOnseleted = (e, order) => {
         const selectedIndex = selected.indexOf(order);
         let newSelected = [];
@@ -117,7 +126,7 @@ const NormalOrderList = ({ Rows, RowsPerPage, Page, HandleChangePage, HandleChan
                         </TableHead>
                         <TableBody>
                             {Rows.length > 0 ? (
-                                Rows.slice(Page * RowsPerPage, Page * RowsPerPage + RowsPerPage).map((row, index) => {
+                                Rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
                                     return (
                                         <TableRow key={row.id}>
                                             <TableCell component="th" scope="row" align="center">
@@ -156,14 +165,14 @@ const NormalOrderList = ({ Rows, RowsPerPage, Page, HandleChangePage, HandleChan
                     rowsPerPageOptions={[10, 25, 100]}
                     component="div"
                     count={Rows.length}
-                    rowsPerPage={RowsPerPage}
-                    page={Page}
-                    onChangePage={HandleChangePage}
-                    onChangeRowsPerPage={HandleChangeRowsPerPage}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onChangePage={handleChangePage}
+                    onChangeRowsPerPage={handleChangeRowsPerPage}
                 />
             </Paper>
         </>
     );
 };
 
-export default withRouter(NormalOrderList);
+export default withRouter(RequestOrderList);

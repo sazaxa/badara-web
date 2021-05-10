@@ -13,7 +13,7 @@ import SwipeableViews from 'react-swipeable-views';
 import PandingOrderList from './PandingOrderList';
 import DepositOrderList from './DepositOrderList';
 import ShippingOrderList from './ShippingOrderList';
-import RequestOrderList from './RequestOrderList ';
+import RequestOrderList from './RequestOrderList';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
