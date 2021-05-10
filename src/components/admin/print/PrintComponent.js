@@ -23,7 +23,7 @@ const PrintComponent = ({ history }) => {
         <PrintWrap>
             {seletedOrders.map(order => (
                 <div className="page" key={order.id}>
-                    <div className="customPopup subpage" key={order.id}>
+                    <div className="customPopup subpage">
                         <div className="Deviver">
                             <div className="head">
                                 <div className="userInformation">
@@ -102,7 +102,7 @@ const PrintComponent = ({ history }) => {
                                         </thead>
                                         <tbody>
                                             {(order.productResponses || []).map(product => (
-                                                <tr>
+                                                <tr key={product.id}>
                                                     <td>{product.productDetail}</td>
                                                     <td> {product.quantity}</td>
                                                     <td>{product.price.toLocaleString() + '원'}</td>
@@ -124,7 +124,7 @@ const PrintComponent = ({ history }) => {
                                         </thead>
                                         <tbody>
                                             {(order.boxResponses || []).map(box => (
-                                                <tr>
+                                                <tr key={box.id}>
                                                     <td>{box.expectedVolumeWeight + 'KG'}</td>
                                                     <td>{box.expectedNetWeight + 'KG'}</td>
                                                     <td>{box.volumeWeight ? box.volumeWeight + 'KG' : '입력전'}</td>
