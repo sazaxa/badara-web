@@ -108,7 +108,7 @@ const OrderListContainer = () => {
             cancalRows={order.cancelOrder}
             pandingOrderRows={order.pandingOrder}
             shippingOrderRows={order.shippingOrder}
-            requestOrderRows={order.shippingOrder}
+            requestOrderRows={order.requestOrder}
             handleCancelChangePage={handleCancelChangePage}
             handleChangeCancelRowsPerPage={handleChangeCancelRowsPerPage}
             RowsPerPage={rowsPerPage}
