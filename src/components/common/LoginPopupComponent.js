@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import { LoginPopupWrap, LoginPopup, StyledInput } from 'styles/CommonStyles';
 import logo from '../../styles/img/logo.png';
+import KakaoLoginButton from './KakaoLoginButton';
 
 const LoginPopupComponent = ({ onClick, HandleChange, HandleSubmit, onKeyPress }) => (
     <>
@@ -39,6 +40,7 @@ const LoginPopupComponent = ({ onClick, HandleChange, HandleSubmit, onKeyPress }
                 <Button variant="contained" color="primary" onClick={HandleSubmit} id="loginBtn">
                     로그인
                 </Button>
+                <KakaoLoginButton />
             </form>
             <p className="registerFont">
                 {/* <Link to="register" onClick={onClick}>

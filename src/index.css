@@ -72,3 +72,19 @@ code {
         page-break-after: always;
     }
 }
+.kakaoBtn {
+    height: 30px;
+    line-height: 30px;
+    display: inline-block;
+}
+.kakaoBtn::before {
+    display: inline-block;
+    position: relative;
+    top: 0px;
+    width: 30px;
+    height: 30px;
+    background: url(https://static.msscdn.net/ui/build/m/img/old/bg_social.png?v=20210504121900) no-repeat;
+    background-size: 60px 30px;
+    vertical-align: top;
+    content: '';
+}
