@@ -3,6 +3,7 @@ import produce from 'immer';
 import { createRequestActionTypes } from 'lib/createRequestActionTypes';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import * as orderAPI from '../lib/api/order';
+import fileDownload from 'js-file-download';
 
 //  주문 목록 Action Types
 const [GET_ORDER_LIST_REQUEST, GET_ORDER_LIST_SUCCESS, GET_ORDER_LIST_FAILURE] = createRequestActionTypes(
@@ -27,6 +28,9 @@ const GET_ORDER_ID = 'order/GET_ORDER_ID';
 // 프린트를 위한 주문번호 보내기
 const PRINT_ORDER_NUMBER_LIST = 'print/PRINT_ORDER_NUMBER_LIST';
 
+// 전체 엑셀 다운로드
+const EXCEL_ORDER_ALL = 'excel/EXCEL_ORDER_ALL';
+
 export const getOrderListAction = createAction(GET_ORDER_LIST_REQUEST);
 export const getOrderIdAction = createAction(GET_ORDER_ID, id => id);
 export const getOrderInfoAction = createAction(GET_ORDER_INFO_REQUEST, id => id);
@@ -40,6 +44,8 @@ export const orderStatusChangeAction = createAction(ORDER_STATUS_CHANGE_REQUEST,
     callBack,
 }));
 export const printOrderNumberListAction = createAction(PRINT_ORDER_NUMBER_LIST, selectedOrders => selectedOrders);
+
+export const excelOrderAllDownloadAction = createAction(EXCEL_ORDER_ALL);
 
 function* getOrderListSaga() {
     try {
@@ -88,11 +94,21 @@ function* orderStatusChangeSaga({ payload: { id, data, callBack } }) {
     }
 }
 
+function* excelOrderAllDownloadSaga() {
+    try {
+        const response = yield call(orderAPI.orderExcelAllDownload);
+        fileDownload(response.data, 'Order.xlsx');
+    } catch (e) {
+        alert('오류가 발생했습니다. 관리자에게 문의하세요.' + e);
+    }
+}
+
 export function* orderSaga() {
     yield takeLatest(GET_ORDER_LIST_REQUEST, getOrderListSaga);
     yield takeLatest(GET_ORDER_INFO_REQUEST, getOrderInfoSaga);
     yield takeLatest(PUT_ORDER_INFO, putOrderInfoSaga);
     yield takeLatest(ORDER_STATUS_CHANGE_REQUEST, orderStatusChangeSaga);
+    yield takeLatest(EXCEL_ORDER_ALL, excelOrderAllDownloadSaga);
 }
 
 const initialState = {

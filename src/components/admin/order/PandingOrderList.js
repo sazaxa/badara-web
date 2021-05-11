@@ -15,7 +15,7 @@ import { columns } from 'containers/admin/order/OrderListContainer';
 import moment from 'moment';
 import 'moment/locale/ko';
 import { useDispatch } from 'react-redux';
-import { printOrderNumberListAction } from 'store/order';
+import { excelOrderAllDownloadAction, printOrderNumberListAction } from 'store/order';
 
 const StyledTableCell = withStyles(theme => ({
     head: {
@@ -95,6 +95,13 @@ const PandingOrderList = ({ Rows, history }) => {
                     onClick={() => handlePrint()}
                 >
                     프린트
+                </Button>
+                <Button
+                    variant="contained"
+                    style={{ backgroundColor: '#2191f3', color: '#fff', marginRight: '10px' }}
+                    onClick={() => dispatch(excelOrderAllDownloadAction())}
+                >
+                    전체 엑셀 다운로드
                 </Button>
                 <Button
                     variant="contained"

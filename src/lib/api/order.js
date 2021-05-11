@@ -18,3 +18,9 @@ export const orderStatusChange = ({ id, data }) => {
     console.log(data);
     return client.put(`/api/v1/orders/status/${id}`, data);
 };
+
+// 주문 엑셀 다운로드
+
+export const orderExcelAllDownload = () => {
+    return client.get('/excel/download/orders');
+};
