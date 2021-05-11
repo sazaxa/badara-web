@@ -14,6 +14,7 @@ const DepositToAccount = ({ handlePopup, popup, paymentPopup }) => {
     const [depositData, setDepositData] = useState({
         paymentMethod: '무통장입금',
         depositName: null,
+        cardType: '무통장입금',
     });
 
     const handleChange = e => {
