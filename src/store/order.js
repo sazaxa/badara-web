@@ -97,7 +97,7 @@ function* orderStatusChangeSaga({ payload: { id, data, callBack } }) {
 function* excelOrderAllDownloadSaga() {
     try {
         const response = yield call(orderAPI.orderExcelAllDownload);
-        fileDownload(response.data, 'Order.xlsx');
+        fileDownload(response.data, 'orders.xlsx');
     } catch (e) {
         alert('오류가 발생했습니다. 관리자에게 문의하세요.' + e);
     }

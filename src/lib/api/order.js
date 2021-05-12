@@ -22,5 +22,7 @@ export const orderStatusChange = ({ id, data }) => {
 // 주문 엑셀 다운로드
 
 export const orderExcelAllDownload = () => {
-    return client.get('/excel/download/orders');
+    return client.get('/excel/download/orders', {
+        responseType: 'arraybuffer',
+    });
 };

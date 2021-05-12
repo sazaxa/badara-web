@@ -16,6 +16,8 @@ import moment from 'moment';
 import 'moment/locale/ko';
 import { useDispatch } from 'react-redux';
 import { excelOrderAllDownloadAction, printOrderNumberListAction } from 'store/order';
+import axios from '../../../../node_modules/axios/index';
+import fileDownload from 'js-file-download';
 
 const StyledTableCell = withStyles(theme => ({
     head: {
@@ -85,7 +87,6 @@ const PandingOrderList = ({ Rows, history }) => {
             history.push('/admin/print');
         }
     };
-
     return (
         <>
             <div className="btnWrap" style={{ marginBottom: '10px' }}>
