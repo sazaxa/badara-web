@@ -15,9 +15,7 @@ import { columns } from 'containers/admin/order/OrderListContainer';
 import moment from 'moment';
 import 'moment/locale/ko';
 import { useDispatch } from 'react-redux';
-import { excelOrderAllDownloadAction, printOrderNumberListAction } from 'store/order';
-import axios from '../../../../node_modules/axios/index';
-import fileDownload from 'js-file-download';
+import { excelOrderAllDownloadAction, excelOrderSelectDownloadAction, printOrderNumberListAction } from 'store/order';
 
 const StyledTableCell = withStyles(theme => ({
     head: {
@@ -87,6 +85,17 @@ const PandingOrderList = ({ Rows, history }) => {
             history.push('/admin/print');
         }
     };
+
+    const handleExcel = () => {
+        if (selected.length <= 0) {
+            alert('선택해주세요.');
+        } else {
+            const orderNumbers = [];
+            selected.map(order => orderNumbers.push(order.orderNumber));
+            dispatch(excelOrderSelectDownloadAction({ orderNumbers: orderNumbers }));
+            setSelected([]);
+        }
+    };
     return (
         <>
             <div className="btnWrap" style={{ marginBottom: '10px' }}>
@@ -107,7 +116,7 @@ const PandingOrderList = ({ Rows, history }) => {
                 <Button
                     variant="contained"
                     style={{ backgroundColor: '#2191f3', color: '#fff', marginRight: '10px' }}
-                    onClick={() => alert('준비중입니다.')}
+                    onClick={() => handleExcel()}
                 >
                     엑셀 다운로드
                 </Button>

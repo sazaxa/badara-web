@@ -19,10 +19,16 @@ export const orderStatusChange = ({ id, data }) => {
     return client.put(`/api/v1/orders/status/${id}`, data);
 };
 
-// 주문 엑셀 다운로드
-
+// 주문 전체 엑셀 다운로드
 export const orderExcelAllDownload = () => {
     return client.get('/excel/download/orders', {
+        responseType: 'arraybuffer',
+    });
+};
+
+// 주문 선택 엑셀 다운로드
+export const orderExcelSelectDownload = orderNumber => {
+    return client.post('/excel/download/orders', orderNumber, {
         responseType: 'arraybuffer',
     });
 };

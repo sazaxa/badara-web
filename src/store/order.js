@@ -31,6 +31,9 @@ const PRINT_ORDER_NUMBER_LIST = 'print/PRINT_ORDER_NUMBER_LIST';
 // 전체 엑셀 다운로드
 const EXCEL_ORDER_ALL = 'excel/EXCEL_ORDER_ALL';
 
+// 전체 선택한 엑셀 다운로드
+const EXCEL_ORDER_SELECT = 'excel/EXCEL_ORDER_SELECT';
+
 export const getOrderListAction = createAction(GET_ORDER_LIST_REQUEST);
 export const getOrderIdAction = createAction(GET_ORDER_ID, id => id);
 export const getOrderInfoAction = createAction(GET_ORDER_INFO_REQUEST, id => id);
@@ -46,6 +49,8 @@ export const orderStatusChangeAction = createAction(ORDER_STATUS_CHANGE_REQUEST,
 export const printOrderNumberListAction = createAction(PRINT_ORDER_NUMBER_LIST, selectedOrders => selectedOrders);
 
 export const excelOrderAllDownloadAction = createAction(EXCEL_ORDER_ALL);
+
+export const excelOrderSelectDownloadAction = createAction(EXCEL_ORDER_SELECT, orderNumbers => orderNumbers);
 
 function* getOrderListSaga() {
     try {
@@ -103,12 +108,22 @@ function* excelOrderAllDownloadSaga() {
     }
 }
 
+function* excelOrderSelcetDownloadSaga({ payload: orderNumbers }) {
+    try {
+        const response = yield call(orderAPI.orderExcelSelectDownload, orderNumbers);
+        fileDownload(response.data, 'orders.xlsx');
+    } catch (e) {
+        alert('오류가 발생했습니다. 관리자에게 문의하세요.' + e);
+    }
+}
+
 export function* orderSaga() {
     yield takeLatest(GET_ORDER_LIST_REQUEST, getOrderListSaga);
     yield takeLatest(GET_ORDER_INFO_REQUEST, getOrderInfoSaga);
     yield takeLatest(PUT_ORDER_INFO, putOrderInfoSaga);
     yield takeLatest(ORDER_STATUS_CHANGE_REQUEST, orderStatusChangeSaga);
     yield takeLatest(EXCEL_ORDER_ALL, excelOrderAllDownloadSaga);
+    yield takeLatest(EXCEL_ORDER_SELECT, excelOrderSelcetDownloadSaga);
 }
 
 const initialState = {
