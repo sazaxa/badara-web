@@ -17,6 +17,7 @@ import {
     AdminLoginPage,
     Mypage,
     AdminPrintPage,
+    AdminPointSetting,
 } from 'pages';
 import { FooterComponent } from 'components';
 import { HeaderContainer, AdminHeaderContainer } from 'containers';
@@ -56,6 +57,7 @@ function App({ location }) {
                     <Route component={AdminOrderDetailPage} path="/admin/order/:id" />
                     <Route component={AdminFAQPage} path="/admin/faq" />
                     <Route component={AdminChargePage} path="/admin/insert" />
+                    <Route component={AdminPointSetting} path="/admin/pointsetting" />
                     {/* TODO: 계속 랜더링됨... 이유 확인중 */}
                     {/* <Redirect path="*" to="/admin" /> */}
                 </section>
