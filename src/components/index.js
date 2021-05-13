@@ -32,3 +32,5 @@ export { default as MyorderCancelList } from './user/mypage/MyorderCancelList';
 export { default as AdminLogin } from './admin/auth/Login';
 
 export { default as PrintComponent } from './admin/print/PrintComponent';
+
+export { default as PointComponent } from './admin/setting/point/PointComponent';
