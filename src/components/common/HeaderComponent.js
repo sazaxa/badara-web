@@ -71,15 +71,38 @@ const HeaderComponent = ({
                                 open={Boolean(AnchorEl)}
                                 onClose={HandleMenuClose}
                             >
+                                <p
+                                    style={{
+                                        textAlign: 'center',
+                                        padding: '1rem',
+                                        marginBottom: '1rem',
+                                        borderBottom: '1px solid #ccc',
+                                        lineHeight: '1.5',
+                                    }}
+                                >
+                                    회원님의 <br /> 보유 Point :{' '}
+                                    <strong>{loggedUser && loggedUser.point !== null ? loggedUser.point : 0}</strong>
+                                </p>
                                 <MenuItem onClick={HandleMenuClose}>
                                     <Link
-                                        style={{ color: '#000', display: 'block', width: '100%', height: '100%' }}
+                                        style={{
+                                            color: '#000',
+                                            display: 'block',
+                                            width: '100%',
+                                            height: '100%',
+                                            textAlign: 'center',
+                                        }}
                                         to="/mypage"
                                     >
                                         마이페이지
                                     </Link>
                                 </MenuItem>
-                                <MenuItem onClick={HandleLogout}>로그아웃</MenuItem>
+                                <MenuItem
+                                    onClick={HandleLogout}
+                                    style={{ width: '100%', textAlign: 'center', display: 'block' }}
+                                >
+                                    로그아웃
+                                </MenuItem>
                             </Menu>
                         </>
                     ) : (

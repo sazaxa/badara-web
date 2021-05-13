@@ -21,7 +21,7 @@ const HeaderContainer = () => {
     );
     const member = localStorage.getItem('accessToken');
     const { pathname } = useLocation();
-
+    console.log(logged);
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [pathname]);
