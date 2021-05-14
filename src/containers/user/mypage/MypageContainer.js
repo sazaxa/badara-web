@@ -3,7 +3,7 @@ import { MyorderList } from 'components';
 import React, { useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { getMemberOrderAction } from 'store/member';
-import { getOrderIdAction, getOrderInfoAction, orderStatusChangeAction } from 'store/order';
+import { getOrderIdAction, getOrderInfoAction, orderStatusChangeAction, orderStatusResetAction } from 'store/order';
 import { getProductInfoAction } from 'store/box';
 import { MyorderCancelList } from 'components/index';
 import { withRouter } from 'react-router';
@@ -13,6 +13,7 @@ import { loginPopupAction } from 'store/auth';
 
 const MypageContainer = ({ location, history }) => {
     const dispatch = useDispatch();
+    const orderReduxState = useSelector(state => state.order);
     const accessToken = localStorage.getItem('accessToken');
     const [orderTab, setOrderTab] = useState(0);
     const [priceDetail, setPriceDeatail] = useState(false);
@@ -65,6 +66,13 @@ const MypageContainer = ({ location, history }) => {
             statusLength();
         }
     }, [orders]);
+
+    // useEffect(() => {
+    //     if (orderReduxState.status === 'success') {
+    //         window.location.('/mypage');
+    //         dispatch(orderStatusResetAction());
+    //     }
+    // }, [orderReduxState.status]);
 
     // 취소 order 분리
     useEffect(() => {
@@ -229,7 +237,8 @@ const MypageContainer = ({ location, history }) => {
                         },
                     })
                 );
-                window.location.href = '/mypage';
+                setTimeout(() => (window.location.href = '/mypage'), 1500);
+                // window.location.replace('/mypage');
             })
             .catch(e => {
                 alert(e.message);
@@ -267,6 +276,7 @@ const MypageContainer = ({ location, history }) => {
                 handleCancelPopup={handleCancelPopup}
                 handlePriceDetail={handlePriceDetail}
                 priceDetail={priceDetail}
+                orderStatus={orderReduxState.status}
             />
         );
     if (orderTab === 1) {
