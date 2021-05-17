@@ -2,6 +2,7 @@ import React from 'react';
 import { FooterWrap, FooterContent } from 'styles/CommonStyles';
 import naver from '../../styles/img/naver.png';
 import kakao from '../../styles/img/kakao.png';
+import { Link } from 'react-router-dom';
 
 const FooterComponent = () => (
     <FooterWrap>
@@ -18,6 +19,19 @@ const FooterComponent = () => (
                 <span>국민은행</span>
                 <span>061701-04-240916</span>
                 <p>주식회사 후스구스</p>
+            </div>
+            <div className="footer" style={{ marginBottom: '0.5rem' }}>
+                <span style={{ fontWeight: '600' }}>
+                    <Link to="/policy">이용약관</Link>
+                </span>
+                <span className="bar">|</span>
+                <span style={{ fontWeight: '600' }}>
+                    <Link to="/cost">비용안내</Link>
+                </span>
+                <span className="bar">|</span>
+                <span style={{ fontWeight: '600' }}>
+                    <Link to="/support">고객센터</Link>
+                </span>
             </div>
             <div className="footer">
                 <span>대표이사 : 김용현</span>
