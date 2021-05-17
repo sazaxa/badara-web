@@ -34,3 +34,5 @@ export { default as AdminLogin } from './admin/auth/Login';
 export { default as PrintComponent } from './admin/print/PrintComponent';
 
 export { default as PointComponent } from './admin/setting/point/PointComponent';
+
+export { default as PolicyComponent } from './common/PolicyComponent';

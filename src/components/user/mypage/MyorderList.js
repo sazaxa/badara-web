@@ -6,6 +6,16 @@ import UpdateInvoice from './UpdateInvoice';
 import PaymentPopup from './PaymentPopup';
 import moment from '../../../../node_modules/moment/moment';
 import CancelModal from './CancelModal';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+    backdrop: {
+        zIndex: theme.zIndex.drawer + 1,
+        color: '#fff',
+    },
+}));
 
 const MyorderList = ({
     status,
@@ -22,7 +32,9 @@ const MyorderList = ({
     cancelPopup,
     handlePriceDetail,
     priceDetail,
+    orderStatus,
 }) => {
+    const classes = useStyles();
     if (!memberOrder) {
         return null;
     }
@@ -33,6 +45,12 @@ const MyorderList = ({
             ) : null}
             {updatePopup === true ? <UpdateInvoice handlePopup={handleUpdatePopup} updatePopup={updatePopup} /> : null}
             {paymentPopup === true ? <PaymentPopup handlePopup={handlePaymentPopup} /> : null}
+            <Backdrop className={classes.backdrop} open={orderStatus === 'loading'}>
+                <CircularProgress color="inherit" />
+                <p style={{ marginLeft: '20px', textAlign: 'center', lineHeight: '1.5' }}>
+                    진행중입니다. <br /> 잠시만 기다려주세요.
+                </p>
+            </Backdrop>
             <MypageContent>
                 {/* <Button variant="contained" color="primary">
                     내정보 수정

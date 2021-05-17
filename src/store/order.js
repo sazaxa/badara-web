@@ -1,7 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 import { createRequestActionTypes } from 'lib/createRequestActionTypes';
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest, delay } from 'redux-saga/effects';
 import * as orderAPI from '../lib/api/order';
 import fileDownload from 'js-file-download';
 
@@ -34,6 +34,9 @@ const EXCEL_ORDER_ALL = 'excel/EXCEL_ORDER_ALL';
 // 전체 선택한 엑셀 다운로드
 const EXCEL_ORDER_SELECT = 'excel/EXCEL_ORDER_SELECT';
 
+// order 상태 리렛
+const ORDER_STATUS_RESET = 'order/ORDER_STATUS_RESET';
+
 export const getOrderListAction = createAction(GET_ORDER_LIST_REQUEST);
 export const getOrderIdAction = createAction(GET_ORDER_ID, id => id);
 export const getOrderInfoAction = createAction(GET_ORDER_INFO_REQUEST, id => id);
@@ -52,6 +55,7 @@ export const excelOrderAllDownloadAction = createAction(EXCEL_ORDER_ALL);
 
 export const excelOrderSelectDownloadAction = createAction(EXCEL_ORDER_SELECT, orderNumbers => orderNumbers);
 
+export const orderStatusResetAction = createAction(ORDER_STATUS_RESET);
 function* getOrderListSaga() {
     try {
         const response = yield call(orderAPI.gets);
@@ -86,6 +90,7 @@ function* putOrderInfoSaga({ payload: { updateData, callBack } }) {
 }
 
 function* orderStatusChangeSaga({ payload: { id, data, callBack } }) {
+    yield delay(1500);
     try {
         const response = yield call(orderAPI.orderStatusChange, { id, data });
         yield put({ type: ORDER_STATUS_CHANGE_SUCCESS, payload: response.data });
@@ -134,6 +139,7 @@ const initialState = {
     print: {
         seletedOrders: [],
     },
+    status: 'idle',
     orderInfo: null,
     id: null,
     error: null,
@@ -180,6 +186,26 @@ export default handleActions(
         [PRINT_ORDER_NUMBER_LIST]: (state, { payload }) => {
             return produce(state, draft => {
                 draft.print.seletedOrders = payload.selectedOrders;
+            });
+        },
+        [ORDER_STATUS_CHANGE_REQUEST]: state => {
+            return produce(state, draft => {
+                draft.status = 'loading';
+            });
+        },
+        [ORDER_STATUS_CHANGE_SUCCESS]: state => {
+            return produce(state, draft => {
+                draft.status = 'success';
+            });
+        },
+        [ORDER_STATUS_CHANGE_FAILURE]: state => {
+            return produce(state, draft => {
+                draft.status = 'fail';
+            });
+        },
+        [ORDER_STATUS_RESET]: state => {
+            return produce(state, draft => {
+                draft.status = 'idle';
             });
         },
     },

@@ -17,7 +17,7 @@ const Tracking = () => {
     return (
         <TarkingWrap>
             <article className="title_wrap" style={{}}>
-                <h2>DHL 배송조회</h2>
+                <h2>해외 배송조회</h2>
             </article>
             <article className="trackingBox">
                 <p>배송조회</p>
