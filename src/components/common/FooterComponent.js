@@ -27,7 +27,7 @@ const FooterComponent = () => (
                 </span>
             </div>
             <div className="footer">
-                <span>대표번호 : 02-2634-1121</span>
+                <span>대표번호 : 070-4269-5289</span>
                 <span className="bar">|</span>
                 <span>FAX : 02-2633-1124</span>
                 <span className="bar">|</span>
