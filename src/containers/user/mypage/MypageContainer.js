@@ -231,13 +231,15 @@ const MypageContainer = ({ location, history }) => {
                             cardOwnerType: response.data.card.ownerType,
                             paymentKey: response.data.paymentKey,
                             cardRequestedDate: response.data.requestedAt,
+                            //TODO: 포인트 사용로직 구현
+                            point: 0,
                         },
                         callBack: () => {
+                            setTimeout(() => (window.location.href = '/mypage'), 500);
                             dispatch(getMemberOrderAction(logged.id));
                         },
                     })
                 );
-                setTimeout(() => (window.location.href = '/mypage'), 1500);
                 // window.location.replace('/mypage');
             })
             .catch(e => {

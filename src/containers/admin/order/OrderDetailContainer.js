@@ -9,6 +9,7 @@ const OrderDetailContainer = ({ match }) => {
     const dispatch = useDispatch();
     const [updateState, setUpdateState] = useState(false);
     const [updateValue, setUpdateValue] = useState(null);
+    const [refundPopup, setRefuncPopup] = useState(false);
     const { id } = match.params;
     const { list, orderInfo } = useSelector(state => ({
         list: state.part.country.list,
@@ -37,6 +38,7 @@ const OrderDetailContainer = ({ match }) => {
                 products: orderInfo.productResponses,
                 boxes: orderInfo.boxResponses,
                 recipient: orderInfo.recipient,
+                paymentKey: orderInfo.paymentKey,
             });
         }
     }, [orderInfo]);
@@ -128,6 +130,11 @@ const OrderDetailContainer = ({ match }) => {
             })
         );
     };
+
+    const handleRefundPopup = () => {
+        setRefuncPopup(!refundPopup);
+    };
+
     if (orderInfo === null || updateValue === null || list === null) {
         return null;
     }
@@ -143,6 +150,9 @@ const OrderDetailContainer = ({ match }) => {
             UpdateValue={updateValue}
             OrderInfo={orderInfo}
             List={list}
+            handleRefundPopup={handleRefundPopup}
+            refundPopup={refundPopup}
+            setRefuncPopup={setRefuncPopup}
         />
     );
 };
