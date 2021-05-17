@@ -141,7 +141,9 @@ const MyorderList = ({
                                 >
                                     주문 취소
                                 </button> */}
-                                {order.orderStatus === '해외배송중' || order.orderStatus === '해외배송완료' ? null : (
+                                {order.orderStatus === '결제완료' ||
+                                order.orderStatus === '해외배송중' ||
+                                order.orderStatus === '해외배송완료' ? null : (
                                     <button type="button" onClick={() => handleCancelPopup(order.orderNumber)}>
                                         주문 취소
                                     </button>
