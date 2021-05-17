@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import produce from 'immer';
-import { getOrderInfoAction, putOrderInfoAction } from 'store/order';
+import { getOrderInfoAction, orderStatusChangeAction, putOrderInfoAction } from 'store/order';
 
 const OrderDetailContainer = ({ match }) => {
     const dispatch = useDispatch();
@@ -135,6 +135,24 @@ const OrderDetailContainer = ({ match }) => {
         setRefuncPopup(!refundPopup);
     };
 
+    const handleDepositCancel = () => {
+        const confirm = window.confirm('정말로 환불하시겠습니까?');
+        if (confirm === true) {
+            dispatch(
+                orderStatusChangeAction({
+                    id: updateValue.orderNumber,
+                    data: {
+                        paymentMethod: '환불',
+                    },
+                    callBack: () => {
+                        dispatch(getOrderInfoAction(updateValue.id));
+                        window.location.href = `/admin/order/${updateValue.id}`;
+                    },
+                })
+            );
+        }
+    };
+
     if (orderInfo === null || updateValue === null || list === null) {
         return null;
     }
@@ -153,6 +171,7 @@ const OrderDetailContainer = ({ match }) => {
             handleRefundPopup={handleRefundPopup}
             refundPopup={refundPopup}
             setRefuncPopup={setRefuncPopup}
+            handleDepositCancel={handleDepositCancel}
         />
     );
 };

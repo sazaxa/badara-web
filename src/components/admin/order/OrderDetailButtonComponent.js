@@ -7,11 +7,17 @@ const OrderDetailButtonComponent = ({
     HandleUpdateClick,
     HandleUpdateFinish,
     handleRefundPopup,
+    handleDepositCancel,
 }) => {
     return (
         <article className="btnWrap">
             {UpdateValue.paymentKey && UpdateValue.orderStatus !== '환불' ? (
-                <button type="button" onClick={() => handleRefundPopup()}>
+                <button
+                    type="button"
+                    onClick={
+                        UpdateValue.orderStatus === '환불대기' ? () => handleDepositCancel() : () => handleRefundPopup()
+                    }
+                >
                     환불하기
                 </button>
             ) : null}

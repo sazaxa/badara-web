@@ -19,8 +19,8 @@ const OrderDetailComponent = ({
     handleRefundPopup,
     refundPopup,
     setRefuncPopup,
+    handleDepositCancel,
 }) => {
-    console.log(UpdateValue.paymentKey);
     return (
         <OrderWrap>
             <OrderRefundPopup
@@ -36,6 +36,7 @@ const OrderDetailComponent = ({
                     HandleUpdateFinish={HandleUpdateFinish}
                     UpdateValue={UpdateValue}
                     handleRefundPopup={handleRefundPopup}
+                    handleDepositCancel={handleDepositCancel}
                 />
                 <OrderDetailUserInfo
                     UpdateState={UpdateState}
