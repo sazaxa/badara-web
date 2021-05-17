@@ -33,6 +33,8 @@ const MyorderList = ({
     handlePriceDetail,
     priceDetail,
     orderStatus,
+    handleChangeUsePoint,
+    usePoint,
 }) => {
     const classes = useStyles();
     if (!memberOrder) {
@@ -44,7 +46,13 @@ const MyorderList = ({
                 <CancelModal handlePopup={handleCancelPopup} handleCancel={handleCancel} visible={cancelPopup} />
             ) : null}
             {updatePopup === true ? <UpdateInvoice handlePopup={handleUpdatePopup} updatePopup={updatePopup} /> : null}
-            {paymentPopup === true ? <PaymentPopup handlePopup={handlePaymentPopup} /> : null}
+            {paymentPopup === true ? (
+                <PaymentPopup
+                    handlePopup={handlePaymentPopup}
+                    handleChangeUsePoint={handleChangeUsePoint}
+                    usePoint={usePoint}
+                />
+            ) : null}
             <Backdrop className={classes.backdrop} open={orderStatus === 'loading'}>
                 <CircularProgress color="inherit" />
                 <p style={{ marginLeft: '20px', textAlign: 'center', lineHeight: '1.5' }}>

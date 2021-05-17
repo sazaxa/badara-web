@@ -6,7 +6,7 @@ import { getMemberOrderAction } from 'store/member';
 import { getOrderIdAction, getOrderInfoAction, orderStatusChangeAction, orderStatusResetAction } from 'store/order';
 import { getProductInfoAction } from 'store/box';
 import { MyorderCancelList } from 'components/index';
-import { withRouter } from 'react-router';
+import { useParams, withRouter } from 'react-router';
 import queryStirng from 'query-string';
 import axios from '../../../../node_modules/axios/index';
 import { loginPopupAction } from 'store/auth';
@@ -26,6 +26,7 @@ const MypageContainer = ({ location, history }) => {
     });
     const { search } = location;
     const queryObj = queryStirng.parse(search);
+    const [usePoint, setUsePoint] = useState(0);
 
     useEffect(() => {
         if (queryObj.orderId) {
@@ -173,6 +174,7 @@ const MypageContainer = ({ location, history }) => {
     const handlePaymentPopup = id => {
         setPaymentPopup(!paymentPopup);
         dispatch(getOrderIdAction(id));
+        handleResetUserPoint();
     };
 
     const handlePaymentInfo = id => {
@@ -219,7 +221,6 @@ const MypageContainer = ({ location, history }) => {
         };
         axios(options)
             .then(response => {
-                console.log(response);
                 dispatch(
                     orderStatusChangeAction({
                         id: response.data.orderId,
@@ -232,11 +233,13 @@ const MypageContainer = ({ location, history }) => {
                             paymentKey: response.data.paymentKey,
                             cardRequestedDate: response.data.requestedAt,
                             //TODO: 포인트 사용로직 구현
-                            point: 0,
+                            // point: usePoint,
+                            point: localStorage.getItem('usePoint') ? Number(localStorage.getItem('usePoint')) : 0,
                         },
                         callBack: () => {
                             setTimeout(() => (window.location.href = '/mypage'), 500);
                             dispatch(getMemberOrderAction(logged.id));
+                            handleResetUserPoint();
                         },
                     })
                 );
@@ -260,6 +263,17 @@ const MypageContainer = ({ location, history }) => {
             dispatch(loginPopupAction(true));
         }
     }, [accessToken, logged]);
+
+    // 포인트 사용 로직
+    const handleChangeUsePoint = e => {
+        const { value } = e.target;
+        setUsePoint(value);
+        localStorage.setItem('usePoint', value);
+    };
+    const handleResetUserPoint = () => {
+        setUsePoint(0);
+        localStorage.removeItem('userPoint');
+    };
     if (!logged && !accessToken) return null;
     if (orderTab === 0)
         return (
@@ -279,6 +293,8 @@ const MypageContainer = ({ location, history }) => {
                 handlePriceDetail={handlePriceDetail}
                 priceDetail={priceDetail}
                 orderStatus={orderReduxState.status}
+                handleChangeUsePoint={handleChangeUsePoint}
+                usePoint={usePoint}
             />
         );
     if (orderTab === 1) {

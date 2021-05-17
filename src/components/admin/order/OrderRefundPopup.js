@@ -74,6 +74,7 @@ const OrderRefundPopup = ({ visible, onCancel, UpdateValue, setRefuncPopup }) =>
                     id="outlined-basic"
                     label="취소 금액"
                     variant="outlined"
+                    disabled
                     name="cancelAmount"
                     value={refundData.cancelAmount}
                     onChange={onChange}

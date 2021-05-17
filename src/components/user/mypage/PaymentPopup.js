@@ -6,11 +6,10 @@ import { Fullscreen, PaymentWrap, UpdateInvoiceWrap } from 'styles/MypageStyles'
 import DepositToAccount from './DepositToAccount';
 import { loadTossPayments } from '@tosspayments/sdk';
 import Button from '@material-ui/core/Button';
-import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import PaymentIcon from '@material-ui/icons/Payment';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 
-const PaymentPopup = ({ handlePopup, updatePopup }) => {
+const PaymentPopup = ({ handlePopup, handleChangeUsePoint, usePoint }) => {
     const dispatch = useDispatch();
     const { orders } = useSelector(state => state.member.memberInfo);
     const { logged } = useSelector(state => state.member.loggedInfo);
@@ -18,6 +17,9 @@ const PaymentPopup = ({ handlePopup, updatePopup }) => {
     const [depositPopup, setDepositPopup] = useState(false);
     const [paymentAgree, setPaymentAgree] = useState(false);
     const [getOrder, setGetOrder] = useState('');
+    const [usePointPopup, setPointPopup] = useState(false);
+
+    console.log(usePointPopup);
 
     const [checked, setChecked] = useState({
         AllChecked: false,
@@ -100,13 +102,22 @@ const PaymentPopup = ({ handlePopup, updatePopup }) => {
         handlePopup();
     };
 
+    const handleUsePont = () => {
+        if (logged.point < usePoint) {
+            alert('보유하신 캐시보다 더 많이 입력하셨습니다. 다시 입력해주세요.');
+            return;
+        } else {
+            setPointPopup(!usePointPopup);
+        }
+    };
+
     const handleToss = async () => {
         // alert('준비중입니다.');
         const clientKey = `${process.env.REACT_APP_PAYMENT_CLIENT_KEY}`;
         const tossPayments = await loadTossPayments(clientKey);
         tossPayments.requestPayment('카드', {
             amount: Math.ceil(
-                Number(getOrder.orderPrice) + Number(getOrder.extraPrice) + Number(getOrder.orderPrice) * 0.1
+                Number(getOrder.orderPrice) + Number(getOrder.extraPrice) - usePoint + Number(getOrder.orderPrice) * 0.1
             ),
             orderId: getOrder.orderNumber,
             orderName: '해외배송서비스',
@@ -228,33 +239,71 @@ const PaymentPopup = ({ handlePopup, updatePopup }) => {
                 </PaymentWrap>
             </>
         );
-    return (
-        <>
-            <Fullscreen onClick={handlePopup} />
+    if (!usePointPopup && paymentAgree && logged.point !== null)
+        return (
             <UpdateInvoiceWrap>
-                {depositPopup ? (
-                    <DepositToAccount popup={depositPopup} handlePopup={handleDeposit} paymentPopup={handlePopup} />
-                ) : null}
                 <div
                     className="header"
                     style={{ marginBottom: '10px', padding: '20px 0', borderBottom: '1px solid #ccc' }}
                 >
-                    <strong style={{ fontSize: '22px' }}>결제 수단을 선택해주세요!</strong>
+                    <strong style={{ fontSize: '22px' }}>사용할 포인트를 입력해주세요.</strong>
                 </div>
                 <div className="paymentBtnWrap">
-                    {/* <button type="button" className="paymentBtn" onClick={() => handleToss()}>
+                    <p style={{ marginBottom: '1rem' }}>
+                        회원님의 보유한 바다라 <strong>Cash</strong> :{' '}
+                        <span style={{ fontWeight: '900', fontSize: '1.2rem' }}>{logged.point} Cash</span>
+                    </p>
+                    <input
+                        type="number"
+                        placeholder="사용할 포인트를 입력해주세요."
+                        value={usePoint}
+                        onChange={e => handleChangeUsePoint(e)}
+                    />
+                </div>
+                <button
+                    type="button"
+                    onClick={handlePopup}
+                    style={{ width: '50%', color: '#0049ff', background: '#fff' }}
+                >
+                    취소
+                </button>
+                <button
+                    type="button"
+                    onClick={handleUsePont}
+                    style={{ width: '50%', background: '#0049ff', color: '#fff' }}
+                >
+                    확인
+                </button>
+            </UpdateInvoiceWrap>
+        );
+    if (usePointPopup || logged.point === null)
+        return (
+            <>
+                <Fullscreen onClick={handlePopup} />
+                <UpdateInvoiceWrap>
+                    {depositPopup ? (
+                        <DepositToAccount popup={depositPopup} handlePopup={handleDeposit} paymentPopup={handlePopup} />
+                    ) : null}
+                    <div
+                        className="header"
+                        style={{ marginBottom: '10px', padding: '20px 0', borderBottom: '1px solid #ccc' }}
+                    >
+                        <strong style={{ fontSize: '22px' }}>결제 수단을 선택해주세요!</strong>
+                    </div>
+                    <div className="paymentBtnWrap">
+                        {/* <button type="button" className="paymentBtn" onClick={() => handleToss()}>
                         {/* <img src={toss} alt="toss" /> 
                         카드결제
                     </button> */}
-                    <Button
-                        variant="contained"
-                        className="paymentBtn"
-                        startIcon={<PaymentIcon />}
-                        onClick={() => handleToss()}
-                    >
-                        카드결제
-                    </Button>
-                    {/* <Button
+                        <Button
+                            variant="contained"
+                            className="paymentBtn"
+                            startIcon={<PaymentIcon />}
+                            onClick={() => handleToss()}
+                        >
+                            카드결제
+                        </Button>
+                        {/* <Button
                         variant="contained"
                         className="paymentBtn"
                         startIcon={<AccountBalanceIcon />}
@@ -262,21 +311,21 @@ const PaymentPopup = ({ handlePopup, updatePopup }) => {
                     >
                         계좌이체
                     </Button> */}
-                    <Button
-                        variant="contained"
-                        className="paymentBtn"
-                        startIcon={<AccountBalanceWalletIcon />}
-                        onClick={() => handleDeposit()}
-                    >
-                        무통장 입금
-                    </Button>
-                </div>
-                <button type="button" onClick={handlePopup} style={{ width: '100%', background: '#0049ff' }}>
-                    취소
-                </button>
-            </UpdateInvoiceWrap>
-        </>
-    );
+                        <Button
+                            variant="contained"
+                            className="paymentBtn"
+                            startIcon={<AccountBalanceWalletIcon />}
+                            onClick={() => handleDeposit()}
+                        >
+                            무통장 입금
+                        </Button>
+                    </div>
+                    <button type="button" onClick={handlePopup} style={{ width: '100%', background: '#0049ff' }}>
+                        취소
+                    </button>
+                </UpdateInvoiceWrap>
+            </>
+        );
 };
 
 export default PaymentPopup;
