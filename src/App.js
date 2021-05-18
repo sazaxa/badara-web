@@ -19,6 +19,7 @@ import {
     AdminPrintPage,
     AdminPointSetting,
     Policypage,
+    CashPage,
 } from 'pages';
 import { FooterComponent } from 'components';
 import { HeaderContainer, AdminHeaderContainer } from 'containers';
@@ -72,7 +73,8 @@ function App({ location }) {
                     <Route component={RegisterPage} path="/register" />
                     <Route component={SupportPage} path="/support" exact />
                     <Route component={Detail} path="/support/:id" />
-                    <Route component={Mypage} path="/mypage" />
+                    <Route component={Mypage} path="/mypage" exact />
+                    <Route component={CashPage} path="/mypage/cash" />
                     <Route component={Policypage} path="/policy" />
                     {/* TODO: 새로고침시 전부 / 로 이동되어 주석처리 */}
                     {/* <Redirect path="*" to="/" /> */}

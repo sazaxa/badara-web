@@ -36,3 +36,5 @@ export { default as PrintComponent } from './admin/print/PrintComponent';
 export { default as PointComponent } from './admin/setting/point/PointComponent';
 
 export { default as PolicyComponent } from './common/PolicyComponent';
+
+export { default as CashComponent } from './user/cash/CashComponent';

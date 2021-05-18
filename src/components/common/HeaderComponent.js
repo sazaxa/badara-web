@@ -71,18 +71,31 @@ const HeaderComponent = ({
                                 open={Boolean(AnchorEl)}
                                 onClose={HandleMenuClose}
                             >
-                                <p
+                                <Link
+                                    to="/mypage/cash"
                                     style={{
+                                        color: '#000',
+                                        display: 'block',
+                                        width: '100%',
+                                        height: '100%',
                                         textAlign: 'center',
-                                        padding: '1rem',
-                                        marginBottom: '1rem',
-                                        borderBottom: '1px solid #ccc',
-                                        lineHeight: '1.5',
                                     }}
                                 >
-                                    회원님의 <br /> 보유 Point :{' '}
-                                    <strong>{loggedUser && loggedUser.point !== null ? loggedUser.point : 0}</strong>
-                                </p>
+                                    <p
+                                        style={{
+                                            textAlign: 'center',
+                                            padding: '1rem',
+                                            marginBottom: '1rem',
+                                            borderBottom: '1px solid #ccc',
+                                            lineHeight: '1.5',
+                                        }}
+                                    >
+                                        바다라 Cash :{' '}
+                                        <strong>
+                                            {loggedUser && loggedUser.point !== null ? loggedUser.point : 0}
+                                        </strong>
+                                    </p>
+                                </Link>
                                 <MenuItem onClick={HandleMenuClose}>
                                     <Link
                                         style={{
@@ -94,7 +107,7 @@ const HeaderComponent = ({
                                         }}
                                         to="/mypage"
                                     >
-                                        마이페이지
+                                        주문목록
                                     </Link>
                                 </MenuItem>
                                 <MenuItem

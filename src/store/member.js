@@ -12,6 +12,12 @@ const [GET_MEMBER_ORDER_REQUEST, GET_MEMBER_ORDER_SUCCESS, GET_MEMBER_ORDER_FAIL
     'auth/MEMBER_ORDER'
 );
 
+const [
+    GET_MEMBER_POINT_HISTORY_REQUEST,
+    GET_MEMBER_POINT_HISTORY_SUCCESS,
+    GET_MEMBER_POINT_HISTORY_FAILURE,
+] = createRequestActionTypes('user/GET_MEMBER_POINT_HISTORY');
+
 const [GET_MEMBER_INFO_REQUEST, GET_MEMBER_INFO_SUCCESS, GET_MEMBER_INFO_FAILURE] = createRequestActionTypes(
     'auth/MEMBER_INFO'
 );
@@ -34,6 +40,7 @@ export const [ADMIN_LOGOUT, ADMIN_LOGOUT_SUCCESS, ADMIN_LOGOUT_FAILURE] = create
 
 export const getMemberListAction = createAction(GET_MEMBER_LIST_REQUEST);
 export const getMemberInfoAction = createAction(GET_MEMBER_INFO_REQUEST, id => id);
+export const getMemberPointHistoryAction = createAction(GET_MEMBER_POINT_HISTORY_REQUEST, id => id);
 export const getMemberOrderAction = createAction(GET_MEMBER_ORDER_REQUEST, id => id);
 export const getMemberCheckAction = createAction(GET_MEMBER_CHECK_REQUEST);
 export const putPasswordModfiyAction = createAction(PUT_PASSWORD_MODIFY_REQUEST, ({ id, data }) => ({ id, data }));
@@ -134,6 +141,15 @@ function* adminLogoutSaga() {
     }
 }
 
+function* getPointHistorySaga({ payload: id }) {
+    try {
+        const response = yield call(authAPI.getPointHistory, id);
+        yield put({ type: GET_MEMBER_POINT_HISTORY_SUCCESS, payload: response.data });
+    } catch (e) {
+        yield put({ type: GET_MEMBER_POINT_HISTORY_FAILURE, payload: e.response.data });
+    }
+}
+
 export function* memberSaga() {
     yield takeLatest(GET_MEMBER_LIST_REQUEST, getMemberListSaga);
     yield takeLatest(GET_MEMBER_INFO_REQUEST, getMemberInfoSaga);
@@ -143,6 +159,7 @@ export function* memberSaga() {
     yield takeLatest(LOGOUT, logoutSaga);
     yield takeLatest(ADMIN_LOGOUT, adminLogoutSaga);
     yield takeLatest(PUT_PASSWORD_MODIFY_REQUEST, putPasswordModifyrSaga);
+    yield takeLatest(GET_MEMBER_POINT_HISTORY_REQUEST, getPointHistorySaga);
 }
 
 const initialState = {
@@ -157,6 +174,7 @@ const initialState = {
     },
     loggedInfo: {
         logged: null,
+        pointHistory: null,
         error: null,
     },
     adminInfo: {
@@ -237,6 +255,11 @@ export default handleActions(
         [ADMIN_LOGOUT_FAILURE]: (state, { payload }) => {
             return produce(state, draft => {
                 draft.adminInfo.error = payload;
+            });
+        },
+        [GET_MEMBER_POINT_HISTORY_SUCCESS]: (state, { payload }) => {
+            return produce(state, draft => {
+                draft.loggedInfo.pointHistory = payload;
             });
         },
     },
