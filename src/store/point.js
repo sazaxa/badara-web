@@ -13,6 +13,11 @@ const [GET_POINT_LIST, GET_POINT_LIST_SUCCESS, GET_POINT_LIST_FAILURE] = createR
 const [POST_POINT_LIST, POST_POINT_LIST_SUCCESS, POST_POINT_LIST_FAILURE] = createRequestActionTypes(
     'point/POST_POINT_LIST'
 );
+
+// 포인트 관리자 지급하기
+const [POST_POINT_INSERT, POST_POINT_INSERT_SUCCESS, POST_POINT_INSERT_FAILURE] = createRequestActionTypes(
+    'point/POST_POINT_INSERT'
+);
 // 상태 리셋
 
 const POINT_STATUS_RESET = 'point/POINT_STATUS_REST';
@@ -20,6 +25,8 @@ const POINT_STATUS_RESET = 'point/POINT_STATUS_REST';
 export const getPointListAction = createAction(GET_POINT_LIST);
 
 export const savePointListAction = createAction(POST_POINT_LIST, ({ data }) => ({ data }));
+
+export const postPointInsertAction = createAction(POST_POINT_INSERT, ({ id, pointData }) => ({ id, pointData }));
 
 export const pointStatusResetAction = createAction(POINT_STATUS_RESET);
 const initialState = {
@@ -46,9 +53,18 @@ function* savePointSaga({ payload: { data } }) {
     }
 }
 
+function* insertPointSaga({ payload: { pointData, id } }) {
+    try {
+        const response = yield call(pointAPI.insertPoint, { id, pointData });
+        yield put({ type: POST_POINT_INSERT_SUCCESS, payload: response.data });
+    } catch (e) {
+        yield put({ type: POST_POINT_INSERT_FAILURE });
+    }
+}
 export function* pointSaga() {
     yield takeLatest(GET_POINT_LIST, getPointSaga);
     yield takeLatest(POST_POINT_LIST, savePointSaga);
+    yield takeLatest(POST_POINT_INSERT, insertPointSaga);
 }
 
 export default handleActions(

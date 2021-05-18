@@ -12,11 +12,13 @@ import member, {
 import { DetailWrap } from 'styles/AdminUserPageStyles';
 import moment from 'moment';
 import { useState } from 'react';
+import InsertCashPopup from './InsertCashPopup';
 
 const Detail = ({ match }) => {
     const dispatch = useDispatch();
     const { memberInfo, error, loggedInfo } = useSelector(state => state.member);
     const [passwordModify, setPasswordModify] = useState(false);
+    const [insertCash, setInserCash] = useState(false);
     const [passwordModifyInfo, setPasswordModifyInfo] = useState({
         name: memberInfo.info ? memberInfo.info.name : null,
         phoneNumber: memberInfo.info ? memberInfo.info.phoneNumber : null,
@@ -40,6 +42,10 @@ const Detail = ({ match }) => {
         setPasswordModify(!passwordModify);
     };
 
+    const handleInertCashPopup = () => {
+        setInserCash(!insertCash);
+    };
+
     useEffect(() => {
         dispatch(getMemberOrderAction(id));
         dispatch(getMemberInfoAction(id));
@@ -60,13 +66,14 @@ const Detail = ({ match }) => {
             dispatch(getMemberPointHistoryAction(info.id));
         }
     }, [memberInfo.info]);
-
+    console.log(insertCash);
     if (error) return <div>없는 회원 입니다.</div>;
     const { info, orders } = memberInfo;
     const { pointHistory } = loggedInfo;
     if (info === null || orders === null || pointHistory === null) return null;
     return (
         <DetailWrap>
+            <InsertCashPopup visible={insertCash} setInserCash={setInserCash} user={info} />
             <article className="title">
                 <h2>회원 정보</h2>
                 {passwordModify ? (
@@ -78,6 +85,9 @@ const Detail = ({ match }) => {
                         회원 비밀번호 변경
                     </button>
                 )}
+                <button type="button" style={{ marginLeft: '10px' }} onClick={() => handleInertCashPopup()}>
+                    회원 포인트 주기
+                </button>
             </article>
             <table>
                 <tbody>
@@ -126,7 +136,7 @@ const Detail = ({ match }) => {
                 </thead>
                 <tbody>
                     {orders.map(order => (
-                        <tr>
+                        <tr key={order.id}>
                             <Link to={`/admin/order/${order.id}`}>
                                 <td>{order.orderNumber}</td>
                                 <td>{order.productResponses[0].productDetail}</td>
@@ -153,7 +163,7 @@ const Detail = ({ match }) => {
                 </thead>
                 <tbody>
                     {pointHistory.map(history => (
-                        <tr>
+                        <tr key={history.id}>
                             <td>{history.deposit ? history.deposit : '없음'}</td>
                             <td>{history.withdraw ? history.withdraw : '없음'}</td>
                             <td>{history.section}</td>
