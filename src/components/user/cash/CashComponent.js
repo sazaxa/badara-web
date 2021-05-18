@@ -23,7 +23,10 @@ const CashComponent = ({ user, history }) => {
                         ) : (
                             history.map(item => (
                                 <div className="item">
-                                    <div className="left">{item.detail}</div>
+                                    <div className="left">
+                                        <span>{item.section}</span>
+                                        <span>{item.detail}</span>
+                                    </div>
                                     <div className="right">
                                         {/* {!item.withdraw ? '적립' + item.deposit : '사용' + item.withdraw} */}
                                         <span style={!item.withdraw ? { color: '#1976d2' } : { color: 'red' }}>
