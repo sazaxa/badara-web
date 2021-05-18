@@ -121,6 +121,22 @@ const Detail = ({ match }) => {
                     ))}
                 </tbody>
             </table>
+
+            <article className="title">
+                <h2>POINT 정보</h2>
+                <span>POINT 내역을 확인할 수 있습니다.</span>
+            </article>
+            <table className="orderInfo">
+                <thead>
+                    <tr>
+                        <th>deposite</th>
+                        <th>withdraw</th>
+                        <th>section</th>
+                        <th>detail</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
         </DetailWrap>
     );
 };
