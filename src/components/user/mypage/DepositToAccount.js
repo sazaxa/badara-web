@@ -15,6 +15,7 @@ const DepositToAccount = ({ handlePopup, popup, paymentPopup }) => {
         paymentMethod: '무통장입금',
         depositName: null,
         cardType: '무통장입금',
+        point: localStorage.getItem('usePoint') ? Number(localStorage.getItem('usePoint')) : 0,
     });
 
     const handleChange = e => {
