@@ -78,6 +78,15 @@ export const CashPageContent = styled(MypageContent)`
                 font-weight: 600;
                 padding: 0 1rem;
                 box-sizing: border-box;
+                p {
+                    color: #808080;
+                    font-size: 0.95rem;
+                    margin-top: 0.3rem;
+                    @media screen and (max-width: 500px) {
+                        font-size: 0.8rem;
+                        letter-spacing: -1px;
+                    }
+                }
                 @media screen and (max-width: 500px) {
                     width: 75%;
                     font-size: 0.9rem;
@@ -90,6 +99,8 @@ export const CashPageContent = styled(MypageContent)`
             }
             .right {
                 width: 10%;
+                display: flex;
+                align-items: center;
                 @media screen and (max-width: 500px) {
                     width: 25%;
                     font-size: 0.9rem;

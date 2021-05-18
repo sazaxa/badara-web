@@ -1,6 +1,7 @@
 import React from 'react';
 import { CashPageContent } from 'styles/CashPageStyles';
 import { Responsive } from 'styles/CommonStyles';
+import moment from 'moment';
 
 const CashComponent = ({ user, history }) => {
     if (!user || !history) return null;
@@ -26,6 +27,7 @@ const CashComponent = ({ user, history }) => {
                                     <div className="left">
                                         <span>{item.section}</span>
                                         <span>{item.detail}</span>
+                                        <p>{moment(item.createdDate).format('l')}</p>
                                     </div>
                                     <div className="right">
                                         {/* {!item.withdraw ? '적립' + item.deposit : '사용' + item.withdraw} */}
