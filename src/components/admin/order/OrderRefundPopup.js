@@ -17,6 +17,8 @@ const OrderRefundPopup = ({ visible, onCancel, UpdateValue, setRefuncPopup }) =>
                 parseInt(UpdateValue.orderPrice) * 0.1
         ),
     });
+
+    console.log(refundData.cancelAmount);
     const onSubmit = e => {
         e.preventDefault();
         const options = {

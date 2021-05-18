@@ -52,7 +52,7 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                             type="text"
                             name="vat"
                             value={
-                                UpdateValue.orderPrice && UpdateValue.extraPrice
+                                UpdateValue.orderPrice
                                     ? parseInt(UpdateValue.orderPrice + UpdateValue.extraPrice) * 0.1
                                     : ''
                             }
@@ -69,7 +69,11 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                             value={
                                 UpdateValue.orderPrice
                                     ? Math.ceil(
-                                          parseInt(UpdateValue.orderPrice + UpdateValue.extraPrice) +
+                                          parseInt(
+                                              UpdateValue.orderPrice +
+                                                  UpdateValue.extraPrice -
+                                                  UpdateValue.discountPrice
+                                          ) +
                                               parseInt(UpdateValue.orderPrice) * 0.1
                                       ).toLocaleString() + '원'
                                     : ''

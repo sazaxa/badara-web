@@ -39,6 +39,7 @@ const OrderDetailContainer = ({ match }) => {
                 boxes: orderInfo.boxResponses,
                 recipient: orderInfo.recipient,
                 paymentKey: orderInfo.paymentKey,
+                discountPrice: orderInfo.discountPrice,
             });
         }
     }, [orderInfo]);
