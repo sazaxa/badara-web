@@ -13,7 +13,8 @@ const OrderRefundPopup = ({ visible, onCancel, UpdateValue, setRefuncPopup }) =>
     const [refundData, setRefundData] = useState({
         cancelReason: '',
         cancelAmount: Math.ceil(
-            parseInt(UpdateValue.orderPrice + UpdateValue.extraPrice) + parseInt(UpdateValue.orderPrice) * 0.1
+            parseInt(UpdateValue.orderPrice + UpdateValue.extraPrice - UpdateValue.discountPrice) +
+                parseInt(UpdateValue.orderPrice) * 0.1
         ),
     });
     const onSubmit = e => {
