@@ -38,7 +38,7 @@ export const DetailWrap = styled.article`
         display: flex;
     }
     .orderInfo > thead > tr > th,
-    .orderInfo > tbody > tr > a > td {
+    .orderInfo > tbody > tr td {
         width: 25%;
         display: flex;
         align-items: center;

@@ -3,14 +3,19 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import { getMemberInfoAction, getMemberOrderAction, putPasswordModfiyAction } from 'store/member';
+import member, {
+    getMemberInfoAction,
+    getMemberOrderAction,
+    getMemberPointHistoryAction,
+    putPasswordModfiyAction,
+} from 'store/member';
 import { DetailWrap } from 'styles/AdminUserPageStyles';
 import moment from 'moment';
 import { useState } from 'react';
 
 const Detail = ({ match }) => {
     const dispatch = useDispatch();
-    const { memberInfo, error } = useSelector(state => state.member);
+    const { memberInfo, error, loggedInfo } = useSelector(state => state.member);
     const [passwordModify, setPasswordModify] = useState(false);
     const [passwordModifyInfo, setPasswordModifyInfo] = useState({
         name: memberInfo.info ? memberInfo.info.name : null,
@@ -50,9 +55,16 @@ const Detail = ({ match }) => {
         }
     }, [memberInfo.info]);
 
+    useEffect(() => {
+        if (memberInfo.info) {
+            dispatch(getMemberPointHistoryAction(info.id));
+        }
+    }, [memberInfo.info]);
+
     if (error) return <div>없는 회원 입니다.</div>;
     const { info, orders } = memberInfo;
-    if (info === null || orders === null) return null;
+    const { pointHistory } = loggedInfo;
+    if (info === null || orders === null || pointHistory === null) return null;
     return (
         <DetailWrap>
             <article className="title">
@@ -71,19 +83,23 @@ const Detail = ({ match }) => {
                 <tbody>
                     <tr>
                         <th>이메일</th>
-                        <td colSpan="3">{info.email}</td>
+                        <td>{info.email}</td>
                     </tr>
                     <tr>
                         <th>이름</th>
-                        <td colSpan="3">{info.name}</td>
+                        <td>{info.name}</td>
                     </tr>
                     <tr>
                         <th>휴대폰 번호</th>
-                        <td colSpan="3">{info.phoneNumber}</td>
+                        <td>{info.phoneNumber}</td>
                     </tr>
                     <tr>
                         <th>회원 등급</th>
-                        <td colSpan="3">{info.roles[0].roleName === 'ROLE_USER' ? '일반회원' : '관리자'}</td>
+                        <td>{info.roles[0].roleName === 'ROLE_USER' ? '일반회원' : '관리자'}</td>
+                    </tr>
+                    <tr>
+                        <th>회원 보유한 바다라 Cash</th>
+                        <td>{info.point ? info.point : 0}</td>
                     </tr>
                     {passwordModify ? (
                         <tr>
@@ -129,13 +145,22 @@ const Detail = ({ match }) => {
             <table className="orderInfo">
                 <thead>
                     <tr>
-                        <th>deposite</th>
-                        <th>withdraw</th>
-                        <th>section</th>
-                        <th>detail</th>
+                        <th>지급</th>
+                        <th>사용</th>
+                        <th>사용 용도</th>
+                        <th>자세한 내용</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                    {pointHistory.map(history => (
+                        <tr>
+                            <td>{history.deposit ? history.deposit : '없음'}</td>
+                            <td>{history.withdraw ? history.withdraw : '없음'}</td>
+                            <td>{history.section}</td>
+                            <td>{history.detail}</td>
+                        </tr>
+                    ))}
+                </tbody>
             </table>
         </DetailWrap>
     );
