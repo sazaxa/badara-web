@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import KakaoLogin from 'react-kakao-login';
 import { useDispatch, useSelector } from 'react-redux';
-import { socialLoginCheckAction, socialRegisterAction } from 'store/social';
-import { loginPopupAction } from 'store/auth';
+import { socialLoginCheckAction } from 'store/social';
+import { loginAction, loginPopupAction } from 'store/auth';
 
 const KakaoLoginButton = () => {
     const dispatch = useDispatch();
@@ -14,11 +14,9 @@ const KakaoLoginButton = () => {
     useEffect(() => {
         if (!!login.isRegistered) {
             dispatch(
-                socialRegisterAction({
-                    data: {
-                        email: login.email,
-                        password: login.password,
-                    },
+                loginAction({
+                    email: login.email,
+                    password: login.password,
                 })
             );
         } else if (login.isRegistered === false) {
