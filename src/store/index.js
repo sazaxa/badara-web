@@ -8,6 +8,7 @@ import apply, { applySaga } from './apply';
 import part, { partSaga } from './part';
 import box, { boxSaga } from './box';
 import point, { pointSaga } from './point';
+import social, { socialSaga } from './social';
 
 const rootReducer = combineReducers({
     auth,
@@ -18,10 +19,21 @@ const rootReducer = combineReducers({
     part,
     box,
     point,
+    social,
 });
 
 export function* rootSaga() {
-    yield all([authSaga(), memberSaga(), orderSaga(), faqSaga(), partSaga(), applySaga(), boxSaga(), pointSaga()]);
+    yield all([
+        authSaga(),
+        memberSaga(),
+        orderSaga(),
+        faqSaga(),
+        partSaga(),
+        applySaga(),
+        boxSaga(),
+        pointSaga(),
+        socialSaga(),
+    ]);
 }
 
 export default rootReducer;

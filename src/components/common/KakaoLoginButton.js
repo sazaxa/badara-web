@@ -1,29 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import KakaoLogin from 'react-kakao-login';
-import KakaoLogout from 'react-kakao-login';
 import { useDispatch } from 'react-redux';
-import { loginAction, registerAction } from 'store/auth';
 
 const KakaoLoginButton = () => {
     const dispatch = useDispatch();
     const [kakaoLogin, setKakaoLogin] = useState({
+        socialId: '',
         email: '',
-        name: '',
     });
     const onSuccess = response => {
-        console.log(response.profile.kakao_account.email);
+        console.log(response);
         setKakaoLogin({
             email: response.profile.kakao_account.email,
-            name: response.profile.kakao_account.profile.nickname,
+            socialId: response.profile.id,
         });
-        console.log(kakaoLogin);
-        dispatch(
-            registerAction({
-                email: response.profile.kakao_account.email,
-                name: response.profile.kakao_account.profile.nickname,
-            })
-        );
-        dispatch(loginAction({ email: response.profile.kakao_account.email, password: null }));
+        // dispatch(
+        //     registerAction({
+        //         email: response.profile.kakao_account.email,
+        //         name: response.profile.kakao_account.profile.nickname,
+        //     })
+        // );
+        // dispatch(loginAction({ email: response.profile.kakao_account.email, password: null }));
     };
 
     return (

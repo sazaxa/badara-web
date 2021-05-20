@@ -52,6 +52,10 @@ export const RegisterContent = styled.article`
         &:focus {
             border 2px solid #1976d2;
         }
+        &:disabled {
+            background:#ddd;
+            color:#666;
+        }
     }
     form {
         padding: 20px 0;

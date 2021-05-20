@@ -1,11 +1,19 @@
 import ReigisterComponent from 'components/user/register/RegisterComponent';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { clearStoreAction, registerAction } from 'store/auth';
+import { socialRegisterAction } from 'store/social';
 
 const RegisterContainer = ({ history }) => {
-    const { error, status } = useSelector(state => state.auth.register);
+    const { error, status, social } = useSelector(
+        state => ({
+            error: state.auth.register.error,
+            status: state.auth.register.status,
+            social: state.social.login,
+        }),
+        shallowEqual
+    );
     const dispatch = useDispatch();
     const [registerInfo, setRegisterInfo] = useState({
         email: '',
@@ -26,7 +34,14 @@ const RegisterContainer = ({ history }) => {
             dispatch(clearStoreAction());
         }
     });
-
+    useEffect(() => {
+        if (social.isRegistered) {
+            setRegisterInfo({
+                ...registerInfo,
+                email: social.email,
+            });
+        }
+    }, []);
     const handleChange = e => {
         const { name, value } = e.target;
         setRegisterInfo({
@@ -69,6 +84,28 @@ const RegisterContainer = ({ history }) => {
         }
         dispatch(registerAction(registerInfo));
     };
+    const socialFinish = () => {
+        if (!registerInfo.phoneNumber) {
+            alert('휴대폰번호를 입력하세요.');
+            return;
+        } else if (!registerInfo.name) {
+            alert('이름을 입력하세요.');
+            return;
+        } else {
+            console.log(social.socialId);
+            console.log(registerInfo);
+            dispatch(
+                socialRegisterAction({
+                    data: {
+                        socialId: social.socialId,
+                        email: registerInfo.email,
+                        name: registerInfo.name,
+                        phoneNumber: registerInfo.phoneNumber,
+                    },
+                })
+            );
+        }
+    };
     return (
         <ReigisterComponent
             HandleAgree={handleAgree}
@@ -76,6 +113,8 @@ const RegisterContainer = ({ history }) => {
             HandleChange={handleChange}
             HandleFinish={handleFinish}
             RegisterInfo={registerInfo}
+            social={social}
+            socialFinish={socialFinish}
         />
     );
 };
