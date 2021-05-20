@@ -9,20 +9,25 @@ import createSagaMiddleware from 'redux-saga';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import rootReducer, { rootSaga } from './store';
+import { ConnectedRouter, routerMiddleware } from 'connected-react-router';
+import { createBrowserHistory } from 'history';
 
+export const history = createBrowserHistory();
 const sagaMiddleWare = createSagaMiddleware();
 const store = createStore(
     rootReducer,
     `${process.env.REACT_APP_ENV}` === 'prod'
-        ? applyMiddleware(sagaMiddleWare)
-        : composeWithDevTools(applyMiddleware(sagaMiddleWare))
+        ? applyMiddleware(sagaMiddleWare, routerMiddleware(history))
+        : composeWithDevTools(applyMiddleware(sagaMiddleWare, routerMiddleware(history)))
 );
 sagaMiddleWare.run(rootSaga);
 ReactDOM.render(
     <Provider store={store}>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
+        <ConnectedRouter history={history}>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </ConnectedRouter>
     </Provider>,
     document.getElementById('root')
 );

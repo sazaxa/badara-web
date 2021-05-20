@@ -3,6 +3,8 @@ import { takeLatest, call, put } from 'redux-saga/effects';
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 import * as socialAPI from '../lib/api/social';
+import { loginAction } from './auth';
+import { push } from 'connected-react-router';
 
 // 소셜 로그인 가입 여부 체크
 const SOCIAL_LOGIN_CHECK = 'social/SOCIAL_LOGIN_CHECK';
@@ -21,7 +23,9 @@ function* checkSaga({ payload: { data } }) {
         const response = yield call(socialAPI.check, data);
         yield put({ type: SOCIAL_LOGIN_CHECK, payload: response.data });
         if (response.data.isRegistered) {
-            localStorage.setItem('accessToken', response.data.accessToken);
+            loginAction({ email: response.data.email, password: response.data.password });
+        } else {
+            yield put(push('/register'));
         }
     } catch (e) {
         alert('로그인이 실패하였습니다.');
@@ -44,9 +48,9 @@ export function* socialSaga() {
 const initalState = {
     social: null,
     login: {
-        socialId: 1231231,
-        email: 'test@kakao.com',
-        isRegistered: true,
+        socialId: null,
+        email: null,
+        isRegistered: null,
     },
 };
 
@@ -55,6 +59,8 @@ export default handleActions(
         [SOCIAL_LOGIN_CHECK]: (state, { payload }) => {
             return produce(state, draft => {
                 draft.login.isRegistered = payload.isRegistered;
+                draft.login.socialId = payload.socialId;
+                draft.login.email = payload.email;
             });
         },
     },
