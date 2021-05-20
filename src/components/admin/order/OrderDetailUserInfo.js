@@ -23,14 +23,14 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                             <input
                                 type="number"
                                 name="orderPrice"
-                                defaultValue={Math.ceil(UpdateValue.orderPrice) || ''}
+                                defaultValue={Math.ceil(UpdateValue.orderPrice).toLocaleString() || ''}
                                 onChange={e => handleOrderChange(e)}
                                 disabled
                             />
                         ) : (
                             <input
                                 type="text"
-                                value={Math.ceil(UpdateValue.orderPrice) || ''}
+                                value={Math.ceil(UpdateValue.orderPrice).toLocaleString() || ''}
                                 onChange={e => handleOrderChange(e)}
                                 disabled
                             />
@@ -53,7 +53,9 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                             name="vat"
                             value={
                                 UpdateValue.orderPrice
-                                    ? parseInt(UpdateValue.orderPrice + UpdateValue.extraPrice) * 0.1
+                                    ? Math.ceil(
+                                          parseInt(UpdateValue.orderPrice + UpdateValue.extraPrice) * 0.1
+                                      ).toLocaleString()
                                     : ''
                             }
                             disabled
@@ -61,8 +63,17 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                     </td>
                 </tr>
                 <tr>
+                    <th>사용 캐쉬</th>
+                    <td>
+                        <input
+                            type="text"
+                            name="discountPrice"
+                            value={UpdateValue.discountPrice ? UpdateValue.discountPrice.toLocaleString() : 0}
+                            disabled
+                        />
+                    </td>
                     <th>총 가격</th>
-                    <td colSpan="5">
+                    <td colSpan="3">
                         <input
                             type="text"
                             name="vat"

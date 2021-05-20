@@ -57,7 +57,14 @@ const PaymentPopup = ({ handlePopup, handleChangeUsePoint, usePoint }) => {
     }, []);
 
     const handleDeposit = async () => {
-        setDepositPopup(!depositPopup);
+        const amount = Math.ceil(
+            Number(getOrder.orderPrice) + Number(getOrder.extraPrice) - usePoint + Number(getOrder.orderPrice) * 0.1
+        );
+        if (amount === 0) {
+            handlePayment();
+        } else {
+            setDepositPopup(!depositPopup);
+        }
         // const clientKey = 'test_ck_lpP2YxJ4K87PxeNb69p3RGZwXLOb';
         // const tossPayments = await loadTossPayments(clientKey);
         // tossPayments.requestPayment('가상계좌', {
