@@ -15,7 +15,7 @@ import { createBrowserHistory } from 'history';
 export const history = createBrowserHistory();
 const sagaMiddleWare = createSagaMiddleware();
 const store = createStore(
-    rootReducer,
+    rootReducer(history),
     `${process.env.REACT_APP_ENV}` === 'prod'
         ? applyMiddleware(sagaMiddleWare, routerMiddleware(history))
         : composeWithDevTools(applyMiddleware(sagaMiddleWare, routerMiddleware(history)))

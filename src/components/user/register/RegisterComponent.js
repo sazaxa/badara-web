@@ -5,7 +5,7 @@ import Tos from './Tos';
 
 const ReigisterComponent = ({ Agree, HandleAgree, HandleChange, HandleFinish, RegisterInfo, social, socialFinish }) => {
     useEffect(() => {
-        if (social.isRegistered) {
+        if (social.isRegistered === false) {
             alert('가입되지 않은 소셜 아이디 입니다. 가입후 이용 가능합니다.');
         }
     }, []);
@@ -15,7 +15,7 @@ const ReigisterComponent = ({ Agree, HandleAgree, HandleChange, HandleFinish, Re
                 <Tos HandleAgree={HandleAgree} />
             </RegisterWrap>
         );
-    if (social.isRegistered)
+    if (social.isRegistered === false)
         return (
             <RegisterWrap>
                 <RegisterContent>

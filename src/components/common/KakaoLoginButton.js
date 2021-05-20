@@ -1,26 +1,42 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import KakaoLogin from 'react-kakao-login';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { socialLoginCheckAction, socialRegisterAction } from 'store/social';
+import { loginPopupAction } from 'store/auth';
 
 const KakaoLoginButton = () => {
     const dispatch = useDispatch();
-    const [kakaoLogin, setKakaoLogin] = useState({
-        socialId: '',
-        email: '',
-    });
+    const history = useHistory();
+    const { login } = useSelector(state => state.social);
+    console.log(login);
+
+    useEffect(() => {
+        if (!!login.isRegistered) {
+            dispatch(
+                socialRegisterAction({
+                    data: {
+                        email: login.email,
+                        password: login.password,
+                    },
+                })
+            );
+        } else if (login.isRegistered === false) {
+            history.push('/register');
+            dispatch(loginPopupAction(false));
+        }
+    }, [login.isRegistered]);
     const onSuccess = response => {
         console.log(response);
-        setKakaoLogin({
-            email: response.profile.kakao_account.email,
-            socialId: response.profile.id,
-        });
-        // dispatch(
-        //     registerAction({
-        //         email: response.profile.kakao_account.email,
-        //         name: response.profile.kakao_account.profile.nickname,
-        //     })
-        // );
-        // dispatch(loginAction({ email: response.profile.kakao_account.email, password: null }));
+
+        dispatch(
+            socialLoginCheckAction({
+                data: {
+                    socialId: response.profile.id,
+                    email: response.profile.kakao_account.email,
+                },
+            })
+        );
     };
 
     return (
@@ -44,4 +60,4 @@ const KakaoLoginButton = () => {
     );
 };
 
-export default KakaoLoginButton;
+export default React.memo(KakaoLoginButton);

@@ -1,9 +1,10 @@
 import ReigisterComponent from 'components/user/register/RegisterComponent';
+import { login } from 'lib/api/auth';
 import React, { useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { clearStoreAction, registerAction } from 'store/auth';
-import { socialRegisterAction } from 'store/social';
+import { clearStoreAction, loginAction, registerAction } from 'store/auth';
+import { resetSocialInfoActin, socialRegisterAction } from 'store/social';
 
 const RegisterContainer = ({ history }) => {
     const { error, status, social } = useSelector(
@@ -35,12 +36,15 @@ const RegisterContainer = ({ history }) => {
         }
     });
     useEffect(() => {
-        if (social.isRegistered) {
+        if (social.isRegistered === false) {
             setRegisterInfo({
                 ...registerInfo,
                 email: social.email,
             });
         }
+        return () => {
+            dispatch(resetSocialInfoActin());
+        };
     }, []);
     const handleChange = e => {
         const { name, value } = e.target;
@@ -101,6 +105,9 @@ const RegisterContainer = ({ history }) => {
                         email: registerInfo.email,
                         name: registerInfo.name,
                         phoneNumber: registerInfo.phoneNumber,
+                    },
+                    callBack: () => {
+                        dispatch(loginAction({ email: login.email, password: login.password }));
                     },
                 })
             );
