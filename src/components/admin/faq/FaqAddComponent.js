@@ -22,7 +22,7 @@ const FaqAddComponent = ({ close, onSubmit, onChange }) => {
 
     return (
         <>
-            <FaqAddWrap onClick={close} />
+            {/* <FaqAddWrap onClick={close} /> */}
             <FaqAddPopup>
                 <form className={classes.root} noValidate autoComplete="off" onSubmit={onSubmit}>
                     <h2>FAQ</h2>
@@ -39,6 +39,9 @@ const FaqAddComponent = ({ close, onSubmit, onChange }) => {
                     <EditorContainer />
                     <Button variant="contained" color="primary" type="submit">
                         추가하기
+                    </Button>
+                    <Button variant="contained" color="primary" type="button" onClick={close}>
+                        닫기
                     </Button>
                 </form>
             </FaqAddPopup>

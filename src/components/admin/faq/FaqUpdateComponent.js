@@ -24,8 +24,8 @@ const FaqUpdateComponent = ({ close, onSubmit, onChange, FaqInfo }) => {
 
     return (
         <>
-            <FaqAddWrap onClick={close} />
-            <FaqAddPopup>
+            {/* <FaqAddWrap onClick={close} /> */}
+            <FaqAddPopup style={{ height: '700px' }}>
                 <form className={classes.root} noValidate autoComplete="off" onSubmit={onSubmit}>
                     <h2>FAQ 수정하기</h2>
                     <TextField
@@ -49,6 +49,9 @@ const FaqUpdateComponent = ({ close, onSubmit, onChange, FaqInfo }) => {
                     <EditorContainer />
                     <Button variant="contained" color="primary" type="submit">
                         수정하기
+                    </Button>
+                    <Button variant="contained" color="primary" type="button" onClick={close}>
+                        닫기
                     </Button>
                 </form>
             </FaqAddPopup>
