@@ -349,9 +349,7 @@ const MyorderList = ({
                                             <span
                                                 className={priceDetail ? 'detailBtn active' : 'detailBtn'}
                                                 onClick={() => handlePriceDetail()}
-                                            >
-                                                >
-                                            </span>
+                                            ></span>
                                         </div>
                                         <div className={priceDetail ? 'detailPrice active' : 'detailPrice'}>
                                             <div className="item" style={{ marginTop: '10px' }}>
