@@ -93,7 +93,7 @@ const PaymentPopup = ({ handlePopup, handleChangeUsePoint, usePoint }) => {
         dispatch(
             orderStatusChangeAction({
                 id: id,
-                data: { paymentMethod: '결제완료' },
+                data: { paymentMethod: '결제완료', point: Number(usePoint) },
                 callBack: () => {
                     dispatch(getMemberOrderAction(logged.id));
                 },
@@ -103,8 +103,18 @@ const PaymentPopup = ({ handlePopup, handleChangeUsePoint, usePoint }) => {
     };
 
     const handleUsePont = () => {
+        const amount = Math.ceil(
+            Number(getOrder.orderPrice) +
+                Number(getOrder.extraPrice) -
+                Number(usePoint) +
+                Number(getOrder.orderPrice) * 0.1
+        );
+        console.log('userPoint', logged.point);
+        console.log('usePoint', usePoint);
         if (logged.point < usePoint) {
             alert('보유하신 캐시보다 더 많이 입력하셨습니다. 다시 입력해주세요.');
+        } else if (amount < 0) {
+            alert('결제금액보다 더 많은 포인트를 사용할수 없습니다. 다시 입력해주세요.');
             return;
         } else {
             setPointPopup(!usePointPopup);
@@ -112,19 +122,24 @@ const PaymentPopup = ({ handlePopup, handleChangeUsePoint, usePoint }) => {
     };
 
     const handleToss = async () => {
+        const amount = Math.ceil(
+            Number(getOrder.orderPrice) + Number(getOrder.extraPrice) - usePoint + Number(getOrder.orderPrice) * 0.1
+        );
         // alert('준비중입니다.');
         const clientKey = `${process.env.REACT_APP_PAYMENT_CLIENT_KEY}`;
-        const tossPayments = await loadTossPayments(clientKey);
-        tossPayments.requestPayment('카드', {
-            amount: Math.ceil(
-                Number(getOrder.orderPrice) + Number(getOrder.extraPrice) - usePoint + Number(getOrder.orderPrice) * 0.1
-            ),
-            orderId: getOrder.orderNumber,
-            orderName: '해외배송서비스',
-            customerName: getOrder.recipient.member.name,
-            successUrl: window.location.origin + '/mypage',
-            failUrl: window.location.origin + '/mypage',
-        });
+        if (amount === 0) {
+            handlePayment();
+        } else {
+            const tossPayments = await loadTossPayments(clientKey);
+            tossPayments.requestPayment('카드', {
+                amount: Number(amount),
+                orderId: getOrder.orderNumber,
+                orderName: '해외배송서비스',
+                customerName: getOrder.recipient.member.name,
+                successUrl: window.location.origin + '/mypage',
+                failUrl: window.location.origin + '/mypage',
+            });
+        }
     };
     if (!orders) return null;
     if (!paymentAgree)

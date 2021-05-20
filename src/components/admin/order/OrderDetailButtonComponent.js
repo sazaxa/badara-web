@@ -11,7 +11,7 @@ const OrderDetailButtonComponent = ({
 }) => {
     return (
         <article className="btnWrap">
-            {UpdateValue.paymentKey && UpdateValue.orderStatus !== '환불' ? (
+            {UpdateValue.paymentKey || UpdateValue.orderStatus !== '환불' ? (
                 <button
                     type="button"
                     onClick={
