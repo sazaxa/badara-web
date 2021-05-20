@@ -472,7 +472,7 @@ export const MypageContent = styled.article`
         .detailPrice.active {
             visibility: visible;
             opacity: 1;
-            height: 15vh;
+            height: 23vh;
         }
     }
     .detailBtn {

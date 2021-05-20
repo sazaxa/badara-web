@@ -336,11 +336,12 @@ const MyorderList = ({
                                             </span>
                                         </div> */}
                                         <div className="item" style={{ width: '100%' }}>
-                                            <strong>총 금액</strong>
+                                            <strong>결제 금액</strong>
                                             <span style={{ fontSize: '20px', fontWeight: '600' }}>
                                                 {Math.ceil(
                                                     Number(order.orderPrice) +
-                                                        Number(order.extraPrice) +
+                                                        Number(order.extraPrice) -
+                                                        Number(order.discountPrice) +
                                                         Number(order.orderPrice) * 0.1
                                                 ).toLocaleString()}
                                                 원
@@ -369,6 +370,21 @@ const MyorderList = ({
                                                     ).toLocaleString()}
                                                     원
                                                 </span>
+                                            </div>
+                                            <div className="item">
+                                                <strong>총 비용</strong>
+                                                <span>
+                                                    {Math.ceil(
+                                                        Number(order.orderPrice) +
+                                                            Number(order.extraPrice) +
+                                                            (Number(order.orderPrice) + Number(order.extraPrice)) * 0.1
+                                                    ).toLocaleString()}
+                                                    원
+                                                </span>
+                                            </div>
+                                            <div className="item">
+                                                <strong>사용 캐쉬</strong>
+                                                <span>{Math.ceil(Number(order.discountPrice)).toLocaleString()}원</span>
                                             </div>
                                         </div>
                                         {order.orderStatus === '해외배송중' || order.orderStatus === '해외배송완료' ? (
