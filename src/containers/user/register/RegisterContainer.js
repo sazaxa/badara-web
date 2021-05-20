@@ -107,7 +107,7 @@ const RegisterContainer = ({ history }) => {
                         phoneNumber: registerInfo.phoneNumber,
                     },
                     callBack: () => {
-                        dispatch(loginAction({ email: login.email, password: login.password }));
+                        dispatch(loginAction({ email: social.email, password: social.password }));
                     },
                 })
             );
