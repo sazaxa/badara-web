@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import main from './img/main.png';
+import main from './img/main.jpg';
 export const MainBannerWrap = styled.article`
     width: 100%;
     height: 500px;
@@ -21,25 +21,27 @@ export const MainBannerWrap = styled.article`
     p {
         text-align: right;
         color: #fff;
-        font-size: 32px;
+        font-size: 27px;
         letter-spacing: -1px;
         position: absolute;
-        bottom: 130px;
+        top: 50px;
         right: 50px;
         line-height: 1.5;
         @media screen and (max-width: 1140px) {
-            font-size: 3vw;
-            bottom: 15vw;
+            font-size: 1.8rem;
+            top: 5.5vw;
+            right: 30px;
         }
-        @media screen and (max-width: 1140px) {
-            font-size: 3vw;
-        }
+        // @media screen and (max-width: 1140px) {
+        //     font-size: 3vw;
+        // }
         @media screen and (max-width: 800px) {
-            font-size: 3.5vw;
+            font-size: 1.3rem;
         }
         @media screen and (max-width: 600px) {
-            font-size: 4vw;
-            right: 20px;
+            top: 6vw;
+            font-size: 0.8rem;
+            right: 15px;
         }
     }
     .BannerBtn {
@@ -52,7 +54,7 @@ export const MainBannerWrap = styled.article`
         line-height: 50px;
         border-radius: 10px;
         position: absolute;
-        bottom: 50px;
+        bottom: 30px;
         right: 50px;
         cursor: pointer;
         @media screen and (max-width: 1140px) {

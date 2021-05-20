@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Responsive from '../components/common/Responsive';
+import { FaqAddPopup } from './FaqStyles';
 
 export const OrderWrap = styled(Responsive)`
     width: 100%;
@@ -447,5 +448,20 @@ export const PrintWrap = styled.div`
         /* padding: 1cm; */
         // height: 100%;
     }
+    }
+`;
+
+export const OrderRefuncPopupWrap = styled(FaqAddPopup)`
+    width: 500px;
+    height: auto;
+    h2 {
+        font-size: 1.5rem;
+        text-align: center;
+        letter-spacing: -1px;
+        margin-bottom: 1rem;
+    }
+    .MuiFormControl-root.MuiTextField-root {
+        width: 100%;
+        margin-bottom: 1rem;
     }
 `;

@@ -3,12 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import produce from 'immer';
-import { getOrderInfoAction, putOrderInfoAction } from 'store/order';
+import { getOrderInfoAction, orderStatusChangeAction, putOrderInfoAction } from 'store/order';
 
 const OrderDetailContainer = ({ match }) => {
     const dispatch = useDispatch();
     const [updateState, setUpdateState] = useState(false);
     const [updateValue, setUpdateValue] = useState(null);
+    const [refundPopup, setRefuncPopup] = useState(false);
     const { id } = match.params;
     const { list, orderInfo } = useSelector(state => ({
         list: state.part.country.list,
@@ -37,6 +38,8 @@ const OrderDetailContainer = ({ match }) => {
                 products: orderInfo.productResponses,
                 boxes: orderInfo.boxResponses,
                 recipient: orderInfo.recipient,
+                paymentKey: orderInfo.paymentKey,
+                discountPrice: orderInfo.discountPrice,
             });
         }
     }, [orderInfo]);
@@ -128,6 +131,29 @@ const OrderDetailContainer = ({ match }) => {
             })
         );
     };
+
+    const handleRefundPopup = () => {
+        setRefuncPopup(!refundPopup);
+    };
+
+    const handleDepositCancel = () => {
+        const confirm = window.confirm('정말로 환불하시겠습니까?');
+        if (confirm === true) {
+            dispatch(
+                orderStatusChangeAction({
+                    id: updateValue.orderNumber,
+                    data: {
+                        paymentMethod: '환불',
+                    },
+                    callBack: () => {
+                        dispatch(getOrderInfoAction(updateValue.id));
+                        window.location.href = `/admin/order/${updateValue.id}`;
+                    },
+                })
+            );
+        }
+    };
+
     if (orderInfo === null || updateValue === null || list === null) {
         return null;
     }
@@ -143,6 +169,10 @@ const OrderDetailContainer = ({ match }) => {
             UpdateValue={updateValue}
             OrderInfo={orderInfo}
             List={list}
+            handleRefundPopup={handleRefundPopup}
+            refundPopup={refundPopup}
+            setRefuncPopup={setRefuncPopup}
+            handleDepositCancel={handleDepositCancel}
         />
     );
 };

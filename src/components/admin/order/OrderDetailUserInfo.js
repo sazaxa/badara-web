@@ -23,14 +23,14 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                             <input
                                 type="number"
                                 name="orderPrice"
-                                defaultValue={Math.ceil(UpdateValue.orderPrice) || ''}
+                                defaultValue={Math.ceil(UpdateValue.orderPrice).toLocaleString() || ''}
                                 onChange={e => handleOrderChange(e)}
                                 disabled
                             />
                         ) : (
                             <input
                                 type="text"
-                                value={Math.ceil(UpdateValue.orderPrice) || ''}
+                                value={Math.ceil(UpdateValue.orderPrice).toLocaleString() || ''}
                                 onChange={e => handleOrderChange(e)}
                                 disabled
                             />
@@ -52,8 +52,10 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                             type="text"
                             name="vat"
                             value={
-                                UpdateValue.orderPrice && UpdateValue.extraPrice
-                                    ? parseInt(UpdateValue.orderPrice + UpdateValue.extraPrice) * 0.1
+                                UpdateValue.orderPrice
+                                    ? Math.ceil(
+                                          parseInt(UpdateValue.orderPrice + UpdateValue.extraPrice) * 0.1
+                                      ).toLocaleString()
                                     : ''
                             }
                             disabled
@@ -61,15 +63,28 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                     </td>
                 </tr>
                 <tr>
+                    <th>사용 캐쉬</th>
+                    <td>
+                        <input
+                            type="text"
+                            name="discountPrice"
+                            value={UpdateValue.discountPrice ? UpdateValue.discountPrice.toLocaleString() : 0}
+                            disabled
+                        />
+                    </td>
                     <th>총 가격</th>
-                    <td colSpan="5">
+                    <td colSpan="3">
                         <input
                             type="text"
                             name="vat"
                             value={
                                 UpdateValue.orderPrice
                                     ? Math.ceil(
-                                          parseInt(UpdateValue.orderPrice + UpdateValue.extraPrice) +
+                                          parseInt(
+                                              UpdateValue.orderPrice +
+                                                  UpdateValue.extraPrice -
+                                                  UpdateValue.discountPrice
+                                          ) +
                                               parseInt(UpdateValue.orderPrice) * 0.1
                                       ).toLocaleString() + '원'
                                     : ''
@@ -96,7 +111,9 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                                 <option value="해외배송중">해외배송중</option>
                                 <option value="해외배송완료">해외배송완료</option>
                                 <option value="취소">취소</option>
-                                <option value="환불">환불</option>
+                                <option value="환불" disabled>
+                                    환불
+                                </option>
                                 <option value="환불대기">환불대기</option>
                             </select>
                         ) : (
@@ -115,7 +132,9 @@ const OrderDetailUserInfo = ({ UpdateState, UpdateValue, handleOrderChange, List
                                 <option value="해외배송중">해외배송중</option>
                                 <option value="해외배송완료">해외배송완료</option>
                                 <option value="취소">취소</option>
-                                <option value="환불">환불</option>
+                                <option value="환불" disabled>
+                                    환불
+                                </option>
                                 <option value="환불대기">환불대기</option>
                             </select>
                         )}

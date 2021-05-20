@@ -5,7 +5,7 @@ export const AdminUserWrap = styled.article`
     padding-top: 50px;
     padding-left: 300px;
 
-    height: 100vh;
+    min-height: 100vh;
     background: #f2f2f2;
 `;
 

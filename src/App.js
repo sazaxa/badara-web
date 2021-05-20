@@ -17,6 +17,9 @@ import {
     AdminLoginPage,
     Mypage,
     AdminPrintPage,
+    AdminPointSetting,
+    Policypage,
+    CashPage,
 } from 'pages';
 import { FooterComponent } from 'components';
 import { HeaderContainer, AdminHeaderContainer } from 'containers';
@@ -56,6 +59,7 @@ function App({ location }) {
                     <Route component={AdminOrderDetailPage} path="/admin/order/:id" />
                     <Route component={AdminFAQPage} path="/admin/faq" />
                     <Route component={AdminChargePage} path="/admin/insert" />
+                    <Route component={AdminPointSetting} path="/admin/pointsetting" />
                     {/* TODO: 계속 랜더링됨... 이유 확인중 */}
                     {/* <Redirect path="*" to="/admin" /> */}
                 </section>
@@ -69,7 +73,9 @@ function App({ location }) {
                     <Route component={RegisterPage} path="/register" />
                     <Route component={SupportPage} path="/support" exact />
                     <Route component={Detail} path="/support/:id" />
-                    <Route component={Mypage} path="/mypage" />
+                    <Route component={Mypage} path="/mypage" exact />
+                    <Route component={CashPage} path="/mypage/cash" />
+                    <Route component={Policypage} path="/policy" />
                     {/* TODO: 새로고침시 전부 / 로 이동되어 주석처리 */}
                     {/* <Redirect path="*" to="/" /> */}
                     <FooterComponent />

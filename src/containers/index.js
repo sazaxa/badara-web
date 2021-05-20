@@ -24,3 +24,7 @@ export { default as RegisterContainer } from './user/register/RegisterContainer'
 export { default as CostContainer } from './user/cost/CostContainer';
 
 export { default as Print } from './admin/print/Print';
+
+export { default as PointContainer } from './admin/setting/point/PointContainer';
+
+export { default as CashContainer } from './user/cash/CashContainer';

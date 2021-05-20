@@ -6,6 +6,16 @@ import UpdateInvoice from './UpdateInvoice';
 import PaymentPopup from './PaymentPopup';
 import moment from '../../../../node_modules/moment/moment';
 import CancelModal from './CancelModal';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+    backdrop: {
+        zIndex: theme.zIndex.drawer + 1,
+        color: '#fff',
+    },
+}));
 
 const MyorderList = ({
     status,
@@ -22,7 +32,11 @@ const MyorderList = ({
     cancelPopup,
     handlePriceDetail,
     priceDetail,
+    orderStatus,
+    handleChangeUsePoint,
+    usePoint,
 }) => {
+    const classes = useStyles();
     if (!memberOrder) {
         return null;
     }
@@ -32,7 +46,19 @@ const MyorderList = ({
                 <CancelModal handlePopup={handleCancelPopup} handleCancel={handleCancel} visible={cancelPopup} />
             ) : null}
             {updatePopup === true ? <UpdateInvoice handlePopup={handleUpdatePopup} updatePopup={updatePopup} /> : null}
-            {paymentPopup === true ? <PaymentPopup handlePopup={handlePaymentPopup} /> : null}
+            {paymentPopup === true ? (
+                <PaymentPopup
+                    handlePopup={handlePaymentPopup}
+                    handleChangeUsePoint={handleChangeUsePoint}
+                    usePoint={usePoint}
+                />
+            ) : null}
+            <Backdrop className={classes.backdrop} open={orderStatus === 'loading'}>
+                <CircularProgress color="inherit" />
+                <p style={{ marginLeft: '20px', textAlign: 'center', lineHeight: '1.5' }}>
+                    진행중입니다. <br /> 잠시만 기다려주세요.
+                </p>
+            </Backdrop>
             <MypageContent>
                 {/* <Button variant="contained" color="primary">
                     내정보 수정
@@ -123,7 +149,9 @@ const MyorderList = ({
                                 >
                                     주문 취소
                                 </button> */}
-                                {order.orderStatus === '해외배송중' || order.orderStatus === '해외배송완료' ? null : (
+                                {order.orderStatus === '결제완료' ||
+                                order.orderStatus === '해외배송중' ||
+                                order.orderStatus === '해외배송완료' ? null : (
                                     <button type="button" onClick={() => handleCancelPopup(order.orderNumber)}>
                                         주문 취소
                                     </button>
@@ -308,11 +336,12 @@ const MyorderList = ({
                                             </span>
                                         </div> */}
                                         <div className="item" style={{ width: '100%' }}>
-                                            <strong>총 금액</strong>
+                                            <strong>결제 금액</strong>
                                             <span style={{ fontSize: '20px', fontWeight: '600' }}>
                                                 {Math.ceil(
                                                     Number(order.orderPrice) +
-                                                        Number(order.extraPrice) +
+                                                        Number(order.extraPrice) -
+                                                        Number(order.discountPrice) +
                                                         Number(order.orderPrice) * 0.1
                                                 ).toLocaleString()}
                                                 원
@@ -320,9 +349,7 @@ const MyorderList = ({
                                             <span
                                                 className={priceDetail ? 'detailBtn active' : 'detailBtn'}
                                                 onClick={() => handlePriceDetail()}
-                                            >
-                                                >
-                                            </span>
+                                            ></span>
                                         </div>
                                         <div className={priceDetail ? 'detailPrice active' : 'detailPrice'}>
                                             <div className="item" style={{ marginTop: '10px' }}>
@@ -341,6 +368,21 @@ const MyorderList = ({
                                                     ).toLocaleString()}
                                                     원
                                                 </span>
+                                            </div>
+                                            <div className="item">
+                                                <strong>총 비용</strong>
+                                                <span>
+                                                    {Math.ceil(
+                                                        Number(order.orderPrice) +
+                                                            Number(order.extraPrice) +
+                                                            (Number(order.orderPrice) + Number(order.extraPrice)) * 0.1
+                                                    ).toLocaleString()}
+                                                    원
+                                                </span>
+                                            </div>
+                                            <div className="item">
+                                                <strong>사용 캐쉬</strong>
+                                                <span>{Math.ceil(Number(order.discountPrice)).toLocaleString()}원</span>
                                             </div>
                                         </div>
                                         {order.orderStatus === '해외배송중' || order.orderStatus === '해외배송완료' ? (

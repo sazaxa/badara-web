@@ -14,3 +14,9 @@ export { default as Mypage } from './user/Mypage';
 export { default as AdminPrintPage } from './admin/AdminPrintPage';
 
 export { default as MainPage } from './user/MainPage';
+
+export { default as AdminPointSetting } from './admin/AdminPointSetting';
+
+export { default as Policypage } from './user/PolicyPage';
+
+export { default as CashPage } from './user/CashPage';

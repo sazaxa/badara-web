@@ -31,14 +31,7 @@ const CancelModal = ({ visible, handleCancel, handlePopup }) => {
                         variant="contained"
                         style={{ backgroundColor: '#0049ff', color: '#fff' }}
                         type="button"
-                        onClick={() =>
-                            handleCancel(
-                                id,
-                                order.orderStatus === '해외배송중' || order.orderStatus === '결제완료'
-                                    ? '환불대기'
-                                    : '취소'
-                            )
-                        }
+                        onClick={() => handleCancel(id, order.orderStatus === '무통장입금' ? '환불대기' : '취소')}
                     >
                         확인
                     </Button>

@@ -45,3 +45,9 @@ export const adminLogin = (email, password) => {
 export const passwordModify = ({ id, data }) => {
     return client.put(`/api/v1/members/${id}`, data);
 };
+
+// 회원 포인트 사용내역 조회
+
+export const getPointHistory = id => {
+    return client.get(`/api/v1/members/point/${id}`);
+};
