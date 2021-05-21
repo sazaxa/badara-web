@@ -7,12 +7,13 @@ import { clearStoreAction, loginAction, registerAction } from 'store/auth';
 import { resetSocialInfoActin, socialRegisterAction } from 'store/social';
 
 const RegisterContainer = ({ history }) => {
-    const { error, status, social, register } = useSelector(
+    const { error, status, social, register, login } = useSelector(
         state => ({
             error: state.auth.register.error,
             status: state.auth.register.status,
             social: state.social.login,
             register: state.social.register,
+            login: state.auth.login,
         }),
         shallowEqual
     );
@@ -128,6 +129,7 @@ const RegisterContainer = ({ history }) => {
             RegisterInfo={registerInfo}
             social={social}
             socialFinish={socialFinish}
+            loginStatus={login.status}
         />
     );
 };
