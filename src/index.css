@@ -83,7 +83,7 @@ code {
     top: 0px;
     width: 30px;
     height: 30px;
-    background: url(https://static.msscdn.net/ui/build/m/img/old/bg_social.png?v=20210504121900) no-repeat;
+    background: url(./styles/img/bg_social.png) no-repeat;
     background-size: 60px 30px;
     vertical-align: top;
     content: '';
