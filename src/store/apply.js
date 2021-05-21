@@ -92,6 +92,7 @@ export const initialState = {
         ],
         boxes: [
             {
+                type: 'basic',
                 expectedWidth: null,
                 expectedDepth: null,
                 expectedHeight: null,

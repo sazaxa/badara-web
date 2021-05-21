@@ -37,6 +37,7 @@ const Boxes = ({ stepIndex, steps }) => {
     }, [boxes]);
 
     const defaultBoxData = {
+        type: 'basic',
         expectedWidth: null,
         expectedDepth: null,
         expectedHeight: null,

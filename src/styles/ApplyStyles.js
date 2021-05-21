@@ -424,11 +424,11 @@ export const BoxWrap = styled.article`
             flex-wrap: wrap;
             justify-content: space-between;
             & > p {
-                letter-spacing:-1px;
-                font-size:14px;
-                color:red;
-                margin-top:10px;
-                font-weight:600;
+                letter-spacing: -1px;
+                font-size: 14px;
+                color: red;
+                margin-top: 10px;
+                font-weight: 600;
             }
         }
         & > tbody > tr > td > input {
@@ -449,6 +449,24 @@ export const BoxWrap = styled.article`
             background-color: #0080ff;
             color: #fff;
         }
+    }
+    .RadioGroup {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        label {
+            width: 23%;
+            @media screen and (max-width: 860px) {
+                width: 48%;
+            }
+            @media screen and (max-width: 420px) {
+                width: 100%;
+            }
+            .MuiTypography-body1 {
+                font-size: 0.9em;
+            }
+        }
+    }
 `;
 
 export const ConfirmWrap = styled.article`
