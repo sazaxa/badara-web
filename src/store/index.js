@@ -9,7 +9,6 @@ import part, { partSaga } from './part';
 import box, { boxSaga } from './box';
 import point, { pointSaga } from './point';
 import social, { socialSaga } from './social';
-import { connectRouter } from 'connected-react-router';
 
 const rootReducer = history =>
     combineReducers({
@@ -22,7 +21,6 @@ const rootReducer = history =>
         box,
         point,
         social,
-        router: connectRouter(history),
     });
 
 export function* rootSaga() {
