@@ -3,8 +3,6 @@ import { takeLatest, call, put } from 'redux-saga/effects';
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 import * as socialAPI from '../lib/api/social';
-import { initialState } from './part';
-
 // 소셜 로그인 가입 여부 체크
 const [SOCIAL_LOGIN_CHECK, SOCIAL_LOGIN_CHECK_SUCCESS, SOCIAL_LOGIN_CHECK_FAILURE] = createRequestActionTypes(
     'social/SOCIAL_LOGIN_CHECK'
