@@ -18,7 +18,7 @@ const Box = ({ box, index, Remove }) => {
             ...updateBoxData,
             [name]: value,
         });
-        if (name === 'type' && value !== 'basic') {
+        if (name === 'type' && value !== '박스') {
             setUpdateBoxData({
                 ...updateBoxData,
                 type: value,
@@ -27,7 +27,7 @@ const Box = ({ box, index, Remove }) => {
                 expectedHeight: 1,
                 expectedVolumeWeight: 1,
             });
-        } else if (name === 'type' && value === 'basic') {
+        } else if (name === 'type' && value === '박스') {
             setUpdateBoxData({
                 ...updateBoxData,
                 type: value,
@@ -86,14 +86,14 @@ const Box = ({ box, index, Remove }) => {
                                 onChange={e => handleChange(e)}
                                 className="RadioGroup"
                             >
-                                <FormControlLabel value="basic" control={<Radio />} label="박스" />
-                                <FormControlLabel value="forwarding" control={<Radio />} label="배대지" />
-                                <FormControlLabel value="plasticBag" control={<Radio />} label="비닐봉투" />
-                                <FormControlLabel value="donno" control={<Radio />} label="몰라요" />
+                                <FormControlLabel value="박스" control={<Radio />} label="박스" />
+                                <FormControlLabel value="배대지" control={<Radio />} label="배대지" />
+                                <FormControlLabel value="비닐봉투" control={<Radio />} label="비닐봉투" />
+                                <FormControlLabel value="모르겠어요" control={<Radio />} label="모르겠어요" />
                             </RadioGroup>
                         </td>
                     </tr>
-                    {updateBoxData.type === 'basic' ? (
+                    {updateBoxData.type === '박스' ? (
                         <>
                             <tr>
                                 <th>부피무게 계산(단위:cm)</th>
@@ -170,6 +170,9 @@ const Box = ({ box, index, Remove }) => {
                                 required
                             />
                             <span style={{ marginLeft: '10px' }}>kg</span>
+                            {updateBoxData.type !== '박스' ? (
+                                <p style={{ width: '100%' }}>(대략적인 실무게를 입력해주세요.)</p>
+                            ) : null}
                         </td>
                     </tr>
                     <tr>

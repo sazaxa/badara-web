@@ -176,20 +176,35 @@ const Confirm = ({ stepIndex, steps, history }) => {
                                         박스 {index + 1}
                                     </th>
                                 </tr>
-                                <tr>
-                                    <th>가로</th>
-                                    <th>세로</th>
-                                    <th>높이</th>
-                                    <th>부피 무게</th>
-                                    <th>실 무게</th>
-                                </tr>
-                                <tr>
-                                    <td>{box.expectedWidth}cm</td>
-                                    <td>{box.expectedDepth}cm</td>
-                                    <td>{box.expectedHeight}cm</td>
-                                    <td>{Number(box.expectedVolumeWeight).toFixed(2)}kg</td>
-                                    <td>{Number(box.expectedNetWeight).toFixed(2)}kg</td>
-                                </tr>
+                                {box.type === 'basic' ? (
+                                    <>
+                                        <tr>
+                                            <th>가로</th>
+                                            <th>세로</th>
+                                            <th>높이</th>
+                                            <th>부피 무게</th>
+                                            <th>실 무게</th>
+                                        </tr>
+                                        <tr>
+                                            <td>{box.expectedWidth}cm</td>
+                                            <td>{box.expectedDepth}cm</td>
+                                            <td>{box.expectedHeight}cm</td>
+                                            <td>{Number(box.expectedVolumeWeight).toFixed(2)}kg</td>
+                                            <td>{Number(box.expectedNetWeight).toFixed(2)}kg</td>
+                                        </tr>
+                                    </>
+                                ) : (
+                                    <>
+                                        <tr>
+                                            <th colSpan="2" style={{ width: '100%' }}>
+                                                선택한 포장 유형
+                                            </th>
+                                            <td colSpan="4" style={{ width: '100%' }}>
+                                                {box.type}
+                                            </td>
+                                        </tr>
+                                    </>
+                                )}
                                 <tr>
                                     <th>측정된 무게</th>
                                     <td>{box.expectedVolumeWeight > box.expectedNetWeight ? '부피무게' : '실 무게'}</td>
