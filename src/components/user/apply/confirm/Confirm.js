@@ -176,7 +176,7 @@ const Confirm = ({ stepIndex, steps, history }) => {
                                         박스 {index + 1}
                                     </th>
                                 </tr>
-                                {box.type === 'basic' ? (
+                                {box.type === '박스' ? (
                                     <>
                                         <tr>
                                             <th>가로</th>
