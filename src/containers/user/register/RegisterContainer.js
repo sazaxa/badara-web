@@ -1,11 +1,22 @@
 import ReigisterComponent from 'components/user/register/RegisterComponent';
+import { login } from 'lib/api/auth';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { clearStoreAction, registerAction } from 'store/auth';
+import { clearStoreAction, loginAction, registerAction } from 'store/auth';
+import { resetSocialInfoActin, socialRegisterAction } from 'store/social';
 
 const RegisterContainer = ({ history }) => {
-    const { error, status } = useSelector(state => state.auth.register);
+    const { error, status, social, register, login } = useSelector(
+        state => ({
+            error: state.auth.register.error,
+            status: state.auth.register.status,
+            social: state.social.login,
+            register: state.social.register,
+            login: state.auth.login,
+        }),
+        shallowEqual
+    );
     const dispatch = useDispatch();
     const [registerInfo, setRegisterInfo] = useState({
         email: '',
@@ -26,7 +37,25 @@ const RegisterContainer = ({ history }) => {
             dispatch(clearStoreAction());
         }
     });
+    useEffect(() => {
+        if (social.isRegistered === false) {
+            setRegisterInfo({
+                ...registerInfo,
+                email: social.email,
+            });
+        }
+        return () => {
+            dispatch(resetSocialInfoActin());
+        };
+    }, []);
 
+    useEffect(() => {
+        if (register.status === 'success') {
+            dispatch(loginAction({ email: register.email, password: register.password }));
+        } else if (register.status === 'fail') {
+            alert('로그인이 실패하였습니다. 다시 시도 해주세요.');
+        }
+    }, [register.status]);
     const handleChange = e => {
         const { name, value } = e.target;
         setRegisterInfo({
@@ -69,6 +98,28 @@ const RegisterContainer = ({ history }) => {
         }
         dispatch(registerAction(registerInfo));
     };
+    const socialFinish = () => {
+        if (!registerInfo.phoneNumber) {
+            alert('휴대폰번호를 입력하세요.');
+            return;
+        } else if (!registerInfo.name) {
+            alert('이름을 입력하세요.');
+            return;
+        } else {
+            console.log(social.socialId);
+            console.log(registerInfo);
+            dispatch(
+                socialRegisterAction({
+                    data: {
+                        socialId: social.socialId,
+                        email: registerInfo.email,
+                        name: registerInfo.name,
+                        phoneNumber: registerInfo.phoneNumber,
+                    },
+                })
+            );
+        }
+    };
     return (
         <ReigisterComponent
             HandleAgree={handleAgree}
@@ -76,6 +127,9 @@ const RegisterContainer = ({ history }) => {
             HandleChange={handleChange}
             HandleFinish={handleFinish}
             RegisterInfo={registerInfo}
+            social={social}
+            socialFinish={socialFinish}
+            loginStatus={login.status}
         />
     );
 };

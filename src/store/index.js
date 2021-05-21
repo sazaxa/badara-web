@@ -8,20 +8,35 @@ import apply, { applySaga } from './apply';
 import part, { partSaga } from './part';
 import box, { boxSaga } from './box';
 import point, { pointSaga } from './point';
+import social, { socialSaga } from './social';
+import { connectRouter } from 'connected-react-router';
 
-const rootReducer = combineReducers({
-    auth,
-    member,
-    order,
-    faq,
-    apply,
-    part,
-    box,
-    point,
-});
+const rootReducer = history =>
+    combineReducers({
+        auth,
+        member,
+        order,
+        faq,
+        apply,
+        part,
+        box,
+        point,
+        social,
+        router: connectRouter(history),
+    });
 
 export function* rootSaga() {
-    yield all([authSaga(), memberSaga(), orderSaga(), faqSaga(), partSaga(), applySaga(), boxSaga(), pointSaga()]);
+    yield all([
+        authSaga(),
+        memberSaga(),
+        orderSaga(),
+        faqSaga(),
+        partSaga(),
+        applySaga(),
+        boxSaga(),
+        pointSaga(),
+        socialSaga(),
+    ]);
 }
 
 export default rootReducer;
