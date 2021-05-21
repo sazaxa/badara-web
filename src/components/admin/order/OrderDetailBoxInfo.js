@@ -11,6 +11,23 @@ const OrderDetailBoxInfo = ({ Boxes, UpdateState, HandleChange }) => {
                                 <th colSpan="5">박스정보 {index + 1}</th>
                             </tr>
                             <tr>
+                                <th>포장 유형</th>
+                                <td colSpan="4">
+                                    <select
+                                        value={box.type}
+                                        disabled={UpdateState ? false : true}
+                                        onChange={e => HandleChange(e, index)}
+                                        name="type"
+                                    >
+                                        <option value="">선택</option>
+                                        <option value="박스">박스</option>
+                                        <option value="배대지">배대지</option>
+                                        <option value="비닐봉투">비닐봉투</option>
+                                        <option value="모르겠어요">모르겠어요</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
                                 <th>회원 입력 가로</th>
                                 <th>회원 입력 세로</th>
                                 <th>회원 입력 높이</th>

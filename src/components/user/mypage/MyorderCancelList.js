@@ -154,8 +154,30 @@ const MyorderCancelList = ({ status, memberOrder, handleTabToggle }) => {
                                                                 : { width: '60%', float: 'left' }
                                                         }
                                                     >
-                                                        <strong>회원님이 입력한 부피 무게</strong>
-                                                        <p>{box.expectedVolumeWeight}kg</p>
+                                                        <strong
+                                                            style={{
+                                                                marginRight: '0',
+                                                                marginBottom: '5px',
+                                                                display: 'block',
+                                                            }}
+                                                        >
+                                                            포장 유형
+                                                        </strong>
+                                                        <p>{box.type === null ? '박스' : box.type}</p>
+                                                        {box.type === null || box.type === '박스' ? (
+                                                            <>
+                                                                <strong
+                                                                    style={{
+                                                                        marginRight: '0',
+                                                                        marginBottom: '5px',
+                                                                        display: 'block',
+                                                                    }}
+                                                                >
+                                                                    회원님이 입력한 부피 무게
+                                                                </strong>
+                                                                <p>{box.expectedVolumeWeight}kg</p>
+                                                            </>
+                                                        ) : null}
                                                         <strong>회원님이 입력한 실 무게</strong>
                                                         <p>{box.expectedNetWeight}kg</p>
                                                     </div>
