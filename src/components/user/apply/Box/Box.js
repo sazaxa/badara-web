@@ -3,6 +3,9 @@ import { useDispatch } from 'react-redux';
 import { boxDataUpdateAction } from 'store/apply';
 import Button from '@material-ui/core/Button';
 import { BoxWrap } from 'styles/ApplyStyles';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Radio from '@material-ui/core/Radio';
 
 const Box = ({ box, index, Remove }) => {
     // 받은 data를 수정하기 위해 state에 담는다.
@@ -15,6 +18,25 @@ const Box = ({ box, index, Remove }) => {
             ...updateBoxData,
             [name]: value,
         });
+        if (name === 'type' && value !== 'basic') {
+            setUpdateBoxData({
+                ...updateBoxData,
+                type: value,
+                expectedWidth: 1,
+                expectedDepth: 1,
+                expectedHeight: 1,
+                expectedVolumeWeight: 1,
+            });
+        } else if (name === 'type' && value === 'basic') {
+            setUpdateBoxData({
+                ...updateBoxData,
+                type: value,
+                expectedWidth: null,
+                expectedDepth: null,
+                expectedHeight: null,
+                expectedVolumeWeight: null,
+            });
+        }
     };
 
     // state가 변경 될때마다 redux state에 저장한다.
@@ -42,7 +64,7 @@ const Box = ({ box, index, Remove }) => {
     return (
         <BoxWrap>
             <article className="titleBox">
-                <h2>{index + 1}번 박스정보</h2>
+                <h2>{index + 1}번 박스 정보</h2>
                 <p>
                     센터에 보내시는 <strong>박스의 수량만큼</strong> 박스를 추가해주세요.
                 </p>
@@ -55,65 +77,86 @@ const Box = ({ box, index, Remove }) => {
             <table>
                 <tbody>
                     <tr>
-                        <th>부피무게 계산(단위:cm)</th>
+                        <th>포장 유형</th>
                         <td>
-                            <input
-                                type="number"
-                                name="expectedWidth"
-                                value={updateBoxData.expectedWidth ?? undefined}
+                            <RadioGroup
+                                aria-label="type"
+                                name="type"
+                                value={updateBoxData.type}
                                 onChange={e => handleChange(e)}
-                                required
-                                placeholder="가로"
-                                style={{ width: '20%' }}
-                            />
-                            <input
-                                type="number"
-                                name="expectedDepth"
-                                value={updateBoxData.expectedDepth ?? undefined}
-                                onChange={e => handleChange(e)}
-                                required
-                                placeholder="세로"
-                                style={{ width: '20%' }}
-                            />
-                            <input
-                                type="number"
-                                name="expectedHeight"
-                                value={updateBoxData.expectedHeight ?? undefined}
-                                onChange={e => handleChange(e)}
-                                required
-                                placeholder="높이"
-                                style={{ width: '20%' }}
-                            />
-                            <Button
-                                variant="contained"
-                                className="btn"
-                                type="button"
-                                onClick={onClickVolume}
-                                style={{ width: '20%' }}
+                                className="RadioGroup"
                             >
-                                계산
-                            </Button>
-                            <p>(부피무게는 가로x세로x높이/5000 으로 계산됩니다.)</p>
+                                <FormControlLabel value="basic" control={<Radio />} label="박스" />
+                                <FormControlLabel value="forwarding" control={<Radio />} label="배대지" />
+                                <FormControlLabel value="plasticBag" control={<Radio />} label="비닐봉투" />
+                                <FormControlLabel value="donno" control={<Radio />} label="몰라요" />
+                            </RadioGroup>
                         </td>
                     </tr>
-                    <tr>
-                        <th>부피무게(단위:kg)</th>
-                        <td className="weight">
-                            <input
-                                type="text"
-                                name="expectedVolumeWeight"
-                                value={
-                                    updateBoxData.expectedVolumeWeight
-                                        ? updateBoxData.expectedVolumeWeight.toFixed(1)
-                                        : ''
-                                }
-                                disabled
-                                placeholder="계산하기 후 확인가능합니다."
-                                onChange={e => handleChange(e)}
-                            />
-                            <span style={{ marginLeft: '10px' }}>kg</span>
-                        </td>
-                    </tr>
+                    {updateBoxData.type === 'basic' ? (
+                        <>
+                            <tr>
+                                <th>부피무게 계산(단위:cm)</th>
+                                <td>
+                                    <input
+                                        type="number"
+                                        name="expectedWidth"
+                                        value={updateBoxData.expectedWidth ?? undefined}
+                                        onChange={e => handleChange(e)}
+                                        required
+                                        placeholder="가로"
+                                        style={{ width: '20%' }}
+                                    />
+                                    <input
+                                        type="number"
+                                        name="expectedDepth"
+                                        value={updateBoxData.expectedDepth ?? undefined}
+                                        onChange={e => handleChange(e)}
+                                        required
+                                        placeholder="세로"
+                                        style={{ width: '20%' }}
+                                    />
+                                    <input
+                                        type="number"
+                                        name="expectedHeight"
+                                        value={updateBoxData.expectedHeight ?? undefined}
+                                        onChange={e => handleChange(e)}
+                                        required
+                                        placeholder="높이"
+                                        style={{ width: '20%' }}
+                                    />
+                                    <Button
+                                        variant="contained"
+                                        className="btn"
+                                        type="button"
+                                        onClick={onClickVolume}
+                                        style={{ width: '20%' }}
+                                    >
+                                        계산
+                                    </Button>
+                                    <p>(부피무게는 가로x세로x높이/5000 으로 계산됩니다.)</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>부피무게(단위:kg)</th>
+                                <td className="weight">
+                                    <input
+                                        type="text"
+                                        name="expectedVolumeWeight"
+                                        value={
+                                            updateBoxData.expectedVolumeWeight
+                                                ? updateBoxData.expectedVolumeWeight.toFixed(1)
+                                                : ''
+                                        }
+                                        disabled
+                                        placeholder="계산하기 후 확인가능합니다."
+                                        onChange={e => handleChange(e)}
+                                    />
+                                    <span style={{ marginLeft: '10px' }}>kg</span>
+                                </td>
+                            </tr>
+                        </>
+                    ) : null}
                     <tr>
                         <th>실 무게(단위:kg)</th>
                         <td className="weight">
