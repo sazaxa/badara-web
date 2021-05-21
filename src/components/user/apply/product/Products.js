@@ -30,6 +30,7 @@ const useStyles = makeStyles(theme => ({
     description: {
         marginBottom: '0.5rem',
         letterSpacing: '-1.5px',
+        lineHeight: '1.5',
     },
 }));
 
@@ -123,8 +124,11 @@ const Products = ({ stepIndex, steps }) => {
                     </p>
                     <h2 className={classes.title}>※ 식품 발송 주의 사항</h2>
                     <p className={classes.description}>
-                        - 식품에 동물 성분이 포함된 것이 확인되면 현지 세관에서 반송할 수 있습니다. 이 경우 반송비가
-                        청구될 수 있으며, 상품 재발송을 위해서는 추가 비용을 결제해주셔야 합니다.
+                        - 식품에 동물 성분이 포함된 것이 확인되면 현지 세관에서 반송할 수 있습니다.
+                    </p>
+                    <p>
+                        이 경우 반송비가 청구될 수 있으며, <br /> 상품 재발송을 위해서는 추가 비용을 결제해주셔야
+                        합니다.
                     </p>
                     <p className={classes.description}>- 국가별로 발송 가능한 식품은 상이합니다.</p>
                     <div className="btnWrap">

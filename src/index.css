@@ -101,6 +101,7 @@ code {
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
+    min-width: 64px;
 }
 .btnWrap button:disabled {
     background: #ccc;
