@@ -7,11 +7,12 @@ import { clearStoreAction, loginAction, registerAction } from 'store/auth';
 import { resetSocialInfoActin, socialRegisterAction } from 'store/social';
 
 const RegisterContainer = ({ history }) => {
-    const { error, status, social } = useSelector(
+    const { error, status, social, register } = useSelector(
         state => ({
             error: state.auth.register.error,
             status: state.auth.register.status,
             social: state.social.login,
+            register: state.social.register,
         }),
         shallowEqual
     );
@@ -46,6 +47,14 @@ const RegisterContainer = ({ history }) => {
             dispatch(resetSocialInfoActin());
         };
     }, []);
+
+    useEffect(() => {
+        if (register.status === 'success') {
+            dispatch(loginAction({ email: register.email, password: register.password }));
+        } else if (register.status === 'fail') {
+            alert('로그인이 실패하였습니다. 다시 시도 해주세요.');
+        }
+    }, [register.status]);
     const handleChange = e => {
         const { name, value } = e.target;
         setRegisterInfo({
@@ -105,9 +114,6 @@ const RegisterContainer = ({ history }) => {
                         email: registerInfo.email,
                         name: registerInfo.name,
                         phoneNumber: registerInfo.phoneNumber,
-                    },
-                    callBack: () => {
-                        dispatch(loginAction({ email: social.email, password: social.password }));
                     },
                 })
             );

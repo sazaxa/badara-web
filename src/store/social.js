@@ -3,6 +3,7 @@ import { takeLatest, call, put } from 'redux-saga/effects';
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 import * as socialAPI from '../lib/api/social';
+import { initialState } from './part';
 
 // 소셜 로그인 가입 여부 체크
 const [SOCIAL_LOGIN_CHECK, SOCIAL_LOGIN_CHECK_SUCCESS, SOCIAL_LOGIN_CHECK_FAILURE] = createRequestActionTypes(
@@ -33,17 +34,10 @@ function* checkSaga({ payload: { data } }) {
     }
 }
 
-function* registerSaga({ payload: { data, callBack } }) {
+function* registerSaga({ payload: { data } }) {
     try {
         const response = yield call(socialAPI.reigister, data);
         yield put({ type: SOCIAL_KAKAO_REGISTER_SUCCESS, payload: response.data });
-        if (callBack instanceof Function) {
-            callBack({
-                result: true,
-            });
-        } else {
-            alert('처리중 문제 발생했습니다.');
-        }
     } catch (e) {
         yield put({ type: SOCIAL_KAKAO_REGISTER_FAILURE, payload: e.response.data });
     }
@@ -61,6 +55,11 @@ const initalState = {
         isRegistered: null,
         password: null,
     },
+    register: {
+        status: 'idle',
+        email: null,
+        password: null,
+    },
 };
 
 export default handleActions(
@@ -73,15 +72,27 @@ export default handleActions(
                 draft.login.password = payload.password;
             });
         },
+        [SOCIAL_KAKAO_REGISTER]: state => {
+            return produce(state, draft => {
+                draft.register.status = 'loading';
+            });
+        },
         [SOCIAL_KAKAO_REGISTER_SUCCESS]: (state, { payload }) => {
             return produce(state, draft => {
-                draft.login.email = payload.email;
-                draft.login.password = payload.password;
+                draft.register.status = 'success';
+                draft.register.email = payload.email;
+                draft.register.password = payload.password;
+            });
+        },
+        [SOCIAL_KAKAO_REGISTER_FAILURE]: state => {
+            return produce(state, draft => {
+                draft.register.status = 'fail';
             });
         },
         [RESET_SOCIAL_INFO]: state => {
             return produce(state, draft => {
                 draft.login = initalState.login;
+                draft.register = initalState.register;
             });
         },
     },

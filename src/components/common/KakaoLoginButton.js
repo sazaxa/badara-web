@@ -9,7 +9,6 @@ const KakaoLoginButton = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const { login } = useSelector(state => state.social);
-    console.log(login);
 
     useEffect(() => {
         if (!!login.isRegistered) {
