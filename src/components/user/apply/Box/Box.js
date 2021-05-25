@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { boxDataUpdateAction } from 'store/apply';
+import { useDispatch, useSelector } from 'react-redux';
+import { boxDataUpdateAction, productDataAddAction } from 'store/apply';
 import Button from '@material-ui/core/Button';
 import { BoxWrap } from 'styles/ApplyStyles';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
+import Product from './Product';
 
 const Box = ({ box, index, Remove }) => {
+    const { products } = useSelector(state => state.apply.apply);
     // 받은 data를 수정하기 위해 state에 담는다.
     const [updateBoxData, setUpdateBoxData] = useState(box);
     const dispatch = useDispatch();
 
-    const handleChange = e => {
+    const handleChangeBox = e => {
         const { name, value } = e.target;
         setUpdateBoxData({
             ...updateBoxData,
@@ -61,6 +63,17 @@ const Box = ({ box, index, Remove }) => {
         }
     };
 
+    const defaultProduct = {
+        productDetail: null,
+        quantity: null,
+        price: null,
+    };
+
+    const ProductAdd = () => {
+        dispatch(productDataAddAction({ product: defaultProduct }));
+        console.log(defaultProduct);
+    };
+
     return (
         <BoxWrap>
             <article className="titleBox">
@@ -83,7 +96,7 @@ const Box = ({ box, index, Remove }) => {
                                 aria-label="type"
                                 name="type"
                                 value={updateBoxData.type}
-                                onChange={e => handleChange(e)}
+                                onChange={e => handleChangeBox(e)}
                                 className="RadioGroup"
                             >
                                 <FormControlLabel value="박스" control={<Radio />} label="박스" />
@@ -102,7 +115,7 @@ const Box = ({ box, index, Remove }) => {
                                         type="number"
                                         name="expectedWidth"
                                         value={updateBoxData.expectedWidth ?? undefined}
-                                        onChange={e => handleChange(e)}
+                                        onChange={e => handleChangeBox(e)}
                                         required
                                         placeholder="가로"
                                         style={{ width: '20%' }}
@@ -111,7 +124,7 @@ const Box = ({ box, index, Remove }) => {
                                         type="number"
                                         name="expectedDepth"
                                         value={updateBoxData.expectedDepth ?? undefined}
-                                        onChange={e => handleChange(e)}
+                                        onChange={e => handleChangeBox(e)}
                                         required
                                         placeholder="세로"
                                         style={{ width: '20%' }}
@@ -120,7 +133,7 @@ const Box = ({ box, index, Remove }) => {
                                         type="number"
                                         name="expectedHeight"
                                         value={updateBoxData.expectedHeight ?? undefined}
-                                        onChange={e => handleChange(e)}
+                                        onChange={e => handleChangeBox(e)}
                                         required
                                         placeholder="높이"
                                         style={{ width: '20%' }}
@@ -150,7 +163,7 @@ const Box = ({ box, index, Remove }) => {
                                         }
                                         disabled
                                         placeholder="계산하기 후 확인가능합니다."
-                                        onChange={e => handleChange(e)}
+                                        onChange={e => handleChangeBox(e)}
                                     />
                                     <span style={{ marginLeft: '10px' }}>kg</span>
                                 </td>
@@ -164,7 +177,7 @@ const Box = ({ box, index, Remove }) => {
                                 type="number"
                                 name="expectedNetWeight"
                                 value={updateBoxData.expectedNetWeight ?? undefined}
-                                onChange={e => handleChange(e)}
+                                onChange={e => handleChangeBox(e)}
                                 placeholder="박스의 무게를 숫자만 입력해주세요."
                                 step="0.01"
                                 required
@@ -175,15 +188,31 @@ const Box = ({ box, index, Remove }) => {
                             ) : null}
                         </td>
                     </tr>
+                    {products.map((product, index) => (
+                        <Product product={product} index={index} />
+                    ))}
                     <tr>
-                        <th>어떠한 물건이 있나요?</th>
+                        <th style={{ width: '100%' }}>
+                            <Button
+                                variant="outlined"
+                                color="primary"
+                                type="button"
+                                onClick={ProductAdd}
+                                style={{ fontSize: '0.8rem' }}
+                            >
+                                상품 추가하기
+                            </Button>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>특이사항</th>
                         <td className="weight">
                             <input
                                 type="text"
                                 name="userMemo"
                                 value={updateBoxData.userMemo ?? undefined}
-                                onChange={e => handleChange(e)}
-                                placeholder="박스안 어떠한 상품이 들어있나요?"
+                                onChange={e => handleChangeBox(e)}
+                                placeholder="특이사항을 적어주세요."
                                 required
                             />
                         </td>
