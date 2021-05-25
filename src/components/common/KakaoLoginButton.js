@@ -39,7 +39,7 @@ const KakaoLoginButton = () => {
     return (
         <>
             <KakaoLogin
-                token="74a1b4aa5ea36e9a89ad734d26d426d4"
+                token="b27dc70f2bbea89e7239600a0e611493"
                 onSuccess={response => onSuccess(response)}
                 onFailure={console.error}
                 getProfile={true}
