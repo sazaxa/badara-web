@@ -452,4 +452,21 @@ export const CalculatorWrap = styled.article`
             font-size: 3.5vw;
         }
     }
+    .moreBtn {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 20px 0 0 0;
+        box-sizing: border-box;
+        button {
+            font-size:0.9rem;
+            background: #0049ff;;
+            color:#fff;
+            outline: none;
+            border 1px solid #ccc;
+            padding:0.8rem 1.2rem;
+            border-radius:5px;
+            cursor:pointer;
+        }
+    }
 `;

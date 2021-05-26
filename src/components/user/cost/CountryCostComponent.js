@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CalculatorWrap as CountryWrap } from 'styles/CalculatorStyles';
 import { CostTable } from 'styles/CostStyles';
-const CountryCostComponent = ({ list, onHandleSelectCountry, countryPrise, selected }) => {
+const CountryCostComponent = ({ list, onHandleSelectCountry, countryPrise, selected, weight, handleMoreBtn }) => {
     return (
         <CountryWrap>
             <article className="title_wrap">
@@ -35,17 +35,25 @@ const CountryCostComponent = ({ list, onHandleSelectCountry, countryPrise, selec
                 <tbody>
                     {countryPrise?.map(price => {
                         const Calculated = price.price;
-                        return (
-                            <tr key={price.id}>
-                                <td>{price.weight + 'kg'}</td>
-                                <td>
-                                    <strong>{Math.floor(parseInt(Calculated)).toLocaleString()}</strong> 원
-                                </td>
-                            </tr>
-                        );
+                        if (price.weight < weight)
+                            return (
+                                <tr key={price.id}>
+                                    <td>{price.weight + 'kg'}</td>
+                                    <td>
+                                        <strong>{Math.floor(parseInt(Calculated)).toLocaleString()}</strong> 원
+                                    </td>
+                                </tr>
+                            );
                     })}
                 </tbody>
             </CostTable>
+            {weight !== 35 ? (
+                <div className="moreBtn">
+                    <button type="button" onClick={() => handleMoreBtn()}>
+                        더 보기
+                    </button>
+                </div>
+            ) : null}
         </CountryWrap>
     );
 };

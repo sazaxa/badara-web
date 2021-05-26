@@ -4,7 +4,7 @@ import { Responsive } from 'styles/CommonStyles';
 import { CostWrap } from 'styles/CostStyles';
 import CountryCostComponent from './CountryCostComponent';
 
-const CostComponent = ({ list, countryPrise, onHandleSelectCountry, selected }) => {
+const CostComponent = ({ list, countryPrise, onHandleSelectCountry, selected, weight, handleMoreBtn }) => {
     return (
         <Responsive>
             <CostWrap>
@@ -13,6 +13,8 @@ const CostComponent = ({ list, countryPrise, onHandleSelectCountry, selected }) 
                     countryPrise={countryPrise}
                     onHandleSelectCountry={onHandleSelectCountry}
                     selected={selected}
+                    weight={weight}
+                    handleMoreBtn={handleMoreBtn}
                 />
                 <CalculatorContainer />
             </CostWrap>

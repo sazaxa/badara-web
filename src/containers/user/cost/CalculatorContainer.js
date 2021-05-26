@@ -10,6 +10,7 @@ const CalculatorContainer = () => {
     const { price, country } = useSelector(state => state.part);
     const [getCountry, setGetCountry] = useState([]);
     const [priceOpen, setPriseOpen] = useState(false);
+
     const [material, setMaterial] = useState({
         width: '',
         vertical: '',
