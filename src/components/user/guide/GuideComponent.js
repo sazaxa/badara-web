@@ -12,7 +12,7 @@ const GuideComponent = () => {
                         <span>서비스 소개</span>
                     </div>
                     <p>
-                        해외 배송 대행사 “BADARA”의 한글 발음은 <strong>“바다라”</strong>입니다. <br />
+                        국제택배 전문 해외 배송 대행사 “BADARA”의 한글 발음은 <strong>“바다라”</strong>입니다. <br />
                         <br />
                         <br />
                         “BADARA”는 부담스러운 운송비와 복잡한 절차로 해외 배송 서비스를 사용하지 못한 분들에게 더 나은
