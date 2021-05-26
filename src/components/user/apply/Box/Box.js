@@ -100,7 +100,7 @@ const Box = ({ box, index, Remove }) => {
                                 className="RadioGroup"
                             >
                                 <FormControlLabel value="박스" control={<Radio />} label="박스" />
-                                <FormControlLabel value="배대지" control={<Radio />} label="배대지" />
+                                {/* <FormControlLabel value="배대지" control={<Radio />} label="배대지" /> */}
                                 <FormControlLabel value="비닐봉투" control={<Radio />} label="비닐봉투" />
                                 <FormControlLabel value="모르겠어요" control={<Radio />} label="모르겠어요" />
                             </RadioGroup>

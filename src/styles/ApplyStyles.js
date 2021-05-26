@@ -455,7 +455,7 @@ export const BoxWrap = styled.article`
         width: 100%;
         flex-direction: row;
         label {
-            width: 23%;
+            width: 32%;
             @media screen and (max-width: 860px) {
                 width: 48%;
             }
