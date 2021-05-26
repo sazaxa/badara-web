@@ -188,9 +188,9 @@ const Box = ({ box, index, Remove }) => {
                             ) : null}
                         </td>
                     </tr>
-                    {products.map((product, index) => (
+                    {/* {products.map((product, index) => (
                         <Product product={product} index={index} />
-                    ))}
+                    ))} */}
                     <tr>
                         <th style={{ width: '100%' }}>
                             <Button
