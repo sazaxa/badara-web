@@ -28,7 +28,7 @@ const PointContainer = () => {
     const handleSavePoint = () => {
         console.log('눌렀음');
         if (data === point) {
-            alert('변경된게 없거랑요? 변경하고 눌러주시와요.');
+            alert('변경된게 없어예~ 변경하고 눌러주시이소~');
             return;
         } else {
             dispatch(savePointListAction({ data: point }));

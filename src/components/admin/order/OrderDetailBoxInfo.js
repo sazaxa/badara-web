@@ -1,6 +1,6 @@
 import React from 'react';
 
-const OrderDetailBoxInfo = ({ Boxes, UpdateState, HandleChange }) => {
+const OrderDetailBoxInfo = ({ Boxes, UpdateState, HandleChange, productsHandleChange }) => {
     return (
         <>
             {Boxes.map((box, index) => {
@@ -8,7 +8,7 @@ const OrderDetailBoxInfo = ({ Boxes, UpdateState, HandleChange }) => {
                     <table style={{ marginBottom: '30px' }}>
                         <tbody>
                             <tr>
-                                <th colSpan="5">박스정보 {index + 1}</th>
+                                <th colSpan="5">포장정보 {index + 1}</th>
                             </tr>
                             <tr>
                                 <th>포장 유형</th>
@@ -186,6 +186,63 @@ const OrderDetailBoxInfo = ({ Boxes, UpdateState, HandleChange }) => {
                                     )}
                                 </td>
                             </tr>
+                            {box.products.map((product, i) => (
+                                <>
+                                    <tr>
+                                        <th colSpan="5">상품정보 {i + 1}</th>
+                                    </tr>
+                                    <tr>
+                                        <th>상품 이름</th>
+                                        <td colSpan="5">
+                                            <input
+                                                type="text"
+                                                name="productDetail"
+                                                value={product.productDetail}
+                                                disabled={UpdateState ? false : true}
+                                                onChange={e => productsHandleChange(e, index, i)}
+                                            />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>개수</th>
+                                        <td colSpan="5">
+                                            <input
+                                                type="text"
+                                                value={product.quantity}
+                                                name="quantity"
+                                                disabled={UpdateState ? false : true}
+                                                onChange={e => productsHandleChange(e, index, i)}
+                                            />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>금액</th>
+                                        <td colSpan="5">
+                                            {UpdateState ? (
+                                                <input
+                                                    type="text"
+                                                    defaultValue={product.price || ''}
+                                                    name="price"
+                                                    onChange={e => productsHandleChange(e, index, i)}
+                                                    disabled={UpdateState ? false : true}
+                                                />
+                                            ) : (
+                                                <input type="text" value={product.price || ''} disabled />
+                                            )}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>총 금액</th>
+                                        <td colSpan="5">
+                                            <input
+                                                type="text"
+                                                value={product.price * product.quantity + '원'}
+                                                disabled
+                                            />
+                                        </td>
+                                    </tr>
+                                </>
+                            ))}
                             <tr>
                                 <th>운송장번호</th>
                                 <td colSpan="2">

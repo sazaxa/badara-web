@@ -98,13 +98,13 @@ const MyorderCancelList = ({ status, memberOrder, handleTabToggle }) => {
                                             </span>
                                         </div>
                                     </article>
-                                    <article className="product">
+                                    {/* <article className="product">
                                         <div className="titleWrap">
                                             <h2>상품 정보</h2>
                                         </div>
                                         {order.productResponses.map((product, index) => (
                                             <article className="productWrap" key={product.id}>
-                                                {/* <h3>상품정보 {index + 1}</h3> */}
+                                                {/* <h3>상품정보 {index + 1}</h3>
                                                 <div className="productItem">
                                                     <strong>상품 </strong>
                                                     <span>{product.productDetail}</span>
@@ -128,17 +128,18 @@ const MyorderCancelList = ({ status, memberOrder, handleTabToggle }) => {
                                                 </div>
                                             </article>
                                         ))}
-                                    </article>
+                                    </article> */}
                                     <article className="box">
                                         <div className="titleWrap">
-                                            <h2>박스 정보</h2>
+                                            <h2>포장 정보</h2>
                                         </div>
-                                        {order.boxResponses.map((box, index) => (
-                                            <>
-                                                {/* <h3>박스정보 {index + 1}</h3> */}
+                                        {order.boxes.map(box => (
+                                            <div
+                                                key={box.id}
+                                                style={{ width: '100%', display: 'flex', alignItems: 'center' }}
+                                            >
                                                 <div
                                                     className="boxItem"
-                                                    key={box.id}
                                                     style={
                                                         box.koreanShippingStatus !== '송장입력' &&
                                                         box.koreanShippingStatus !== '센터입고중'
@@ -150,8 +151,8 @@ const MyorderCancelList = ({ status, memberOrder, handleTabToggle }) => {
                                                         className="userWeight"
                                                         style={
                                                             box.netWeight === null || box.volumeWeight === null
-                                                                ? { width: '100%' }
-                                                                : { width: '60%', float: 'left' }
+                                                                ? { width: '50%', float: 'left' }
+                                                                : { width: '50%', float: 'left' }
                                                         }
                                                     >
                                                         <strong
@@ -197,17 +198,44 @@ const MyorderCancelList = ({ status, memberOrder, handleTabToggle }) => {
                                                             <p>{box.netWeight}kg</p>
                                                         </div>
                                                     ) : null}
-                                                </div>
-                                                {box.koreanShippingStatus === '송장입력' ||
-                                                box.koreanShippingStatus === '센터입고중' ? (
-                                                    <div className="boxstatus">
-                                                        <strong>상태</strong>
-                                                        <p style={{ marginBottom: '10px' }}>
-                                                            {box.koreanShippingStatus}
-                                                        </p>
+                                                    <div className="product" style={{ width: '50%', float: 'left' }}>
+                                                        {box.products.map(product => (
+                                                            <div style={{ marginBottom: '30px' }}>
+                                                                <strong
+                                                                    style={{
+                                                                        marginRight: '0',
+                                                                        marginBottom: '5px',
+                                                                        display: 'block',
+                                                                    }}
+                                                                >
+                                                                    상품명
+                                                                </strong>
+                                                                <p>{product.productDetail}</p>
+                                                                <strong
+                                                                    style={{
+                                                                        marginRight: '0',
+                                                                        marginBottom: '5px',
+                                                                        display: 'block',
+                                                                    }}
+                                                                >
+                                                                    개수
+                                                                </strong>
+                                                                <p>{product.quantity}</p>
+                                                                <strong
+                                                                    style={{
+                                                                        marginRight: '0',
+                                                                        marginBottom: '5px',
+                                                                        display: 'block',
+                                                                    }}
+                                                                >
+                                                                    개당 가격
+                                                                </strong>
+                                                                <p>{product.price}</p>
+                                                            </div>
+                                                        ))}
                                                     </div>
-                                                ) : null}
-                                            </>
+                                                </div>
+                                            </div>
                                         ))}
                                     </article>
                                 </article>

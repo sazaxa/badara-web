@@ -355,7 +355,7 @@ export const BoxWrap = styled.article`
             justify-content: center;
         }
         & > h2 {
-            width: 15%;
+            width: 18%;
             letter-spacing: -2.5px;
             font-size: 32px;
             margin-right: 10px;
@@ -455,7 +455,7 @@ export const BoxWrap = styled.article`
         width: 100%;
         flex-direction: row;
         label {
-            width: 23%;
+            width: 32%;
             @media screen and (max-width: 860px) {
                 width: 48%;
             }

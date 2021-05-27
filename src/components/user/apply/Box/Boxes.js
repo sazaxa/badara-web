@@ -47,6 +47,13 @@ const Boxes = ({ stepIndex, steps }) => {
         koreanInvoice: null,
         koreanShippingCompany: null,
         userMemo: null,
+        products: [
+            {
+                productDetail: null,
+                quantity: null,
+                price: null,
+            },
+        ],
     };
 
     const handlePrev = () => {
@@ -127,7 +134,7 @@ const Boxes = ({ stepIndex, steps }) => {
                     />
                 ))}
                 <Button variant="outlined" color="primary" onClick={BoxAdd}>
-                    다른 박스 추가하기
+                    다른 발송품 추가하기
                 </Button>
                 <article
                     style={{

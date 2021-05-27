@@ -24,23 +24,7 @@ const OrderDetailContainer = ({ match }) => {
 
     useEffect(() => {
         if (orderInfo !== null) {
-            setUpdateValue({
-                id: orderInfo.id,
-                orderNumber: orderInfo.orderNumber,
-                orderPrice: orderInfo.orderPrice,
-                extraPrice: orderInfo.extraPrice === null ? 0 : orderInfo.extraPrice,
-                orderStatus: orderInfo.orderStatus,
-                invoice: orderInfo.invoice,
-                depositName: orderInfo.depositName,
-                shippingCompany: orderInfo.shippingCompany,
-                adminMemo: orderInfo.adminMemo,
-                userMemo: orderInfo.userMemo,
-                products: orderInfo.productResponses,
-                boxes: orderInfo.boxResponses,
-                recipient: orderInfo.recipient,
-                paymentKey: orderInfo.paymentKey,
-                discountPrice: orderInfo.discountPrice,
-            });
+            setUpdateValue(orderInfo);
         }
     }, [orderInfo]);
 
@@ -114,11 +98,11 @@ const OrderDetailContainer = ({ match }) => {
         });
     };
 
-    const handleProductChange = (e, index) => {
+    const handleProductChange = (e, boxIndex, index) => {
         const { name, value } = e.target;
         setUpdateValue(
             produce(updateValue, draft => {
-                draft.products[index][name] = value;
+                draft.boxes[boxIndex].products[index][name] = value;
             })
         );
     };
