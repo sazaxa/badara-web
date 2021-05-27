@@ -114,3 +114,20 @@ code {
     color: #333;
     font-weight: 600;
 }
+.btn {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.4rem 0.5rem 0.7rem 0.5rem;
+    box-sizing: border-box;
+    font-weight: 600;
+}
+.btn p {
+    cursor: pointer;
+    letter-spacing: -1.3px;
+    font-size: 15px;
+}
+
+.popupImg {
+    min-width: 300px;
+    max-width: 600px;
+}
