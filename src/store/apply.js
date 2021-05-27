@@ -37,9 +37,13 @@ export const applySaveAction = createAction(APPLY_SAVE_REQUEST, ({ data }) => ({
 export const recipientInsertAction = createAction(RECIPIENT_DATA_SAVE, data => data);
 
 // Apply.product
-export const productDataAddAction = createAction(PRODUCT_DATA_ADD, data => data);
-export const productDataRemoveAction = createAction(PRODUCT_DATA_REMOVE, index => index);
-export const productDataUpdateAction = createAction(PRODUCT_DATA_UPDATE, ({ index, updateData }) => ({
+export const productDataAddAction = createAction(PRODUCT_DATA_ADD, ({ boxIndex, product }) => ({ boxIndex, product }));
+export const productDataRemoveAction = createAction(PRODUCT_DATA_REMOVE, ({ boxIndex, index }) => ({
+    boxIndex,
+    index,
+}));
+export const productDataUpdateAction = createAction(PRODUCT_DATA_UPDATE, ({ boxIndex, index, updateData }) => ({
+    boxIndex,
     index,
     updateData,
 }));
@@ -83,13 +87,6 @@ export function* applySaga() {
 export const initialState = {
     apply: {
         recipient: null,
-        products: [
-            {
-                productDetail: null,
-                quantity: null,
-                price: null,
-            },
-        ],
         boxes: [
             {
                 type: '박스',
@@ -101,6 +98,13 @@ export const initialState = {
                 expectedPrice: null,
                 koreanInvoice: null,
                 koreanShippingCompany: null,
+                products: [
+                    {
+                        productDetail: null,
+                        quantity: null,
+                        price: null,
+                    },
+                ],
             },
         ],
     },
@@ -123,18 +127,19 @@ export default handleActions(
             });
         },
         [PRODUCT_DATA_ADD]: (state, { payload }) => {
+            console.log(payload);
             return produce(state, draft => {
-                draft.apply.products.push(payload.product);
+                draft.apply.boxes[payload.boxIndex].products.push(payload.product);
             });
         },
         [PRODUCT_DATA_UPDATE]: (state, { payload }) => {
             return produce(state, draft => {
-                draft.apply.products.splice(payload.index, 1, payload.updateData);
+                draft.apply.boxes[payload.boxIndex].products.splice(payload.index, 1, payload.updateData);
             });
         },
         [PRODUCT_DATA_REMOVE]: (state, { payload }) => {
             return produce(state, draft => {
-                draft.apply.products.splice(payload.index, 1);
+                draft.apply.boxes[payload.boxIndex].products.splice(payload.index, 1);
             });
         },
         [BOX_DATA_ADD]: (state, { payload }) => {

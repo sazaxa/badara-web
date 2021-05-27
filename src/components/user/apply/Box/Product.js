@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { productDataRemoveAction, productDataUpdateAction } from 'store/apply';
 import Button from '@material-ui/core/Button';
 
-const Product = ({ product, index }) => {
+const Product = ({ product, index, boxIndex }) => {
     const [updateProductData, setUpdateProductData] = useState(product);
     const dispatch = useDispatch();
 
@@ -16,16 +16,16 @@ const Product = ({ product, index }) => {
     };
 
     useEffect(() => {
-        dispatch(productDataUpdateAction({ index: index, updateData: updateProductData }));
+        dispatch(productDataUpdateAction({ boxIndex: boxIndex, index: index, updateData: updateProductData }));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [updateProductData]);
 
     const onRemoveProduct = index => {
-        dispatch(productDataRemoveAction({ index: index }));
+        dispatch(productDataRemoveAction({ boxIndex: boxIndex, index: index }));
     };
     return (
         <tr>
-            <th>상품 {index + 1}</th>
+            <th>상품 {index + 1} </th>
             <td>
                 <input
                     type="text"

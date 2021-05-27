@@ -213,7 +213,7 @@ export const MypageContent = styled.article`
     }
 
     .memberOrders .data > article {
-        width: 30%;
+        width: 60%;
         // display: flex;
         // flex-wrap: wrap;
         padding: 20px 15px;
@@ -380,6 +380,7 @@ export const MypageContent = styled.article`
             height: 41px;
             margin-bottom: 10px;
             display: flex;
+            justify-content: center;
             @media screen and (max-width: 1140px) {
                 justify-content: center;
             }
@@ -391,13 +392,16 @@ export const MypageContent = styled.article`
         }
     }
     .boxItem {
-        width: 60%;
+        width: 70%;
         letter-spacing: -1px;
         padding: 10px 0;
         float: left;
-        @media screen and (max-width: 1140px) {
-            text-align: center;
-        }
+        display: flex;
+        align-items: center;
+        text-align: center;
+        // @media screen and (max-width: 1140px) {
+        //     text-align: center;
+        // }
         div {
             width: 100%;
             p {
@@ -412,7 +416,7 @@ export const MypageContent = styled.article`
         margin-bottom: 10px;
     }
     .boxstatus {
-        width: 40%;
+        width: 30%;
         float: left;
         text-align: center;
         & > strong {

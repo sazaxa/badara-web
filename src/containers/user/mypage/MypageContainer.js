@@ -143,11 +143,11 @@ const MypageContainer = ({ location, history }) => {
                 // eslint-disable-next-line no-unused-vars
                 REFUND_WAITING++;
             }
-            for (let j = 0; j < orders[i].boxResponses.length; j++) {
-                if (orders[i].boxResponses[j].koreanShippingStatus === '송장입력') {
+            for (let j = 0; j < orders[i].boxes.length; j++) {
+                if (orders[i].boxes[j].koreanShippingStatus === '송장입력') {
                     INVOICE++;
                 }
-                if (orders[i].boxResponses[j].koreanShippingStatus === '센터입고중') {
+                if (orders[i].boxes[j].koreanShippingStatus === '센터입고중') {
                     CENTER_INCOME++;
                 }
             }
