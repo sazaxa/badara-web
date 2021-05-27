@@ -130,7 +130,7 @@ const Confirm = ({ stepIndex, steps, history }) => {
                         </tr>
                     </tbody>
                 </table>
-                <article className="titleBox">
+                {/* <article className="titleBox">
                     <h2>상품</h2>
                 </article>
                 {products.map((product, index) => {
@@ -163,9 +163,9 @@ const Confirm = ({ stepIndex, steps, history }) => {
                             </table>
                         </>
                     );
-                })}
+                })} */}
                 <article className="titleBox">
-                    <h2>박스</h2>
+                    <h2>포장</h2>
                 </article>
                 {boxes.map((box, index) => {
                     return (
@@ -205,7 +205,34 @@ const Confirm = ({ stepIndex, steps, history }) => {
                                         </tr>
                                     </>
                                 )}
-                                <tr>
+                                {box.products.map(product => (
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <th colSpan="4" style={{ width: '100%' }}>
+                                                    {index + 1}번 포장 상품
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>상품정보</th>
+                                                <th>개수</th>
+                                                <th>가격</th>
+                                                <th>총가격</th>
+                                            </tr>
+                                            <tr>
+                                                <td>{product.productDetail}</td>
+                                                <td>{product.quantity}개</td>
+                                                <td>{Number(product.price).toLocaleString()}원</td>
+                                                <td>
+                                                    {product.quantity && product.price
+                                                        ? (product.quantity * product.price).toLocaleString() + '원'
+                                                        : null}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                ))}
+                                <tr style={{ borderTop: '4px solid #0080ff' }}>
                                     <th>측정된 무게</th>
                                     <td>{box.expectedVolumeWeight > box.expectedNetWeight ? '부피무게' : '실 무게'}</td>
                                     <td>

@@ -9,7 +9,11 @@ import Radio from '@material-ui/core/Radio';
 import Product from './Product';
 
 const Box = ({ box, index, Remove }) => {
-    const { products } = useSelector(state => state.apply.apply);
+    useEffect(() => {
+        if (updateBoxData !== box) {
+            setUpdateBoxData(box);
+        }
+    }, [updateBoxData, box]);
     // 받은 data를 수정하기 위해 state에 담는다.
     const [updateBoxData, setUpdateBoxData] = useState(box);
     const dispatch = useDispatch();
@@ -70,128 +74,142 @@ const Box = ({ box, index, Remove }) => {
     };
 
     const ProductAdd = () => {
-        dispatch(productDataAddAction({ product: defaultProduct }));
+        dispatch(productDataAddAction({ boxIndex: index, product: defaultProduct }));
         console.log(defaultProduct);
     };
 
     return (
-        <BoxWrap>
-            <article className="titleBox">
-                <h2>{index + 1}번 박스 정보</h2>
-                <p>
-                    센터에 보내시는 <strong>박스의 수량만큼</strong> 박스를 추가해주세요.
-                </p>
-                {index !== 0 ? (
-                    <Button variant="contained" color="secondary" onClick={() => Remove(index)}>
-                        삭제
-                    </Button>
-                ) : null}
-            </article>
-            <table>
-                <tbody>
-                    <tr>
-                        <th>포장 유형</th>
-                        <td>
-                            <RadioGroup
-                                aria-label="type"
-                                name="type"
-                                value={updateBoxData.type}
-                                onChange={e => handleChangeBox(e)}
-                                className="RadioGroup"
-                            >
-                                <FormControlLabel value="박스" control={<Radio />} label="박스" />
-                                {/* <FormControlLabel value="배대지" control={<Radio />} label="배대지" /> */}
-                                <FormControlLabel value="비닐봉투" control={<Radio />} label="비닐봉투" />
-                                <FormControlLabel value="모르겠어요" control={<Radio />} label="모르겠어요" />
-                            </RadioGroup>
-                        </td>
-                    </tr>
-                    {updateBoxData.type === '박스' ? (
-                        <>
-                            <tr>
-                                <th>부피무게 계산(단위:cm)</th>
-                                <td>
-                                    <input
-                                        type="number"
-                                        name="expectedWidth"
-                                        value={updateBoxData.expectedWidth ?? undefined}
-                                        onChange={e => handleChangeBox(e)}
-                                        required
-                                        placeholder="가로"
-                                        style={{ width: '20%' }}
-                                    />
-                                    <input
-                                        type="number"
-                                        name="expectedDepth"
-                                        value={updateBoxData.expectedDepth ?? undefined}
-                                        onChange={e => handleChangeBox(e)}
-                                        required
-                                        placeholder="세로"
-                                        style={{ width: '20%' }}
-                                    />
-                                    <input
-                                        type="number"
-                                        name="expectedHeight"
-                                        value={updateBoxData.expectedHeight ?? undefined}
-                                        onChange={e => handleChangeBox(e)}
-                                        required
-                                        placeholder="높이"
-                                        style={{ width: '20%' }}
-                                    />
-                                    <Button
-                                        variant="contained"
-                                        className="btn"
-                                        type="button"
-                                        onClick={onClickVolume}
-                                        style={{ width: '20%' }}
-                                    >
-                                        계산
-                                    </Button>
-                                    <p>(부피무게는 가로x세로x높이/5000 으로 계산됩니다.)</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>부피무게(단위:kg)</th>
-                                <td className="weight">
-                                    <input
-                                        type="text"
-                                        name="expectedVolumeWeight"
-                                        value={
-                                            updateBoxData.expectedVolumeWeight
-                                                ? updateBoxData.expectedVolumeWeight.toFixed(1)
-                                                : ''
-                                        }
-                                        disabled
-                                        placeholder="계산하기 후 확인가능합니다."
-                                        onChange={e => handleChangeBox(e)}
-                                    />
-                                    <span style={{ marginLeft: '10px' }}>kg</span>
-                                </td>
-                            </tr>
-                        </>
+        <>
+            <BoxWrap>
+                <article className="titleBox">
+                    <h2>{index + 1}번 박스 정보</h2>
+                    <p>
+                        센터에 보내시는 <strong>박스의 수량만큼</strong> 박스를 추가해주세요.
+                    </p>
+                    {index !== 0 ? (
+                        <Button variant="contained" color="secondary" onClick={() => Remove(index)}>
+                            삭제
+                        </Button>
                     ) : null}
-                    <tr>
-                        <th>실 무게(단위:kg)</th>
-                        <td className="weight">
-                            <input
-                                type="number"
-                                name="expectedNetWeight"
-                                value={updateBoxData.expectedNetWeight ?? undefined}
-                                onChange={e => handleChangeBox(e)}
-                                placeholder="박스의 무게를 숫자만 입력해주세요."
-                                step="0.01"
-                                required
-                            />
-                            <span style={{ marginLeft: '10px' }}>kg</span>
-                            {updateBoxData.type !== '박스' ? (
-                                <p style={{ width: '100%' }}>(대략적인 실무게를 입력해주세요.)</p>
-                            ) : null}
-                        </td>
-                    </tr>
-                    {products.map((product, index) => (
-                        <Product product={product} index={index} />
-                    ))}
-                    <tr>
+                </article>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>포장 유형</th>
+                            <td>
+                                <RadioGroup
+                                    aria-label="type"
+                                    name="type"
+                                    value={updateBoxData.type}
+                                    onChange={e => handleChangeBox(e)}
+                                    className="RadioGroup"
+                                >
+                                    <FormControlLabel value="박스" control={<Radio />} label="박스" />
+                                    {/* <FormControlLabel value="배대지" control={<Radio />} label="배대지" /> */}
+                                    <FormControlLabel value="비닐봉투" control={<Radio />} label="비닐봉투" />
+                                    <FormControlLabel value="모르겠어요" control={<Radio />} label="모르겠어요" />
+                                </RadioGroup>
+                            </td>
+                        </tr>
+                        {updateBoxData.type === '박스' ? (
+                            <>
+                                <tr>
+                                    <th>부피무게 계산(단위:cm)</th>
+                                    <td>
+                                        <input
+                                            type="number"
+                                            name="expectedWidth"
+                                            value={updateBoxData.expectedWidth ?? undefined}
+                                            onChange={e => handleChangeBox(e)}
+                                            required
+                                            placeholder="가로"
+                                            style={{ width: '20%' }}
+                                        />
+                                        <input
+                                            type="number"
+                                            name="expectedDepth"
+                                            value={updateBoxData.expectedDepth ?? undefined}
+                                            onChange={e => handleChangeBox(e)}
+                                            required
+                                            placeholder="세로"
+                                            style={{ width: '20%' }}
+                                        />
+                                        <input
+                                            type="number"
+                                            name="expectedHeight"
+                                            value={updateBoxData.expectedHeight ?? undefined}
+                                            onChange={e => handleChangeBox(e)}
+                                            required
+                                            placeholder="높이"
+                                            style={{ width: '20%' }}
+                                        />
+                                        <Button
+                                            variant="contained"
+                                            className="btn"
+                                            type="button"
+                                            onClick={onClickVolume}
+                                            style={{ width: '20%' }}
+                                        >
+                                            계산
+                                        </Button>
+                                        <p>(부피무게는 가로x세로x높이/5000 으로 계산됩니다.)</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>부피무게(단위:kg)</th>
+                                    <td className="weight">
+                                        <input
+                                            type="text"
+                                            name="expectedVolumeWeight"
+                                            value={
+                                                updateBoxData.expectedVolumeWeight
+                                                    ? updateBoxData.expectedVolumeWeight.toFixed(1)
+                                                    : ''
+                                            }
+                                            disabled
+                                            placeholder="계산하기 후 확인가능합니다."
+                                            onChange={e => handleChangeBox(e)}
+                                        />
+                                        <span style={{ marginLeft: '10px' }}>kg</span>
+                                    </td>
+                                </tr>
+                            </>
+                        ) : null}
+                        <tr>
+                            <th>실 무게(단위:kg)</th>
+                            <td className="weight">
+                                <input
+                                    type="number"
+                                    name="expectedNetWeight"
+                                    value={updateBoxData.expectedNetWeight ?? undefined}
+                                    onChange={e => handleChangeBox(e)}
+                                    placeholder="박스의 무게를 숫자만 입력해주세요."
+                                    step="0.01"
+                                    required
+                                />
+                                <span style={{ marginLeft: '10px' }}>kg</span>
+                                {updateBoxData.type !== '박스' ? (
+                                    <p style={{ width: '100%' }}>(대략적인 실무게를 입력해주세요.)</p>
+                                ) : null}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>특이사항</th>
+                            <td className="weight">
+                                <input
+                                    type="text"
+                                    name="userMemo"
+                                    value={updateBoxData.userMemo ?? undefined}
+                                    onChange={e => handleChangeBox(e)}
+                                    placeholder="특이사항을 적어주세요."
+                                    required
+                                />
+                            </td>
+                        </tr>
+                        {updateBoxData.products.map((product, i) => (
+                            <Product product={product} index={i} boxIndex={index} />
+                        ))}
+                        {/* <tr>
                         <th style={{ width: '100%' }}>
                             <Button
                                 variant="outlined"
@@ -203,23 +221,20 @@ const Box = ({ box, index, Remove }) => {
                                 상품 추가하기
                             </Button>
                         </th>
-                    </tr>
-                    <tr>
-                        <th>특이사항</th>
-                        <td className="weight">
-                            <input
-                                type="text"
-                                name="userMemo"
-                                value={updateBoxData.userMemo ?? undefined}
-                                onChange={e => handleChangeBox(e)}
-                                placeholder="특이사항을 적어주세요."
-                                required
-                            />
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </BoxWrap>
+                    </tr> */}
+                    </tbody>
+                </table>
+            </BoxWrap>
+            <Button
+                variant="outlined"
+                color="primary"
+                type="button"
+                onClick={ProductAdd}
+                style={{ fontSize: '0.8rem', float: 'right' }}
+            >
+                상품 추가하기
+            </Button>
+        </>
     );
 };
 

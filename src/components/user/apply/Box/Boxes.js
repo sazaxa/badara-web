@@ -47,6 +47,13 @@ const Boxes = ({ stepIndex, steps }) => {
         koreanInvoice: null,
         koreanShippingCompany: null,
         userMemo: null,
+        products: [
+            {
+                productDetail: null,
+                quantity: null,
+                price: null,
+            },
+        ],
     };
 
     const handlePrev = () => {
