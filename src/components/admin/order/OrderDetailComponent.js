@@ -45,15 +45,16 @@ const OrderDetailComponent = ({
                     handleRecipientChange={HandleRecipientChange}
                     List={List}
                 />
-                <OrderDetailProductInfo
+                {/* <OrderDetailProductInfo
                     HandleChange={HandleProductChange}
                     UpdateState={UpdateState}
                     Products={UpdateValue.products}
-                />
+                /> */}
                 <OrderDetailBoxInfo
                     UpdateState={UpdateState}
                     Boxes={UpdateValue.boxes}
                     HandleChange={HandleBoxChange}
+                    productsHandleChange={HandleProductChange}
                 />
             </article>
         </OrderWrap>
