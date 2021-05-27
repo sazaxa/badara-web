@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router';
-import { applyClearAction } from 'store/apply';
+import { applyClearAction, getOrderAction } from 'store/apply';
 import { loginPopupAction } from 'store/auth';
 import { getMemberOrderAction } from 'store/member';
 import { resetStep } from 'store/part';
 import { Responsive } from 'styles/CommonStyles';
 import ApplyMain from '../../../components/user/apply/Main';
 
-const Main = ({ history }) => {
+const Main = ({ history, match }) => {
     const { activeStep, logged } = useSelector(
         state => ({
             activeStep: state.part.activeStep,
@@ -18,6 +18,12 @@ const Main = ({ history }) => {
     );
     const accessToken = localStorage.getItem('accessToken');
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (match.params.orderNumber) {
+            dispatch(getOrderAction({ orderNumber: match.params.orderNumber }));
+        }
+    }, [match.params.orderNumber]);
 
     useEffect(() => {
         return () => {

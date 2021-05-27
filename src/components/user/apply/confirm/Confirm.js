@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { applyPriseAction, applySaveAction } from 'store/apply';
+import { applyModifyAction, applyPriseAction, applySaveAction } from 'store/apply';
 import Button from '@material-ui/core/Button';
 import { acitiveStepChange } from 'store/part';
 import { withRouter } from 'react-router';
 import { ConfirmWrap } from 'styles/ApplyStyles';
 import WaringModal from './WarningModal';
 
-const Confirm = ({ stepIndex, steps, history }) => {
+const Confirm = ({ stepIndex, steps, history, match }) => {
+    const orderNumber = match.params.orderNumber;
     const [warningPopup, setWarningPopup] = useState(false);
     const [totalWeightData, setTotalWeightData] = useState({
         weight: null,
@@ -33,8 +34,11 @@ const Confirm = ({ stepIndex, steps, history }) => {
     }, [apply]);
 
     useEffect(() => {
-        if (status === 'success') {
-            alert('접수가 완료 되었습니다.');
+        if (orderNumber && status === 'success') {
+            alert('주문이 수정 되었습니다.');
+            history.push('/mypage');
+        } else if (status === 'success') {
+            alert('접수가 되었습니다.');
             history.push('/mypage');
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -82,7 +86,11 @@ const Confirm = ({ stepIndex, steps, history }) => {
     };
     const handleWeightConfirm = () => {
         setWeightGuidPopup(false);
-        console.log('클릭됨');
+    };
+
+    const modifyConfirm = () => {
+        console.log('여기다!');
+        dispatch(applyModifyAction({ id: apply.id, data: apply }));
     };
     return (
         <ConfirmWrap>
@@ -276,9 +284,15 @@ const Confirm = ({ stepIndex, steps, history }) => {
                     <Button type="button" disabled={stepIndex === 0} onClick={handlePrev}>
                         이전
                     </Button>
-                    <Button variant="contained" color="primary" type="submit">
-                        {stepIndex === steps.length - 1 ? '접수하기' : '다음'}
-                    </Button>
+                    {orderNumber ? (
+                        <Button variant="contained" color="primary" onClick={() => modifyConfirm()}>
+                            수정하기
+                        </Button>
+                    ) : (
+                        <Button variant="contained" color="primary" type="submit">
+                            {stepIndex === steps.length - 1 ? '접수하기' : '다음'}
+                        </Button>
+                    )}
                 </article>
             </form>
             <WaringModal

@@ -6,7 +6,10 @@ export const save = data => {
 };
 
 // 주문 수정하기
-
 export const getOrder = orderNumber => {
-    return client.get(`/api/v1/orders/order/${orderNumber}`);
+    return client.post(`/api/v1/orders/${orderNumber}`);
+};
+
+export const modify = ({ data, id }) => {
+    return client.put(`/api/v1/orders/${id}`, data);
 };

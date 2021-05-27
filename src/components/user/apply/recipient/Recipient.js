@@ -36,7 +36,7 @@ const Recipient = ({ stepIndex, steps }) => {
             setRecipinet(updateRecipient);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [updateRecipient]);
     useEffect(() => {
         dispatch(getCountryCodeAction());
     }, []);
