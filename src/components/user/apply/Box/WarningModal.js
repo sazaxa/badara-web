@@ -76,10 +76,10 @@ const WaringModal = ({ visible, close, Ask }) => {
                                         }}
                                     >
                                         <strong style={{ color: 'red', marginRight: '5px' }}>(필수)</strong>
-                                        박스 입력 확인
+                                        발송물 입력 확인
                                     </span>
                                     <p style={{ letterSpacing: '-1px', fontSize: '14px' }}>
-                                        보내시는 박스가
+                                        보내시는 발송물이
                                         <strong style={{ color: 'red', fontSize: '17px', margin: '0px 5px' }}>
                                             {' '}
                                             세 개
@@ -105,7 +105,7 @@ const WaringModal = ({ visible, close, Ask }) => {
                                         }}
                                     >
                                         <strong style={{ color: 'red', marginRight: '5px' }}>(필수)</strong>
-                                        박스 내용물 확인
+                                        발송물 내용물 확인
                                     </span>
                                     <p style={{ letterSpacing: '-1px', fontSize: '14px' }}>
                                         보내주신 상품의 정확한
@@ -113,7 +113,7 @@ const WaringModal = ({ visible, close, Ask }) => {
                                             {' '}
                                             정보 확인
                                         </strong>
-                                        을 위해 박스를 임의로
+                                        을 위해 발송물을 임의로
                                         <strong style={{ color: 'red', fontSize: '16px', margin: '0px 5px' }}>
                                             개봉
                                         </strong>
