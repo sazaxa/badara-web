@@ -183,7 +183,7 @@ const Box = ({ box, index, Remove }) => {
                                     name="expectedNetWeight"
                                     value={updateBoxData.expectedNetWeight ?? undefined}
                                     onChange={e => handleChangeBox(e)}
-                                    placeholder="박스의 무게를 숫자만 입력해주세요."
+                                    placeholder="발송품의 무게를 숫자만 입력해주세요."
                                     step="0.01"
                                     required
                                 />
