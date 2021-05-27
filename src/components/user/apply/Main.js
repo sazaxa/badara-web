@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
 
 //  getSteps
 const getSteps = () => {
-    return ['수취인', '상품', '박스', '확인'];
+    return ['수취인', '포장', '확인'];
 };
 
 // getStepContent
@@ -41,11 +41,11 @@ const getStepContent = (stepIndex, steps) => {
         //     return <Tos stepIndex={stepIndex} steps={steps} />;
         case 0:
             return <Recipient stepIndex={stepIndex} steps={steps} />;
+        // case 1:
+        //     return <Products stepIndex={stepIndex} steps={steps} />;
         case 1:
-            return <Products stepIndex={stepIndex} steps={steps} />;
-        case 2:
             return <Boxes stepIndex={stepIndex} steps={steps} />;
-        case 3:
+        case 2:
             return <Confirm stepIndex={stepIndex} steps={steps} />;
         default:
             return 'Unknown stepIndex';
