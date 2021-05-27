@@ -70,6 +70,7 @@ function App({ location }) {
                     <Route component={CostPage} path="/cost" />
                     <Route component={GuidePage} path="/guide" />
                     <Route component={ApplyPage} path="/apply" exact />
+                    <Route component={ApplyPage} path="/apply/:orderNumber" />
                     <Route component={RegisterPage} path="/register" />
                     <Route component={SupportPage} path="/support" exact />
                     <Route component={Detail} path="/support/:id" />

@@ -135,20 +135,14 @@ const MyorderList = ({
                     ) : (
                         memberOrder.map(order => (
                             <article className="order" key={order.id}>
-                                {/* <button
-                                    type="button"
-                                    key={order.id}
-                                    onClick={() =>
-                                        handleCancel(
-                                            order.orderNumber,
-                                            order.orderStatus === '해외배송중' || order.orderStatus === '결제완료'
-                                                ? '환불대기'
-                                                : '취소'
-                                        )
-                                    }
-                                >
-                                    주문 취소
-                                </button> */}
+                                {order.orderStatus !== '무통장입금' ||
+                                order.orderStatus !== '결제완료' ||
+                                order.orderStatus !== '해외배송중' ||
+                                order.orderStatus !== '해외배송완료' ? (
+                                    <button type="button" onClick={() => handleCancelPopup(order.orderNumber)}>
+                                        주문 수정
+                                    </button>
+                                ) : null}
                                 {order.orderStatus === '결제완료' ||
                                 order.orderStatus === '해외배송중' ||
                                 order.orderStatus === '해외배송완료' ? null : (
