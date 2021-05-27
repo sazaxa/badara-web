@@ -355,7 +355,7 @@ export const BoxWrap = styled.article`
             justify-content: center;
         }
         & > h2 {
-            width: 15%;
+            width: 18%;
             letter-spacing: -2.5px;
             font-size: 32px;
             margin-right: 10px;

@@ -82,9 +82,9 @@ const Box = ({ box, index, Remove }) => {
         <>
             <BoxWrap>
                 <article className="titleBox">
-                    <h2>{index + 1}번 박스 정보</h2>
+                    <h2>{index + 1}번 발송품 정보</h2>
                     <p>
-                        센터에 보내시는 <strong>박스의 수량만큼</strong> 박스를 추가해주세요.
+                        센터에 보내시는 <strong>발송품의 수량만큼</strong> 추가해주세요.
                     </p>
                     {index !== 0 ? (
                         <Button variant="contained" color="secondary" onClick={() => Remove(index)}>
