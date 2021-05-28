@@ -67,7 +67,7 @@ const EventPopup = () => {
         >
             <Fade in={showPopUp}>
                 <div className={classes.paper}>
-                    <img src="https://image.badara.kr/popup/badara.jpg" alt="img" className="popupImg" />
+                    <img src="https://image.badara.kr/popup/badara_1.jpg" alt="img" className="popupImg" />
                     <div className="btn">
                         <p onClick={handleOnoneDayClose}>오늘 하루 보지 않기</p>
                         <p onClick={handleOnClose}>닫기</p>
