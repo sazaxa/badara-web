@@ -15,6 +15,7 @@ const MypageContainer = ({ location, history }) => {
     const dispatch = useDispatch();
     const orderReduxState = useSelector(state => state.order);
     const accessToken = localStorage.getItem('accessToken');
+    const usePointStorage = localStorage.getItem('usePoint');
     const [orderTab, setOrderTab] = useState(0);
     const [priceDetail, setPriceDeatail] = useState(false);
     const [updatePopup, setUpdatePopup] = useState(false);
@@ -32,6 +33,12 @@ const MypageContainer = ({ location, history }) => {
         if (queryObj.orderId) {
             paymentRequest();
         }
+    }, []);
+
+    useEffect(() => {
+        return () => {
+            localStorage.removeItem('usePoint');
+        };
     }, []);
 
     const [status, setStatus] = useState({
