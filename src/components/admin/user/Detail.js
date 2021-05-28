@@ -139,7 +139,7 @@ const Detail = ({ match }) => {
                         <tr key={order.id}>
                             <Link to={`/admin/order/${order.id}`}>
                                 <td>{order.orderNumber}</td>
-                                <td>{order.productResponses[0].productDetail}</td>
+                                <td>{order.boxes[0].products[0].productDetail}</td>
                                 <td>{order.orderStatus}</td>
                                 <td>{moment(order.recipient.createdDate).format('LLLL')}</td>
                             </Link>
