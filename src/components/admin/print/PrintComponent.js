@@ -90,7 +90,7 @@ const PrintComponent = ({ history }) => {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="productsInfo">
+                                {/* <div className="productsInfo">
                                     <h2>상품</h2>
                                     <table>
                                         <thead>
@@ -110,30 +110,57 @@ const PrintComponent = ({ history }) => {
                                             ))}
                                         </tbody>
                                     </table>
-                                </div>
-                                <div className="boxsInfo">
-                                    <h2>박스</h2>
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>회원이 입력한 부피 무게</th>
-                                                <th>회원이 입력한 실 무게</th>
-                                                <th>바다라 부피 무게</th>
-                                                <th>바다라 실 무게</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {(order.boxResponses || []).map(box => (
-                                                <tr key={box.id}>
-                                                    <td>{box.expectedVolumeWeight + 'KG'}</td>
-                                                    <td>{box.expectedNetWeight + 'KG'}</td>
-                                                    <td>{box.volumeWeight ? box.volumeWeight + 'KG' : '입력전'}</td>
-                                                    <td>{box.netWeight ? box.netWeight + 'KG' : '입력전'}</td>
-                                                </tr>
+                                </div> */}
+                                {(order.boxes || []).map(box => (
+                                    <>
+                                        <div className="boxsInfo">
+                                            <h2>포장</h2>
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>포장 타입</th>
+                                                        <th>회원이 입력한 부피 무게</th>
+                                                        <th>회원이 입력한 실 무게</th>
+                                                        <th>바다라 부피 무게</th>
+                                                        <th>바다라 실 무게</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr key={box.id}>
+                                                        <td>{box.type}</td>
+                                                        <td>{box.expectedVolumeWeight + 'KG'}</td>
+                                                        <td>{box.expectedNetWeight + 'KG'}</td>
+                                                        <td>{box.volumeWeight ? box.volumeWeight + 'KG' : '입력전'}</td>
+                                                        <td>{box.netWeight ? box.netWeight + 'KG' : '입력전'}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <h2 style={{ marginTop: '10px' }}>상품 정보</h2>
+                                            {box.products.map(product => (
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>상품명</th>
+                                                            <th>상품개수</th>
+                                                            <th>개당 가격</th>
+                                                            <th>총가격</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>{product.productDetail}</td>
+                                                            <td>{product.quantity}</td>
+                                                            <td>{product.price.toLocaleString()}원</td>
+                                                            <td>
+                                                                {(product.quantity * product.price).toLocaleString()}원
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
                                             ))}
-                                        </tbody>
-                                    </table>
-                                </div>
+                                        </div>
+                                    </>
+                                ))}
                                 <div className="boxsInfo">
                                     <h2>총</h2>
                                     <table>
@@ -141,6 +168,7 @@ const PrintComponent = ({ history }) => {
                                             <tr>
                                                 <th>배송금액</th>
                                                 <th>추가금액</th>
+                                                <th>바다라 캐쉬</th>
                                                 <th>부가세</th>
                                                 <th>총 금액</th>
                                             </tr>
@@ -149,12 +177,25 @@ const PrintComponent = ({ history }) => {
                                             <tr>
                                                 <td>{Math.ceil(order.orderPrice).toLocaleString() + '원'}</td>
                                                 <td>{Math.ceil(order.extraPrice).toLocaleString() + '원'}</td>
+                                                <td>{Math.ceil(order.discountPrice).toLocaleString() + 'Cash'}</td>
                                                 <td>
                                                     {Math.ceil(
                                                         (order.orderPrice + order.extraPrice) * 0.1
                                                     ).toLocaleString() + '원'}
                                                 </td>
-                                                <td>{Math.ceil(order.orderPrice).toLocaleString() + '원'}</td>
+                                                <td>
+                                                    {Math.ceil(
+                                                        Math.ceil(
+                                                            parseInt(
+                                                                order.orderPrice +
+                                                                    order.extraPrice -
+                                                                    order.discountPrice
+                                                            ) +
+                                                                parseInt(order.orderPrice) * 0.1
+                                                        )
+                                                    ).toLocaleString()}
+                                                    원
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
