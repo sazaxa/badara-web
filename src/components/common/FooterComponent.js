@@ -64,7 +64,7 @@ const FooterComponent = () => (
                 <a href="https://blog.naver.com/click_black" target="_blank" rel="noreferrer">
                     <img src={naver} alt="naver" />
                 </a>
-                <a href="https://open.kakao.com/o/gIkjjr3c" target="_blank" rel="noreferrer">
+                <a href="https://pf.kakao.com/_FRxads/chat " target="_blank" rel="noreferrer">
                     <img src={kakao} alt="kakao" />
                 </a>
             </div>
