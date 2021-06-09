@@ -3,6 +3,7 @@ import { CalculatorWrap } from 'styles/CalculatorStyles';
 import { Link } from 'react-router-dom';
 
 const CalculatorComponent = ({
+    Auth,
     OnClickWeight,
     OnChange,
     OnClickVolume,
@@ -141,19 +142,32 @@ const CalculatorComponent = ({
                             </button>
                         </div>
                     </div>
-                    <article className="btnWrap">
-                        <button type="button" className="applybtn">
-                            <Link
-                                to="/register"
-                                style={{ display: 'flex', width: '100%', height: '100%', justifyContent: 'center' }}
-                            >
-                                회원가입
-                            </Link>
-                        </button>
-                        <button type="button" className="mypagebtn" onClick={() => handleLoginPopup(true)}>
-                            로그인
-                        </button>
-                    </article>
+                    {Auth ? (
+                        <article className="btnWrap">
+                            <button type="button" className="applybtn" style={{ width: '100%' }}>
+                                <Link
+                                    to="/apply"
+                                    style={{ display: 'flex', width: '100%', height: '100%', justifyContent: 'center' }}
+                                >
+                                    신청하기
+                                </Link>
+                            </button>
+                        </article>
+                    ) : (
+                        <article className="btnWrap">
+                            <button type="button" className="applybtn">
+                                <Link
+                                    to="/register"
+                                    style={{ display: 'flex', width: '100%', height: '100%', justifyContent: 'center' }}
+                                >
+                                    회원가입
+                                </Link>
+                            </button>
+                            <button type="button" className="mypagebtn" onClick={() => handleLoginPopup(true)}>
+                                로그인
+                            </button>
+                        </article>
+                    )}
                 </article>
             </form>
         </CalculatorWrap>
