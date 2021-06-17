@@ -35,6 +35,7 @@ const OrderListContainer = () => {
     }, []);
     const [page, setPage] = useState(0);
     const [cancelPage, setCancelPage] = useState(0);
+    const [completePage, setCompletePage] = useState(0);
     const [order, setOrder] = useState({
         normalOrder: [],
         cancelOrder: [],
@@ -42,14 +43,19 @@ const OrderListContainer = () => {
         depositOrder: [],
         shippingOrder: [],
         requestOrder: [],
+        completeOrder: [],
     });
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [cancelRowsPerPage, setCancelRowsPerPage] = useState(10);
+    const [completeRowsPerPage, setCompleteRowsPerPage] = useState(10);
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
     const handleCancelChangePage = (event, newPage) => {
         setCancelPage(newPage);
+    };
+    const handleCompleteChangePage = (event, newPage) => {
+        setCompletePage(newPage);
     };
 
     const handleChangeRowsPerPage = event => {
@@ -62,6 +68,11 @@ const OrderListContainer = () => {
         setCancelPage(0);
     };
 
+    const handleChangeCompleteRowsPerPage = event => {
+        setCompleteRowsPerPage(+event.target.value);
+        setCompletePage(0);
+    };
+
     useEffect(() => {
         if (list) {
             let pandingOrder = [];
@@ -70,6 +81,7 @@ const OrderListContainer = () => {
             let depositOrder = [];
             let shippingOrder = [];
             let requestOrder = [];
+            let completeOrder = [];
             for (let i = 0; i < list.length; i++) {
                 let orderStatus = list[i].orderStatus;
                 if (orderStatus === '취소' || orderStatus === '환불' || orderStatus === '환불대기') {
@@ -82,6 +94,8 @@ const OrderListContainer = () => {
                     requestOrder.push(list[i]);
                 } else if (orderStatus === '결제완료') {
                     normalOrder.push(list[i]);
+                } else if (orderStatus === '해외배송완료') {
+                    completeOrder.push(list[i]);
                 } else {
                     shippingOrder.push(list[i]);
                 }
@@ -93,6 +107,7 @@ const OrderListContainer = () => {
                     depositOrder: depositOrder,
                     shippingOrder: shippingOrder,
                     requestOrder: requestOrder,
+                    completeOrder: completeOrder,
                 });
             }
         }
@@ -109,14 +124,19 @@ const OrderListContainer = () => {
             pandingOrderRows={order.pandingOrder}
             shippingOrderRows={order.shippingOrder}
             requestOrderRows={order.requestOrder}
+            completeOrderRows={order.completeOrder}
+            handleCompleteChangePage={handleCompleteChangePage}
             handleCancelChangePage={handleCancelChangePage}
             handleChangeCancelRowsPerPage={handleChangeCancelRowsPerPage}
+            handleChangeCompleteRowsPerPage={handleChangeCompleteRowsPerPage}
             RowsPerPage={rowsPerPage}
             cancelRowsPerPage={cancelRowsPerPage}
             Page={page}
             cancelPage={cancelPage}
+            completePage={completePage}
             HandleChangePage={handleChangePage}
             HandleChangeRowsPerPage={handleChangeRowsPerPage}
+            completeRowsPerPage={completeRowsPerPage}
         />
     );
 };
