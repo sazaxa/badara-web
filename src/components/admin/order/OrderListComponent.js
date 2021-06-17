@@ -137,7 +137,7 @@ const OrderListComponent = ({
                         HandleChangeRowsPerPage={handleChangeCompleteRowsPerPage}
                     />
                 </TabPanel>
-                <TabPanel value={value} index={5} dir={theme.direction}>
+                <TabPanel value={value} index={6} dir={theme.direction}>
                     <CancelOrderList
                         Rows={cancalRows}
                         RowsPerPage={cancelRowsPerPage}
