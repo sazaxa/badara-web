@@ -14,6 +14,7 @@ import PandingOrderList from './PandingOrderList';
 import DepositOrderList from './DepositOrderList';
 import ShippingOrderList from './ShippingOrderList';
 import RequestOrderList from './RequestOrderList';
+import CompleteOrderList from './CompleteOrderList';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -64,6 +65,11 @@ const OrderListComponent = ({
     depositOrderRows,
     shippingOrderRows,
     requestOrderRows,
+    completeOrderRows,
+    completePage,
+    completeRowsPerPage,
+    handleCompleteChangePage,
+    handleChangeCompleteRowsPerPage,
 }) => {
     const classes = useStyles();
     const theme = useTheme();
@@ -92,7 +98,8 @@ const OrderListComponent = ({
                     <Tab label="결제요청" {...a11yProps(2)} />
                     <Tab label="결제완료" {...a11yProps(3)} />
                     <Tab label="해외배송중" {...a11yProps(4)} />
-                    <Tab label="취소" {...a11yProps(5)} />
+                    <Tab label="해외배송완료" {...a11yProps(5)} />
+                    <Tab label="취소" {...a11yProps(6)} />
                 </Tabs>
             </AppBar>
             <SwipeableViews
@@ -120,6 +127,15 @@ const OrderListComponent = ({
                 </TabPanel>
                 <TabPanel value={value} index={4} dir={theme.direction}>
                     <ShippingOrderList Rows={shippingOrderRows} />
+                </TabPanel>
+                <TabPanel value={value} index={5} dir={theme.direction}>
+                    <CompleteOrderList
+                        Rows={completeOrderRows}
+                        RowsPerPage={completeRowsPerPage}
+                        Page={completePage}
+                        HandleChangePage={handleCompleteChangePage}
+                        HandleChangeRowsPerPage={handleChangeCompleteRowsPerPage}
+                    />
                 </TabPanel>
                 <TabPanel value={value} index={5} dir={theme.direction}>
                     <CancelOrderList
