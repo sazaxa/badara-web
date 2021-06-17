@@ -23,6 +23,8 @@ const CalculatorContainer = () => {
     });
     const { list, status } = country;
 
+    const member = localStorage.getItem('accessToken');
+
     //  store 에 나라 목록 받아오면 state값에 넘김
     useEffect(() => {
         if (status === 'success') {
@@ -110,6 +112,7 @@ const CalculatorContainer = () => {
     };
     return (
         <CalculatorComponent
+            Auth={member}
             OnClickWeight={onClickWeight}
             OnChange={e => handleChange(e)}
             OnClickVolume={onClickVolume}
