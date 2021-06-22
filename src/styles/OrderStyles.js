@@ -435,14 +435,15 @@ export const PrintWrap = styled.div`
     }
     .page {
         width: 21cm;
-        min-height: 29.7cm;
+        // min-height: 29.7cm;
         padding: 1cm;
         // margin: 0 auto;
         margin-bottom: 50px;
         /* margin: 1cm auto; */
+        box-sizing:border-box;
         border-radius: 5px;
         background: white;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        // box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     }
     .subpage {
         /* padding: 1cm; */

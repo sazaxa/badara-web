@@ -47,22 +47,37 @@ code {
 }
 
 @page {
-    size: auto;
+    size: A4;
     margin: 0;
     /* // size: landscape; */
 }
 
 @media print {
+    /* .adminWrap {
+        display: none;
+    } */
     html,
     body {
         width: 210mm;
         height: 297mm;
-        background: #fff;
+        /* background: #fff; */
         margin: 0;
+        padding: 0;
+        page-break-after: avoid;
+        page-break-before: avoid;
+    }
+    .page:first-child {
+        page-break-before: auto;
+        page-break-inside: avoid;
     }
     .page {
-        width: 100%;
+        width: 210mm;
+        /* height: 297mm; 서브픽셀 해결1 사용시 */
+        box-shadow: 0;
         margin: 0;
+        margin-top: -1px;
+        overflow: hidden;
+        /* position: relative; */
         border: initial;
         border-radius: initial;
         width: initial;
