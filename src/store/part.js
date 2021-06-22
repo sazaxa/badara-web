@@ -9,16 +9,17 @@ const [UPLOAD_CHARGE, UPLOAD_CHARGE_SUCCESS, UPLOAD_CHARGE_FAILURE] = createRequ
 const [UPLOAD_COUNTRY_CODE, UPLOAD_COUNTRY_CODE_SUCCESS, UPLOAD_COUNTRY_CODE_FAILURE] = createRequestActionTypes(
     'order/UPLOAD_COUNTRY_CODE'
 );
+const [UPLOAD_ORDER, UPLOAD_ORDER_SUCCESS, UPLOAD_ORDER_FAILURE] = createRequestActionTypes('order/UPLOAD_ORDER');
 
 // 예상 가격 가져오기 Action Types.
 const [PREDICTION_PRICE, PREDICTION_PRICE_SUCCESS, PREDICTION_PRICE_FAILURE] = createRequestActionTypes(
     'order/PREDICTION_PRICE'
 );
+
 // 예상 가격 초기화 Action Types.
 const CLEAR_PREDICTION_PRICE = 'order/CLEAR_PREDICTION_PRICE';
 
 // 배송신청 step Action Types;
-
 const ACTIVE_STEP_CHANGE = 'part/ACTIVE_STEP_CHANGE';
 const RESET_STEP = 'part/RESET_STEP';
 
@@ -35,6 +36,8 @@ const [COUNTRY_PRISE, COUNTRY_PRISE_SUCCESS, COUNTRY_PRISE_FAILURE] = createRequ
 
 export const uploadDeliveryAction = createAction(UPLOAD_CHARGE, ({ data }) => ({ data }));
 export const uploadCountryCodeAction = createAction(UPLOAD_COUNTRY_CODE, ({ data }) => ({ data }));
+export const uploadOrderAction = createAction(UPLOAD_ORDER, ({ data }) => ({ data }));
+
 export const predictionpriceAction = createAction(PREDICTION_PRICE, ({ country, weight }) => ({
     country,
     weight,
@@ -70,6 +73,20 @@ function* insertCountryCodeSaga({ payload: data }) {
             yield put({ type: UPLOAD_COUNTRY_CODE_SUCCESS });
         } else {
             yield put({ type: UPLOAD_COUNTRY_CODE_FAILURE });
+        }
+    } catch (e) {
+        console.log('통신중 에러가 발생했습니다.', e);
+    }
+}
+
+// 주문 엑셀 등록 Saga.
+function* insertOrderSaga({ payload: data }) {
+    try {
+        const { status } = yield call(partAPI.orderInsert, data);
+        if (status === 201) {
+            yield put({ type: UPLOAD_ORDER_SUCCESS });
+        } else {
+            yield put({ type: UPLOAD_ORDER_FAILURE });
         }
     } catch (e) {
         console.log('통신중 에러가 발생했습니다.', e);
@@ -129,6 +146,7 @@ function* getCountryCodeSaga() {
 export function* partSaga() {
     yield takeLatest(UPLOAD_CHARGE, insertDeliverySaga);
     yield takeLatest(UPLOAD_COUNTRY_CODE, insertCountryCodeSaga);
+    yield takeLatest(UPLOAD_ORDER, insertOrderSaga);
     yield takeLatest(PREDICTION_PRICE, predictionpriceSaga);
     yield takeLatest(GET_COUNTRY, getCountrySaga);
     yield takeLatest(GET_COUNTRY_CODE, getCountryCodeSaga);
@@ -141,6 +159,10 @@ export const initialState = {
         error: '',
     },
     codeInsert: {
+        status: 'idle',
+        error: '',
+    },
+    orderInsert: {
         status: 'idle',
         error: '',
     },
@@ -186,6 +208,23 @@ export default handleActions(
                 draft.codeInsert.status = 'fail';
             });
         },
+
+        [UPLOAD_ORDER]: state => {
+            return produce(state, draft => {
+                draft.codeInsert.status = 'loading';
+            });
+        },
+        [UPLOAD_ORDER_SUCCESS]: state => {
+            return produce(state, draft => {
+                draft.codeInsert.status = 'success';
+            });
+        },
+        [UPLOAD_ORDER_FAILURE]: state => {
+            return produce(state, draft => {
+                draft.codeInsert.status = 'fail';
+            });
+        },
+
         [GET_COUNTRY_CODE_SUCCESS]: (state, { payload }) => {
             return produce(state, draft => {
                 draft.country.code = payload;

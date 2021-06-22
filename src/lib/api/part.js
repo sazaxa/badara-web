@@ -17,6 +17,14 @@ export const codeInsert = ({ data }) => {
     });
 };
 
+export const orderInsert = ({ data }) => {
+    return client.post('/excel/order/upload', data, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    });
+};
+
 // 계산기 예상가격 구하기
 export const PredictionPrice = ({ country, weight }) => {
     return client.post('/api/v1/shipping/dhl', { country, weight });
