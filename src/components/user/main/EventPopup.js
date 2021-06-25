@@ -12,6 +12,7 @@ const useStyles = makeStyles(theme => ({
         top: 0,
         left: 0,
         // width: '600px',
+        background: 'transparent',
     },
     paper: {
         position: 'fixed',
@@ -23,15 +24,15 @@ const useStyles = makeStyles(theme => ({
         borderRadius: '10px',
         overflow: 'hidden',
         outline: 'none',
-        // boxShadow: theme.shadows[5],
+        boxShadow: theme.shadows[3],
         // padding: theme.spacing(2, 4, 3),
     },
 }));
 
-const EventPopup = () => {
+const EventPopup = ({ event }) => {
     const classes = useStyles();
     const [showPopUp, setShowPopUp] = useState(false);
-    const cookies = cookieManager.get('eventPopup');
+    const cookies = cookieManager.get(event.name);
 
     console.log(cookies);
 
@@ -51,7 +52,7 @@ const EventPopup = () => {
 
     const handleOnoneDayClose = () => {
         setShowPopUp(false);
-        cookieManager.set('eventPopup', 'true');
+        cookieManager.set(event.name, 'true');
     };
     return (
         <Modal
@@ -67,7 +68,7 @@ const EventPopup = () => {
         >
             <Fade in={showPopUp}>
                 <div className={classes.paper}>
-                    <img src="https://image.badara.kr/popup/badara_1.jpg" alt="img" className="popupImg" />
+                    <img src={event.img} alt="img" className="popupImg" />
                     <div className="btn">
                         <p onClick={handleOnoneDayClose}>오늘 하루 보지 않기</p>
                         <p onClick={handleOnClose}>닫기</p>
