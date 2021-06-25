@@ -135,16 +135,33 @@ const Detail = ({ match }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {orders.map(order => (
-                        <tr key={order.id}>
-                            <Link to={`/admin/order/${order.id}`}>
-                                <td>{order.orderNumber}</td>
-                                <td>{order.boxes[0].products[0].productDetail}</td>
-                                <td>{order.orderStatus}</td>
-                                <td>{moment(order.recipient.createdDate).format('LLLL')}</td>
-                            </Link>
-                        </tr>
-                    ))}
+                    {orders.map(order =>
+                        order.boxes.length === 0 ? null : order.boxes[0].products.length === 0 ? (
+                            <tr key={order.id}>
+                                <Link
+                                    to={`/a
+                                dmin/order/${order.id}`}
+                                >
+                                    <td>{order.orderNumber}</td>
+                                    <td>없음</td>
+                                    <td>{order.orderStatus}</td>
+                                    <td>{moment(order.recipient.createdDate).format('LLLL')}</td>
+                                </Link>
+                            </tr>
+                        ) : (
+                            <tr key={order.id}>
+                                <Link
+                                    to={`/a
+                                dmin/order/${order.id}`}
+                                >
+                                    <td>{order.orderNumber}</td>
+                                    <td>{order.boxes[0].products[0].productDetail}</td>
+                                    <td>{order.orderStatus}</td>
+                                    <td>{moment(order.recipient.createdDate).format('LLLL')}</td>
+                                </Link>
+                            </tr>
+                        )
+                    )}
                 </tbody>
             </table>
 
