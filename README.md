@@ -14,11 +14,18 @@ cd ${project Root}
 vi .env
 ```
 
-#### Config .env
+#### Config local.env
 
 ```
 REACT_APP_ENV=local
 REACT_APP_API_URL=http://localhost:8080
+```
+
+#### Config prod.env
+
+```
+REACT_APP_ENV=prod
+REACT_APP_API_URL=https://api.badara.kr
 ```
 
 #### Node Module Install.
@@ -33,9 +40,9 @@ yarn install
 yarn start
 ```
 
-### Build
+### Prod Build
 
 ```
-yarn build
+yarn build:prod
 ```
 
