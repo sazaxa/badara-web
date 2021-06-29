@@ -48,7 +48,7 @@ const ChargeContainer = () => {
         dispatch(uploadDeliveryAction({ data: formData }));
     };
 
-    // 업로드 파일 핸들링.
+    // 배송비 업로드 파일 핸들링.
     const handlePriceUpload = e => {
         setPriceFile(e.target.files[0]);
     };
@@ -61,7 +61,7 @@ const ChargeContainer = () => {
         dispatch(uploadCountryCodeAction({ data: formData }));
     };
 
-    // 업로드 파일 핸들링.
+    // 나라코드 업로드 파일 핸들링.
     const handleCodeUpload = e => {
         setCodeFile(e.target.files[0]);
     };
@@ -74,7 +74,7 @@ const ChargeContainer = () => {
         dispatch(uploadOrderAction({ data: formData }));
     };
 
-    // 업로드 파일 핸들링.
+    // 주문 파일 업로드 파일 핸들링.
     const handleOrderUpload = e => {
         setOrderFile(e.target.files[0]);
     };
