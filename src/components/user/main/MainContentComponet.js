@@ -6,10 +6,12 @@ import EventPopup from './EventPopup';
 import MainBanner from './MainBanner';
 import Tracking from './Tracking';
 
-const MainContentComponent = () => {
+const MainContentComponent = ({ eventPopup }) => {
     return (
         <>
-            <EventPopup />
+            {eventPopup.map((event, index) => (
+                <EventPopup key={index} event={event} index={index} />
+            ))}
             <Responsive>
                 <MainWrap>
                     <MainBanner />
