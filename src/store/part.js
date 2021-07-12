@@ -79,7 +79,6 @@ function* insertCountryCodeSaga({ payload: data }) {
     }
 }
 
-// 주문 엑셀 등록 Saga.
 function* insertOrderSaga({ payload: data }) {
     try {
         const { status } = yield call(partAPI.orderInsert, data);
@@ -88,8 +87,9 @@ function* insertOrderSaga({ payload: data }) {
         } else {
             yield put({ type: UPLOAD_ORDER_FAILURE });
         }
-    } catch (e) {
-        console.log('통신중 에러가 발생했습니다.', e);
+    } catch (error) {
+        console.log(error.response);
+        alert(error.response.data.message);
     }
 }
 
