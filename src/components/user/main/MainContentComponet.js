@@ -16,7 +16,7 @@ const MainContentComponent = ({ eventPopup }) => {
                 <MainWrap>
                     <MainBanner />
                     <CalculatorContainer />
-                    <Tracking />
+                    {/* <Tracking /> */}
                 </MainWrap>
             </Responsive>
         </>
