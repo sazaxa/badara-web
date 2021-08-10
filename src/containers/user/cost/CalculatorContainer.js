@@ -62,6 +62,17 @@ const CalculatorContainer = () => {
 
     const onClickWeight = () => {
         const { volume, actual, country } = material;
+
+        if (volume >= actual && volume >= 30) {
+            alert('30kg 이상은 관리자에게 문의하세요');
+            return;
+        }
+
+        if (actual >= volume && actual >= 30) {
+            alert('30kg 이상은 관리자에게 문의하세요');
+            return;
+        }
+
         if (volume === '' && actual === '') {
             alert('부피무게, 실무게 중 1개가 입력되어야 합니다.');
         } else if (country === '') {
