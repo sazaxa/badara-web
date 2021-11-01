@@ -13,10 +13,10 @@ const MainContentContainer = () => {
             name: 'badara_blog_shipping',
             img: 'https://image.badara.kr/popup/badara_blog_shipping.jpg',
         },
-        {
-            name: '10monthEvent',
-            img: 'https://image.badara.kr/popup/10month_event.jpg',
-        },
+        // {
+        //     name: '10monthEvent',
+        //     img: 'https://image.badara.kr/popup/10month_event.jpg',
+        // },
     ]);
     return <MainContentComponent eventPopup={eventPopup} />;
 };
