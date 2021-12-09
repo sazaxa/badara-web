@@ -17,6 +17,10 @@ const MainContentContainer = () => {
         //     name: '10monthEvent',
         //     img: 'https://image.badara.kr/popup/10month_event.jpg',
         // },
+        {
+            name: 'plusFriendOrder',
+            img: 'https://image.badara.kr/popup/plusfriendorder.jpg',
+        },
     ]);
     return <MainContentComponent eventPopup={eventPopup} />;
 };
