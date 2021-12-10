@@ -5,6 +5,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import moment from 'moment';
 import { cookieManager } from 'lib/cookieManger';
+import { popUps } from 'containers/user/main/MainContentContainer';
 
 const useStyles = makeStyles(theme => ({
     modal: {
@@ -33,9 +34,6 @@ const EventPopup = ({ event }) => {
     const classes = useStyles();
     const [showPopUp, setShowPopUp] = useState(false);
     const cookies = cookieManager.get(event.name);
-
-    console.log(cookies);
-
     useEffect(() => {
         if (cookies) {
             setShowPopUp(false);
@@ -44,8 +42,17 @@ const EventPopup = ({ event }) => {
         }
     }, []);
 
-    console.log(cookies);
-
+    const popUpLinkEventHandler = event => {
+        const popUpIndex = popUps.findIndex(popUp => popUp.name === event.name);
+        const { name, link, img } = popUps[popUpIndex];
+        return link ? (
+            <a key={name} href={link}>
+                <img src={img} alt={name} className="popupImg" />
+            </a>
+        ) : (
+            <img src={img} alt={name} className="popupImg" />
+        );
+    };
     const handleOnClose = () => {
         setShowPopUp(false);
     };
@@ -68,13 +75,7 @@ const EventPopup = ({ event }) => {
         >
             <Fade in={showPopUp}>
                 <div className={classes.paper}>
-                    {event.img === 'https://image.badara.kr/popup/badara_blog_shipping.jpg' ? (
-                        <a href="https://blog.naver.com/click_black/222416578433">
-                            <img src={event.img} alt="img" className="popupImg" />
-                        </a>
-                    ) : (
-                        <img src={event.img} alt="img" className="popupImg" />
-                    )}
+                    {popUpLinkEventHandler(event)}
                     <div className="btn">
                         <p onClick={handleOnoneDayClose}>오늘 하루 보지 않기</p>
                         <p onClick={handleOnClose}>닫기</p>
